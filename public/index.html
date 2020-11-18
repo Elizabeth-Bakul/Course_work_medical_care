@@ -1,36 +1,9 @@
 <!DOCTYPE html>
 <html>
-<<<<<<< Updated upstream
-<body>
-
-<h2>An Unordered HTML List</h2>
-
-<div class="logo">
-    <img class="image-logo" src="img/star.svg">
-</div>
-
-
-<ul>
-    <li>Coffee</li>
-    <li>Tea</li>
-    <li>Milk</li>
-</ul>
-
-<h2>An Ordered HTML List</h2>
-
-<ol>
-    <li>Coffee</li>
-    <li>Tea</li>
-    <li>Milk</li>
-</ol>
-
-</body>
-</html>
-=======
 <head>
     <title>Скорая медицинская помощь</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header class="hear">
@@ -41,18 +14,20 @@
         </div>
     </header>
     <div class="avtorization">
-        <form class="auth">
+        <form class="auth" method="POST" action="">
             <fieldset>
                 <legend>Авторизация</legend>
-                <label for="login">Логин:</label>
-                <input type="text" id="login" name="login" placeholder="E-mail">
-                <label for="password">Логин:</label>
-                <input type="password" id="password" name="password" placeholder="Пароль">
+                <label class="reg-label" for="login">Логин:</label>
+                <input class="login" type="text" id="login" name="login" placeholder="E-mail">
+                <label class="reg-label" for="password">Пароль:</label>
+                <input class="password" type="password" id="password" name="password" placeholder="Пароль">
                 <input class="show-password visually-hidden" type="checkbox" id="show-pass">
-                <label class="checkbox-label" for="show-pass">Показать пароль</label>
+                <label class="checkbox-label" class="checkbox-label" for="show-pass">Показать пароль</label>
                 <button class="button" type="submit">Авторизироваться</button>
             </fieldset>
         </form>
+        <!--При клике на авторизацию происходит пост запроса, с помощью node js считываются данные из формы, отправляется запрос и по результату запроса переадресацию -->
     </div>
+    <script src="password.js"></script>
 </body>
->>>>>>> Stashed changes
+
