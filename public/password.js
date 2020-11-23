@@ -1,4 +1,4 @@
-let showPassword = document.querySelector('.show-password');
+const showPassword = document.querySelector('.show-password');
 showPassword.onchange = function () {
     if (showPassword.checked) {
       password.type = 'text';
@@ -7,10 +7,10 @@ showPassword.onchange = function () {
     }
   };
 
-let mistake=document.querySelector('.mistake');
-let zatem=document.querySelector('.zatemnenie');
-let sub=document.querySelector('.button');
-let b1=document.querySelector('.b1');
+const mistake=document.querySelector('.mistake');
+const zatem=document.querySelector('.zatemnenie');
+const sub=document.querySelector('.button');
+const b1=document.querySelector('.b1');
 
 
 let res=-1;//переменная получается с сервера 0/1 0-ошибка;1-нет ошибки

@@ -11,16 +11,32 @@
 <header class="hear">
     <div class="name1"><img src="img/vectorstock_33649960.svg" alt="Логотип" class="logo"><h1 class="name2">Единая система оказания неотложной медицинской помощи</h1></div>
     <div class="in">
+        <button class="vhod"><a class="link_ex" href="index.html" >Выход</a></button>
         <p class="user">Вход выполнен</p>
     </div>
 </header>
 
 <nav class="nav">
     <a class="nav__link nav_active" href="#">Регистрация вызова</a>
-    <a class="nav__link" href="#">Отчетность</a>
-    <a class="nav__link" href="#">Бухгалтерия</a>
+    <a class="nav__link" href="accountant_otchet.html">Отчетность</a>
+    <a class="nav__link" href="accountant__form.html">Бухгалтерия</a>
 </nav>
 
+<div class="search_patient">
+    <form class="search" method="GET" action="">
+        <fieldset>
+            <legend class='sear2'>Поиск пациента</legend>
+            <label class="search-label" for="surname">Фамилия:</label>
+            <input class="surname" type="text" id="surname" name="surname" placeholder="Фамилия">
+            <label class="search-label" for="name">Имя:</label>
+            <input class="name" type="name" id="name" name="name" placeholder="Имя">
+            <label class="search-label" for="Lastname">Отчество:</label>
+            <input class="Lastname" type="Lastname" id="Lastname" name="Lastname" placeholder="Отчество">
+            <button class="button" type="submit">Поиск</button>
+        </fieldset>
+    </form>
+
+</div>
 <div class="intro">
     <div class="container">
         <div class="intro__inner">
