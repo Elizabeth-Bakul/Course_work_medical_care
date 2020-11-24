@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    margin-left: 20%;
+    margin-right: 20%;
+    font-size: 100%;
+    font-weight: normal;
+    /*text-align: center;*/
+}
+
+.hear {
+    display: flex;
+    align-items: center;
+}
+
+.name1 {
+    display: flex;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    border-radius: 4px;
+    /*padding: 5px 30px 5px 12px;*/
+    font-size: 20px;
+    /*margin: 0px auto 20px;*/
+    text-align: center;
+    font-family: "Verdana", sans-serif;
+    color: #1747ff;
+}
+
+.nav__link {
+    text-decoration: none;
+    width: 50%;
+}
+
+.nav_active {
+    text-decoration: underline;
+}
+
+.auth {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    margin-bottom: 30px;
+    padding: 8px 12px;
+}
+
+.reg-label {
+    z-index: 1;
+    margin-right: auto;
+    margin-bottom: -6px;
+    margin-left: -6px;
+    padding: 2px 6px;
+    font-size: 10px;
+    line-height: 14px;
+}
+
+.login,
+.password {
+    width: 95%;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    background-color: transparent;
+    font: inherit;
+    font-size: 14px;
+    line-height: 30px;
+    outline-offset: 0;
+    border: 1px solid;
+}
+
+.password {
+    padding-bottom: 4px;
+}
+
+.login::placeholder,
+.password::placeholder {
+    color: #aaaaaa;
+    font: inherit;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.login:focus::placeholder,
+.password:focus::placeholder {
+    font-size: 0;
+}
+
+.login:hover::placeholder,
+.login:active::placeholder,
+.password:hover::placeholder,
+.password:active::placeholder {
+    opacity: 0.5;
+}
+
+.checkbox-label {
+    position: relative;
+    margin: 4px auto 16px 0;
+    padding: 4px 24px;
+}
+
+
+.show-password:focus + .checkbox-label::before {
+    outline: auto;
+    outline-width: 4px;
+}
+
+.checkbox-label:active::before {
+    opacity: 0.6;
+}
+
+.reg-form .button {
+    margin-right: auto;
+    margin-bottom: 16px;
+}
+  
