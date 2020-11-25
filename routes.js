@@ -17,7 +17,6 @@ const uuidv4 = require('uuid/v4');
 app.use(express.static('public'));
 
 const LocalStrategy = require('passport-local').Strategy;
-//const connectionString = process.env.DATABASE_URL;
 
 var currentAccountsData = [];
 
@@ -89,16 +88,16 @@ module.exports = function (app) {
     });
 
     app.get('/account', function (req, res, next) {
-        if (req.isAuthenticated()) {
+        //if (req.isAuthenticated()) {
             res.render('account', {
                 title: "Account",
                 userData: req.user,
                 userData: req.user,
                 messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
             });
-        } else {
-            res.redirect('/login');
-        }
+        // } else {
+        //    res.redirect('/login');
+        // }
     });
 
     app.get('/login', function (req, res, next) {
