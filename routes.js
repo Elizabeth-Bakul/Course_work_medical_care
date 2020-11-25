@@ -8,7 +8,7 @@ var request = require('request');
 const {Pool, Client} = require('pg')
 const bcrypt = require('bcrypt')
 const uuidv4 = require('uuid/v4');
-const {forwardAuthenticated}=require('./config/auth')
+const {forwardAuthenticated, ensureAuthenticated}=require('./config/auth')
 //TODO
 //Add forgot password functionality
 //Add email confirmation functionality
@@ -88,7 +88,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/account', function (req, res, next) {
+    app.get('/account',ensureAuthenticated, function (req, res) {
         //if (req.isAuthenticated()) {
             res.render('account', {
                 title: "Account",
