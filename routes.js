@@ -32,15 +32,19 @@ const pool = new Pool({
 
 module.exports = function (app) {
 
+    //app.get('/', function (req, res, next) {
+    //    res.render('login', {
+    //        title: "Log in",
+    //        userData: req.user,
+    //        messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
+    //    });
+    //    console.log(req.user);
+    //});
     app.get('/', function (req, res, next) {
-        res.render('login', {
-            title: "Log in",
-            userData: req.user,
-            messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
-        });
+        res.render('index', {title: "Home", userData: req.user, messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}});
+        
         console.log(req.user);
-    });
-
+        });
 
     app.get('/join', forwardAuthenticated, function (req, res) {
         res.render('join', {
