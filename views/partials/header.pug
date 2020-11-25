@@ -11,6 +11,7 @@ html(lang='en')
         link(rel='stylesheet', href='/public/css/bootstrap-select.css')
         link(rel='stylesheet', href='/public/css/font-awesome.css')
         link(rel='stylesheet', href='/public/css/selectize.css')
+        link(rel='stylesheet', href='/public/css/style2.css')
         script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
         script(src='/public/js/slick.js')
 
@@ -44,10 +45,10 @@ html(lang='en')
 
         .container-fluid
             .container(style="min-height:10em;")
-                h1
-                    a(href="/" style="color:inherit; text-decoration:none;")
-                        strong #{title}
-                div.row
+                div.name1
+                    img(src="../public/img/star.svg", alt="Логотип").logo
+                    h1.name2 Единая скорая медицинская служба
+                div.in
                     nav(style="width:100%").navbar.navbar-light.bg-light.justifty-content-between
                         a.navbar-brand #{title}
                         form.form-inline

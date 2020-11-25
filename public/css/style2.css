@@ -1,0 +1,11 @@
+.name1 {
+    display: flex;
+    width: 83%;
+}
+.name2{
+    border-top: 1px solid #1747ff;
+  border-bottom:1px solid #1747ff;
+  border-right:1px solid #1747ff;
+  border-bottom-right-radius: 45%;
+  border-top-right-radius: 45%;
+}

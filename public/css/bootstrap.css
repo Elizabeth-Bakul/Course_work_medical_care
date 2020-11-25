@@ -3304,7 +3304,6 @@ tbody.collapse.show {
 .dropup,
 .dropdown {
     position: relative;
-    width:10%;
 }
 
 .dropdown-toggle::after {
