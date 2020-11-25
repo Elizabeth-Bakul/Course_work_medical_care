@@ -88,16 +88,16 @@ module.exports = function (app) {
     });
 
     app.get('/account', function (req, res, next) {
-        if (req.isAuthenticated()) {
+        //if (req.isAuthenticated()) {
             res.render('account', {
                 title: "Account",
                 userData: req.user,
                 userData: req.user,
                 messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
             });
-        } else {
-            res.redirect('/login');
-        }
+        //} else {
+        //    res.redirect('/login');
+        //}
     });
 
     app.get('/login', function (req, res, next) {
@@ -135,7 +135,7 @@ module.exports = function (app) {
         } else {
             req.session.cookie.expires = false; // Cookie expires at end of session
         }
-        res.redirect('/');
+        //res.redirect('/');
         });
 
 
