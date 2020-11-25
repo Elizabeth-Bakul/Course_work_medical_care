@@ -8,6 +8,7 @@ var request = require('request');
 const {Pool, Client} = require('pg')
 const bcrypt = require('bcrypt')
 const uuidv4 = require('uuid/v4');
+const {forwardAuthenticated}=require('./config/auth')
 //TODO
 //Add forgot password functionality
 //Add email confirmation functionality
@@ -92,7 +93,7 @@ module.exports = function (app) {
             res.render('account', {
                 title: "Account",
                 userData: req.user,
-                userData: req.user,
+                //userData: req.user,
                 messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
             });
         //} else {
@@ -100,17 +101,15 @@ module.exports = function (app) {
         //}
     });
 
-    app.get('/login', function (req, res, next) {
+    app.get('/login', forwardAuthenticated,function (req, res) {
         console.log('3fsf')
-        if (req.isAuthenticated()) {
-            res.redirect('/account');
-        } else {
+        
             res.render('login', {
                 title: "Log in",
                 userData: req.user,
                 messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
             });
-        }
+        
 
     });
 
@@ -129,12 +128,6 @@ module.exports = function (app) {
         failureRedirect: '/login',
         failureFlash: true
     }) (req, res, next);
-        console.log('2cnflbz')
-        if (req.body.remember) {
-            req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
-        } else {
-            req.session.cookie.expires = false; // Cookie expires at end of session
-        }
         //res.redirect('/');
         });
 
