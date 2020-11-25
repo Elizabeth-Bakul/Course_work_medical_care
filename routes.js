@@ -88,16 +88,16 @@ module.exports = function (app) {
     });
 
     app.get('/account', function (req, res, next) {
-        //if (req.isAuthenticated()) {
+        if (req.isAuthenticated()) {
             res.render('account', {
                 title: "Account",
                 userData: req.user,
                 userData: req.user,
                 messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
             });
-        // } else {
-        //    res.redirect('/login');
-        // }
+        } else {
+            res.redirect('/login');
+        }
     });
 
     app.get('/login', function (req, res, next) {
@@ -123,11 +123,12 @@ module.exports = function (app) {
         res.redirect('/');
     });
 
-    app.post('/login', passport.authenticate('local', {
+    app.post('/login', (req, res, next) => {
+        passport.authenticate('local', {
         successRedirect: '/account',
         failureRedirect: '/login',
         failureFlash: true
-    }), function (req, res) {
+    }) (req, res, next);
         console.log('2cnflbz')
         if (req.body.remember) {
             req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
@@ -135,7 +136,7 @@ module.exports = function (app) {
             req.session.cookie.expires = false; // Cookie expires at end of session
         }
         res.redirect('/');
-    });
+        });
 
 
 }
