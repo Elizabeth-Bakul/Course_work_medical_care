@@ -114,7 +114,6 @@ module.exports = function (app) {
     });
 
     app.get('/logout', function (req, res) {
-
         console.log(req.isAuthenticated());
         req.logout();
         console.log(req.isAuthenticated());

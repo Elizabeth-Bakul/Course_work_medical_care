@@ -17,7 +17,11 @@ app.use(require('body-parser').urlencoded({extended: true}));
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(session({
+    secret:'secret',
+ resave: true,
+ saveUninitialized:true
+}))
 var bodyParser = require('body-parser')
 
 var path = require('path');
