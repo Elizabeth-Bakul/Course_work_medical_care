@@ -8,4 +8,9 @@
   border-right:1px solid #1747ff;
   border-bottom-right-radius: 45%;
   border-top-right-radius: 45%;
+
+}
+.hear {
+    display: flex;
+    align-items: center;
 }
