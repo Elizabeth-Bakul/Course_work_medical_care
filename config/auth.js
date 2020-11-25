@@ -1,7 +1,7 @@
 module.exports={
 
     ensureAuthenticated: function(req, res, next) {
-        if( req.isAuthenticated()) { return next()}
+        if( req.isAuthenticated()) { return next();}
         req.flash('danger', 'Please log in');
     res.redirect('/login');
     },
