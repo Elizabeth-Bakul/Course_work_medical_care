@@ -32,19 +32,19 @@ const pool = new Pool({
 
 module.exports = function (app) {
 
-    //app.get('/', function (req, res, next) {
-    //    res.render('login', {
-    //        title: "Log in",
-    //        userData: req.user,
-    //        messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
-    //    });
-    //    console.log(req.user);
-    //});
     app.get('/', function (req, res, next) {
-        res.render('index', {title: "Home", userData: req.user, messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}});
-        
-        console.log(req.user);
+        res.render('login', {
+            title: "Log in",
+            userData: req.user,
+            messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
         });
+        console.log(req.user);
+    });
+    //app.get('/', function (req, res, next) {
+    //    res.render('index', {title: "Home", userData: req.user, messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}});
+    //    
+    //    console.log(req.user);
+    //    });
 
     app.get('/join', forwardAuthenticated, function (req, res) {
         res.render('join', {
@@ -95,7 +95,7 @@ module.exports = function (app) {
     app.get('/account',ensureAuthenticated, function (req, res) {
         //if (req.isAuthenticated()) {
             res.render('account', {
-                title: "Account",
+                title: "Работник",
                 userData: req.user,
                 userData: req.user,
                 messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
@@ -178,7 +178,11 @@ passport.use('local', new LocalStrategy({passReqToCallback: true}, (req, usernam
                                     console.log('Удачно')
                                     return done(null, [{
                                         email: result.rows[0].Login,
-                                        firstName: result.rows[0].WorkerName
+                                        firstName: result.rows[0].WorkerSurname,
+                                        name: result.rows[0].WorkerName,
+                                        MiddleName: result.rows[0].WorkerMiddleName,
+                                        typeWorker: result.rows[0].WorkerType,
+                                        NumBr: result.rows[0].Brigade_fk
                                     }]);
                                 } else {
                                     req.flash('danger', "Oops. Incorrect login details.");
