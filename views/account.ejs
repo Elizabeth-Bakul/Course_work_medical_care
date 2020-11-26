@@ -13,7 +13,13 @@
         <h1 class="name2">Единая система оказания неотложной медицинской помощи</h1></div>
     <div class="in">
         <button class="btn">
-            <%= userData[0].firstName %> Бригада № <%= userData[0].NumBr %>
+            <div class="usn">
+                <%= userData[0].firstName %>  <%= userData[0].name %> <%= userData[0].MiddleName %>
+            </div>
+            <div class="prof">
+                <%= userData[0].typeWorker %> Бригада № <%= userData[0].NumBr %>
+            </div>
+            
         </button>
         <div class="dropdown">
             <a href="/logout" class="dropdown-items">Выйти</a>
