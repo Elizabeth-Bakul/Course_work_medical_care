@@ -12,7 +12,9 @@
     <div class="name1"><img src="../public/img/star.svg" alt="Логотип" class="logo">
         <h1 class="name2">Единая система оказания неотложной медицинской помощи</h1></div>
     <div class="in">
-        <button class="btn"><%= userData[0].firstName %></button>
+        <button class="btn">
+            <%= userData[0].firstName %> Бригада № <%= userData[0].NumBr %>
+        </button>
         <div class="dropdown">
             <a href="/logout" class="dropdown-items">Выйти</a>
         </div>
@@ -36,8 +38,8 @@
             <button class="button" type="submit">Поиск</button>
         </fieldset>
     </form>
-
 </div>
+
 </body>
 <!--Возможно ajaч запрос без перезагрузки страницы, чтобы введенные значения перенеслись во вторую форму-->
 <!--При нажатии кнопки сохранить запрс к БД на update возмонжон тоже ajax-->
