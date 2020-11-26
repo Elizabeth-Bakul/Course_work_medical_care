@@ -72,7 +72,7 @@
 }
 
 .surname, .name, .Lastname,.login,
-.password, .date {
+.password, .date,.str, .adress, .ops, .date, .work {
     width: 95%;
     margin-bottom: 10px;
     padding: 0 10px;
@@ -130,8 +130,16 @@
 .Lastname:active::placeholder {
     opacity: 0.5;
 }
+.add_form .button{
+    margin-right: auto;
+    margin-bottom: 10px;
+    width: 25%;
+    font-size: 20px;
+    background-color: white;
+    border: 1px solid #1747ff;
+}
 
-.search .button, .add_form .button {
+.search .button  {
     margin-right: auto;
     margin-bottom: 10px;
     width: 25%;
