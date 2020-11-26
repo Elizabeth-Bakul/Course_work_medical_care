@@ -10,9 +10,3 @@ but2.onclick=()=> {
     but2.className="sav";
     adr.removeAttribute('readonly');
 }
-let but3=document.querySelector('.sav');
-but3.onclick=()=>{
-    but3.value='Изменить';
-    but3.className="button_2";
-    but3.setAttribute('readonly', 'true');
-}
