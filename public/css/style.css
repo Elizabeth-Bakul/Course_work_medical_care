@@ -15,8 +15,10 @@ body {
 h1 {
     font-weight: 100;
     letter-spacing: 5px;
-    font-size: 4em;
+    font-size: 2em;
     margin-bottom: 0.75em;
+    margin: auto;
+    margin-left: 1%;
 }
 
 h2, h3 {

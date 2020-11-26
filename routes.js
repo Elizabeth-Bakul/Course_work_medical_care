@@ -9,10 +9,6 @@ const {Pool, Client} = require('pg')
 const bcrypt = require('bcrypt')
 const uuidv4 = require('uuid/v4');
 const {forwardAuthenticated, ensureAuthenticated}=require('./config/auth')
-//TODO
-//Add forgot password functionality
-//Add email confirmation functionality
-//Add edit account page
 
 
 app.use(express.static('public'));
@@ -94,9 +90,10 @@ module.exports = function (app) {
 
     app.get('/account',ensureAuthenticated, function (req, res) {
         //if (req.isAuthenticated()) {
+        console.log("typeWorker:", req.user[0].typeWorker);
+        //в зависимости от этого рендер страниц
             res.render('account', {
                 title: "Работник",
-                userData: req.user,
                 userData: req.user,
                 messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
             });

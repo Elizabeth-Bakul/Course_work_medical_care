@@ -1,6 +1,6 @@
 .name1 {
     display: flex;
-    width: 83%;
+    width: 75%;
 }
 .name2{
     border-top: 1px solid #1747ff;
@@ -8,9 +8,179 @@
   border-right:1px solid #1747ff;
   border-bottom-right-radius: 45%;
   border-top-right-radius: 45%;
+    padding-bottom: 3%;
+    padding-top: 3%;
+    padding-right: 1%;
+}
 
+.nav {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    border-radius: 4px;
+    /*padding: 5px 30px 5px 12px;*/
+    font-size: 20px;
+    /*margin: 0px auto 20px;*/
+    text-align: center;
+    font-family: "Verdana", sans-serif;
+    color: #1747ff;
+}
+
+.nav__link {
+    text-decoration: none;
+    width: 50%;
+    color: #1747ff;
+}
+
+.nav__link.nav_active {
+    text-decoration: underline;
+    color: #1747ff;
 }
 .hear {
     display: flex;
     align-items: center;
+}
+
+.in {
+    width: 25%;
+}
+
+.btn {
+    width: 100%;
+}
+
+.dropdown {
+    display: none;
+}
+
+.dropdown.active {
+    display: block;
+}
+
+.auth {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    margin-bottom: 30px;
+    padding: 8px 12px;
+}
+
+.surname, .name, .Lastname {
+    width: 95%;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    background-color: transparent;
+    font: inherit;
+    font-size: 14px;
+    line-height: 30px;
+    outline-offset: 0;
+    border: 1px solid;
+}
+
+.reg-label {
+    z-index: 1;
+    margin-right: auto;
+    margin-bottom: -6px;
+    margin-left: -6px;
+    padding: 2px 6px;
+    font-size: 10px;
+    line-height: 14px;
+}
+
+.login,
+.password {
+    width: 95%;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    background-color: transparent;
+    font: inherit;
+    font-size: 14px;
+    line-height: 30px;
+    outline-offset: 0;
+    border: 1px solid;
+}
+
+.password {
+    padding-bottom: 4px;
+}
+
+.login::placeholder,
+.password::placeholder,
+.surname::placeholder,
+.name::placeholder,
+.Lastname::placeholder {
+    color: #aaaaaa;
+    font: inherit;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.login:focus::placeholder,
+.password:focus::placeholder,
+.surname:focus::placeholder,
+.name:focus::placeholder,
+.Lastname:focus::placeholder {
+    font-size: 0;
+}
+
+.login:hover::placeholder,
+.login:active::placeholder,
+.password:hover::placeholder,
+.password:active::placeholder,
+.surname:hover::placeholder,
+.surname:active::placeholder,
+.name:hover::placeholder,
+.name:active::placeholder,
+.Lastname:hover::placeholder,
+.Lastname:active::placeholder {
+    opacity: 0.5;
+}
+
+.search .button {
+    margin-right: auto;
+    margin-bottom: 10px;
+    width: 25%;
+    font-size: 20px;
+    background-color: white;
+    border: 1px solid #1747ff;
+}
+
+.checkbox-label {
+    position: relative;
+    margin: 4px auto 16px 0;
+}
+
+.sear2 {
+    font-size: 20px;
+}
+
+.show-password:focus + .checkbox-label::before {
+    outline: auto;
+    outline-width: 4px;
+}
+
+.checkbox-label:active::before {
+    opacity: 0.6;
+}
+
+.auth .button {
+    margin-right: auto;
+    margin-bottom: 16px;
+}
+
+.close {
+    width: 25px;
+    height: 25px;
+}
+
+.search {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    padding: 8px 12px;
+    width: 60%;
 }
