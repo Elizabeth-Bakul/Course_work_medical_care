@@ -8,11 +8,10 @@ let adr=document.querySelector('.adress');
 but2.onclick=()=> {
     but2.value='Сохранить';
     but2.classList.add('sav');
-    adr.readOnly='false';
+    adr.removeAttribute('readonly');
 }
 let but3=document.querySelector('.sav');
 but3.onclick=()=>{
     but3.value='Изменить';
     but3.classList.remove('sav');
-    adr.readOnly='true';
 }
