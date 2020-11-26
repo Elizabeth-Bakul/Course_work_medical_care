@@ -12,7 +12,11 @@
     padding-top: 3%;
     padding-right: 1%;
 }
-
+.search-label{
+    z-index: 1;
+    font-size: 14px;
+    line-height: 14px;
+}
 .nav {
     display: flex;
     justify-content: space-between;
@@ -67,7 +71,8 @@
     padding: 8px 12px;
 }
 
-.surname, .name, .Lastname {
+.surname, .name, .Lastname,.login,
+.password, .str, .adress, .ops, .date, .work {
     width: 95%;
     margin-bottom: 10px;
     padding: 0 10px;
@@ -89,18 +94,6 @@
     line-height: 14px;
 }
 
-.login,
-.password {
-    width: 95%;
-    margin-bottom: 10px;
-    padding: 0 10px;
-    background-color: transparent;
-    font: inherit;
-    font-size: 14px;
-    line-height: 30px;
-    outline-offset: 0;
-    border: 1px solid;
-}
 
 .password {
     padding-bottom: 4px;
@@ -183,4 +176,13 @@
     margin-bottom: 10%;
     padding: 8px 12px;
     width: 60%;
+}
+.add_form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    padding: 8px 12px;
+    width: 80%;
 }
