@@ -13,12 +13,6 @@
         <h1 class="name2">Единая система оказания неотложной медицинской помощи</h1></div>
     <div class="in">
         <button class="btn"><%= userData[0].firstName %></button>
-            <!--<div class="userNN">
-                <p> <%=userData[0].name userData[0].MiddleName %> </p>
-            </div>
-            <div class="prof">
-                <p><%= userData[0].typeWorker%> Бригада № <%=userData[0].NumBr %></p>
-            </div>-->
         <div class="dropdown">
             <a href="/logout" class="dropdown-items">Выйти</a>
         </div>
@@ -32,17 +26,19 @@
 <div class="search_patient">
     <form class="search" method="GET" action="">
         <fieldset>
-            <legend class="sear2">Поиск пациента</legend>
+            <legend class='sear2'>Поиск пациента</legend>
             <label class="search-label" for="surname">Фамилия:</label>
             <input class="surname" type="text" id="surname" name="surname" placeholder="Фамилия">
             <label class="search-label" for="name"> Имя:</label>
-            <input class="name" type="text" id="name" name="name" placeholder="Имя">
+            <input class="name" type="name" id="name" name="name" placeholder="Имя">
             <label class="search-label" for="Lastname">Отчество:</label>
-            <input class="Lastname" type="text" id="Lastname" name="Lastname" placeholder="Отчество">
+            <input class="Lastname" type="Lastname" id="Lastname" name="Lastname" placeholder="Отчество">
             <button class="button" type="submit">Поиск</button>
         </fieldset>
     </form>
+
 </div>
+</body>
 <!--Возможно ajaч запрос без перезагрузки страницы, чтобы введенные значения перенеслись во вторую форму-->
 <!--При нажатии кнопки сохранить запрс к БД на update возмонжон тоже ajax-->
 <!--<div class="add_patient">
@@ -74,4 +70,3 @@
 </footer>
 <script src="../public/But.js"></script>
 <script src="../public/data.js"></script>-->
-</body>
