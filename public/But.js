@@ -10,8 +10,9 @@ but2.onclick=()=> {
     but2.classList.add('sav');
     adr.removeAttribute('readonly');
 }
-let but3=document.querySelector('.sav');
+let but3=document.querySelector('.button_2.sav');
 but3.onclick=()=>{
     but3.value='Изменить';
     but3.classList.remove('sav');
+    but3.setAttribute('readonly');
 }
