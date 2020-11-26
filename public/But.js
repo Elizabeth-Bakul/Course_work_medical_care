@@ -7,12 +7,12 @@ let but2 = document.querySelector('.button_2');
 let adr=document.querySelector('.adress');
 but2.onclick=()=> {
     but2.value='Сохранить';
-    but2.classList.add('sav');
+    but2.className="sav";
     adr.removeAttribute('readonly');
 }
-let but3=document.querySelector('.button_2.sav');
+let but3=document.querySelector('.sav');
 but3.onclick=()=>{
     but3.value='Изменить';
-    but3.classList.remove('sav');
-    but3.setAttribute('readonly');
+    but3.className="button_2";
+    but3.setAttribute('readonly', 'true');
 }
