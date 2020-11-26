@@ -12,7 +12,14 @@
     <div class="name1"><img src="../public/img/star.svg" alt="Логотип" class="logo">
         <h1 class="name2">Единая система оказания неотложной медицинской помощи</h1></div>
     <div class="in">
-        <button class="btn"><%= userData[0].firstName %></button>
+        <button class="btn">
+            <div class="userNN">
+                <%= userData[0].firstName userData[0].name userData[0].MiddleName %>
+            </div>
+            <div class="prof">
+                <%= userData[0].typeWorker Бригада № userData[0].NumBr %>
+            </div>
+        </button>
         <div class="dropdown">
             <a href="/logout" class="dropdown-items">Выйти</a>
         </div>
@@ -28,16 +35,44 @@
         <fieldset>
             <legend class='sear2'>Поиск пациента</legend>
             <label class="search-label" for="surname">Фамилия:</label>
-            <input class="surname" type="text" id="surname" name="surname" placeholder="Фамилия">
+            <input class="surname" type="text" id="surname" name="surname" placeholder="Фамилия" required>
             <label class="search-label" for="name"> Имя:</label>
-            <input class="name" type="name" id="name" name="name" placeholder="Имя">
+            <input class="name" type="text" id="name" name="name" placeholder="Имя" required>
             <label class="search-label" for="Lastname">Отчество:</label>
-            <input class="Lastname" type="Lastname" id="Lastname" name="Lastname" placeholder="Отчество">
+            <input class="Lastname" type="text" id="Lastname" name="Lastname" placeholder="Отчество" required>
             <button class="button" type="submit">Поиск</button>
         </fieldset>
     </form>
-
 </div>
-</body>
+<!--Возможно ajaч запрос без перезагрузки страницы, чтобы введенные значения перенеслись во вторую форму-->
+<!--При нажатии кнопки сохранить запрс к БД на update (возмонжон тоже ajax)-->
+<div class="add_patient">
+    <form class="add_form" action="" method="post">
+        <legend class='add'>Регистрация вызова</legend>
+        <label class="search-label" for="str">Страхованя компания:</label>
+        <input class="str" type="text" id="str" name="str" placeholder="Страховая компания" required>
+        <label for="name" class="search-label">Имя:</label>
+        <input class="name" type="text" id="name" name="name" placeholder="Имя" required>
+        <label class="search-label" for="surname">Фамилия:</label>
+        <input class="surname" type="text" id="surname" name="surname" placeholder="Фамилия" required>
+        <label class="search-label" for="Lastname">Отчество:</label>
+        <input class="Lastname" type="text" id="Lastname" name="Lastname" placeholder="Отчество" required>
+        <label class="search-label" for="adress">Адрес:</label>
+        <input class="adress" type="text" id="adress" name="adress" placeholder="Адрес" required readonly>
+        <input class="button_2" type="button" value="Изменить">
+        <label class="search-label" for="ops">Описание случая:</label>
+        <textarea name="ops" class="ops" cols="30" rows="10" placeholder="Краткое описание причины вызова" required></textarea>
+        <label class="search-label" for="date">Дата и время вызова</label>
+        <input type="datetime-local" name="date" class="date-time" readonly required>
+        <input class="button_3" type="button" value="Заполнить">
+        <label class="search-label" for="work">Сотрудник</label>
+        <input type="text" name="work" class="work" readonly required value=<%= userData[0].firstName %>>
+        <button class="button" type="submit">Принять вызов</button>
+    </form>
+</div>
+<footer class="foot">
+    <p class="container">Copyright © Бакулина Елизавета, Гербовец Даниил, Крыжановская Ксения</p>
+</footer>
 <script src="../public/But.js"></script>
+<script src="../public/data.js"></script>
 </body>

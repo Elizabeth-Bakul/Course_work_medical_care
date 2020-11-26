@@ -38,9 +38,9 @@
         <fieldset>
             <legend>Авторизация</legend>
             <label class="reg-label" for="username">Логин:</label>
-            <input class="login" type="text" id="login" name="username" placeholder="E-mail">
+            <input class="login" type="text" id="login" name="username" placeholder="E-mail" required>
             <label class="reg-label" for="password">Пароль:</label>
-            <input class="password" type="password" id="password" name="password" placeholder="Пароль">
+            <input class="password" type="password" id="password" name="password" placeholder="Пароль" required>
             <input class="show-password visually-hidden" type="checkbox" id="show-pass">
             <label class="checkbox-label" class="checkbox-label" for="show-pass">Показать пароль</label>
             <input class="show-password visually-hidden" type="checkbox" id="show-pass" name='remember'>
@@ -50,4 +50,8 @@
     </form>
     <!--При клике на авторизацию происходит пост запроса, с помощью node js считываются данные из формы, отправляется запрос и по результату запроса переадресацию -->
 </div>
+<footer class="foot">
+    <p class="container">Copyright © Бакулина Елизавета, Гербовец Даниил, Крыжановская Ксения</p>
+</footer>
 <script src="../public/password.js"></script>
+</body>
