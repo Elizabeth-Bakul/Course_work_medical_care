@@ -13,12 +13,12 @@
         <h1 class="name2">Единая система оказания неотложной медицинской помощи</h1></div>
     <div class="in">
         <button class="btn"><%= userData[0].firstName %>
-            <!--<div class="userNN">
+            <div class="userNN">
                 <p> <%=userData[0].name%> <%=userData[0].MiddleName %> </p>
             </div>
             <div class="prof">
                 <p><%= userData[0].typeWorker Бригада № userData[0].NumBr %></p>
-            </div>-->
+            </div>
         </button>
         <div class="dropdown">
             <a href="/logout" class="dropdown-items">Выйти</a>
@@ -46,7 +46,7 @@
 </div>
 <!--Возможно ajaч запрос без перезагрузки страницы, чтобы введенные значения перенеслись во вторую форму-->
 <!--При нажатии кнопки сохранить запрс к БД на update возмонжон тоже ajax-->
-<div class="add_patient">
+<!--<div class="add_patient">
     <form class="add_form" action="" method="POST">
         <legend class='add'>Регистрация вызова</legend>
         <label class="search-label" for="str">Страхованя компания:</label>
@@ -66,10 +66,10 @@
         <input type="datetime-local" name="date" class="date-time" readonly required>
         <input class="button_3" type="button" value="Заполнить">
         <label class="search-label" for="work">Сотрудник</label>
-        <!--<input type="text" name="work" class="work" readonly required value=<%=userData[0].firstName %>>-->
+        <input type="text" name="work" class="work" readonly required value=<%=userData[0].firstName %>
         <button class="button" type="submit">Принять вызов</button>
     </form>
-</div>
+</div>-->
 <footer class="foot">
     <p class="container">Copyright © Бакулина Елизавета, Гербовец Даниил, Крыжановская Ксения</p>
 </footer>
