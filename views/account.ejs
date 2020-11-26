@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<body lang="en">
 <head>
     <title>Скорая медицинская помощь</title>
     <meta charset="utf-8"/>
@@ -14,7 +14,7 @@
     <div class="in">
         <button class="btn">
             <div class="usn">
-                <%= userData[0].firstName %>  <%= userData[0].name[0] %> <%= userData[0].MiddleName %>
+                <%= userData[0].firstName %>  <%= userData[0].name[0] %>. <%= userData[0].MiddleName[0] %>.
             </div>
             <div class="prof">
                 <%= userData[0].typeWorker %> Бригада № <%= userData[0].NumBr %>
@@ -49,7 +49,7 @@
 </body>
 <!--Возможно ajaч запрос без перезагрузки страницы, чтобы введенные значения перенеслись во вторую форму-->
 <!--При нажатии кнопки сохранить запрс к БД на update возмонжон тоже ajax-->
-<!--<div class="add_patient">
+<div class="add_patient">
     <form class="add_form" action="" method="POST">
         <legend class='add'>Регистрация вызова</legend>
         <label class="search-label" for="str">Страхованя компания:</label>
@@ -77,4 +77,6 @@
     <p class="container">Copyright © Бакулина Елизавета, Гербовец Даниил, Крыжановская Ксения</p>
 </footer>
 <script src="../public/But.js"></script>
-<script src="../public/data.js"></script>-->
+<script src="../public/data.js"></script>
+</body>
+</html>
