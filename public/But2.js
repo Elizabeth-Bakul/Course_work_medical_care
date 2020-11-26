@@ -1,4 +1,4 @@
-let butten=document.querySelector('.sav');
+let butten=document.querySelector('.saver');
 butten.onclick=()=>{
     butten.value='Изменить';
     butten.className="button_2";

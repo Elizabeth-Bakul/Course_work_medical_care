@@ -7,6 +7,6 @@ let but2 = document.querySelector('.button_2');
 let adr=document.querySelector('.adress');
 but2.onclick=()=> {
     but2.value='Сохранить';
-    but2.className="sav";
+    but2.className="saver";
     adr.removeAttribute('readonly');
 }

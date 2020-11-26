@@ -12,5 +12,5 @@ function getISOStringWithoutSecsAndMillisecs1(date) {
 but4.onclick=()=>{
     tim.removeAttribute('readonly');
     tim.value=getISOStringWithoutSecsAndMillisecs1(new Date());
-    tim.setAttribute('readonly');
+    tim.setAttribute('readonly', 'true');
 }
