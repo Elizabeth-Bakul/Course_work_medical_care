@@ -64,15 +64,15 @@
             <label class="search-label" for="adress">Адрес:</label>
             <input class="adress" type="text" id="adress" name="adress" placeholder="Адрес" required readonly>
             <input class="button_2" type="button" value="Изменить">
-            <input class="button_4" type="button" value="Сохранить" hidden>
+            <input class="button_4" type="button" value="Сохранить" hidden><br>
             <label class="search-label" for="ops">Описание случая:</label>
             <textarea name="ops" class="ops" cols="30" rows="10" placeholder="Краткое описание причины вызова" required></textarea>
             <label class="search-label" for="date">Дата и время вызова</label>
             <input type="datetime-local" name="date" class="date-time" required readonly pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}">
-            <input class="button_3" type="button" value="Заполнить">
+            <input class="button_3" type="button" value="Заполнить"> <br>
             <label class="search-label" for="work">Сотрудник</label>
             <input type="text" name="work" class="work" readonly required value=<%=userData[0].firstName %>
-            <button class="button" type="submit">Принять вызов</button>
+            <button class="button2" type="submit">Принять вызов</button>
         </fieldset>
         
     </form>
