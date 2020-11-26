@@ -1,4 +1,4 @@
-let but4 = document.querySelector('.button_3');
+let but3 = document.querySelector('.button_3');
 let tim=document.querySelector('.date-time');
 
 function getISOStringWithoutSecsAndMillisecs1(date) {
@@ -9,7 +9,7 @@ function getISOStringWithoutSecsAndMillisecs1(date) {
   }
   
   console.log(getISOStringWithoutSecsAndMillisecs1(new Date()))
-but4.onclick=()=>{
+but3.onclick=()=>{
     tim.removeAttribute('readonly');
     tim.value=getISOStringWithoutSecsAndMillisecs1(new Date());
     tim.setAttribute('readonly', 'true');
