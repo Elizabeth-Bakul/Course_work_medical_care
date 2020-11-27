@@ -86,20 +86,6 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/account',ensureAuthenticated, function (req, res) {
-        //if (req.isAuthenticated()) {
-        console.log("typeWorker:", req.user[0].typeWorker);
-        //в зависимости от этого рендер страниц
-            res.render('account', {
-                title: "Работник",
-                userData: req.user,
-                messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
-            });
-        //} else {
-        //    res.redirect('/login');
-        //}
-    });
-
     const jsonParser = express.json();
     app.post('/search_patient', jsonParser, async function (req, res) {
 
@@ -109,11 +95,45 @@ module.exports = function (app) {
             await client.query('BEGIN')
             await JSON.stringify(client.query('select "PatientAddress","InBlackList", "InsuranceName", "InsurancePayType" from "Patients" ' +
                 'left join "Insurance" I on "Patients"."InsuranceId_fk" = I.id where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3', [req.body.userName, req.body.userSurname, req.body.userMiddlename], function (err, result) {
-                console.log(result.body);
+                console.log(result.rows[0]);
                 // console.log(req.body.userName);
                 // console.log(req.body.userSurname);
                 // console.log(req.body.userMiddlename);
-                res.send(result.body);
+                res.send(result.rows[0]);
+
+            }));
+        } catch (e) {
+            throw(e)
+        }
+    });
+
+    app.get('/account', ensureAuthenticated, function (req, res) {
+        //if (req.isAuthenticated()) {
+        console.log("typeWorker:", req.user[0].typeWorker);
+        //в зависимости от этого рендер страниц
+        res.render('account', {
+            title: "Работник",
+            userData: req.user,
+            messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
+        });
+        //} else {
+        //    res.redirect('/login');
+        //}
+    });
+
+    app.post('/account', async function (req, res) {
+
+        try {
+            console.log(req.body);
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('select "PatientAddress","InBlackList", "InsuranceName", "InsurancePayType" from "Patients" ' +
+                'left join "Insurance" I on "Patients"."InsuranceId_fk" = I.id where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3', [req.body.userName, req.body.userSurname, req.body.userMiddlename], function (err, result) {
+                console.log(result.rows[0]);
+                // console.log(req.body.userName);
+                // console.log(req.body.userSurname);
+                // console.log(req.body.userMiddlename);
+                res.send(result.rows[0]);
 
             }));
         } catch (e) {
