@@ -53,7 +53,7 @@
     }
 } %>
 <div class="search_patient">
-    <form class="search" method="GET" action="">
+    <form class="search" name="search-form">
         <fieldset>
             <legend class='sear2'>Поиск пациента</legend>
             <label class="search-label" for="surname">Фамилия:</label>
@@ -62,7 +62,7 @@
             <input class="name" type="text" id="name" name="name" placeholder="Имя" required>
             <label class="search-label" for="Lastname">Отчество:</label>
             <input class="Lastname" type="text" id="Lastname" name="Lastname" placeholder="Отчество" required>
-            <button class="button" type="submit">Поиск</button>
+            <button class="button" type="submit" id="subsear">Поиск</button>
         </fieldset>
     </form>
 </div>
