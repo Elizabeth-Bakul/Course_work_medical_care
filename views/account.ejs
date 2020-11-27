@@ -31,6 +31,27 @@
     <a class="nav__link" href="#">Отчетность</a>
     <a class="nav__link" href="#">Бухгалтерия</a>
 </nav>
+<% if (messages){
+    if(messages.warning){
+        if(messages.warning.length){
+%>
+    <div class="alert-warning"><strong><%= messages.warning %></strong></div>
+    <%
+        }
+    }
+    if(messages.danger){
+        if(messages.danger.length){
+    %>
+    <div class="alert-danger"><strong><%= messages.danger %></strong></div>
+    <% }
+    }
+    if(messages.success){
+        if(messages.success.length){
+    %>
+    <div class="alert-sucess"><strong><%= messages.success %></strong></div>
+    <% }
+    }
+} %>
 <div class="search_patient">
     <form class="search" method="GET" action="">
         <fieldset>
@@ -46,7 +67,6 @@
     </form>
 </div>
 
-</body>
 <!--Возможно ajaч запрос без перезагрузки страницы, чтобы введенные значения перенеслись во вторую форму-->
 <!--При нажатии кнопки сохранить запрс к БД на update возмонжон тоже ajax-->
 <div class="add_patient">
