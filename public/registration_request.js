@@ -1,6 +1,7 @@
-let but = document.querySelector('.btn');
+//Регистрация вызова
+let registration_request = document.querySelector('.btn');
 let men = document.querySelector('.dropdown');
-but.onclick = () => {
+registration_request.onclick = () => {
     men.classList.toggle('active');
 }
 let but2 = document.querySelector('.button_2');

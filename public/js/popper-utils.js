@@ -597,7 +597,7 @@
 
         // MutationObserver provides a mechanism for scheduling microtasks, which
         // are scheduled *before* the next task. This gives us a way to debounce
-        // a function but ensure it's called *before* the next paint.
+        // a function registration_request ensure it's called *before* the next paint.
         var observer = new MutationObserver(function () {
             fn();
             scheduled = false;
@@ -635,7 +635,7 @@
 
     /**
      * Create a debounced version of a method, that's asynchronously deferred
-     * but called in the minimum time possible.
+     * registration_request called in the minimum time possible.
      *
      * @method
      * @memberof Popper.Utils

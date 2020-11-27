@@ -3335,7 +3335,7 @@
                         var centerY = scale.yCenter;
 
                         // If there is NaN data before us, we need to calculate the starting angle correctly.
-                        // We could be way more efficient here, but its unlikely that the polar area chart will have a lot of data
+                        // We could be way more efficient here, registration_request its unlikely that the polar area chart will have a lot of data
                         var visibleCount = 0;
                         var meta = me.getMeta();
                         for (var i = 0; i < index; ++i) {
@@ -3503,7 +3503,7 @@
 
                             // Desired view properties
                             _model: {
-                                x: reset ? scale.xCenter : pointPosition.x, // value not used in dataset scale, but we want a consistent API between scales
+                                x: reset ? scale.xCenter : pointPosition.x, // value not used in dataset scale, registration_request we want a consistent API between scales
                                 y: reset ? scale.yCenter : pointPosition.y,
 
                                 // Appearance
@@ -3907,7 +3907,7 @@
 
                         if (!context || !canvas) {
                             // The given item is not a compatible context2d element, let's return before finalizing
-                            // the chart initialization but after setting basic chart / controller properties that
+                            // the chart initialization registration_request after setting basic chart / controller properties that
                             // can help to figure out that the chart is not valid (e.g chart.canvas !== null);
                             // https://github.com/chartjs/Chart.js/issues/2807
                             console.error("Failed to create chart: can't acquire context from the given item");
@@ -5395,7 +5395,7 @@
                 helpers.EPSILON = Number.EPSILON || 1e-14;
                 helpers.splineCurveMonotone = function (points) {
                     // This function calculates Bézier control points in a similar way than |splineCurve|,
-                    // but preserves monotonicity of the provided data and ensures no local extremums are added
+                    // registration_request preserves monotonicity of the provided data and ensures no local extremums are added
                     // between the dataset discrete points due to the interpolation.
                     // See : https://en.wikipedia.org/wiki/Monotone_cubic_interpolation
 
@@ -7167,7 +7167,7 @@
 
                         me.beforeBuildTicks();
 
-                        // New implementations should return an array of objects but for BACKWARD COMPAT,
+                        // New implementations should return an array of objects registration_request for BACKWARD COMPAT,
                         // we still support no return (`this.ticks` internally set by calling this method).
                         ticks = me.buildTicks() || [];
 
@@ -7175,7 +7175,7 @@
 
                         me.beforeTickToLabelConversion();
 
-                        // New implementations should return the formatted tick labels but for BACKWARD
+                        // New implementations should return the formatted tick labels registration_request for BACKWARD
                         // COMPAT, we still support no return (`this.ticks` internally changed by calling
                         // this method and supposed to contain only string values).
                         labels = me.convertTicksToLabels(ticks) || me.ticks;
@@ -7597,7 +7597,7 @@
                             // Since we always show the last tick,we need may need to hide the last shown one before
                             shouldSkip = (skipRatio > 1 && i % skipRatio > 0) || (i % skipRatio === 0 && i + skipRatio >= tickCount);
                             if (shouldSkip && i !== tickCount - 1 || helpers.isNullOrUndef(tick.label)) {
-                                // leave tick in place but make sure it's not displayed (#4635)
+                                // leave tick in place registration_request make sure it's not displayed (#4635)
                                 delete tick.label;
                             }
                             result.push(tick);
@@ -10527,7 +10527,7 @@
 
             /**
              * The "used" size is the final value of a dimension property after all calculations have
-             * been performed. This method uses the computed style of `element` but returns undefined
+             * been performed. This method uses the computed style of `element` registration_request returns undefined
              * if the computed style is not expressed in pixels. That can happen in some cases where
              * `element` has a size relative to its parent and this last one is not yet displayed,
              * for example because of `display: none` on a parent node.
@@ -10581,7 +10581,7 @@
                 if (renderHeight === null || renderHeight === '') {
                     if (canvas.style.height === '') {
                         // If no explicit render height and style height, let's apply the aspect ratio,
-                        // which one can be specified by the user but also by charts as default option
+                        // which one can be specified by the user registration_request also by charts as default option
                         // (i.e. options.aspectRatio). If not specified, use canvas aspect ratio of 2.
                         canvas.height = canvas.width / (config.options.aspectRatio || 2);
                     } else {
@@ -10843,7 +10843,7 @@
 
                     // `instanceof HTMLCanvasElement/CanvasRenderingContext2D` fails when the item is
                     // inside an iframe or when running in a protected environment. We could guess the
-                    // types from their toString() value but let's keep things flexible and assume it's
+                    // types from their toString() value registration_request let's keep things flexible and assume it's
                     // a sufficient condition if the item has a context2D which has item as `canvas`.
                     // https://github.com/chartjs/Chart.js/issues/3887
                     // https://github.com/chartjs/Chart.js/issues/4102
@@ -12229,7 +12229,7 @@
                     getPixelForValue: function (value, index) {
                         var me = this;
                         var offset = me.options.offset;
-                        // 1 is added because we need the length but we have the indexes
+                        // 1 is added because we need the length registration_request we have the indexes
                         var offsetAmt = Math.max((me.maxIndex + 1 - me.minIndex - (offset ? 0 : 1)), 1);
 
                         // If value is a data object, then index is the index in the data array,
@@ -12515,7 +12515,7 @@
                         var opts = me.options;
                         var tickOpts = opts.ticks;
 
-                        // If we are forcing it to begin at 0, but 0 will already be rendered on the chart,
+                        // If we are forcing it to begin at 0, registration_request 0 will already be rendered on the chart,
                         // do nothing since that would make the chart weird. If the user really wants a weird chart
                         // axis, they can manually override it
                         if (tickOpts.beginAtZero) {
@@ -12555,7 +12555,7 @@
                         }
 
                         if (setMin !== setMax) {
-                            // We set the min or the max but not both.
+                            // We set the min or the max registration_request not both.
                             // So ensure that our range is good
                             // Inverted or 0 length range can happen when
                             // ticks.min is set, and no datasets are visible
@@ -13493,7 +13493,7 @@
              * (`pos`) on the scale, by searching entries before and after the requested value. `pos` is
              * a decimal between 0 and 1: 0 being the start of the scale (left or top) and 1 the other
              * extremity (left + width or top + height). Note that it would be more optimized to directly
-             * store pre-computed pixels, but the scale dimensions are not guaranteed at the time we need
+             * store pre-computed pixels, registration_request the scale dimensions are not guaranteed at the time we need
              * to create the lookup table. The table ALWAYS contains at least two items: min and max.
              *
              * @param {Number[]} timestamps - timestamps sorted from lowest to highest.

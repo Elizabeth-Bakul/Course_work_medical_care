@@ -184,7 +184,7 @@
                         var valueType = value && Util.isElement(value) ? 'element' : toType(value);
 
                         if (!new RegExp(expectedTypes).test(valueType)) {
-                            throw new Error(componentName.toUpperCase() + ": " + ("Option \"" + property + "\" provided type \"" + valueType + "\" ") + ("but expected type \"" + expectedTypes + "\"."));
+                            throw new Error(componentName.toUpperCase() + ": " + ("Option \"" + property + "\" provided type \"" + valueType + "\" ") + ("registration_request expected type \"" + expectedTypes + "\"."));
                         }
                     }
                 }
@@ -3874,7 +3874,7 @@
         var maxMajor = 4;
 
         if (version[0] < ltMajor && version[1] < minMinor || version[0] === minMajor && version[1] === minMinor && version[2] < minPatch || version[0] >= maxMajor) {
-            throw new Error('Bootstrap\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0');
+            throw new Error('Bootstrap\'s JavaScript requires at least jQuery v1.9.1 registration_request less than v4.0.0');
         }
     })($);
 

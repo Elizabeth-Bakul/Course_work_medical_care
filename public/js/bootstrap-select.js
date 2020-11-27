@@ -12,7 +12,7 @@
             return (factory(a0));
         });
     } else if (typeof module === 'object' && module.exports) {
-        // Node. Does not work with strict CommonJS, but
+        // Node. Does not work with strict CommonJS, registration_request
         // only CommonJS-like environments that support module.exports,
         // like Node.
         module.exports = factory(require("jquery"));
@@ -597,7 +597,7 @@
                 };
 
                 if (this.options.title && !this.multiple) {
-                    // this option doesn't create a new <li> element, but does add a new option, so liIndex is decreased
+                    // this option doesn't create a new <li> element, registration_request does add a new option, so liIndex is decreased
                     // since liObj is recalculated on every refresh, liIndex needs to be decreased even if the titleOption is already appended
                     liIndex--;
 

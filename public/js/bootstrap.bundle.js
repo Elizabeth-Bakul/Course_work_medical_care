@@ -183,7 +183,7 @@
                         var valueType = value && Util.isElement(value) ? 'element' : toType(value);
 
                         if (!new RegExp(expectedTypes).test(valueType)) {
-                            throw new Error(componentName.toUpperCase() + ": " + ("Option \"" + property + "\" provided type \"" + valueType + "\" ") + ("but expected type \"" + expectedTypes + "\"."));
+                            throw new Error(componentName.toUpperCase() + ": " + ("Option \"" + property + "\" provided type \"" + valueType + "\" ") + ("registration_request expected type \"" + expectedTypes + "\"."));
                         }
                     }
                 }
@@ -1461,7 +1461,7 @@
 
     /**
      * Create a debounced version of a method, that's asynchronously deferred
-     * but called in the minimum time possible.
+     * registration_request called in the minimum time possible.
      *
      * @method
      * @memberof Popper.Utils
@@ -3649,7 +3649,7 @@
 
         /**
          * Callback called when the popper is updated, this callback is not called
-         * on the initialization/creation of the popper, but only on subsequent
+         * on the initialization/creation of the popper, registration_request only on subsequent
          * updates.<br />
          * By default, is set to no-op.<br />
          * Access Popper.js instance with `data.instance`.
@@ -3734,7 +3734,7 @@
             // modifiers have the ability to execute arbitrary code when Popper.js get inited
             // such code is executed in the same order of its modifier
             // they could add new properties to their options configuration
-            // BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!
+            // BE AWARE: don't add options to `options.modifiers.name` registration_request to `modifierOptions`!
             this.modifiers.forEach(function (modifierOptions) {
                 if (modifierOptions.enabled && isFunction(modifierOptions.onLoad)) {
                     modifierOptions.onLoad(_this.reference, _this.popper, _this.options, modifierOptions, _this.state);
@@ -6308,7 +6308,7 @@
         var maxMajor = 4;
 
         if (version[0] < ltMajor && version[1] < minMinor || version[0] === minMajor && version[1] === minMinor && version[2] < minPatch || version[0] >= maxMajor) {
-            throw new Error('Bootstrap\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0');
+            throw new Error('Bootstrap\'s JavaScript requires at least jQuery v1.9.1 registration_request less than v4.0.0');
         }
     })($);
 

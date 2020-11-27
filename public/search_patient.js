@@ -1,9 +1,10 @@
+//Поиск пациента
 document.getElementById("subsear").addEventListener("click", function (e){
     e.preventDefault();
     let registerForm=document.forms("search-form");
-    let userSurname=registerForm.elements["surname"];
-    let userName=registerForm.elements["name"];
-    let userMiddlename=registerForm.elements["Lastname"];
+    let userSurname = registerForm.elements["surname"].value;
+    let userName = registerForm.elements["name"].value;
+    let userMiddlename = registerForm.elements["Lastname"].value;
     console.log(userSurname);
     console.log(userName);
     console.log(userMiddlename);
