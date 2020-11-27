@@ -67,7 +67,8 @@
 
 .btn {
     width: 100%;
-    background-color: #1747ff;
+    border:1px solid #1747ff;
+    background-color:#87CEFA;
 }
 
 .dropdown {
@@ -152,7 +153,7 @@
 .Lastname:active::placeholder {
     opacity: 0.5;
 }
-.add_form .button2{
+.button2{
     margin-right: auto;
     margin-bottom: 10px;
     width: 25%;
