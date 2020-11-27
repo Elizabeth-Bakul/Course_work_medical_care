@@ -77,8 +77,6 @@ module.exports = function (app) {
                                 return;
                             }
                         });
-
-
                 }
 
             }));
@@ -102,6 +100,27 @@ module.exports = function (app) {
         //}
     });
 
+    const jsonParser = express.json();
+    app.post('/search_patient', jsonParser, async function (req, res) {
+
+        try {
+            console.log(req.body);
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('select "PatientAddress","InBlackList", "InsuranceName", "InsurancePayType" from "Patients" ' +
+                'left join "Insurance" I on "Patients"."InsuranceId_fk" = I.id where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3', [req.body.userName, req.body.userSurname, req.body.userMiddlename], function (err, result) {
+                console.log(result.body);
+                // console.log(req.body.userName);
+                // console.log(req.body.userSurname);
+                // console.log(req.body.userMiddlename);
+                res.send(result.body);
+
+            }));
+        } catch (e) {
+            throw(e)
+        }
+    });
+
     app.get('/login', forwardAuthenticated,function (req, res) {
         console.log('3fsf')
         
@@ -122,14 +141,6 @@ module.exports = function (app) {
         res.redirect('/');
     });
 
-    //app.post('/login', (req, res, next) => {
-      //  passport.authenticate('local', {
-        //successRedirect: '/account',
-    //    failureRedirect: '/login',
-    //    failureFlash: true
-    //}) (req, res, next);
-        //res.redirect('/');
-     //   });
         app.post('/login', passport.authenticate('local', {
             successRedirect: '/account',
             failureRedirect: '/login',
@@ -150,8 +161,6 @@ passport.use('local', new LocalStrategy({passReqToCallback: true}, (req, usernam
         loginAttempt();
 
         async function loginAttempt() {
-
-
             const client = await pool.connect()
             try {
                 await client.query('BEGIN')
