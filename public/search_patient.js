@@ -13,9 +13,12 @@ document.getElementById("subsear").addEventListener("click", function (e){
     let uM = document.getElementById("Lastname2");
     let uSt = document.getElementById("str");
     let uA = document.getElementById("adress");
-    console.log(userSurname.value);
-    console.log(userName.value);
-    console.log(userMiddlename.value);
+    let n1=document.querySelector(".black-list");
+    let n2=document.querySelector(".not-patient");
+    let n3=document.querySelector(".in-base");
+    n1.setAttribute('hidden', 'true');
+    n2.setAttribute('hidden', 'true');
+    n3.setAttribute('hidden', 'true');
     let patient = JSON.stringify({
         userSurname: userSurname.value,
         userName: userName.value,
@@ -39,6 +42,7 @@ document.getElementById("subsear").addEventListener("click", function (e){
         if (!receivedUser.length) {
             if (receivedUser.InBlackList) {
                 registerForm.setAttribute('hidden', 'true');
+                n1.removeAttribute('hidden');
             } else {
                 registerForm.removeAttribute('hidden');
                 uA.value = receivedUser.PatientAddress;
@@ -47,8 +51,9 @@ document.getElementById("subsear").addEventListener("click", function (e){
                 rl.setAttribute('hidden', 'true');
                 r1.setAttribute('hidden', 'true');
                 r2.setAttribute('hidden', 'true');
+                n3.removeAttribute('hidden');
             }
-        }
+        } else {n2.removeAttribute('hidden');}
     });
     uN.value = userName.value;
     uN.setAttribute('readonly', 'true');

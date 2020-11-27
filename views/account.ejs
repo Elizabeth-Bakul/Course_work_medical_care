@@ -66,6 +66,15 @@
         </fieldset>
     </form>
 </div>
+<div class="black-list" hidden>
+    <p class="black-list-n">Пациент в черном списке</p>
+</div>
+<div class="not-patient" hidden>
+    <p class="not-patient-n">Пациента нет в базе</p>
+</div>
+<div class="in-base" hidden>
+    <p class="in-base-n">Пациент есть в базе</p>
+</div>
 
 <!--Возможно ajaч запрос без перезагрузки страницы, чтобы введенные значения перенеслись во вторую форму-->
 <!--При нажатии кнопки сохранить запрс к БД на update возмонжон тоже ajax-->
@@ -75,9 +84,10 @@
             <legend class='sear2'>Регистрация вызова</legend>
             <label class="search-label" for="str">Страховая компания:</label>
             <input class="str" type="text" id="str" name="str" placeholder="Страховая компания" required>
-            <label class="search-label" id="typOpl" for="typOp">Тип оплаты:</label><br>
-            <input type="radio" id="typOp" name="typOp" class="typOp1" value="Безналичный">
-            <input type="radio" id="typOp" name="typOp" class="typOp2" value="Наличными"><br>
+            <label class="search-label" id="typOpl" for="typOp1">Безналичные </label>
+            <input type="radio" id="typOp" name="typOp1" class="typOp1" value="Безналичные">
+            <label class="search-label" id="typOpl" for="typOp2">Наличными </label>
+            <input type="radio" id="typOp" name="typOp" class="typOp2" value="Наличными"> Наличными<br>
             <label for="name" class="search-label">Имя:</label>
             <input class="name" type="text" id="name2" name="name" placeholder="Имя" required>
             <label class="search-label" for="surname">Фамилия:</label>

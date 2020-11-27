@@ -4,14 +4,30 @@
 }
 .name2{
     border-top: 1px solid #1747ff;
-  border-bottom:1px solid #1747ff;
-  border-right:1px solid #1747ff;
-  border-bottom-right-radius: 45%;
-  border-top-right-radius: 45%;
+    border-bottom:1px solid #1747ff;
+    border-right:1px solid #1747ff;
+    border-bottom-right-radius: 45%;
+    border-top-right-radius: 45%;
     padding-bottom: 3%;
     padding-top: 3%;
     padding-right: 1%;
 }
+.in-base, .not-patient, .black-list {
+    margin-left: 30%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    width:9%;
+    height:30px;
+}
+.in-base-n{color:#008000;
+    text-align: center;
+font-size:16px;}
+.black-list-n{color:#FF0000;
+    text-align: center;
+    font-size:16px;}
+.not-patient-n{color:#FF8C00;
+    text-align: center;
+    font-size:16px;}
 .alert-warning {
     color: #856404;
     background-color: #fff3cd;
