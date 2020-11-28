@@ -195,6 +195,7 @@ module.exports = function (app) {
                         //res.redirect('/account')
 
                 } else {
+                    client.query('COMMIT')
                         console.log('Вызов принят')
                         //res.redirect('/account')
                         //return;
