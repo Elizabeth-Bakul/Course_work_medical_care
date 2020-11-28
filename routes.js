@@ -124,7 +124,8 @@ module.exports = function (app) {
             if (err) {console.log("Mistake")} else{
                 res.render('account_otch',{
                     userData:req.user,
-                    BrigadeData:result.body
+                    BrigadeData:result.body,
+                    messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
                 })
             }
         }))
