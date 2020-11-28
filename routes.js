@@ -116,8 +116,9 @@ module.exports = function (app) {
         //    res.redirect('/login');
         //}
     });
-    app.get('/account_otch', ensureAuthenticated, function(req, res){
-        const client = await pool.connect()
+    app.get('/account_otch', ensureAuthenticated, async function(req, res){
+        try {
+            const client = await pool.connect()
         await client.query('BEGIN')
         await JSON.stringify(client.query('select "BrigadeName" from "Brigades"',[], function (err, result){
             if (err) {console.log("Mistake")} else{
@@ -126,6 +127,10 @@ module.exports = function (app) {
                 })
             }
         }))
+        } catch (e) {
+            throw(e)
+        }
+        
     } )
     app.post('/account', async function (req, res) {
         try {
