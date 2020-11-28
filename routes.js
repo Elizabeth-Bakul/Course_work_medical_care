@@ -208,10 +208,11 @@ module.exports = function (app) {
             console.log(user.pol_id)
             await JSON.stringify(client5.query('INSERT INTO "Requests" ("Patient_fk","InformalDescription", "RequestTime") VALUES($1,$2,$3)',[user.pol_id,req.body.ops, req.body.date], function (err8, result8) {
                     if (err8){
-                        console.log(err8)
+                        req.flash('danger','Ошибка')
+                        res.redirect('/account')
                 } else {
                     client.query('COMMIT')
-                    console.log('Вызов принят')
+                    req.flash('sucess','Вызов принят')
                     res.redirect('/account')
                     return;
                 }}))
