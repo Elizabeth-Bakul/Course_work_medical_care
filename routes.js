@@ -138,6 +138,7 @@ module.exports = function (app) {
                     else {
                         client.query('COMMIT')
                         console.log( 'Страховая компания добавлена.')
+                        
                         client.query('select id from "Insurance" where "InsuranceName"=$1',[req.body.str], function (err2, result2){
                             if (err2){console.log("mistake2")}
                             else {
@@ -194,15 +195,16 @@ module.exports = function (app) {
                         res.redirect('/account')
 
                 } else {
-                        req.flash('sucess', 'Вызов принят')
+                        console.log('Вызов принят')
                         res.redirect('/account')
+                        return;
                     }
                 }
                 )
             }
             )
             )
-
+            client.release
             }
         catch (e) {
             throw(e)
