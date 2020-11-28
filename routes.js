@@ -138,7 +138,7 @@ module.exports = function (app) {
                     else {
                         //client.query('COMMIT')
                         console.log( 'Страховая компания добавлена.')
-                        
+                        client.release();
                         client.query('select id from "Insurance" where "InsuranceName"=$1',[req.body.str], function (err2, result2){
                             if (err2){console.log("mistake2")}
                             else {
