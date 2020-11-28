@@ -103,7 +103,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/account',  function (req, res) {
+    app.get('/account', ensureAuthenticated, function (req, res) {
         //if (req.isAuthenticated()) {
         console.log("typeWorker:", req.user[0].typeWorker);
         //в зависимости от этого рендер страниц
@@ -203,50 +203,18 @@ module.exports = function (app) {
                 }                 
             }}))
             client4.release()
-
-                            
-                
-            
-            
-            //    //пункт 2 начало.
-            //    client.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname], function (err3, result3){
-            //        //если 0, то добавляем пациента в таблицу, select-ом получаем id, присваиваем как со страховыми компаниями
-            //         else{
-            //            
-            //            })
-            //        } else {//Если 1, то проверяем адресс на схожесть введенного адреса и полученного из бд. Если не совпадает то делаем update
-            //            user.pol_id=result3.rows[0].id;
-            //            if (result3.rows[0].PatientAddress!=req.body.adress){
-            //                client.query('UPDATE "Patients" SET "PatientAddress"=$4 where where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname, req.body.adress],function(err7, result7){
-            //                    if (err7) {console.log("Ошибка с обновлением данных")}
-            //                    else{console.log("Адресс обновлен")}
-            //                }
-             //               )
-             //           }
-              //      }
-               //     }
-                    ////Проверка на количество строк
-                                        
-                    //Пункт 3 добавляем вызов в БД с id страховой компании=result.rows[0].id, и с id пациента result3.rows[0].id в бд вызовов
-               // }
-                //)
-                //client.query('INSERT INTO "Requests" ("Patient_fk","InformalDescription", "RequestTime") VALUES($1,$2,$3)',[user.pol_id,req.body.ops, req.body.date], function (err8, result8) {
-                //    if (err8){
-                 //       console.log( 'Ошибка с принятием вызова')
-                        //res.redirect('/account')
-
-                //} else {
-                //    client.query('COMMIT')
-                  //      console.log('Вызов принят')
-                        //res.redirect('/account')
-                        //return;
-                  //  }
-                ///}
-              //  )
-            //}
-            //)
-            //)
-            //client.release
+            const client5 = await pool.connect()
+            await client5.query('BEGIN')
+            await JSON.stringify(client5.query('INSERT INTO "Requests" ("Patient_fk","InformalDescription", "RequestTime") VALUES($1,$2,$3)',[user.pol_id,req.body.ops, req.body.date], function (err8, result8) {
+                    if (err8){
+                        console.log( 'Ошибка с принятием вызова')
+                } else {
+                    client.query('COMMIT')
+                    console.log('Вызов принят')
+                    res.redirect('/account')
+                    return;
+                }}))
+            client5.release();
             }
         catch (e) {
             throw(e)
