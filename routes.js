@@ -205,9 +205,10 @@ module.exports = function (app) {
             client4.release()
             const client5 = await pool.connect()
             await client5.query('BEGIN')
+            console.log(user.pol_id)
             await JSON.stringify(client5.query('INSERT INTO "Requests" ("Patient_fk","InformalDescription", "RequestTime") VALUES($1,$2,$3)',[user.pol_id,req.body.ops, req.body.date], function (err8, result8) {
                     if (err8){
-                        console.log( 'Ошибка с принятием вызова')
+                        console.log(err8)
                 } else {
                     client.query('COMMIT')
                     console.log('Вызов принят')
