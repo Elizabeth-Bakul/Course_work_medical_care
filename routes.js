@@ -136,76 +136,81 @@ module.exports = function (app) {
                         console.log('Ошибка с добавлением в таблицу 2.')
                     }
                     else {
-                        //client.query('COMMIT')
+                        client.query('COMMIT')
                         console.log( 'Страховая компания добавлена.')
-                        client.release();
-                        client.query('select id from "Insurance" where "InsuranceName"=$1',[req.body.str], function (err2, result2){
-                            if (err2){console.log("mistake2")}
-                            else {
-                                console.log(result2.rows[0].id);
-                            user.id=result2.rows[0].id;
-                            console.log("In object f2")
-                            console.log(user.id);
-                            }
-                            
-                            })
-                    }
-                })
-                } else {user.id=result.rows[0].id;}
-                console.log(user.id);
-                //пункт 2 начало.
-                client.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname], function (err3, result3){
-                    //если 0, то добавляем пациента в таблицу, select-ом получаем id, присваиваем как со страховыми компаниями
-                    if (err3){console.log("Ошибка с поиском")} else{
-                        if(result3.rowCount===0){
-                        client.query('INSERT INTO "Patients" ("PatientName","PatientSurname","PatientMiddleName", "PatientAddress","InsuranceId_fk", "InBlackList") VALUES($1,$2,$3,$4,$5,$6)',[req.body.name, req.body.surname, req.body.Lastname, req.body.adress, user.id, 'false'], function (err5, result5){
-                            if (err5) {
-                                console.log('Ошибка с добавлением в таблицу 1.')
-                            }
-                            else {
-                                //client.query('COMMIT')
-                                console.log('Пациент добавлен.')
-                                client.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname], function (err6, result6){
-                                    console.log(result6.rows[0].id);
-                                    user.pol_id=result6.rows[0].id;
-                                    console.log("In object f2")
-                                    console.log(user.pol_id);
-                                    })
-                            }
-                        })
-                    } else {//Если 1, то проверяем адресс на схожесть введенного адреса и полученного из бд. Если не совпадает то делаем update
-                        user.pol_id=result3.rows[0].id;
-                        if (result3.rows[0].PatientAddress!=req.body.adress){
-                            client.query('UPDATE "Patients" SET "PatientAddress"=$4 where where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname, req.body.adress],function(err7, result7){
-                                if (err7) {console.log("Ошибка с обновлением данных")}
-                                else{console.log("Адресс обновлен")}
-                            }
-                            )
-                        }
-                    }
-                    }
+                        return;
+                    }}
+                    )
+                }
+            }
+            ))
+            client.release()
+            //const client = await pool.connect()
+            //            client.query('select id from "Insurance" where "InsuranceName"=$1',[req.body.str], function (err2, result2){
+            //                if (err2){console.log("mistake2")}
+            //                else {
+            //                    console.log(result2.rows[0].id);
+            //                user.id=result2.rows[0].id;
+            //                console.log("In object f2")
+            //                console.log(user.id);
+            //               
+            //        
+              
+            //else {user.id=result.rows[0].id;}
+            //    console.log(user.id);
+            //    //пункт 2 начало.
+            //    client.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname], function (err3, result3){
+            //        //если 0, то добавляем пациента в таблицу, select-ом получаем id, присваиваем как со страховыми компаниями
+            //        if (err3){console.log("Ошибка с поиском")} else{
+            //            if(result3.rowCount===0){
+            //            client.query('INSERT INTO "Patients" ("PatientName","PatientSurname","PatientMiddleName", "PatientAddress","InsuranceId_fk", "InBlackList") VALUES($1,$2,$3,$4,$5,$6)',[req.body.name, req.body.surname, req.body.Lastname, req.body.adress, user.id, 'false'], function (err5, result5){
+            //                if (err5) {
+            //                    console.log('Ошибка с добавлением в таблицу 1.')
+            //                }
+            //                else {
+            //                    //client.query('COMMIT')
+            //                    console.log('Пациент добавлен.')
+            //                    client.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname], function (err6, result6){
+            //                        console.log(result6.rows[0].id);
+            //                        user.pol_id=result6.rows[0].id;
+            //                        console.log("In object f2")
+            //                        console.log(user.pol_id);
+            //                        })
+            //                }
+            //            })
+            //        } else {//Если 1, то проверяем адресс на схожесть введенного адреса и полученного из бд. Если не совпадает то делаем update
+            //            user.pol_id=result3.rows[0].id;
+            //            if (result3.rows[0].PatientAddress!=req.body.adress){
+            //                client.query('UPDATE "Patients" SET "PatientAddress"=$4 where where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname, req.body.adress],function(err7, result7){
+            //                    if (err7) {console.log("Ошибка с обновлением данных")}
+            //                    else{console.log("Адресс обновлен")}
+            //                }
+             //               )
+             //           }
+              //      }
+               //     }
                     ////Проверка на количество строк
                                         
                     //Пункт 3 добавляем вызов в БД с id страховой компании=result.rows[0].id, и с id пациента result3.rows[0].id в бд вызовов
-                }
-                )
-                client.query('INSERT INTO "Requests" ("Patient_fk","InformalDescription", "RequestTime") VALUES($1,$2,$3)',[user.pol_id,req.body.ops, req.body.date], function (err8, result8) {
-                    if (err8){
-                        console.log( 'Ошибка с принятием вызова')
+               // }
+                //)
+                //client.query('INSERT INTO "Requests" ("Patient_fk","InformalDescription", "RequestTime") VALUES($1,$2,$3)',[user.pol_id,req.body.ops, req.body.date], function (err8, result8) {
+                //    if (err8){
+                 //       console.log( 'Ошибка с принятием вызова')
                         //res.redirect('/account')
 
-                } else {
-                    client.query('COMMIT')
-                        console.log('Вызов принят')
+                //} else {
+                //    client.query('COMMIT')
+                  //      console.log('Вызов принят')
                         //res.redirect('/account')
                         //return;
-                    }
-                }
-                )
-            }
-            )
-            )
-            client.release
+                  //  }
+                ///}
+              //  )
+            //}
+            //)
+            //)
+            //client.release
             }
         catch (e) {
             throw(e)
