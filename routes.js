@@ -127,13 +127,13 @@ module.exports = function (app) {
             await client.query('BEGIN')
             let user={};
             await JSON.stringify(client.query('select id from "Insurance" where "InsuranceName"=$1', [req.body.str], function (err, result) {
-                if (err){console.log("Mistake")}
+                if (err){console.log("Ошибка с поиском Страховой компании1")}
                 console.log(result.rowCount);
                 //1 пункт (не проверяла)
                 if (result.rowCount===0)//Проверка на количество строк
                 { client.query('INSERT INTO "Insurance" ("InsuranceName", "InsurancePayType") VALUES ($1, $2)',[req.body.str, req.body.typOp],function (err1, result1){
                     if (err1) {
-                        console.log('Ошибка с добавлением в таблицу 2.')
+                        console.log('Ошибка с добавлением в таблицу Страховки.')
                     }
                     else {
                         client.query('COMMIT')
@@ -147,43 +147,72 @@ module.exports = function (app) {
             client.release()
             const client2 = await pool.connect()
             await client2.query('BEGIN')
-            await JSON.stringify(client2.query('select id from "Insurance" where "InsuranceName"=$1', [req.body.str], function (err, result) {
-                if (err){console.log("Mistake")} else {console.log(result.rows[0].id)}
-                //1 пункт (не проверяла)
-            
+            await JSON.stringify(client2.query('select id from "Insurance" where "InsuranceName"=$1', [req.body.str], function (err2, result2) {
+                if (err2){console.log("Ошибка с поиском Страховой компании2")} else {
+                    console.log(result2.rows[0].id)
+                    user.id=result2.rows[0].id;
+                    client2.query('COMMIT')
+                    return;
+                }           
             }))
-            //const client = await pool.connect()
-            //            client.query('select id from "Insurance" where "InsuranceName"=$1',[req.body.str], function (err2, result2){
-            //                if (err2){console.log("mistake2")}
-            //                else {
-            //                    console.log(result2.rows[0].id);
-            //                user.id=result2.rows[0].id;
-            //                console.log("In object f2")
-            //                console.log(user.id);
-            //               
-            //        
-              
-            //else {user.id=result.rows[0].id;}
-            //    console.log(user.id);
+            client2.release()
+            const client3 = await pool.connect()
+            await client3.query('BEGIN')
+            await JSON.stringify(client3.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname], function (err3, result3){
+                
+                
+                
+                if (err3)
+                {
+                    console.log("Ошибка с поиском пациента 1")
+                } 
+                else{
+                    if(result3.rowCount===0){
+                        client3.query('INSERT INTO "Patients" ("PatientName","PatientSurname","PatientMiddleName", "PatientAddress","InsuranceId_fk", "InBlackList") VALUES($1,$2,$3,$4,$5,$6)',[req.body.name, req.body.surname, req.body.Lastname, req.body.adress, user.id, 'false'], function (err5, result5){
+                            if (err5) {
+                                console.log('Ошибка с добавлением в таблицу Пациента.')
+                            }
+                            else {
+                                client3.query('COMMIT')
+                                console.log('Пациент добавлен.')
+                                return
+                            }
+                            }  )
+                        }
+                    }
+                }
+                    )
+                    )
+            client3.release()
+            const client4 = await pool.connect()
+            await client4.query('BEGIN')
+            await JSON.stringify(client4.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname], function (err6, result6){
+                if(err6){console.log("Ошибка с поиском пациента")}   
+                else{
+                    console.log(result6.rows[0].id)
+                    user.pol_id=result6.rows[0].id
+                    if (result6.rows[0].PatientAddress!=req.body.adress){
+                        client4.query('UPDATE "Patients" SET "PatientAddress"=$4 where where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname, req.body.adress],function(err7, result7){
+                            if (err7) {console.log("Ошибка с обновлением данных")}
+                                else{console.log("Адресс обновлен")
+                                client4.query('COMMIT')
+                                return
+                            }
+                    })
+                    
+                }                 
+            }}))
+            client4.release()
+
+                            
+                
+            
+            
             //    //пункт 2 начало.
             //    client.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname], function (err3, result3){
             //        //если 0, то добавляем пациента в таблицу, select-ом получаем id, присваиваем как со страховыми компаниями
-            //        if (err3){console.log("Ошибка с поиском")} else{
-            //            if(result3.rowCount===0){
-            //            client.query('INSERT INTO "Patients" ("PatientName","PatientSurname","PatientMiddleName", "PatientAddress","InsuranceId_fk", "InBlackList") VALUES($1,$2,$3,$4,$5,$6)',[req.body.name, req.body.surname, req.body.Lastname, req.body.adress, user.id, 'false'], function (err5, result5){
-            //                if (err5) {
-            //                    console.log('Ошибка с добавлением в таблицу 1.')
-            //                }
-            //                else {
-            //                    //client.query('COMMIT')
-            //                    console.log('Пациент добавлен.')
-            //                    client.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname], function (err6, result6){
-            //                        console.log(result6.rows[0].id);
-            //                        user.pol_id=result6.rows[0].id;
-            //                        console.log("In object f2")
-            //                        console.log(user.pol_id);
-            //                        })
-            //                }
+            //         else{
+            //            
             //            })
             //        } else {//Если 1, то проверяем адресс на схожесть введенного адреса и полученного из бд. Если не совпадает то делаем update
             //            user.pol_id=result3.rows[0].id;
