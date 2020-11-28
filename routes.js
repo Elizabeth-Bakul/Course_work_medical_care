@@ -145,6 +145,13 @@ module.exports = function (app) {
             }
             ))
             client.release()
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('select id from "Insurance" where "InsuranceName"=$1', [req.body.str], function (err, result) {
+                if (err){console.log("Mistake")} else {console.log(result.rows[0].id)}
+                //1 пункт (не проверяла)
+            
+            }))
             //const client = await pool.connect()
             //            client.query('select id from "Insurance" where "InsuranceName"=$1',[req.body.str], function (err2, result2){
             //                if (err2){console.log("mistake2")}
