@@ -128,7 +128,7 @@ module.exports = function (app) {
             await JSON.stringify(client.query('select id from "Insurance" where "InsuranceName"=$1', [req.body.str], function (err, result) {
                 console.log(result.rowCount);
                 //1 пункт (не проверяла)
-                if (result.rowCount)//Проверка на количество строк
+                if (result.rowCount===0)//Проверка на количество строк
                 { client.query('INSERT INTO "Insurance" ("InsuranceName", "InsurancePayType") VALUES ($1, $2)',[req.body.str, req.body.typOp],function (err1, result1){
                     if (err1) {
                         console.log('Ошибка с добавлением в таблицу.')
