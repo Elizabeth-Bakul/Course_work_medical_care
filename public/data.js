@@ -5,7 +5,7 @@ function getISOStringWithoutSecsAndMillisecs1(date) {
     const dateAndTime = date.toISOString().split('T')
     const time = dateAndTime[1].split(':')
     
-    return dateAndTime[0]+'T'+time[0]+':'+time[1]
+    return dateAndTime[0]+'T'+time[0]+':'+time[1]+':'+time[2]
   }
   
   console.log(getISOStringWithoutSecsAndMillisecs1(new Date()))
