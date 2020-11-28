@@ -192,7 +192,7 @@ module.exports = function (app) {
                     console.log(result6.rows[0].id)
                     user.pol_id=result6.rows[0].id
                     if (result6.rows[0].PatientAddress!=req.body.adress){
-                        client4.query('UPDATE "Patients" SET "PatientAddress"=$4 where where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname, req.body.adress],function(err7, result7){
+                        client4.query('UPDATE "Patients" SET "PatientAddress"=$4 where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname, req.body.adress],function(err7, result7){
                             if (err7) {console.log("Ошибка с обновлением данных")}
                                 else{console.log("Адресс обновлен")
                                 client4.query('COMMIT')
