@@ -191,13 +191,13 @@ module.exports = function (app) {
                 )
                 client.query('INSERT INTO "Requests" ("Patient_fk","InformalDescription", "RequestTime") VALUES($1,$2,$3)',[user.pol_id,req.body.ops, req.body.date], function (err8, result8) {
                     if (err8){
-                        req.flash('danger', 'Ошибка с принятием вызова')
-                        res.redirect('/account')
+                        console.log( 'Ошибка с принятием вызова')
+                        //res.redirect('/account')
 
                 } else {
                         console.log('Вызов принят')
-                        res.redirect('/account')
-                        return;
+                        //res.redirect('/account')
+                        //return;
                     }
                 }
                 )
