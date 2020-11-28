@@ -103,7 +103,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/account', ensureAuthenticated, function (req, res) {
+    app.get('/account',  function (req, res) {
         //if (req.isAuthenticated()) {
         console.log("typeWorker:", req.user[0].typeWorker);
         //в зависимости от этого рендер страниц
