@@ -36,11 +36,7 @@ module.exports = function (app) {
         });
         console.log(req.user);
     });
-    //app.get('/', function (req, res, next) {
-    //    res.render('index', {title: "Home", userData: req.user, messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}});
-    //    
-    //    console.log(req.user);
-    //    });
+
 
     app.get('/join', forwardAuthenticated, function (req, res) {
         res.render('join', {
@@ -127,8 +123,19 @@ module.exports = function (app) {
             console.log(req.body);
             const client = await pool.connect()
             await client.query('BEGIN')
-            await JSON.stringify(client.query('select "PatientAddress","InBlackList", "InsuranceName", "InsurancePayType" from "Patients" ' +
-                'left join "Insurance" I on "Patients"."InsuranceId_fk" = I.id where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3', [req.body.userName, req.body.userSurname, req.body.userMiddlename], function (err, result) {
+            await JSON.stringify(client.query('select id from "Insurance" where "InsuranceName"=$1', [req.body.str], function (err, result) {
+                if(!result.rows[0]) { client.query('INSERT INTO "Insurance" ("InsuranceName", "InsurancePayType") VALUES ($1, $2)',[req.body.str, req.body.typOp],function (err1, result1){
+                    if (err1) {
+                        req.flash('danger', 'Ошибка с добавлением в таблицу.')
+                    }
+                    else {
+                        client.query('COMMIT')
+                        req.flash('success', 'Страховая компания добавлена.')
+                        client.query('select id from "Insurance" where "InsuranceName"=$1',[req.body.str], function (err2, result2){result.rows[0]=result2.rows[0];})
+                    }
+                })
+                
+                }
                 console.log(result.rows[0]);
                 // console.log(req.body.userName);
                 // console.log(req.body.userSurname);
