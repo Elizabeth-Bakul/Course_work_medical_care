@@ -128,19 +128,19 @@ module.exports = function (app) {
             await JSON.stringify(client.query('select id from "Insurance" where "InsuranceName"=$1', [req.body.str], function (err, result) {
                 console.log(result.rowCount);
                 //1 пункт (не проверяла)
-                //if ()//Проверка на количество строк
-                //{ client.query('INSERT INTO "Insurance" ("InsuranceName", "InsurancePayType") VALUES ($1, $2)',[req.body.str, req.body.typOp],function (err1, result1){
-                //    if (err1) {
-                //        console.log('Ошибка с добавлением в таблицу.')
-                //    }
-                //    else {
-                //        client.query('COMMIT')
-                //        console.log( 'Страховая компания добавлена.')
-                //       client.query('select id from "Insurance" where "InsuranceName"=$1',[req.body.str], function (err2, result2){result.rows[0].id=result2.rows[0].id;})
-                //    }
-                //})
-                //}
-                //console.log(result.rows[0]);
+                if (result.rowCount)//Проверка на количество строк
+                { client.query('INSERT INTO "Insurance" ("InsuranceName", "InsurancePayType") VALUES ($1, $2)',[req.body.str, req.body.typOp],function (err1, result1){
+                    if (err1) {
+                        console.log('Ошибка с добавлением в таблицу.')
+                    }
+                    else {
+                        client.query('COMMIT')
+                        console.log( 'Страховая компания добавлена.')
+                        client.query('select id from "Insurance" where "InsuranceName"=$1',[req.body.str], function (err2, result2){result.rows[0].id=result2.rows[0].id;})
+                    }
+                })
+                }
+                console.log(result.rows[0]);
                 //пункт 2 начало.
                 //client.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname], function (err3, result3){
                 //    if(){}////Проверка на количество строк
