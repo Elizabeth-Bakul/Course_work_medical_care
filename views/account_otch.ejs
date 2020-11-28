@@ -63,9 +63,9 @@
                 for( let i=0; i< BrigadeData.length ; i++)
                 {
                 %>
-                    <form action="" class=<%=BrigadeData.id%>>
-                        <input type="text" class="br" hidden value=<%=BrigadeData.id%>>
-                        <button type="submit" class="button2" id=<%=BrigadeData.id %>> <%= BrigadeData.BrigadeName%></button>
+                    <form action="" class=<%=BrigadeData[i].id%>>
+                        <input type="text" class="br" hidden value=<%=BrigadeData[i].id%>>
+                        <button type="submit" class="button2" id=<%=BrigadeData[i].id %>> <%= BrigadeData[i].BrigadeName%> </button>
                     </form>
                 <%
                 }
