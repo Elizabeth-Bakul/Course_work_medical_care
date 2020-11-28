@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<body lang="en">
+<head>
+    <title>Скорая медицинская помощь</title>
+    <meta charset="utf-8"/>
+    <link rel='stylesheet' , href='/public/css/style2.css'>
+</head>
+<body>
+
+
+<header class="hear">
+    <div class="name1"><img src="../public/img/star.svg" alt="Логотип" class="logo">
+        <h1 class="name2">Единая система оказания неотложной медицинской помощи</h1></div>
+    <div class="in">
+        <button class="btn">
+            <div class="usn">
+                <%= userData[0].firstName %>  <%= userData[0].name[0] %>. <%= userData[0].MiddleName[0] %>.
+            </div>
+            <div class="prof">
+                <%= userData[0].typeWorker %> Бригада № <%= userData[0].NumBr %>
+            </div>
+            
+        </button>
+        <div class="dropdown">
+            <a href="/logout" class="dropdown-items">Выйти</a>
+        </div>
+    </div>
+</header>
+<nav class="nav">
+    <a class="nav__link" href="/account">Регистрация вызова</a>
+    <a class="nav__link nav_active" href="/account_otch">Отчетность</a>
+    <a class="nav__link" href="/account_ac">Бухгалтерия</a>
+</nav>
+<% if (messages){
+    if(messages.warning){
+        if(messages.warning.length){
+%>
+    <div class="alert-warning"><strong><%= messages.warning %></strong></div>
+    <%
+        }
+    }
+    if(messages.danger){
+        if(messages.danger.length){
+    %>
+    <div class="alert-danger"><strong><%= messages.danger %></strong></div>
+    <% }
+    }
+    if(messages.success){
+        if(messages.success.length){
+    %>
+    <div class="alert-sucess"><strong><%= messages.success %></strong></div>
+    <% }
+    }
+} %>

@@ -116,7 +116,17 @@ module.exports = function (app) {
         //    res.redirect('/login');
         //}
     });
-
+    app.get('/account_otch', ensureAuthenticated, function(req, res){
+        const client = await pool.connect()
+        await client.query('BEGIN')
+        await JSON.stringify(client.query('select "BrigadeName" from "Brigades"',[], function (err, result){
+            if (err) {console.log("Mistake")} else{
+                res.render('account_otch',{
+                    userData:result.body
+                })
+            }
+        }))
+    } )
     app.post('/account', async function (req, res) {
         try {
             console.log(req.body);
