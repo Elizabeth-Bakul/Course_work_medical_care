@@ -52,3 +52,22 @@
     <% }
     }
 } %>
+<table class="t1">
+    <tr>
+        <th>
+            <% 
+                for( let i=0; i< BrigadeData.length ; i++)
+                {
+                %>
+                    <form action="" class=<%=BrigadeData.id%>>
+                        <input type="text" class="br" hidden value=<%=BrigadeData.id%>>
+                        <button id=<%=BrigadeData.id%> ><%= BrigadeData.BrigadeName%></button>
+                    </form>
+                <%
+                }
+            %>
+            
+        </th>
+        <th></th>
+    </tr>
+</table>
