@@ -133,7 +133,7 @@ module.exports = function (app) {
                 if (result.rowCount===0)//Проверка на количество строк
                 { client.query('INSERT INTO "Insurance" ("InsuranceName", "InsurancePayType") VALUES ($1, $2)',[req.body.str, req.body.typOp],function (err1, result1){
                     if (err1) {
-                        console.log('Ошибка с добавлением в таблицу.')
+                        console.log('Ошибка с добавлением в таблицу 2.')
                     }
                     else {
                         //client.query('COMMIT')
@@ -160,7 +160,7 @@ module.exports = function (app) {
                         if(result3.rowCount===0){
                         client.query('INSERT INTO "Patients" ("PatientName","PatientSurname","PatientMiddleName", "PatientAddress","InsuranceId_fk", "InBlackList") VALUES($1,$2,$3,$4,$5,$6)',[req.body.name, req.body.surname, req.body.Lastname, req.body.adress, user.id, 'false'], function (err5, result5){
                             if (err5) {
-                                console.log('Ошибка с добавлением в таблицу.')
+                                console.log('Ошибка с добавлением в таблицу 1.')
                             }
                             else {
                                 //client.query('COMMIT')
