@@ -141,11 +141,13 @@ module.exports = function (app) {
                         client.query('select id from "Insurance" where "InsuranceName"=$1',[req.body.str], function (err2, result2){
                             console.log(result2.rows[0].id);
                             user.id=result2.rows[0].id;
+                            console.log("In object f2")
+                            console.log(user.id);
                             })
                     }
                 })
                 } else {user.id=result.rows[0].id;}
-                console.log(user);
+                console.log(user.id);
                 //пункт 2 начало.
                 //client.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname], function (err3, result3){
                 //    if(){}////Проверка на количество строк
