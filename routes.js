@@ -118,29 +118,39 @@ module.exports = function (app) {
     });
 
     app.post('/account', async function (req, res) {
-
         try {
             console.log(req.body);
+            //Порядок запросов:1. Поиск в БД Страховой компании (получаем ее ид), если нет то добавляем введенную в БД, ищем id.
+            //2. Поиск пациента в бд(id, adress). Если есть, то сравниваем адрес. Адрес не совподает-> меняем адрес. Пациента нет в БД: Добавляем, получаем id.
+            //3 Добавляем в БД вызов с введенными данными и полученными id из пункта 1 и пункта 2.
             const client = await pool.connect()
             await client.query('BEGIN')
             await JSON.stringify(client.query('select id from "Insurance" where "InsuranceName"=$1', [req.body.str], function (err, result) {
-                if(!result.rows[0]) { client.query('INSERT INTO "Insurance" ("InsuranceName", "InsurancePayType") VALUES ($1, $2)',[req.body.str, req.body.typOp],function (err1, result1){
+                //1 пункт (не проверяла)
+                if ()//Проверка на количество строк
+                { client.query('INSERT INTO "Insurance" ("InsuranceName", "InsurancePayType") VALUES ($1, $2)',[req.body.str, req.body.typOp],function (err1, result1){
                     if (err1) {
-                        req.flash('danger', 'Ошибка с добавлением в таблицу.')
+                        console.log('Ошибка с добавлением в таблицу.')
                     }
                     else {
                         client.query('COMMIT')
-                        req.flash('success', 'Страховая компания добавлена.')
-                        client.query('select id from "Insurance" where "InsuranceName"=$1',[req.body.str], function (err2, result2){result.rows[0]=result2.rows[0];})
+                        console.log( 'Страховая компания добавлена.')
+                        client.query('select id from "Insurance" where "InsuranceName"=$1',[req.body.str], function (err2, result2){result.rows[0].id=result2.rows[0].id;})
                     }
                 })
-                
                 }
                 console.log(result.rows[0]);
+                //пункт 2 начало.
+                client.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname], function (err3, result3){
+                    if(){}////Проверка на количество строк
+                    //если 0, то добавляем пациента в таблицу, select-ом получаем id, присваиваем как со страховыми компаниями
+                    //Если 1, то проверяем адресс на схожесть введенного адреса и полученного из бд. Если не совпадает то делаем update
+                    //Пункт 3 добавляем вызов в БД с id страховой компании=result.rows[0].id, и с id пациента result3.rows[0].id в бд вызовов
+                })
                 // console.log(req.body.userName);
                 // console.log(req.body.userSurname);
                 // console.log(req.body.userMiddlename);
-                res.send(result.rows[0]);
+                //res.send(result.rows[0]);
 
             }));
         } catch (e) {
