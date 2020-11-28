@@ -134,7 +134,7 @@ module.exports = function (app) {
                         console.log('Ошибка с добавлением в таблицу.')
                     }
                     else {
-                        client.query('COMMIT')
+                        //client.query('COMMIT')
                         console.log( 'Страховая компания добавлена.')
                         client.query('select id from "Insurance" where "InsuranceName"=$1',[req.body.str], function (err2, result2){result.rows[0].id=result2.rows[0].id;})
                     }
