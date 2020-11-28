@@ -126,7 +126,7 @@ module.exports = function (app) {
             const client = await pool.connect()
             await client.query('BEGIN')
             await JSON.stringify(client.query('select id from "Insurance" where "InsuranceName"=$1', [req.body.str], function (err, result) {
-                console.log(result.body);
+                console.log(result);
                 //1 пункт (не проверяла)
                 //if ()//Проверка на количество строк
                 //{ client.query('INSERT INTO "Insurance" ("InsuranceName", "InsurancePayType") VALUES ($1, $2)',[req.body.str, req.body.typOp],function (err1, result1){
