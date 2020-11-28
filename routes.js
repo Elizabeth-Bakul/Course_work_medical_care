@@ -122,9 +122,10 @@ module.exports = function (app) {
         await client.query('BEGIN')
         await JSON.stringify(client.query('select id,"BrigadeName" from "Brigades"',[], function (err, result){
             if (err) {console.log("Mistake")} else{
+                console.log(result.rows)
                 res.render('account_otch',{
                     userData:req.user,
-                    BrigadeData:result.body,
+                    BrigadeData:result.rows,
                     messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
                 })
             }
