@@ -63,3 +63,8 @@ document.getElementById("subsear").addEventListener("click", function (e){
     uM.setAttribute('readonly', 'true');
 
 })
+var button9=document.querySelector('.button2');
+button9.onclick=()=>{
+    var f1=document.querySelector('.add_form');
+    f1.submit();
+}
