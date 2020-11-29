@@ -27,8 +27,8 @@ function buttonsControl(button, i){
     request.send(brig);
     request.addEventListener("load", function () {
         let receivedBrigades = JSON.parse(request.response);
-        for (let j=0;j<receivedBrigades.work.length; i++){
-            console.log(receivedBrigades.work[i].WorkerType)
+        for (let j=0;j<receivedBrigades.work.length; j++){
+            console.log(receivedBrigades.work[j].WorkerType)
         }
         console.log(receivedBrigades.work[0].WorkerSurname,' ', receivedBrigades.req[0].id);
     })
