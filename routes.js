@@ -106,7 +106,7 @@ module.exports = function (app) {
     app.post('/search_brigades', jsonParser, async function(req,res){
         try{
             console.log(req.body);
-            send(req.body);
+            res.json(req.body);
         }
         catch(e){throw(e)}
     })
