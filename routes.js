@@ -108,7 +108,7 @@ module.exports = function (app) {
             console.log(req.body);
             const client = await pool.connect()
             await client.query('BEGIN')
-            await JSON.stringify(client.query('select id, "AcceptTime","EndRequestTime" from "Requests" where "Brigade_id_fk"=$1 order by "AcceptTime"',[req.body.idBrigades],function(err, res){
+            await JSON.stringify(client.query('select id, "AcceptTime","EndRequestTime" from "Requests" where "Brigade_id_fk"=$1 order by "AcceptTime"',[req.body.idBrigades],function(err, result){
                 if(err){console.log(err)}
                 else {console.log(result.rows)}
             }))
