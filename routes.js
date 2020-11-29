@@ -103,7 +103,7 @@ module.exports = function (app) {
             throw(e)
         }
     });
-    app.post('/search_brigades', jsonParser, async function(req,res){
+    app.post('/search_brigade', jsonParser, async function(req,res){
         try{
             console.log(req.body);
             res.json(req.body);
