@@ -35,7 +35,7 @@ function buttonsControl(button, i){
             console.log(receivedBrigades.work[j].WorkerType)
             sostav.innerHTML+=receivedBrigades.work[j].WorkerType+': '+receivedBrigades.work[j].WorkerSurname+' '+receivedBrigades.work[j].WorkerName+' '+receivedBrigades.work[j].WorkerMiddleName+'<br>'
         }
-        if(receivedBrigades.req[0].id=='undefined'){
+        if(typeof receivedBrigades.req=="undefined"){
             console.log('Нет вызовов');
             g.removeAttribute('hidden');
         } else {
