@@ -35,17 +35,19 @@ function buttonsControl(button, i){
             console.log(receivedBrigades.work[j].WorkerType)
             sostav.innerHTML+=receivedBrigades.work[j].WorkerType+': '+receivedBrigades.work[j].WorkerSurname+' '+receivedBrigades.work[j].WorkerName+' '+receivedBrigades.work[j].WorkerMiddleName+'<br>'
         }
-        if(receivedBrigades.req.rowCount===0){
+        if(receivedBrigades.req[0].id=='undefined'){
             console.log('Нет вызовов');
             g.removeAttribute('hidden');
-        }
-        for(let k=0; k<receivedBrigades.req.length; k++){
+        } else {
+            for(let k=0; k<receivedBrigades.req.length; k++){
             history.innerHTML+=receivedBrigades.req[k].AcceptTime+'  '+receivedBrigades.req[k].id+'<br>'
             if (receivedBrigades.req[k].EndRequestTime===null){
                 bad.removeAttribute('hidden');
             } else {g.removeAttribute('hidden');}
         }
         console.log(receivedBrigades.work[0].WorkerSurname,' ', receivedBrigades.req[0].id);
+        }
+        
     })
     console.log(forms[i].className);
 }
