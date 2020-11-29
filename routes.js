@@ -109,7 +109,7 @@ module.exports = function (app) {
             
                 const client = await pool.connect()
                 await client.query('BEGIN')
-                await JSON.stringify(client.query('select "WorkerSurname",  from "Workers" where "Brigade_fk"=$1',[req.body.idBrigades], function(err1, result1){
+                await JSON.stringify(client.query('select "WorkerSurname", "WorkerName","WorkerMidlleName", "WorkerType" from "Workers" where "Brigade_fk"=$1',[req.body.idBrigades], function(err1, result1){
                     if(err1) {console.log(err1)}
                     else{
                         console.log(result1.rows);
