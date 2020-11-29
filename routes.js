@@ -226,7 +226,24 @@ module.exports = function (app) {
         }
         
     } )
-
+    app.get('/account_otch_pat',ensureAuthenticated, async function(req,res){
+        try{
+            const client=await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('select id, "PatientName","PatientSurName","PatientMiddleName" from "Patients"',[], function(err, result){
+                if (err){console.log("Mistake")}
+                else {
+                    res.render('account_otch',{
+                        userData:req.user,
+                        PatientData:result.rows,
+                        messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
+                    })
+                }
+            }))
+        } catch (e){
+            throw(e)
+        }
+    })
     app.post('/account', async function (req, res) {
         try {
             console.log(req.body);

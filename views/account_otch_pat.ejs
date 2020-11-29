@@ -32,8 +32,8 @@
     <a class="nav__link" href="/account_ac">Бухгалтерия</a>
 </nav>
 <nav class="menu_otch">
-    <a href="/account_otch" class="link_submenu act">Бригады</a>
-    <a href="/account_otch_pat" class="link_submenu">Пациент</a>
+    <a href="/account_otch" class="link_submenu">Бригады</a>
+    <a href="/account_otch_pat" class="link_submenu act">Пациент</a>
 </nav>
 <% if (messages){
     if(messages.warning){
@@ -56,39 +56,19 @@
     <% }
     }
 } %>
-<table class="t1">
-    <tr>
-        <th>
+<div class="pat">
+    <form action="" class="otc_pat">
+        <select name="pat" id="" class="sp_pat">
+            <option disabled>Выберите героя</option>
             <% 
-                for( let i=0; i< BrigadeData.length ; i++)
+                for( let i=0; i< PatientData.length ; i++)
                 {
                 %>
-                    <form action="" class=<%=BrigadeData[i].id%>>
-                        <input type="text" class="br" name="id_br" hidden value=<%=BrigadeData[i].id%>>
-                        <button type="submit" class="button2"> <%= BrigadeData[i].BrigadeName%> </button>
-                    </form>
+                <option value=<%=PatientData[i].id>><%= PatientData[i].SurName %>  <%= PatientData[i].name[0] %>. <%= PatientData[i].MiddleName[0] %></option>
                 <%
                 }
-            %>
-            
-        </th>
-        <th>
-            <div class="status">
-                <span class="good" hidden>Свободен</span>
-                <span class="bad" hidden>Занят</span>
-            </div>
-            <div class="sostav"></div>
-            <div class="history">
-            </div>
-            <div class="grah"></div>
-        </th>
-    </tr>
-</table>
-<footer class="foot">
-    <p class="container">Copyright © Бакулина Елизавета, Гербовец Даниил, Крыжановская Ксения</p>
-</footer>
-<script src="../public/registration_request.js"></script>
-<script src="../public/search_brigades.js"></script>
-<script src="../public/data.js"></script>
-</body>
-</html>
+                %>
+        </select>
+        <button type="submit" class="button2">Поиск</button>
+    </form>
+</div>

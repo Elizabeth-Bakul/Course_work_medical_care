@@ -44,7 +44,7 @@ function buttonsControl(button, i){
         console.log()
         if(typeof receivedBrigades.req[0]=="undefined"){
             console.log('Нет вызовов');
-            history.inner='Нет вызовов';
+            history.innerHTML='Нет вызовов';
             g.removeAttribute('hidden');
         } else {
             for(let k=0; k<receivedBrigades.req.length; k++){
