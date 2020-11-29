@@ -23,7 +23,7 @@ function buttonsControl(button, i){
     request.send(brig);
     request.addEventListener("load", function () {
         let receivedBrigades = JSON.parse(request.response);
-        console.log(receivedBrigades.idBrigades);
+        console.log(receivedBrigades.work.WorkerSurname,' ', receivedBrigades.req.id);
     })
     console.log(forms[i].className);
 }
