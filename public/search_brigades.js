@@ -4,7 +4,8 @@ var inp=document.getElementsByTagName("input");
 let status=document.querySelector('.status');
 let sostav=document.querySelector('.sostav');
 let history=document.querySelector('.history');
-
+let g=document.querySelector('.good');
+let b=document.querySelector('.bad);
 for (let i=0; i<buttons.length;i++){
     buttons[i].addEventListener("click", function(e){
         e.preventDefault();
@@ -28,9 +29,16 @@ function buttonsControl(button, i){
     request.addEventListener("load", function () {
         let receivedBrigades = JSON.parse(request.response);
         sostav.innerHTML='';
+        history.innerHTML='';
         for (let j=0;j<receivedBrigades.work.length; j++){
             console.log(receivedBrigades.work[j].WorkerType)
             sostav.innerHTML+=receivedBrigades.work[j].WorkerType+': '+receivedBrigades.work[j].WorkerSurname+' '+receivedBrigades.work[j].WorkerName+' '+receivedBrigades.work[j].WorkerMiddleName+'<br>'
+        }
+        for(let k=0; k<receivedBrigades.req.length; k++){
+            history.innerHTML+=receivedBrigades.req[k].AcceptTime+'  '+receivedBrigades.req[k].id+'<br>'
+            if (receivedBrigades.req[k].EndRequestTime===null){
+                b.removeAttribute('hidden');
+            } else {g.removeAttribute('hidden');}
         }
         console.log(receivedBrigades.work[0].WorkerSurname,' ', receivedBrigades.req[0].id);
     })
