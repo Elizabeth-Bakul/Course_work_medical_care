@@ -106,16 +106,29 @@ module.exports = function (app) {
     app.post('/search_brigade', jsonParser, async function(req,res){
         try{
             console.log(req.body);
-            const client = await pool.connect()
-            await client.query('BEGIN')
-            await JSON.stringify(client.query('select id, "AcceptTime","EndRequestTime" from "Requests" where "Brigade_id_fk"=$1 order by "AcceptTime"',[req.body.idBrigades],function(err, result){
-                if(err){console.log(err)}
-                else {console.log(result.rows)}
-            }))
+            
+                const client = await pool.connect()
+                await client.query('BEGIN')
+                await JSON.stringify(client.query('select "WorkerSurname",  from "Workers" where "Brigade_fk"=$1',[req.body.idBrigades], function(err1, result1){
+                    if(err1) {console.log(err1)}
+                    else{
+                        console.log(result1.rows);
+                        if (req.body.idBrigades!=3){
+                            await JSON.stringify(client.query('select id, "AcceptTime","EndRequestTime" from "Requests" where "Brigade_id_fk"=$1 order by "AcceptTime"',[req.body.idBrigades],function(err, result){
+                            if(err){console.log(err)}
+                                else {
+                                    console.log(result.rows);
+                                    console.log(result1.rows);
+                                }}))}}}))
+
+                
+
             res.json(req.body);
+            }
+            catch(e){throw(e)}
         }
-        catch(e){throw(e)}
-    })
+        
+    )
     app.get('/account', ensureAuthenticated, function (req, res) {
         console.log("typeWorker:", req.user[0].typeWorker);
         //в зависимости от этого рендер страниц
