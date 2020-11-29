@@ -31,12 +31,17 @@ function buttonsControl(button, i){
         let receivedBrigades = JSON.parse(request.response);
         sostav.innerHTML='';
         history.innerHTML='';
-        for (let j=0;j<receivedBrigades.work.length; j++){
+        if(typeof receivedBrigades.work=="undefined"){
+            sostav.innerHTML='В данной бригаде нет работников';
+        } else {
+            for (let j=0;j<receivedBrigades.work.length; j++){
             console.log(receivedBrigades.work[j].WorkerType)
             sostav.innerHTML+=receivedBrigades.work[j].WorkerType+': '+receivedBrigades.work[j].WorkerSurname+' '+receivedBrigades.work[j].WorkerName+' '+receivedBrigades.work[j].WorkerMiddleName+'<br>'
         }
+        }
+        
         if(typeof receivedBrigades.req=="undefined"){
-            console.log('Нет вызовов');
+            history.inner='Нет вызовов';
             g.removeAttribute('hidden');
         } else {
             for(let k=0; k<receivedBrigades.req.length; k++){
