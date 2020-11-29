@@ -28,7 +28,7 @@ function buttonsControl(button, i){
     request.addEventListener("load", function () {
         let receivedBrigades = JSON.parse(request.response);
         for (let j=0;j<receivedBrigades.work.length; i++){
-            sostav.innerHTML=receivedBrigades.work[i].WorkerType+' :'+receivedBrigades.work[i].WorkerSurname
+            console.log(receivedBrigades.work[i].WorkerType)
         }
         console.log(receivedBrigades.work[0].WorkerSurname,' ', receivedBrigades.req[0].id);
     })
