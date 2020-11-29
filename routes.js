@@ -233,7 +233,7 @@ module.exports = function (app) {
             await JSON.stringify(client.query('select id, "PatientName","PatientSurName","PatientMiddleName" from "Patients"',[], function(err, result){
                 if (err){console.log("Mistake")}
                 else {
-                    res.render('account_otch',{
+                    res.render('account_otch_pat',{
                         userData:req.user,
                         PatientData:result.rows,
                         messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
