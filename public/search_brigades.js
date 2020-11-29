@@ -59,3 +59,4 @@ function buttonsControl(button, i){
     })
     console.log(forms[i].className);
 }
+//Отсался график и запрос данных для графика
