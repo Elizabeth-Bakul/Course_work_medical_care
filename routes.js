@@ -233,6 +233,7 @@ module.exports = function (app) {
             await JSON.stringify(client.query('select id, "PatientName","PatientSurname","PatientMiddleName" from "Patients"',[], function(err, result){
                 if (err){console.log(err)}
                 else {
+                    console.log(result.rows)
                     res.render('account_otch_pat',{
                         userData:req.user,
                         PatientData:result.rows,
