@@ -38,7 +38,7 @@ function buttonsControl(button, i){
         for(let k=0; k<receivedBrigades.req.length; k++){
             history.innerHTML+=receivedBrigades.req[k].AcceptTime+'  '+receivedBrigades.req[k].id+'<br>'
             if (receivedBrigades.req[k].EndRequestTime===null){
-                b.removeAttribute('hidden');
+                bad.removeAttribute('hidden');
             } else {g.removeAttribute('hidden');}
         }
         console.log(receivedBrigades.work[0].WorkerSurname,' ', receivedBrigades.req[0].id);
