@@ -117,12 +117,14 @@ module.exports = function (app) {
                             client.query('select id, "AcceptTime","EndRequestTime" from "Requests" where "Brigade_id_fk"=$1 order by "AcceptTime" desc LIMIT 10',[req.body.idBrigades],function(err, result){
                             if(err){console.log(err)}
                                 else {
+                                    console.log(result.rows);
+                                    console.log(result1.rows);
+                                    client.end();
                                         res.json({
                                         work:result1.rows,
                                         req:result.rows
                                         }) 
-                                    console.log(result.rows);
-                                    console.log(result1.rows);
+                                    
                                    
                                 }})
                             }})
