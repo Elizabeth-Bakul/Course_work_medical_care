@@ -35,6 +35,10 @@ function buttonsControl(button, i){
             console.log(receivedBrigades.work[j].WorkerType)
             sostav.innerHTML+=receivedBrigades.work[j].WorkerType+': '+receivedBrigades.work[j].WorkerSurname+' '+receivedBrigades.work[j].WorkerName+' '+receivedBrigades.work[j].WorkerMiddleName+'<br>'
         }
+        if(receivedBrigades.req.length===0){
+            console.log('Нет вызовов');
+            g.removeAttribute('hidden');
+        }
         for(let k=0; k<receivedBrigades.req.length; k++){
             history.innerHTML+=receivedBrigades.req[k].AcceptTime+'  '+receivedBrigades.req[k].id+'<br>'
             if (receivedBrigades.req[k].EndRequestTime===null){
