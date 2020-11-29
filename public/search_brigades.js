@@ -31,6 +31,8 @@ function buttonsControl(button, i){
         let receivedBrigades = JSON.parse(request.response);
         sostav.innerHTML='';
         history.innerHTML='';
+        bad.setAttribute('hidden', true)
+        g.setAttribute('hidden',true);
         if(typeof receivedBrigades.work=="undefined"){
             sostav.innerHTML='В данной бригаде нет работников';
         } else {
