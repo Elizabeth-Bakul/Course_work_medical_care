@@ -230,8 +230,8 @@ module.exports = function (app) {
         try{
             const client=await pool.connect()
             await client.query('BEGIN')
-            await JSON.stringify(client.query('select id, "PatientName","PatientSurName","PatientMiddleName" from "Patients"',[], function(err, result){
-                if (err){console.log("Mistake")}
+            await JSON.stringify(client.query('select id, "PatientName","PatientSurname","PatientMiddleName" from "Patients"',[], function(err, result){
+                if (err){console.log(err)}
                 else {
                     res.render('account_otch_pat',{
                         userData:req.user,
