@@ -119,11 +119,12 @@ module.exports = function (app) {
                                 else {
                                     console.log(result.rows);
                                     console.log(result1.rows);
-                                    client.end();
+                                    client.query('COMMIT');
                                         res.json({
                                         work:result1.rows,
                                         req:result.rows
                                         }) 
+                                    
                                     
                                    
                                 }})
@@ -132,7 +133,7 @@ module.exports = function (app) {
 
                 
 
-            //res.json(req.body);
+            client.release()
             }
             catch(e){throw(e)}
         }
