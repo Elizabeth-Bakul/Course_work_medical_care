@@ -58,8 +58,8 @@
 } %>
 <div class="pat">
     <form action="" class="otc_pat">
-        <select name="pat" id="" class="sp_pat">
-            <option disabled>Выберите героя</option>
+        <select name="pat" id="" class="js-selectize" placeholder="Выберите пациента">
+            <option value=""></option>
             <% 
                 for( let i=0; i< PatientData.length ; i++)
                 {
@@ -72,3 +72,16 @@
         <button type="submit" class="button2">Поиск</button>
     </form>
 </div>
+<script>
+    $(document).ready(function(){
+        $('.js-selectize').selectize();
+    });
+    </script>
+<script src="/jquery.min.js"></script>
+<script src="/microplugin/src/microplugin.js"></script>
+<script src="/sifter/sifter.min.js"></script>
+<script src="/selectize/dist/js/selectize.min.js"></script>
+<script src="../public/registration_request.js"></script>
+</body>
+</body>
+</html>

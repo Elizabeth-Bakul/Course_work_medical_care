@@ -33,7 +33,7 @@ function buttonsControl(button, i){
         history.innerHTML='';
         bad.setAttribute('hidden', true)
         g.setAttribute('hidden',true);
-        if(typeof receivedBrigades.work=="undefined"){
+        if(typeof receivedBrigades.work[0]=="undefined"){
             sostav.innerHTML='В данной бригаде нет работников';
         } else {
             for (let j=0;j<receivedBrigades.work.length; j++){
@@ -59,4 +59,4 @@ function buttonsControl(button, i){
     })
     console.log(forms[i].className);
 }
-//Отсался график и запрос данных для графика
+//Остался график и запрос данных для графика
