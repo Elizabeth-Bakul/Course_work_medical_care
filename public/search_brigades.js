@@ -40,7 +40,7 @@ function buttonsControl(button, i){
         }
         }
         
-        if(typeof receivedBrigades.req=="undefined"){
+        if(typeof receivedBrigades.req=="null"){
             history.inner='Нет вызовов';
             g.removeAttribute('hidden');
         } else {
@@ -50,7 +50,7 @@ function buttonsControl(button, i){
                 bad.removeAttribute('hidden');
             } else {g.removeAttribute('hidden');}
         }
-        console.log(receivedBrigades.work[0].WorkerSurname,' ', receivedBrigades.req[0].id);
+        //console.log(receivedBrigades.work[0].WorkerSurname,' ', receivedBrigades.req[0].id);
         }
         
     })
