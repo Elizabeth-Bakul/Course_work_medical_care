@@ -41,7 +41,7 @@ function buttonsControl(button, i){
             sostav.innerHTML+=receivedBrigades.work[j].WorkerType+': '+receivedBrigades.work[j].WorkerSurname+' '+receivedBrigades.work[j].WorkerName+' '+receivedBrigades.work[j].WorkerMiddleName+'<br>'
         }
         }
-        if(typeof receivedBrigades.req=="undefined"){
+        if(typeof receivedBrigades.req=="null"){
             console.log('Нет вызовов');
             history.inner='Нет вызовов';
             g.removeAttribute('hidden');
