@@ -104,17 +104,58 @@ module.exports = function (app) {
     });
 
     app.get('/account', ensureAuthenticated, function (req, res) {
-        //if (req.isAuthenticated()) {
         console.log("typeWorker:", req.user[0].typeWorker);
         //в зависимости от этого рендер страниц
-        res.render('account', {
-            title: "Работник",
-            userData: req.user,
-            messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
-        });
-        //} else {
-        //    res.redirect('/login');
-        //}
+        switch (req.user[0].typeWorker) {
+            case 'бухгалтер-регистратор':
+                res.render('account', {
+                    title: "Работник",
+                    userData: req.user,
+                    messages: {
+                        danger: req.flash('danger'),
+                        warning: req.flash('warning'),
+                        success: req.flash('success')
+                    }
+                });
+                break;
+            case 'врач':
+                res.render('account_doctor', {
+                    title: "Работник",
+                    userData: req.user,
+                    messages: {
+                        danger: req.flash('danger'),
+                        warning: req.flash('warning'),
+                        success: req.flash('success')
+                    }
+                });
+                break;
+            case "администратор":
+                res.render('account_admin', {
+                    title: "Работник",
+                    userData: req.user,
+                    messages: {
+                        danger: req.flash('danger'),
+                        warning: req.flash('warning'),
+                        success: req.flash('success')
+                    }
+                });
+                break;
+            case 'фельдшер':
+                res.render('account_doctor', {
+                    title: "Работник",
+                    userData: req.user,
+                    messages: {
+                        danger: req.flash('danger'),
+                        warning: req.flash('warning'),
+                        success: req.flash('success')
+                    }
+                });
+                break;
+            default:
+                console.log("Ошибка! Неизвестный тип работника.");
+                res.redirect('/');
+                break;
+        }
     });
     app.get('/account_otch', ensureAuthenticated, async function(req, res){
         try {
@@ -135,6 +176,7 @@ module.exports = function (app) {
         }
         
     } )
+
     app.post('/account', async function (req, res) {
         try {
             console.log(req.body);
