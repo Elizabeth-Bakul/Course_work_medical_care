@@ -1,6 +1,10 @@
 var buttons=document.querySelectorAll('.button2');
 var forms=document.getElementsByTagName("form");
 var inp=document.getElementsByTagName("input");
+let status=document.querySelector('.status');
+let sostav=document.querySelector('.sostav');
+let history=document.querySelector('.history');
+
 for (let i=0; i<buttons.length;i++){
     buttons[i].addEventListener("click", function(e){
         e.preventDefault();
@@ -23,6 +27,9 @@ function buttonsControl(button, i){
     request.send(brig);
     request.addEventListener("load", function () {
         let receivedBrigades = JSON.parse(request.response);
+        for (let j=0;j<receivedBrigades.work.length; i++){
+            sostav.innerHTML=receivedBrigades.work[i].WorkerType+' :'+receivedBrigades.work[i].WorkerSurname
+        }
         console.log(receivedBrigades.work[0].WorkerSurname,' ', receivedBrigades.req[0].id);
     })
     console.log(forms[i].className);

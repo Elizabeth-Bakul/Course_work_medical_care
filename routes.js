@@ -112,8 +112,9 @@ module.exports = function (app) {
                 await JSON.stringify(client.query('select "WorkerSurname", "WorkerName","WorkerMiddleName", "WorkerType" from "Workers" where "Brigade_fk"=$1',[req.body.idBrigades], function(err1, result1){
                     if(err1) {console.log(err1)}
                     else{
-                        if (req.body.idBrigades!=3){
-                            client.query('select id, "AcceptTime","EndRequestTime" from "Requests" where "Brigade_id_fk"=$1 order by "AcceptTime"',[req.body.idBrigades],function(err, result){
+                        if(result1.rowCount!=0){ 
+                            if (req.body.idBrigades!=3){
+                            client.query('select id, "AcceptTime","EndRequestTime" from "Requests" where "Brigade_id_fk"=$1 order by "AcceptTime" desc LIMIT 10',[req.body.idBrigades],function(err, result){
                             if(err){console.log(err)}
                                 else {
                                     console.log(result.rows);
@@ -122,7 +123,9 @@ module.exports = function (app) {
                                         work:result1.rows,
                                         req:result.rows
                                     })
-                                }})}}}))
+                                }})}}
+                            }})
+                                )
 
                 
 
