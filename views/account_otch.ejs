@@ -64,8 +64,8 @@
                 {
                 %>
                     <form action="" class=<%=BrigadeData[i].id%>>
-                        <input type="text" class="br" hidden value=<%=BrigadeData[i].id%>>
-                        <button type="submit" class="button2" value=<%=BrigadeData[i].id %> > <%= BrigadeData[i].BrigadeName%> </button>
+                        <input type="text" class="br" name="id_br" hidden id=<%=BrigadeData[i].id%> value=<%=BrigadeData[i].id%>>
+                        <button type="submit" class="button2"> <%= BrigadeData[i].BrigadeName%> </button>
                     </form>
                 <%
                 }

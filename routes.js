@@ -102,7 +102,12 @@ module.exports = function (app) {
             throw(e)
         }
     });
-
+    app.post('/search_brigades', jsonParser, async function(req,res){
+        try{
+            console.log(req.body);
+        }
+        catch(e){throw(e)}
+    })
     app.get('/account', ensureAuthenticated, function (req, res) {
         console.log("typeWorker:", req.user[0].typeWorker);
         //в зависимости от этого рендер страниц
