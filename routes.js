@@ -114,12 +114,12 @@ module.exports = function (app) {
                     else{
                         console.log(result1.rows);
                         if (req.body.idBrigades!=3){
-                            await JSON.stringify(client.query('select id, "AcceptTime","EndRequestTime" from "Requests" where "Brigade_id_fk"=$1 order by "AcceptTime"',[req.body.idBrigades],function(err, result){
+                            client.query('select id, "AcceptTime","EndRequestTime" from "Requests" where "Brigade_id_fk"=$1 order by "AcceptTime"',[req.body.idBrigades],function(err, result){
                             if(err){console.log(err)}
                                 else {
                                     console.log(result.rows);
                                     console.log(result1.rows);
-                                }}))}}}))
+                                }})}}}))
 
                 
 
