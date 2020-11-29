@@ -65,7 +65,7 @@
                 %>
                     <form action="" class=<%=BrigadeData[i].id%>>
                         <input type="text" class="br" hidden value=<%=BrigadeData[i].id%>>
-                        <button type="submit" class="button2" id=<%=BrigadeData[i].id %>> <%= BrigadeData[i].BrigadeName%> </button>
+                        <button type="submit" class="button2" value=<%=BrigadeData[i].id %> > <%= BrigadeData[i].BrigadeName%> </button>
                     </form>
                 <%
                 }
@@ -75,3 +75,11 @@
         <th></th>
     </tr>
 </table>
+<footer class="foot">
+    <p class="container">Copyright © Бакулина Елизавета, Гербовец Даниил, Крыжановская Ксения</p>
+</footer>
+<script src="../public/registration_request.js"></script>
+<script src="../public/search_brigades.js"></script>
+<script src="../public/data.js"></script>
+</body>
+</html>
