@@ -8,7 +8,8 @@ var request = require('request');
 const {Pool, Client} = require('pg')
 const bcrypt = require('bcrypt')
 const uuidv4 = require('uuid/v4');
-const {forwardAuthenticated, ensureAuthenticated}=require('./config/auth')
+const {forwardAuthenticated, ensureAuthenticated}=require('./config/auth');
+const { send } = require('process');
 
 
 app.use(express.static('public'));
@@ -105,6 +106,7 @@ module.exports = function (app) {
     app.post('/search_brigades', jsonParser, async function(req,res){
         try{
             console.log(req.body);
+            send(req.body);
         }
         catch(e){throw(e)}
     })
