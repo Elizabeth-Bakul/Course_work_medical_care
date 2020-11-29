@@ -106,6 +106,12 @@ module.exports = function (app) {
     app.post('/search_brigade', jsonParser, async function(req,res){
         try{
             console.log(req.body);
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('select id, "AcceptTime","EndRequestTime" from "Requests" where "Brigade_id_fk"=$1 order by "AcceptTime"',[req.body.idBrigades],function(err, res){
+                if(err){console.log(err)}
+                else {console.log(result.rows)}
+            }))
             res.json(req.body);
         }
         catch(e){throw(e)}
