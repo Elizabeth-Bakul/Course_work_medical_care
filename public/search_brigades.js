@@ -5,7 +5,8 @@ let status=document.querySelector('.status');
 let sostav=document.querySelector('.sostav');
 let history=document.querySelector('.history');
 let g=document.querySelector('.good');
-let b=document.querySelector('.bad);
+let bad=document.querySelector('.bad')
+
 for (let i=0; i<buttons.length;i++){
     buttons[i].addEventListener("click", function(e){
         e.preventDefault();
@@ -35,7 +36,7 @@ function buttonsControl(button, i){
             sostav.innerHTML+=receivedBrigades.work[j].WorkerType+': '+receivedBrigades.work[j].WorkerSurname+' '+receivedBrigades.work[j].WorkerName+' '+receivedBrigades.work[j].WorkerMiddleName+'<br>'
         }
         for(let k=0; k<receivedBrigades.req.length; k++){
-            history.innerHTML+=receivedBrigades.req[k].AcceptTime+'  '+receivedBrigades.req[k].id+'<br>'
+            history.innerHTML+=receivedBrigades.req[k].AcceptTime+'  '+receivedBrigades.req[k].id
             if (receivedBrigades.req[k].EndRequestTime===null){
                 b.removeAttribute('hidden');
             } else {g.removeAttribute('hidden');}
