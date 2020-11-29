@@ -9,7 +9,7 @@ for (let i=0; i<buttons.length;i++){
 function buttonsControl(button, i){
     console.log(i)
     console.log(button.value);
-    let brigades=JSON.stringify(
+    let brig=JSON.stringify(
         {
         idBrigades:inp[i].value
     }
@@ -20,10 +20,10 @@ function buttonsControl(button, i){
     request.onload = function () {
         console.log(this.response);
     };
-    request.send(brigades);
+    request.send(brig);
     request.addEventListener("load", function () {
         let receivedBrigades = JSON.parse(request.response);
-
+        console.log()
     })
     console.log(forms[i].className);
 }
