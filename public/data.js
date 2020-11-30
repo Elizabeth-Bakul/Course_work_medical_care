@@ -2,10 +2,10 @@ let but3 = document.querySelector('.button_3');
 let tim=document.querySelector('.date-time');
 
 function getISOStringWithoutSecsAndMillisecs1(date) {
+    date.setMilliseconds(3 * 60 * 60 * 1000);
     const dateAndTime = date.toISOString().split('T')
     const time = dateAndTime[1].split(':')
     const sec=time[2].split('.')
-    time[0]+=3;
     return dateAndTime[0]+'T'+time[0]+':'+time[1]+':'+sec[0]
   }
   
