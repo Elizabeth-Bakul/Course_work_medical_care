@@ -65,7 +65,7 @@ if(messages.success.length){
             <label class="search-label" for="name"> Симптомы:</label>
             <select>
                 <% for(var i = 0; i < list_values.length; i++) { %>
-                    <option><%= list_values[i] %></option>
+                    <option><%= list_values[i].Symptom_name%></option>
                 <% } %>
             </select>
             <button class="button" type="submit" id="subsear">Добавить</button>

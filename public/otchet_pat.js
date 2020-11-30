@@ -14,5 +14,8 @@ but.addEventListener("click", function (e){
         console.log(this.response);
     };
     request.send(patient);
-    
+    request.addEventListener("load", function () {
+        let receivedPatient = JSON.parse(request.response);
+        if(typeof )
+    })
 })
