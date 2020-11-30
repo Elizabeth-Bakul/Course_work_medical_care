@@ -39,7 +39,7 @@ document.getElementById("subsear").addEventListener("click", function (e){
         // получаем и парсим ответ сервера
         let receivedUser = JSON.parse(request.response);
         console.log(receivedUser.PatientAddress, " ", receivedUser.InBlackList, " ", receivedUser.InsuranceName, " ", receivedUser.InsurancePayType, " ");// смотрим ответ сервера
-        if (typeof receivedUser[0].PatientAddress=="undefined") {n2.removeAttribute('hidden');} else{
+        if (typeof receivedUser=="undefined") {n2.removeAttribute('hidden');} else{
 
             if (receivedUser.InBlackList) {
                 registerForm.setAttribute('hidden', 'true');
