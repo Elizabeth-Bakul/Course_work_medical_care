@@ -39,7 +39,7 @@ button.addEventListener("click", function (e){
     var fc = n.firstChild;
     while( fc ) {
         n.removeChild( fc );
-        fc = nt.firstChild;
+        fc = n.firstChild;
     }
     var fc2 = id.firstChild;
     while( fc2 ) {
