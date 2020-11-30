@@ -1,5 +1,7 @@
 let but=document.querySelector('.button2')
 let sec=document.querySelector('.js-selectize')
+var dat = document.querySelector('.d')
+
 but.addEventListener("click", function (e){
     e.preventDefault();
     console.log(sec.value);
@@ -8,7 +10,7 @@ but.addEventListener("click", function (e){
         idPat:sec.value
     })
     let request = new XMLHttpRequest();
-    request.open("POST", "/search_patient", true); // посылаем запрос на адрес "/user"
+    request.open("POST", "/account_otch_pat", true); // посылаем запрос на адрес "/user"
     request.setRequestHeader("Content-Type", "application/json");
     request.onload = function () {
         console.log(this.response);
@@ -16,6 +18,8 @@ but.addEventListener("click", function (e){
     request.send(patient);
     request.addEventListener("load", function () {
         let receivedPatient = JSON.parse(request.response);
-        if(typeof )
+        if(typeof receivedPatient.work[0]=="undefined"){
+
+        let di=document.createElement('div');
     })
 })
