@@ -396,7 +396,7 @@ module.exports = function (app) {
         res.redirect('/');
     });
 
-    app.get('/account_by',forwardAuthenticated, function (req, res){
+    app.get('/account_by',ensureAuthenticated, function (req, res){
         res.render('account_by', {
             userData: req.user,
             messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
