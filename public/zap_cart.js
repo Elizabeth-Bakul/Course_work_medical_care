@@ -8,6 +8,12 @@ for (let i=0; i<but31.length;i++){
     e.preventDefault();
     buttonsControl(this,i)},false);
 }
+function getISOStringWithoutSecsAndMillisecs1(date) {
+  const dateAndTime = date.toISOString().split('T')
+  const time = dateAndTime[1].split(':')
+  const sec=time[2].split('.')
+  return dateAndTime[0]+'T'+time[0]+':'+time[1]+':'+sec[0]
+}
 function buttonsControl(button, i){
   tim2.value=getISOStringWithoutSecsAndMillisecs1(new Date());
   console.log(button[i].value);
