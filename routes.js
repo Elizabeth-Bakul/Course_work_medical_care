@@ -95,7 +95,7 @@ module.exports = function (app) {
                 // console.log(req.body.userName);
                 // console.log(req.body.userSurname);
                 // console.log(req.body.userMiddlename);
-                res.send(result.rows[0]);
+                res.json(result.rows[0]);
 
             }));
         } catch (e) {
