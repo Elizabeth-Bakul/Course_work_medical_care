@@ -16,6 +16,7 @@ but3.onclick=()=>{
 }
 
 let but31 = document.querySelectorAll('.Big_B');
+console.log(but31);
 let tim2=document.querySelector('.date-time2');
 let req=document.querySelector('.rrrrreq');
 let brig=document.querySelector('.brrrr');
