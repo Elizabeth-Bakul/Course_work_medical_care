@@ -344,10 +344,10 @@ module.exports = function (app) {
                                 }
                             })
                         }}))
-           client.release()   
+            client.release()   
             }
             catch(e){throw(e)}
-      }
+    }
         
     )
     app.get('/login', forwardAuthenticated,function (req, res) {
@@ -367,7 +367,24 @@ module.exports = function (app) {
             
                 const client = await pool.connect()
                 await client.query('BEGIN')
-                
+                await JSON.stringify(client.query('select "PatientName","PatientSurname","PatientMiddleName","PatientAddress","InBlackList", "InsuranceName", "InsurancePayType" from "Patients" ' +
+                'left join "Insurance" I on "Patients"."InsuranceId_fk" = I.id where "Patients".id=$1',[req.body.idPat],function (err, result){
+                    if (err){ console.log(err)}
+                    else {
+                        console.log(result.rows)
+                        client.query('select "Requests".id, "RequestTime","Hospitalization", "Diagnosis_name" from "Requests" left join "Diagnosis" on "Requests"."Diagnosis_id_fk"="Diagnosis".id where  "Patient_fk"=$1',[req.body.idPat], function(err1, result1){
+                            if (err1) {console.log(err1)} else {
+                                console.log(result1.rows)
+                                res.json({
+                                    Pat:result.rows,
+                                    res: result1.rows
+                                })
+                                client.query('COMMIT')
+                            }
+                        })
+                    }
+                }))
+                client.release()        
         }
         catch(e){throw(e)}
     })
