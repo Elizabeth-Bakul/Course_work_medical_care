@@ -57,42 +57,42 @@
     }
 } %>
 <table class="t1">
-    <tr>
-        <th>
+    <tr class="tr1">
+        <th class="th1">
             <form action="" class=<%=BrigadeData[0].id%>>
                 <input type="text" class="br" name="id_br" hidden value=<%=BrigadeData[0].id%>>
                 <button type="submit" class="button2"> <%= BrigadeData[0].BrigadeName%> </button>
             </form>
         </th>
-        <th class="st">Статус
+        <th class="th2">Статус
                 <div class="status"> 
                     <span class="good" hidden>Свободен</span>
                     <span class="bad" hidden>Занят</span>
                 </div>
         </th>
     </tr>        
-    <tr>
-        <th><form action="" class=<%=BrigadeData[1].id%>>
+    <tr class="tr1">
+        <th class="th1"><form action="" class=<%=BrigadeData[1].id%>>
             <input type="text" class="br" name="id_br" hidden value=<%=BrigadeData[1].id%>>
             <button type="submit" class="button2"> <%= BrigadeData[1].BrigadeName%> </button>
         </form></th>
-        <th class="ss">Состав
+        <th class="th2">Состав
                 <div class="sostav"></div>
         </th>
     </tr>
-    <tr>
-        <th>
+    <tr class="tr1">
+        <th class="th1">
             <form action="" class=<%=BrigadeData[2].id%>>
                 <input type="text" class="br" name="id_br" hidden value=<%=BrigadeData[2].id%>>
                 <button type="submit" class="button2"> <%= BrigadeData[2].BrigadeName%> </button>
             </form>
         </th> 
-        <th class="last_vyz"> Последние вызовы
+        <th class="th2"> Последние вызовы
                 <div class="history">
                 </div>
         </th>
     </tr>
-    <tr>
+    <tr class="tr1">
         <th></th> 
         <th>
             <div class="grah"></div>
