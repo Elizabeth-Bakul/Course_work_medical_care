@@ -103,7 +103,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/account', ensureAuthenticated, async function (req, res) {
+    app.get('/account', ensureAuthenticated, function (req, res) {
         console.log("typeWorker:", req.user[0].typeWorker);
         //в зависимости от этого рендер страниц
         switch (req.user[0].typeWorker) {
@@ -130,27 +130,6 @@ module.exports = function (app) {
                 });
                 break;
             case "администратор":
-                try {
-                    const client = await pool.connect()
-                    await client.query('BEGIN')
-                    await JSON.stringify(client.query('select "Symptom_name" from "Symptoms"', [], function (err, result) {
-                        if (err) {
-                            console.log("Mistake")
-                        } else {
-                            console.log(result.rows)
-                            res.render('account_admin', {
-                                dropdownVals: result.rows,
-                                messages: {
-                                    danger: req.flash('danger'),
-                                    warning: req.flash('warning'),
-                                    success: req.flash('success')
-                                }
-                            })
-                        }
-                    }))
-                } catch (e) {
-                    throw(e)
-                }
                 res.render('account_admin', {
                     title: "Работник",
                     userData: req.user,
