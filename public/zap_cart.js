@@ -9,6 +9,7 @@ for (let i=0; i<but31.length;i++){
     buttonsControl(this,i)},false);
 }
 function getISOStringWithoutSecsAndMillisecs1(date) {
+  date.setMilliseconds(3 * 60 * 60 * 1000);
   const dateAndTime = date.toISOString().split('T')
   const time = dateAndTime[1].split(':')
   const sec=time[2].split('.')
