@@ -396,6 +396,14 @@ module.exports = function (app) {
         res.redirect('/');
     });
 
+    app.get('/account_by',forwardAuthenticated, function (req, res){
+        res.render('account_by', {
+            title: "Join",
+            userData: req.user,
+            messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
+        });
+    } )
+    
     app.post('/login', passport.authenticate('local', {
             successRedirect: '/account',
             failureRedirect: '/login',

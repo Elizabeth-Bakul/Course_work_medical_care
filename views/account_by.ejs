@@ -29,12 +29,9 @@
 <nav class="nav">
     <a class="nav__link" href="/account">Регистрация вызова</a>
     <a class="nav__link nav_active" href="/account_otch">Отчетность</a>
-    <a class="nav__link" href="/account_by">Бухгалтерия</a>
+    <a class="nav__link nav_active" href="/account_by">Бухгалтерия</a>
 </nav>
-<nav class="menu_otch">
-    <a href="/account_otch" class="link_submenu act">Бригады</a>
-    <a href="/account_otch_pat" class="link_submenu">Пациент</a>
-</nav>
+
 <% if (messages){
     if(messages.warning){
         if(messages.warning.length){
@@ -56,40 +53,22 @@
     <% }
     }
 } %>
-<table class="t1">
-    <tr>
-        <th>
-            <% 
-                for( let i=0; i< BrigadeData.length ; i++)
-                {
-                %>
-                    <form action="" class=<%=BrigadeData[i].id%>>
-                        <input type="text" class="br" name="id_br" hidden value=<%=BrigadeData[i].id%>>
-                        <button type="submit" class="button2"> <%= BrigadeData[i].BrigadeName%> </button>
-                    </form>
-                <%
-                }
-            %>
-            
-        </th>
-        <th>
-            <div class="status">
-                <span class="good" hidden>Свободен</span>
-                <span class="bad" hidden>Занят</span>
-            </div>
-            <div class="sostav"></div>
-            <div class="history">
-            </div>
-            <div class="grah"></div>
-        </th>
-    </tr>
-</table>
+<div class="zp">
+    <form action="" class="zp_r">
+        <fieldset>
+            <legend class='sear2'>Рассчет заработной платы</legend>
+            <label class="search-label" for="date">Месяц для Рассчета</label>
+                    <input type="month" name="date" id="dat-zp">
+            <button class="button2" id="r_z">Рассчитать</button>
+        </fieldset>
+    </form>
+</div>
+<div class="vzp">
+    
+</div>
 <footer class="foot">
     <p class="container">Copyright © Бакулина Елизавета, Гербовец Даниил, Крыжановская Ксения</p>
 </footer>
 <script src="../public/registration_request.js"></script>
-<script src="../public/search_brigades.js"></script>
-<script src="../public/data.js"></script>
-
 </body>
 </html>
