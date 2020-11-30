@@ -67,7 +67,10 @@
                 <th class="23"><%= RequestData[i].InformalDescription%></th>
                 <th class="33"><%= RequestData[i].RequestTime%></th>
                 <th class="43">
-                <button class="Big_B" value=<%= RequestData[i].id%>>Принять</button>
+                <form action="">
+                    <button class="Big_B" value=<%= RequestData[i].id%>>Принять</button>
+                </form>
+                
                 </th>
             </tr><%
         }

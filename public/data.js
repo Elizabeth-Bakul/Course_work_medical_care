@@ -21,7 +21,7 @@ let req=document.querySelector('.rrrrreq');
 let brig=document.querySelector('.brrrr');
 for (let i=0; i<buttons.length;i++){
   but31[i].addEventListener("click", function(e){
-      //e.preventDefault();
+      e.preventDefault();
       buttonsControl(this,i)},false);
 }
 function buttonsControl(button, i){
