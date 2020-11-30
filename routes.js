@@ -177,7 +177,29 @@ module.exports = function (app) {
                 //});
                 break;
             case 'фельдшер':
-                res.redirect('/account_doctor');
+                try{
+                    const client1=await pool.connect()
+                    await client1.query('BEGIN')
+                    await JSON.stringify(client1.query('select id,"InformalDescription","RequestTime" from "Requests" where "AcceptTime" is NULL',[],function(err,result){
+                        if (err) {console.log(err)}
+                        else{
+                            console.log(result.rows)
+                            res.render('account_doctor', {
+                            title: "Работник",
+                            userData: req.user,
+                            res:result.rows,
+                            messages: {
+                                danger: req.flash('danger'),
+                                warning: req.flash('warning'),
+                                success: req.flash('success')
+                            }
+                });
+                        }
+                    }))
+                }
+                catch (e) {
+                    throw(e)
+                }
                 break;
             default:
                 console.log("Ошибка! Неизвестный тип работника.");
