@@ -3,7 +3,7 @@
 <head>
     <title>Скорая медицинская помощь</title>
     <meta charset="utf-8"/>
-    <link rel='stylesheet' , href='/public/css/style2.css'>
+    <link rel='stylesheet' href='/public/css/style2.css'>
 </head>
 <body>
 
@@ -27,9 +27,12 @@
     </div>
 </header>
 <nav class="nav">
-    <a class="nav__link nav_active" href="/account">Регистрация вызова</a>
-    <a class="nav__link" href="/account_otch">Отчетность</a>
-    <a class="nav__link" href="/account_ac">Бухгалтерия</a>
+    <a class="nav__link nav_active" href="/account">Добавить диагноз</a>
+    <a class="nav__link" href="/account_otch">Добавить симптом</a>
+    <a class="nav__link" href="/account_ac">Добавить анализ</a>
+    <a class="nav__link" href="/account_ac">Добавить лекарство</a>
+    <a class="nav__link" href="/account_ac">Добавить бригаду</a>
+
 </nav>
 
 <% if (messages){
@@ -53,20 +56,78 @@ if(messages.success.length){
 <% }
 }
 } %>
-<div class="search_patient">
+<div class="add_diagnosis">
     <form class="search" name="search-form">
         <fieldset>
-            <legend class='sear2'>Поиск пациента</legend>
-            <label class="search-label" for="surname">Фамилия:</label>
-            <input class="surname" type="text" id="surname" name="surname" placeholder="Фамилия" required>
-            <label class="search-label" for="name"> Имя:</label>
-            <input class="name" type="text" id="name" name="name" placeholder="Имя" required>
-            <label class="search-label" for="Lastname">Отчество:</label>
-            <input class="Lastname" type="text" id="Lastname" name="Lastname" placeholder="Отчество" required>
+            <legend class='sear2'>Добавление диагноза</legend>
+            <label class="search-label" for="surname">Наименование диагноза:</label>
+            <input class="surname" type="text" id="surname" name="surname" required>
+            <label class="search-label" for="name"> Симптомы:</label>
+            <select>
+                <% for(var i = 0; i < dropdownVals.length; i++) { %>
+                    <option><%= dropdownVals[i] %></option>
+                <% } %>
+            </select>
+            <button class="button" type="submit" id="subsear">Добавить</button>
+        </fieldset>
+    </form>
+</div>
+
+<div class="add_symptom">
+    <form class="search" name="search-form">
+        <fieldset>
+            <legend class='sear2'>Добавление симптома</legend>
+            <label class="search-label" for="surname">Наименование симптома:</label>
+            <input class="surname" type="text" id="surname" name="surname" required>
+            <button class="button" type="submit" id="subsear">Добавить</button>
+        </fieldset>
+    </form>
+</div>
+
+<div class="add_analysis">
+    <form class="search" name="search-form">
+        <fieldset>
+            <legend class='sear2'>Добавление анализа</legend>
+            <label class="search-label" for="surname">Наименование анализа:</label>
+            <input class="surname" type="text" id="surname" name="surname" required>
+            <button class="button" type="submit" id="subsear">Добавить</button>
+        </fieldset>
+    </form>
+</div>
+
+<div class="add_medicine">
+    <form class="search" name="search-form">
+        <fieldset>
+            <legend class='sear2'>Добавление лекарства</legend>
+            <label class="search-label" for="surname">Наименование лекарства</label>
+            <label class="search-label" for="name">Диагноз:</label>
+            <select class="ui fluid search dropdown" multiple="">
+                <option value="">State</option>
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+            </select>
+            <button class="button" type="submit" id="subsear">Добавить</button>
+        </fieldset>
+    </form>
+</div>
+
+<div class="add_brigade">
+    <form class="search" name="search-form">
+        <fieldset>
+            <legend class='sear2'>Добавление бригады</legend>
+            <label class="search-label" for="surname">Наименование бригады:</label>
+            <input class="surname" type="text" id="surname" name="surname" required>
+            <label class="search-label" for="name">Врач:</label>
+            <input class="name" type="text" id="name" name="name" placeholder="ФИО" required>
+            <label class="search-label" for="Lastname">Водитель:</label>
+            <input class="Lastname" type="text" id="Lastname" name="Lastname" placeholder="ФИО" required>
+            <label class="search-label" for="Lastname">Медсестра:</label>
+            <input class="Lastname" type="text" id="Lastname" name="Lastname" placeholder="ФИО" required>
             <button class="button" type="submit" id="subsear">Поиск</button>
         </fieldset>
     </form>
 </div>
+
 <div class="black-list" hidden>
     <p class="black-list-n">Пациент в черном списке</p>
 </div>
@@ -119,5 +180,6 @@ if(messages.success.length){
 <script src="../public/registration_request.js"></script>
 <script src="../public/search_patient.js"></script>
 <script src="../public/data.js"></script>
+<script src="../public/account_admin.js"></script>
 </body>
 </html>
