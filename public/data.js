@@ -19,7 +19,7 @@ let but31 = document.querySelectorAll('.Big_B');
 let tim2=document.querySelector('.date-time2');
 let req=document.querySelector('.rrrrreq');
 let brig=document.querySelector('.brrrr');
-for (let i=0; i<buttons.length;i++){
+for (let i=0; i<but31.length;i++){
   but31[i].addEventListener("click", function(e){
       e.preventDefault();
       buttonsControl(this,i)},false);
