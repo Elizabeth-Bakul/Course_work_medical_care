@@ -140,7 +140,7 @@ module.exports = function (app) {
                             console.log(result.rows)
                             res.render('account_admin', {
                                 userData: req.user,
-                                list_values: result.length,
+                                list_values: result.rows,
                                 messages: {
                                     danger: req.flash('danger'),
                                     warning: req.flash('warning'),
