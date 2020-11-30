@@ -16,8 +16,8 @@ function getISOStringWithoutSecsAndMillisecs1(date) {
 }
 function buttonsControl(button, i){
   tim2.value=getISOStringWithoutSecsAndMillisecs1(new Date());
-  console.log(button[i].value);
-  req.value=button[i].value;
+  console.log(button.value);
+  req.value=button.value;
   console.log(req.value);
   console.log(tim2.value);
   console.log(brig.value);
