@@ -429,7 +429,26 @@ module.exports = function (app) {
             messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
         });
     } )
-    
+    app.post('/account_doctor_karta',ensureAuthenticated, async function(req,res){
+        try{
+            console.log(req.body);
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('UPDATE public."Requests" SET  "AcceptTime"=$1, "Brigade_id_fk"=$2 WHERE id=$3',[req.body.date,req.body.brigade, req.body.id_req],function(err,result){
+                if(err){res.flash('danger','Ошибка с обновлением данных');
+                        res.redirect('/account_doctor')}
+                else {
+                    client.query('COMMIT');
+                    console.log('Update success');
+                }
+            }))
+            client.release()
+            
+        }
+        catch (e) {
+            throw(e)
+        }
+    })
     app.post('/login', passport.authenticate('local', {
             successRedirect: '/account',
             failureRedirect: '/login',
