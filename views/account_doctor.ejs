@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<body lang="en">
+<head>
+    <title>Скорая медицинская помощь</title>
+    <meta charset="utf-8"/>
+    <link rel='stylesheet' , href='/public/css/style2.css'>
+</head>
+<body>
+
+
+<header class="hear">
+    <div class="name1"><img src="../public/img/star.svg" alt="Логотип" class="logo">
+        <h1 class="name2">Единая система оказания неотложной медицинской помощи</h1></div>
+    <div class="in">
+        <button class="btn">
+            <div class="usn">
+                <%= userData[0].firstName %>  <%= userData[0].name[0] %>. <%= userData[0].MiddleName[0] %>.
+            </div>
+            <div class="prof">
+                <%= userData[0].typeWorker %> Бригада № <%= userData[0].NumBr %>
+            </div>
+            
+        </button>
+        <div class="dropdown">
+            <a href="/logout" class="dropdown-items">Выйти</a>
+        </div>
+    </div>
+</header>
+<nav class="nav">
+    <a class="nav__link nav_active" href="/accoun_doctor">Активные вызовы</a>
+    <a class="nav__link" href="">Карта вызова</a>
+</nav>
+
+<% if (messages){
+    if(messages.warning){
+        if(messages.warning.length){
+%>
+    <div class="alert-warning"><strong><%= messages.warning %></strong></div>
+    <%
+        }
+    }
+    if(messages.danger){
+        if(messages.danger.length){
+    %>
+    <div class="alert-danger"><strong><%= messages.danger %></strong></div>
+    <% }
+    }
+    if(messages.success){
+        if(messages.success.length){
+    %>
+    <div class="alert-sucess"><strong><%= messages.success %></strong></div>
+    <% }
+    }
+} %>
+<div class="vyzov">
+    <table class="t3">
+        <tr class="tr3">
+            <th class="13">id Вызова
+            </th>
+            <th class="23">Описание случая</th>
+            <th class="33">Время вызова</th>
+            <th class="43">Действие</th>
+        </tr>
+        <% for(let i=0; i < res.length; i++){
+            %><tr class="tr3">
+                <th class="13"><%= res[i].id%></th>
+                <th class="23"><%= res[i].InformalDescription%></th>
+                <th class="33"><%= res[i].RequestTime%></th>
+                <th class="43">
+                    <button class="button3" value=<%= res[i].id%>>Принять</button>
+                </th>
+            </tr>
+        }
+        %>
+    </table>
+</div>
+<form action="/account_doctor_karta" method="POST" class="form_req" hidden>
+    <input type="text" name="brigade" class='brrrr' value=<%= userData[0].NumBr %>>
+    <input type="text" class='rrrrreq' name="id_req">
+    <input type="datetime-local" name="date" class="date-time2" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">
+
+</form>
+<script src="../public/registration_request.js"></script>
+<script src="../public/data.js"></script>
+</body>
+</html>

@@ -14,3 +14,13 @@ but3.onclick=()=>{
     tim.value=getISOStringWithoutSecsAndMillisecs1(new Date());
     tim.setAttribute('readonly', 'true');
 }
+
+let but31 = document.querySelector('.button3');
+let tim2=document.querySelector('.date-time2');
+let req=document.querySelector('.rrrrreq');
+but31.onclick=()=>{
+  tim2.value=getISOStringWithoutSecsAndMillisecs1(new Date());
+  req.value=but31.value;
+  console.log(req.value);
+  console.log(tim2.value);
+}
