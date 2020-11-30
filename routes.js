@@ -395,7 +395,26 @@ module.exports = function (app) {
         req.flash('success', "Logged out. See you soon!");
         res.redirect('/');
     });
-
+    app.post('/account_zp',jsonParser,async function(req,res){
+        try{
+            console.log(req.body);
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('select I."l", I."WorkerSurname",I."WorkerName",I."WorkerMiddleName",I."WorkerType", V."s" from (select "Brigades".id "l","BrigadeName", "WorkerSurname","WorkerName","WorkerMiddleName","WorkerType" from "Brigades" Right join "Workers" on "Brigades".id="Workers"."Brigade_fk") as I left join (select sum("Count") as "s","Brigade_id_fk" as "m" from "Requests" where (EXTRACT(month from"RequestTime")=$1) and (EXTRACT(year from"RequestTime")=$2) group by "m") as V on I."l"=V."m"',[req.body.idMonth,req.body.idYear ], function(err, result){
+                if(err){console.log(err)}else{
+                    console.log(reuslt.rows)
+                    res.json({
+                        res:result.rows
+                        }) 
+                    client.query('COMMIT')
+                }
+            }))
+            client.release()
+        }
+        catch (e) {
+            throw(e)
+        }
+    })
     app.get('/account_by',ensureAuthenticated, function (req, res){
         res.render('account_by', {
             userData: req.user,
