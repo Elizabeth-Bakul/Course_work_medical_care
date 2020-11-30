@@ -74,7 +74,7 @@ button.addEventListener("click", function (e){
         di4.className='f';
         di4.innerHTML='Заработная плата';
         zp.appendChild(di4);
-        for (let m=0; m<receivedZP.length; m++)
+        for (let m=0; m<receivedZP.res.length; m++)
         {
             let di5=document.createElement('div');
             di5.className='el';
