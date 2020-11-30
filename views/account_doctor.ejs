@@ -74,11 +74,11 @@
         %>
     </table>
 </div>
-<form action="/account_doctor_karta" method="POST" class="form_req" hidden>
-    <input type="text" name="brigade" class='brrrr' value=<%= userData[0].NumBr %>>
-    <input type="text" class='rrrrreq' name="id_req">
-    <input type="datetime-local" name="date" class="date-time2" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">
-    <button type="submit"></button>
+<form action="/account_doctor_karta" method="POST" class="form_req" >
+    <input type="text" name="brigade" class='brrrr' value=<%= userData[0].NumBr %> hidden>
+    <input type="text" class='rrrrreq' name="id_req" hidden>
+    <input type="datetime-local" name="date" class="date-time2" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}" hidden>
+    <button type="submit" hidden></button>
 </form>
 <script src="../public/registration_request.js"></script>
 <script src="../public/data.js"></script>
