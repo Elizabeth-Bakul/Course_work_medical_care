@@ -61,11 +61,11 @@
             <th class="33">Время вызова</th>
             <th class="43">Действие</th>
         </tr>
-        <% for(let i=0; i < res.length; i++){
+        <% for(let i=0; i < RequestData.length; i++){
             %><tr class="tr3">
-                <th class="13"><%= res[i].id%></th>
-                <th class="23"><%= res[i].InformalDescription%></th>
-                <th class="33"><%= res[i].RequestTime%></th>
+                <th class="13"><%= RequestData[i].id%></th>
+                <th class="23"><%= RequestData[i].InformalDescription%></th>
+                <th class="33"><%= RequestData[i].RequestTime%></th>
                 <th class="43">
                     <button class="button3" value=<%= res[i].id%>>Принять</button>
                 </th>

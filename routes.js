@@ -187,7 +187,7 @@ module.exports = function (app) {
                             res.render('account_doctor', {
                             title: "Работник",
                             userData: req.user,
-                            res:result.rows,
+                            RequestData:result.rows,
                             messages: {
                                 danger: req.flash('danger'),
                                 warning: req.flash('warning'),
