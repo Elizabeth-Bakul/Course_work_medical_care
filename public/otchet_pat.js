@@ -55,6 +55,7 @@ but.addEventListener("click", function (e){
         hos.removeChild( fc4 );
         fc4 = hos.firstChild;
     }
+
     request.addEventListener("load", function () {
         let receivedPatient = JSON.parse(request.response);
         n.innerHTML=receivedPatient.Pat[0].PatientName;
@@ -86,21 +87,26 @@ but.addEventListener("click", function (e){
             bad.removeAttribute('hidden')
         } else {
             g.removeAttribute('hidden');
-            let di5=document.createElement('div');
-            di5.className='el';
-            let di6=document.createElement('div');
-            di6.className='el';
-            let di7=document.createElement('div');
-            di7.className='el';
-            let di8=document.createElement('div');
-            di8.className='el';
+            
             for(let k=0; k<receivedPatient.res.length; k++){
+                let di5=document.createElement('div');
+                di5.className='el';
                 di5.innerHTML=receivedPatient.res[k].RequestTime;
                 dat.appendChild(di5);
+                let di6=document.createElement('div');
+                di6.className='el';
                 di6.innerHTML=receivedPatient.res[k].id;
                 id.appendChild(di6);
+
+                let di7=document.createElement('div');
+                di7.className='el';
                 di7.innerHTML=receivedPatient.res[k].Diagnosis_name;
                 ds.appendChild(di7);
+            let di8=document.createElement('div');
+            di8.className='el';
+                
+                
+                
                 di8.innerHTML=receivedPatient.res[k].Hospitalization;
                 hos.appendChild(di8);
             }
