@@ -152,15 +152,15 @@ module.exports = function (app) {
                 } catch (e) {
                     throw(e)
                 }
-                res.render('account_admin', {
-                    title: "Работник",
-                    userData: req.user,
-                    messages: {
-                        danger: req.flash('danger'),
-                        warning: req.flash('warning'),
-                        success: req.flash('success')
-                    }
-                });
+                //res.render('account_admin', {
+                //    title: "Работник",
+                //    userData: req.user,
+                //    messages: {
+                //        danger: req.flash('danger'),
+                //        warning: req.flash('warning'),
+                //        success: req.flash('success')
+                //    }
+                //});
                 break;
             case 'фельдшер':
                 res.render('account_doctor', {
