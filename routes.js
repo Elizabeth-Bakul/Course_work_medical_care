@@ -147,13 +147,12 @@ module.exports = function (app) {
                         rr2.id=result.rows[d].Diagnosis_id_fk;
                         rr2.name=result.rows[d].Diagnosis_name;
                         rr2.kol=1;
-                        console.log(rr2)
                         rk.push(rr2);
-                        console.log(rk);
                     }
                     console.log(rk);
                 }
             }))
+            console.log(rk)
             client.query('COMMIT')
             client.release()
         }
