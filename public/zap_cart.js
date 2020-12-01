@@ -24,7 +24,8 @@ function buttonsControl(button, i){
     idReq:button.value,
     idBrig: brigad[i].value,
     dA:tim
-})
+  })
+  console.log(brig)
 let request = new XMLHttpRequest();
     request.open("POST", "/account_doctor", true); 
     request.setRequestHeader("Content-Type", "application/json");
