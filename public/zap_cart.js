@@ -1,8 +1,8 @@
 let but31 = document.querySelectorAll('.Big_B');
-let fr=document.querySelectorAll('.form_req');
-let tim2=document.querySelectorAll('.date-time2');
-let req=document.querySelectorAll('.rrrrreq');
-let brig=document.querySelectorAll('.brrrr');
+let fr=document.querySelector('.form_req');
+let tim2=document.querySelector('.date-time2');
+let req=document.querySelector('.rrrrreq');
+let brig=document.querySelector('.brrrr');
 for (let i=0; i<but31.length;i++){
     but31[i].addEventListener("click", function(e){
     e.preventDefault();
@@ -17,8 +17,10 @@ function getISOStringWithoutSecsAndMillisecs1(date) {
 }
 
 function buttonsControl(button, i){
-  tim2[i].value=getISOStringWithoutSecsAndMillisecs1(new Date());
-  console.log(tim2[i].value);
-  console.log(req[i].value);
-  fr[i].submit();
+  tim2.value=getISOStringWithoutSecsAndMillisecs1(new Date());
+  req.value=button.value;
+  console.log(tim2.value);
+  console.log(req.value);
+  console.log(brig.value);
+  fr.submit();
 }
