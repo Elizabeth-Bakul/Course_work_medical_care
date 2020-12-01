@@ -464,7 +464,7 @@ module.exports = function (app) {
                                 res.redirect('/account_doctor')}
                                 else{
                                     console.log(result3.rows)
-                                    res.send('',{
+                                    res.send('account_doc_karta',{
                                         userData: req.user,
                                         ReqData: result1.rows,
                                         SymData:result2.rows,
