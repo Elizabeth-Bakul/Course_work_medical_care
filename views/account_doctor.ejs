@@ -67,8 +67,10 @@
                 <th class="23"><%= RequestData[i].InformalDescription%></th>
                 <th class="33"><%= RequestData[i].RequestTime%></th>
                 <th class="43">
-                <form>
-                    <button  class="Big_B" value=<%= RequestData[i].id %>>Принять</button>
+                <form action="/account_doctor_karta" method="GET" class="f_inf_req">
+                    <input type="text" name="brigade" class='brrrr' value=<%= userData[0].NumBr %>>
+                    <input type="text" class='rrrrreq' name="idReq" value=<%= RequestData[i].id>
+                    <button type="submit" class="Big_B"  %>>Принять</button>
                 </form>
                 
                 </th>
@@ -76,12 +78,9 @@
         }
         %>
     </table>
-    <form action="/account_doctor_karta" method="GET" class="f_inf_req">
-        <input type="text" name="brigade" class='brrrr' value=<%= userData[0].NumBr %>>
-        <input type="text" class='rrrrreq' name="idReq">
+    
         <!--<input type="datetime-local" name="dddddd" class="date-time2" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">-->
-        <button  class="b" type="submit">Принять</button>
-    </form>
+
 </div>
 
 <script src="../public/registration_request.js"></script>
