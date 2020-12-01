@@ -1,5 +1,5 @@
 let but31 = document.querySelectorAll('.Big_B');
-let fr=document.querySelector('.form_req');
+let fr=document.querySelector('.f_inf_req');
 let tim2=document.querySelector('.date-time2');
 let req=document.querySelector('.rrrrreq');
 let brig=document.querySelector('.brrrr');
@@ -22,5 +22,5 @@ function buttonsControl(button, i){
   console.log(tim2.value);
   console.log(req.value);
   console.log(brig.value);
-  fr.submit();
+  //fr.submit();
 }
