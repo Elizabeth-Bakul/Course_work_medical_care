@@ -82,6 +82,8 @@ module.exports = function (app) {
         }
     });
 
+
+
     const jsonParser = express.json();
     app.post('/search_patient', jsonParser, async function (req, res) {
 
@@ -104,9 +106,9 @@ module.exports = function (app) {
     });
     app.get('/account_doctor',ensureAuthenticated, async function (req, res){
         try{
-            const client1=await pool.connect()
-            await client1.query('BEGIN')
-            await JSON.stringify(client1.query('select id,"InformalDescription","RequestTime" from "Requests" where "AcceptTime" is NULL',[],function(err,result){
+            const client=await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('select id,"InformalDescription","RequestTime" from "Requests" where "AcceptTime" is NULL',[],function(err,result){
                 if (err) {console.log(err)}
                 else{
                     console.log(result.rows)
@@ -120,12 +122,24 @@ module.exports = function (app) {
                         success: req.flash('success')
                     }
         });
+        client.query('COMMIT')
                 }
             }))
+            client.release()
         }
         catch (e) {
             throw(e)
         }
+    })
+
+    app.post('/account_doctor',ensureAuthenticated, async function (req, res){
+        try{
+            console.log(req.body);
+        }
+        catch (e) {
+            throw(e)
+        }
+
     })
     app.get('/account', ensureAuthenticated, async function (req, res) {
         console.log("typeWorker:", req.user[0].typeWorker);
@@ -440,6 +454,7 @@ module.exports = function (app) {
                 else {
                     client.query('COMMIT');
                     console.log('Update success');
+                    return;
                 }
             }))
             client.release()

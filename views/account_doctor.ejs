@@ -67,7 +67,7 @@
                 <th class="23"><%= RequestData[i].InformalDescription%></th>
                 <th class="33"><%= RequestData[i].RequestTime%></th>
                 <th class="43">
-                <form action="/account_doctor_karta" method="GET" class="f_inf_req">
+                <form class="f_inf_req" action="/account_doctor" method="POST" >
                     <input type="text" name="brigade" class='brrrr' value=<%= userData[0].NumBr %>>
                     <input type="text" class='rrrrreq' name="idReq" value=<%= RequestData[i].id %>>
                     <button type="submit" class="Big_B"   >Принять</button>
