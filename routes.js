@@ -501,7 +501,7 @@ module.exports = function (app) {
             console.log(req.body);
             const client = await pool.connect()
             await client.query('BEGIN')
-            await JSON.stringify(client.query('UPDATE public."Requests" SET  "AcceptTime"=$1, "Brigade_id_fk"=$2 WHERE id=$3',[req.body.dddddd,req.body.brigade, req.body.idReq],function(err,result){
+            await JSON.stringify(client.query('UPDATE "Requests" SET  "AcceptTime"=$1, "Brigade_id_fk"=$2 WHERE id=$3',[req.body.dddddd,req.body.brigade, req.body.idReq],function(err,result){
                 if(err){res.flash('danger','Ошибка с обновлением данных');
                         res.redirect('/account_doctor')}
                 else {
@@ -513,7 +513,7 @@ module.exports = function (app) {
             client.release()
             const client2 = await pool.connect()
             await client2.query('BEGIN')
-            await JSON.stringify(client2.query('select "Requests".id, "InformalDescription","RequestTime","AcceptTime", "PatientSurname", "PatientName","PatientMiddleName","PatientAddress" from "Requests" left join "Patients" on "Requests"."Patient_fk"="Patients".id where "Requests".id=$1',[req.body.id_req], function(err1, result1){
+            await JSON.stringify(client2.query('select "Requests".id, "InformalDescription","RequestTime","AcceptTime", "PatientSurname", "PatientName","PatientMiddleName","PatientAddress" from "Requests" left join "Patients" on "Requests"."Patient_fk"="Patients".id where "Requests".id=$1',[req.body.idReq], function(err1, result1){
                 if(err1){console.log(err1)
                     req.flash('danger', "Ошибка с поиском Вызовов")
                 res.redirect('/account_doctor')
