@@ -104,27 +104,11 @@
             <label class="search-label" for="Symptom">Симптомы</label>
             <select name="Symptom" id="Symptom" multiple class="js-selectize" placeholder="Выберите Симптомы">
                     <option value="" class='Symptomopt'></option>
-                    <% 
-                        for( let i=0; i< SymData.length ; i++)
-                        {
-                        %>
-                        <option class='Symptomopt' value=<%=SymData[i].id%>><%= SymData[i].Symptom_name %></option>
-                        <%
-                        }
-                        %>
             </select>
             <input class="button_32" type="button" value="Выбрать"> <br>
             <label class="search-label" for="Issledovania">Исследования</label>
             <select name="Issledovania" id="Issledovania" multiple class="js-selectize" placeholder="Выберите исследования">
                 <option value="" class="Issledovaniaopt"></option>
-                <% 
-                    for( let i=0; i< IsData.length ; i++)
-                    {
-                    %>
-                    <option class="Issledovaniaopt" value=<%=IsData[i].id%>><%= IsData[i].AnalysisName %></option>
-                    <%
-                    }
-                    %>
             </select>
             <input class="button_33" type="button" value="Выбрать"><br>
             <label class="search-label" for="Diagnosis">Диагноз</label>
@@ -146,10 +130,10 @@
             <input class="countReq" type="number" id="countReq" name="countReq" placeholder="Стоимость" >
             <input class="button_36" type="button" value="Рассчитать"><br>
             <label class="search-label" for="dateEndRequestTime">Дата и время Окончания вызова</label>
-            <input type="datetime-local" name="dateEndRequestTime" class="date-time" required readonly pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">
+            <input type="datetime-local" name="dateEndRequestTime" class="date-time" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">
             <input class="button_37" type="button" value="Заполнить"> <br>
             <label class="search-label" for="dateArrive">Дата и время возврата</label>
-            <input type="datetime-local" name="dateArrive" class="date-time" required readonly pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">
+            <input type="datetime-local" name="dateArrive" class="date-time" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">
             <input class="button_38" type="button" value="Заполнить"> <br>
             <button class="button2" type="submit">Закрыть вызов</button>
         </fieldset>
