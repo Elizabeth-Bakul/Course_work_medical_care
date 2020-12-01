@@ -59,6 +59,35 @@ let request = new XMLHttpRequest();
       dateRequest2.setAttribute('readonly','true')
       dateAccept2.value=receivedRequest.ReqData[0].AcceptTime;
       dateAccept2.setAttribute('readonly','true')
-      
+
     });
+}
+
+
+let but8 = document.querySelector('.button_31');
+let but81 = document.querySelector('.button_37');
+let but82 = document.querySelector('.button_38');
+let tim7=document.querySelector('.date-time1');
+let tim8=document.querySelector('.date-time2');
+let tim9=document.querySelector('.date-time3');
+function getISOStringWithoutSecsAndMillisecs1(date) {
+    date.setMilliseconds(3 * 60 * 60 * 1000);
+    const dateAndTime = date.toISOString().split('T')
+    const time = dateAndTime[1].split(':')
+    const sec=time[2].split('.')
+    return dateAndTime[0]+'T'+time[0]+':'+time[1]+':'+sec[0]
+}
+
+console.log(getISOStringWithoutSecsAndMillisecs1(new Date()))
+but8.onclick=()=>{
+    tim7.value=getISOStringWithoutSecsAndMillisecs1(new Date());
+    tim7.setAttribute('readonly', 'true');
+}
+but81.onclick=()=>{
+    tim8.value=getISOStringWithoutSecsAndMillisecs1(new Date());
+    tim8.setAttribute('readonly', 'true');
+}
+but82.onclick=()=>{
+    tim9.value=getISOStringWithoutSecsAndMillisecs1(new Date());
+    tim9.setAttribute('readonly', 'true');
 }
