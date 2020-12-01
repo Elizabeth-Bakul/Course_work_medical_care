@@ -1,8 +1,10 @@
-var but31 = document.querySelectorAll('.BIG_B');
+let but31 = document.querySelectorAll('.BIG_B');
 var f1=document.querySelector('.vyzov');
 var brigad=document.querySelectorAll('.brrrr');
 var surname2=document.querySelector('.surname');
 var f2=document.querySelector('.form_req');
+
+console.log(but31);
 for (let i=0; i<but31.length;i++){
     but31[i].addEventListener("click", function(e){
     e.preventDefault();
