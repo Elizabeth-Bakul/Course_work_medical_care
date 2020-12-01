@@ -166,6 +166,7 @@ module.exports = function (app) {
                 })
                 
             }
+            console.log(rk)
         }
         catch(e){
             throw(e)
