@@ -20,5 +20,5 @@ function buttonsControl(button, i){
   tim2.value=getISOStringWithoutSecsAndMillisecs1(new Date());
   req.value=button.value;
   console.log(tim2.value);
-  fr.onsubmit();
+  fr.submit();
 }
