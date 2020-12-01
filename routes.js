@@ -458,7 +458,7 @@ module.exports = function (app) {
                             res.redirect('/account_doctor')}
                         else{
                             console.log(result2.rows)
-                            client2.query('select id, "Analysisname" from "Analysis"',[],function(err3,result3){
+                            client2.query('select id, "AnalysisName" from "Analysis"',[],function(err3,result3){
                                 if(err3){console.log(err3)
                                     req.flash('danger', "Ошибка с поиском Исследования")
                                 res.redirect('/account_doctor')}
