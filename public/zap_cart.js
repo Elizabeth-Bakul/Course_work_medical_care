@@ -156,14 +156,19 @@ function work(){
       }
       console.log(res);
       for( var z=1; z<x.length;z++){
+        let SD1=JSON.stringify(
+          {
+          idS:x[z],
+          idReq: id2.value
+        })
         let request1 = new XMLHttpRequest();
         request1.open("POST", "/account_doctor", true); 
         request1.setRequestHeader("Content-Type", "application/json");
         request1.onload = function () {
           console.log(this.response);
         };
-        request1.send(x[z]);
-        request.addEventListener("load", function () {
+        request1.send(SD1);
+        request1.addEventListener("load", function () {
           let rD = JSON.parse(request.response);
           for (var xu=0; xu<rD.Diad.length; xu++)
           {
