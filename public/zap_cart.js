@@ -121,10 +121,12 @@ let but101=document.querySelector('.button_32');
 but101.addEventListener("click", work);
 
 function work(){
+    var x=[]
     let symptom_name = document.getElementById('Symptom');
-    console.log(symptom_name);
-    let sym = JSON.stringify({
-      symptom_name: $('#select_symptoms').val(),
-  });
-  console.log(sym);
+    for ( var p=0; p<symptom_name.options.length; p++){
+      if(symptom_name.options[p].selected===true){
+        x.push(symptom_name.options[p].value)
+      }
+    }
+  console.log(x);
 }
