@@ -154,6 +154,8 @@ module.exports = function (app) {
                     console.log(rk);
                 }
             }))
+            client.query('COMMIT')
+            client.release()
         }
         catch(e){
             throw(e)
