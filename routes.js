@@ -165,8 +165,8 @@ module.exports = function (app) {
                                             rk[o].kol+=1;
                                         } else {
                                             var rr3={}
-                                            rr3.id=result1.rows[d].Diagnosis_id_fk;
-                                            rr3.name=result1.rows[d].Diagnosis_name;
+                                            rr3.id=result1.rows[v].Diagnosis_id_fk;
+                                            rr3.name=result1.rows[v].Diagnosis_name;
                                             rr3.kol=1;
                                             rk.push(rr3);
                                         }
@@ -177,9 +177,11 @@ module.exports = function (app) {
                                     console.log(rk)
                                 }
                                 console.log("res6")
-                                        console.log(rk)
+                                console.log(rk)
                         }
                     })
+                    console.log("res7")
+                    console.log(rk)
                 }
             }}))
             console.log(rk)
