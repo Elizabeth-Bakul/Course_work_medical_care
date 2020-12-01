@@ -69,11 +69,11 @@
             <label class="search-label" for="ops">Описание случая:</label>
             <textarea name="ops" class="ops" cols="30" rows="10" placeholder="Краткое описание причины вызова" required value=<%= ReqData[0].InformalDescription %></textarea>
             <label class="search-label" for="dateRequest">Дата и время принятия вызова:</label>
-            <input class="date-time" type="datetime-local" id="dateRequest" name="dateRequest" required readonly value=<%= ReqData[0].RequestTime %>>
+            <input class="dateRequest" type="text" id="dateRequest" name="dateRequest" required readonly value=<%= ReqData[0].RequestTime %>>
             <label class="search-label" for="dateAccept">Дата и время принятия вызова бригадой:</label>
             <input class="dateRequest" type="text" id="dateRequest" name="dateAccept" required readonly value=<%= ReqData[0].AcceptTime %>>
             <label class="search-label" for="dateArrive">Дата и время прибытия</label>
-            <input type="text" name="dateArrive" class="dateArrive" required readonly pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">
+            <input type="datetime-local" name="dateArrive" class="date-time" required readonly pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">
             <input class="button_31" type="button" value="Заполнить"> <br>
             <label class="search-label" for="Symptom">Симптомы</label>
             <select name="Symptom" id="Symptom" multiple class="js-selectize" placeholder="Выберите Симптомы">
