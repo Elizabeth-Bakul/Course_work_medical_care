@@ -139,7 +139,7 @@ module.exports = function (app) {
             await JSON.stringify(client.query('SELECT "Diagnosis_id_fk", "Diagnosis_name" FROM "Diagnosis-Symptoms" left join "Diagnosis" on "Diagnosis-Symptoms"."Diagnosis_id_fk"="Diagnosis".id where "Symptoms_id_fk"=$1',[req.body.idS],function(err, result){
                 if(err) {console.log(err)}{
                     console.log(result);
-                    client.query('INSERT INTO "Request-Symptoms" ("Request_id_fk", "Symptoms_id_fk") VALUES($1,$2)',[req.body.idS,req.body.idReq], function(err1, result1){
+                    client.query('INSERT INTO "Request-Symptoms" ("Request_id_fk", "Symptom_id_fk") VALUES($1,$2)',[req.body.idS,req.body.idReq], function(err1, result1){
                         if (err1){
                             console.log(err1)
                         }
