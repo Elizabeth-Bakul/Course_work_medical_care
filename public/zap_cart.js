@@ -116,3 +116,15 @@ but82.onclick=()=>{
     tim9.value=getISOStringWithoutSecsAndMillisecs1(new Date());
     tim9.setAttribute('readonly', 'true');
 }
+
+let but101=document.querySelector('.button_32');
+but101.addEventListener("click", work);
+
+function work(){
+    let symptom_name = document.getElementById('Symptom');
+    console.log(symptom_name);
+    let sym = JSON.stringify({
+      symptom_name: $('#select_symptoms').val(),
+  });
+  console.log(sym);
+}
