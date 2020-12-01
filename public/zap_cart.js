@@ -20,6 +20,5 @@ function buttonsControl(button, i){
   tim2[i].value=getISOStringWithoutSecsAndMillisecs1(new Date());
   console.log(tim2[i].value);
   console.log(req[i].value);
-
-  //fr.submit();
+  fr[i].submit();
 }
