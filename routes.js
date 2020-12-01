@@ -137,36 +137,23 @@ module.exports = function (app) {
             const client=await pool.connect()
             await client.query('BEGIN')
             var rk=[]
-            for (let k=0;k<req.body.idS.length;k++){
-                client.query('SELECT "Diagnosis_id_fk", "Diagnosis_name" FROM "Diagnosis-Symptoms" left join "Diagnosis" on "Diagnosis-Symptoms"."Diagnosis_id_fk"="Diagnosis".id where "Symptoms_id_fk"=$1',[req.body.idS[k]], function(err, result){
-                    if (err){console.log(err)}else{
-                        for (let m=0; m<result.rowCount;m++){
-                            for (let d=0;d< rk.length;d++){
-                                if (rk[d]!=result.rows[m].Diagnosis_id_fk){
-                                    var l={};
-                                    l.id=result.rows[m].Diagnosis_id_fk;
-                                    l.name=result.rows[m].Diagnosis_name;
-                                    l.kol=1;
-                                    rk.push(l);
-                                } else {rk.kol+=1;}
-                            }
-                            console.log(rk);
-                        }
-                        client.release()
-                        client.query('INSERT INTO "Request-Symptoms" ("Request_id_fk", "Symptom_id_fk") VALUES($1,$2)',[req.body.idReq,req.body.idS[k]], function(err1, result1){
-                    if (err1){
-                        console.log(err1)
+            await JSON.stringify(client.query('SELECT "Diagnosis_id_fk", "Diagnosis_name" FROM "Diagnosis-Symptoms" left join "Diagnosis" on "Diagnosis-Symptoms"."Diagnosis_id_fk"="Diagnosis".id where "Symptoms_id_fk"=$1',[req.body.idS[0]],function(err,result){
+                if(err){
+                    console.log(err)
+                } else{
+                    console.log(result.rows)
+                    for (let d=0; d<result.rowCount; d++){
+                        var rr2={}
+                        rr2.id=result.rows[d].Diagnosis_id_fk;
+                        rr2.name=result.rows[d].Diagnosis_name;
+                        rr2.kol=1;
+                        console.log(rr2)
+                        rk.push(rr2);
+                        console.log(rk);
                     }
-                    else{
-                        client.query('COMMIT')
-                    }
-                    })
-                    }
-                    client.release()
-                })
-                
-            }
-            console.log(rk)
+                    console.log(rk);
+                }
+            }))
         }
         catch(e){
             throw(e)
