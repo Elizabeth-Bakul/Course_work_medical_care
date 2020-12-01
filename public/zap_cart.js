@@ -11,7 +11,7 @@ var dateRequest2=document.querySelector('.dateRequest');
 var dateAccept2=document.querySelector('.dateAccept');
 var Symptom=document.getElementById('Symptom')
 var Issledovania=document.getElementById('Issledovania')
-var id2=name2=document.querySelector('.id');
+var id2=document.querySelector('.id');
 
 console.log(but31);
 for (let i=0; i<but31.length;i++){
