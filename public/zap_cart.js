@@ -32,16 +32,15 @@ let request = new XMLHttpRequest();
         console.log(this.response);
     };
     request.send(brig);
-    request.addEventListener("load", function () {
-      let receivedRequest = JSON.parse(request.response);
-      f2.removeAttribute('hidden');
-      f1.setAttribute('hidden', 'true')
-      surname2.value=receivedRequest.ReqData[0].PatientSurname;
-      surname2.setAttribute('readonly','true');
-      name2.value=receivedRequest.ReqData[0].PatientName;
-      name2.setAttribute('readonly','true');
-
-    });
+    //request.addEventListener("load", function () {
+    //  let receivedRequest = JSON.parse(request.response);
+    //  f2.removeAttribute('hidden');
+    //  f1.setAttribute('hidden', 'true')
+    //  surname2.value=receivedRequest.ReqData[0].PatientSurname;
+    //  surname2.setAttribute('readonly','true');
+    //  name2.value=receivedRequest.ReqData[0].PatientName;
+    //  name2.setAttribute('readonly','true');
+    //});
 
   //tim2[i].value=;
   
