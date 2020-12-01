@@ -429,7 +429,7 @@ module.exports = function (app) {
             messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
         });
     } )
-    app.post('/account_doctor_karta',ensureAuthenticated, async function(req,res){
+    app.get('/account_doctor_karta',ensureAuthenticated, async function(req,res){
         try{
             console.log(req.body);
             const client = await pool.connect()
