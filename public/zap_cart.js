@@ -168,12 +168,14 @@ function work(){
       let rD = JSON.parse(request.response);
       for (var xu=0; xu<rD.Diad.length; xu++)
       {
-        for (let cb=0;cb<res.length)
-        var rtu={};
+        for (let cb=0;cb<res.length;cb++){
+          var rtu={};
         rtu.id=rD.Diad[xu].Diagnosis_id_fk;
         rtu.name=rD.Diad[xu].Diagnosis_name;
         rtu.count=1;
         res.push(rtu);
+        }
+        
       }
     })
     }
