@@ -1,4 +1,4 @@
-let but31 = document.querySelectorAll('.BIG_B');
+let but31 = document.querySelectorAll('.BB');
 var f1=document.querySelector('.vyzov');
 var brigad=document.querySelectorAll('.brrrr');
 var surname2=document.querySelector('.surname');
