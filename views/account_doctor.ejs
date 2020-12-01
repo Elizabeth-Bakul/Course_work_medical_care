@@ -52,34 +52,7 @@
     <% }
     }
 } %>
-<div class="vyzov">
-    <table class="t3">
-        <tr class="tr3">
-            <th class="13">id Вызова
-            </th>
-            <th class="23">Описание случая</th>
-            <th class="33">Время вызова</th>
-            <th class="43">Действие</th>
-        </tr>
-        <% for(let i=0; i < vyzov.length; i++){
-            %><tr class="tr3">
-                <th class="13"><%= vyzov[i].id %></th>
-                <th class="23"><%= vyzov[i].InformalDescription%></th>
-                <th class="33"><%= vyzov[i].RequestTime%></th>
-                <th class="43">
-                <form class="f_inf_req" action="/account_doctor" method="POST" >
-                    <input type="number" name="brigade" class='brrrr' value=<%= us[0].NumBr %> hidden>
-                    <input class="BB"type="button" value=<%= vyzov[i].id %>>
-                </form>
-                
-                </th>
-            </tr><%
-        }
-        %>
-    </table>
-</div>
 <div>
-
     <div class="form_req" hidden>
         <form action="" method="post">
             <fieldset>
@@ -141,18 +114,43 @@
             </fieldset>
         </form>
     </div>
-
 </div>
+<div class="vyzov">
+    <table class="t3">
+        <tr class="tr3">
+            <th class="13">id Вызова
+            </th>
+            <th class="23">Описание случая</th>
+            <th class="33">Время вызова</th>
+            <th class="43">Действие</th>
+        </tr>
+        <% for(let i=0; i < vyzov.length; i++){
+            %><tr class="tr3">
+                <th class="13"><%= vyzov[i].id %></th>
+                <th class="23"><%= vyzov[i].InformalDescription%></th>
+                <th class="33"><%= vyzov[i].RequestTime%></th>
+                <th class="43">
+                <form class="f_inf_req" action="/account_doctor" method="POST" >
+                    <input type="number" name="brigade" class='brrrr' value=<%= us[0].NumBr %> hidden>
+                    <input class="BB"type="button" value=<%= vyzov[i].id %>>
+                </form>
+                
+                </th>
+            </tr><%
+        }
+        %>
+    </table>
+</div>
+
 <script>
     $(document).ready(function(){
         $('.js-selectize').selectize();
     });
-    </script>
+</script>
 <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://snipp.ru/cdn/microplugin.js/src/microplugin.js"></script>
 <script src="https://snipp.ru/cdn/sifter.js/sifter.min.js"></script>
 <script src="https://snipp.ru/cdn/selectize.js/0.12.6/dist/js/selectize.min.js"></script>
-
 <script src="../public/registration_request.js"></script>
 <script src="../public/zap_cart.js"></script>
 </body>
