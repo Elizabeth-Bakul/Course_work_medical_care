@@ -9,6 +9,8 @@ var address2=document.querySelector('.adress');
 var ops2=document.querySelector('.ops');
 var dateRequest2=document.querySelector('.dateRequest');
 var dateAccept2=document.querySelector('.dateAccept');
+var Symptom=document.getElementById('Symptom')
+var Issledovania=document.getElementById('Issledovania')
 
 console.log(but31);
 for (let i=0; i<but31.length;i++){
@@ -59,7 +61,23 @@ let request = new XMLHttpRequest();
       dateRequest2.setAttribute('readonly','true')
       dateAccept2.value=receivedRequest.ReqData[0].AcceptTime;
       dateAccept2.setAttribute('readonly','true')
-
+      var fc = Symptom.firstChild;
+      while( fc ) {
+        Symptom.removeChild( fc );
+        fc = Symptom.firstChild;
+      }
+      for (let k=0;k<receivedRequest.SymData.length; k++){
+        let op6=document.createElement('option');
+        op6.className='Symptomopt';
+        op6.value=receivedRequest.SymData[k].id;
+        op6.innerHTML=receivedRequest.SymData[k].Symptom_name;
+        Symptom.appendChild(op6);
+      }
+      var fc2 = Issledovania.firstChild;
+      while( fc2 ) {
+        Issledovania.removeChild( fc2 );
+        fc2 = Issledovania.firstChild;
+      }
     });
 }
 
