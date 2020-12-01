@@ -1,4 +1,4 @@
-var but31 = document.querySelectorAll('."BIG_B');
+var but31 = document.querySelectorAll('.BIG_B');
 var forms=document.getElementsByTagName("form");
 var brigad=document.querySelectorAll('.brrrr');
 for (let i=0; i<but31.length;i++){
@@ -23,6 +23,7 @@ function buttonsControl(button, i){
     idBrig: brigad[i].value,
     dA:tim
 })
+console.log(brig)
 let request = new XMLHttpRequest();
     request.open("POST", "/account_doctor", true); 
     request.setRequestHeader("Content-Type", "application/json");
@@ -30,6 +31,7 @@ let request = new XMLHttpRequest();
         console.log(this.response);
     };
     request.send(brig);
+    request.addEventListener("load", function () {});
 
   //tim2[i].value=;
   
