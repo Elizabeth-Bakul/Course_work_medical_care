@@ -160,17 +160,21 @@ module.exports = function (app) {
                                 console.log("res3")
                                 console.log(result1.rows)
                                 for (let v=0; v<result1.rowCount; v++){
-                                    for (let o=0;o<rk.length;o++){
-                                        if(rk[o].id===result1.rows[v].Diagnosis_id_fk){
-                                            rk[o].kol+=1;
-                                        } else {
-                                            var rr3={}
+                                    var b=0;
+                                    let o=0
+                                    while((o<rk.length) && (b===0)){
+                                        if(rk[o].id===result1.rows[v].Diagnosis_id_fk){b=1}
+                                        else (o++)
+                                    }
+                                    if (b===1){
+                                        rk[o].kol+=1;
+                                    }else{
+                                        var rr3={}
                                             rr3.id=result1.rows[v].Diagnosis_id_fk;
                                             rr3.name=result1.rows[v].Diagnosis_name;
                                             rr3.kol=1;
                                             rk.push(rr3)
-                                            break;
-                                        }
+                                    }
                                         console.log("res4")
                                         console.log(rk)
                                     }
@@ -180,11 +184,14 @@ module.exports = function (app) {
                                 console.log("res6")
                                 console.log(rk)
                         }
-                    })
-                    console.log("res7")
-                    console.log(rk)
+                       
+            )
+            console.log("res7")
+            console.log(rk)
+        }
+                    
                 }
-            }}))
+            }))
             console.log(rk)
             client.query('COMMIT')
             client.release()
