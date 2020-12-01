@@ -132,7 +132,7 @@ module.exports = function (app) {
         }
     })
 
-    app.post('/account_doctor',ensureAuthenticated, async function (req, res){
+    app.post('/account_doctor',jsonParser, async function (req, res){
         try{
             console.log(req.body);
             const client = await pool.connect()
@@ -168,8 +168,7 @@ module.exports = function (app) {
                                 res.redirect('/account_doctor')}
                                 else{
                                     console.log(result3.rows)
-                                    res.send('account_doc_karta',{
-                                        userData: req.user,
+                                    res.json({
                                         ReqData: result1.rows,
                                         SymData:result2.rows,
                                         IsData:result3.rows,

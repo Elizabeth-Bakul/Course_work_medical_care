@@ -1,11 +1,9 @@
-var but31 = document.querySelectorAll('.Big_B');
+var but31 = document.querySelectorAll('."BIG_B');
 var forms=document.getElementsByTagName("form");
-let tim2=document.querySelectorAll('.date-time2');
-let req=document.querySelector('.rrrrreq');
-let brig=document.querySelector('.brrrr');
+var brigad=document.querySelectorAll('.brrrr');
 for (let i=0; i<but31.length;i++){
     but31[i].addEventListener("click", function(e){
-    //e.preventDefault();
+    e.preventDefault();
     buttonsControl(this,i)},false);
 }
 function getISOStringWithoutSecsAndMillisecs1(date) {
@@ -17,7 +15,23 @@ function getISOStringWithoutSecsAndMillisecs1(date) {
 }
 
 function buttonsControl(button, i){
-  //tim2[i].value=getISOStringWithoutSecsAndMillisecs1(new Date());
-  forms[i].submit();
+  console.log(button.value);
+  tim=getISOStringWithoutSecsAndMillisecs1(new Date())
+  let brig=JSON.stringify(
+    {
+    idReq:button.value,
+    idBrig: brigad[i].value,
+    dA:tim
+})
+let request = new XMLHttpRequest();
+    request.open("POST", "/account_doctor", true); 
+    request.setRequestHeader("Content-Type", "application/json");
+    request.onload = function () {
+        console.log(this.response);
+    };
+    request.send(brig);
+
+  //tim2[i].value=;
+  
   //fr.submit();
 }
