@@ -499,18 +499,18 @@ module.exports = function (app) {
     app.get('/account_doctor_karta',ensureAuthenticated, async function(req,res){
         try{
             console.log(req.body);
-            const client = await pool.connect()
-            await client.query('BEGIN')
-            await JSON.stringify(client.query('UPDATE "Requests" SET  "AcceptTime"=$1, "Brigade_id_fk"=$2 WHERE id=$3',[req.body.dddddd,req.body.brigade, req.body.idReq],function(err,result){
-                if(err){res.flash('danger','Ошибка с обновлением данных');
-                        res.redirect('/account_doctor')}
-                else {
-                    client.query('COMMIT');
-                    console.log('Update success');
-                    return;
-                }
-            }))
-            client.release()
+            //const client = await pool.connect()
+            //await client.query('BEGIN')
+            //await JSON.stringify(client.query('UPDATE "Requests" SET  "AcceptTime"=$1, "Brigade_id_fk"=$2 WHERE id=$3',[req.body.dddddd,req.body.brigade, req.body.idReq],function(err,result){
+            //    if(err){res.flash('danger','Ошибка с обновлением данных');
+            //            res.redirect('/account_doctor')}
+            //    else {
+            //        client.query('COMMIT');
+            //        console.log('Update success');
+            //        return;
+            //    }
+            //}))
+            //client.release()
             const client2 = await pool.connect()
             await client2.query('BEGIN')
             await JSON.stringify(client2.query('select "Requests".id, "InformalDescription","RequestTime","AcceptTime", "PatientSurname", "PatientName","PatientMiddleName","PatientAddress" from "Requests" left join "Patients" on "Requests"."Patient_fk"="Patients".id where "Requests".id=$1',[req.body.idReq], function(err1, result1){
