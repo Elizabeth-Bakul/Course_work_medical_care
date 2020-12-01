@@ -14,10 +14,10 @@
     <div class="in">
         <button class="btn">
             <div class="usn">
-                <%= userData[0].firstName %>  <%= userData[0].name[0] %>. <%= userData[0].MiddleName[0] %>.
+                <%= us[0].firstName %>  <%= us[0].name[0] %>. <%= us[0].MiddleName[0] %>.
             </div>
             <div class="prof">
-                <%= userData[0].typeWorker %> Бригада № <%= userData[0].NumBr %>
+                <%= us[0].typeWorker %> Бригада № <%= us[0].NumBr %>
             </div>
             
         </button>
@@ -61,15 +61,15 @@
             <th class="33">Время вызова</th>
             <th class="43">Действие</th>
         </tr>
-        <% for(let i=0; i < RequestData.length; i++){
+        <% for(let i=0; i < vyzov.length; i++){
             %><tr class="tr3">
-                <th class="13"><%= RequestData[i].id %></th>
-                <th class="23"><%= RequestData[i].InformalDescription%></th>
-                <th class="33"><%= RequestData[i].RequestTime%></th>
+                <th class="13"><%= vyzov[i].id %></th>
+                <th class="23"><%= vyzov[i].InformalDescription%></th>
+                <th class="33"><%= vyzov[i].RequestTime%></th>
                 <th class="43">
                 <form class="f_inf_req" action="/account_doctor" method="POST" >
-                    <input type="text" name="brigade" class='brrrr' value=<%= userData[0].NumBr %> hidden>
-                    <input type="text" class='rrrrreq' name="idReq" value=<%= RequestData[i].id %> hidden>
+                    <input type="text" name="brigade" class='brrrr' value=<%= us[0].NumBr %> hidden>
+                    <input type="text" class='rrrrreq' name="idReq" value=<%= vyzov[i].id %> hidden>
                     <!--<input type="datetime-local" name="dddddd" class="date-time2" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}" hidden>-->
                     <button type="submit" class="Big_B"   >Принять</button>
                 </form>

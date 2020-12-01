@@ -114,8 +114,8 @@ module.exports = function (app) {
                     console.log(result.rows)
                     res.render('account_doctor', {
                     title: "Работник",
-                    userData: req.user,
-                    RequestData:result.rows,
+                    us: req.user,
+                    vyzov:result.rows,
                     messages: {
                         danger: req.flash('danger'),
                         warning: req.flash('warning'),
