@@ -1,6 +1,8 @@
 var but31 = document.querySelectorAll('.BIG_B');
-var forms=document.getElementsByTagName("form");
+var f1=document.querySelector('.vyzov');
 var brigad=document.querySelectorAll('.brrrr');
+var surname2=document.querySelector('.surname');
+var f2=document.querySelector('.form_req');
 for (let i=0; i<but31.length;i++){
     but31[i].addEventListener("click", function(e){
     e.preventDefault();
@@ -23,7 +25,6 @@ function buttonsControl(button, i){
     idBrig: brigad[i].value,
     dA:tim
 })
-console.log(brig)
 let request = new XMLHttpRequest();
     request.open("POST", "/account_doctor", true); 
     request.setRequestHeader("Content-Type", "application/json");
@@ -31,7 +32,16 @@ let request = new XMLHttpRequest();
         console.log(this.response);
     };
     request.send(brig);
-    //request.addEventListener("load", function () {});
+    request.addEventListener("load", function () {
+      let receivedRequest = JSON.parse(request.response);
+      f2.removeAttribute('hidden');
+      f1.setAttribute('hidden', 'true')
+      surname2.value=receivedRequest.ReqData[0].PatientSurname;
+      surname2.setAttribute('readonly','true');
+      name2.value=receivedRequest.ReqData[0].PatientName;
+      name2.setAttribute('readonly','true');
+
+    });
 
   //tim2[i].value=;
   
