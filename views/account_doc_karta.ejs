@@ -141,3 +141,67 @@
 <script src="../public/registration_request.js"></script>
 </body>
 </html>
+
+
+
+<div class="form_req" hidden>
+    <form action="" method="post">
+        <fieldset>
+            <legend class='sear2'>Карта вызова</legend>
+            <label class="search-label" for="BlackList">Страховая компания:</label>
+            <input class="BlackLIst" type="checkbox" name="BlackList" id="BlackList">
+            <label class="search-label" for="surname">Фамилия:</label>
+            <input class="surname" type="text" id="surname2" name="surname" placeholder="Фамилия" required >
+            <label for="name" class="search-label">Имя:</label>
+            <input class="name" type="text" id="name2" name="name" placeholder="Имя" required>
+            <label class="search-label" for="Lastname">Отчество:</label>
+            <input class="Lastname" type="text" id="Lastname2" name="Lastname" placeholder="Отчество" required>
+            <label class="search-label" for="adress">Адрес:</label>
+            <input class="adress" type="text" id="adress" name="adress" placeholder="Адрес" required >
+            <label class="search-label" for="ops">Описание случая:</label>
+            <textarea name="ops" class="ops" cols="30" rows="10" placeholder="Краткое описание причины вызова" required </textarea>
+            <label class="search-label" for="dateRequest">Дата и время принятия вызова:</label>
+            <input class="dateRequest" type="text" id="dateRequest" name="dateRequest" required>
+            <label class="search-label" for="dateAccept">Дата и время принятия вызова бригадой:</label>
+            <input class="dateRequest" type="text" id="dateRequest" name="dateAccept" required>
+            <label class="search-label" for="dateArrive">Дата и время прибытия</label>
+            <input type="datetime-local" name="dateArrive" class="date-time" required readonly pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">
+            <input class="button_31" type="button" value="Заполнить"> <br>
+            <label class="search-label" for="Symptom">Симптомы</label>
+            <select name="Symptom" id="Symptom" multiple class="js-selectize" placeholder="Выберите Симптомы">
+                    <option value="" class='Symptomopt'></option>
+            </select>
+            <input class="button_32" type="button" value="Выбрать"> <br>
+            <label class="search-label" for="Issledovania">Исследования</label>
+            <select name="Issledovania" id="Issledovania" multiple class="js-selectize" placeholder="Выберите исследования">
+                <option value="" class="Issledovaniaopt"></option>
+            </select>
+            <input class="button_33" type="button" value="Выбрать"><br>
+            <label class="search-label" for="Diagnosis">Диагноз</label>
+            <select name="Diagnosis" id="Diagnosis" class="js-selectize" placeholder="Выберите диагноз">
+                <option value="" class="Diagnosisopt"></option>
+            </select>
+            <input class="button_34" type="button" value="Выбрать"><br>
+            <label class="search-label" for="Medicine">Лекарства</label>
+            <select name="Medicine" id="Medicine" class="js-selectize" placeholder="Выберите диагноз">
+                <option value="" class="Medicineopt"></option>
+            </select>
+            <input class="button_35" type="button" value="Выбрать"><br>
+            <label class="search-label" for="Hospitalization">Госпитализация</label>
+            <input class="button_35" type="button" value="Подтвердить"><br>
+            <input class="Hospitalizationch" type="checkbox" name="Hospitalization" id="Hospitalizationch" hidden>
+            <label class="search-label" for="Rasstoynie" hidden>Расстояние:</label>
+            <input class="Rasstoynie" type="number" id="Rasstoynie" name="Rasstoynie" placeholder="Расстояние" hidden>
+            <label class="search-label" for="countReq" hidden>Стоимость</label>
+            <input class="countReq" type="number" id="countReq" name="countReq" placeholder="Стоимость" >
+            <input class="button_36" type="button" value="Рассчитать"><br>
+            <label class="search-label" for="dateEndRequestTime">Дата и время Окончания вызова</label>
+            <input type="datetime-local" name="dateEndRequestTime" class="date-time" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">
+            <input class="button_37" type="button" value="Заполнить"> <br>
+            <label class="search-label" for="dateArrive">Дата и время возврата</label>
+            <input type="datetime-local" name="dateArrive" class="date-time" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">
+            <input class="button_38" type="button" value="Заполнить"> <br>
+            <button class="button2" type="submit">Закрыть вызов</button>
+        </fieldset>
+    </form>
+</div>

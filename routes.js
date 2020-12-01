@@ -136,25 +136,36 @@ module.exports = function (app) {
             console.log(req.body);
             const client=await pool.connect()
             await client.query('BEGIN')
-            await JSON.stringify(client.query('SELECT "Diagnosis_id_fk", "Diagnosis_name" FROM "Diagnosis-Symptoms" left join "Diagnosis" on "Diagnosis-Symptoms"."Diagnosis_id_fk"="Diagnosis".id where "Symptoms_id_fk"=$1',[req.body.idS],function(err, result){
-                if(err) {console.log(err)} else {
-                    console.log(result.rows);
-                    client.query('INSERT INTO "Request-Symptoms" ("Request_id_fk", "Symptom_id_fk") VALUES($1,$2)',[req.body.idReq,req.body.idS], function(err1, result1){
-                        if (err1){
-                            console.log(err1)
+            var rk=[]
+            for (let k=0;k<req.body.idS.length;k++){
+                client.query('SELECT "Diagnosis_id_fk", "Diagnosis_name" FROM "Diagnosis-Symptoms" left join "Diagnosis" on "Diagnosis-Symptoms"."Diagnosis_id_fk"="Diagnosis".id where "Symptoms_id_fk"=$1',[req.body.idS[k]], function(err, result){
+                    if (err){console.log(err)}else{
+                        for (let m=0; m<result.rowCount;m++){
+                            for (let d=0;d< rk.length;d++){
+                                if (rk[d]!=result.rows[m].Diagnosis_id_fk){
+                                    var l={};
+                                    l.id=result.rows[m].Diagnosis_id_fk;
+                                    l.name=result.rows[m].Diagnosis_name;
+                                    l.kol=1;
+                                    rk.push(l);
+                                } else {rk.kol+=1;}
+                            }
+                            console.log(rk);
                         }
-                        else{
-                            
-                            res.json({
-                                Diad:result.rows
-                            })
-                            client.query('COMMIT')
-                        }
+                        client.release()
+                        client.query('INSERT INTO "Request-Symptoms" ("Request_id_fk", "Symptom_id_fk") VALUES($1,$2)',[req.body.idReq,req.body.idS[k]], function(err1, result1){
+                    if (err1){
+                        console.log(err1)
+                    }
+                    else{
+                        client.query('COMMIT')
+                    }
                     })
-                    client.release();
-                }
-            }))
-        
+                    }
+                    client.release()
+                })
+                
+            }
         }
         catch(e){
             throw(e)
