@@ -456,9 +456,7 @@ module.exports = function (app) {
         catch(e){throw(e)}
     })
 
-    app.post('/add_diagnosis_symptoms', jsonParser, async
-
-    function (req, res) {
+    app.post('/add_diagnosis_symptoms', jsonParser, async function (req, res) {
         try {
             //console.log(req.body.diagnosis_name);
             const client = await
