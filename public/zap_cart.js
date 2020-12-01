@@ -146,6 +146,6 @@ function work(){
       let rD = JSON.parse(request.response);
       
         
-      }
-;
+      })
+
 }
