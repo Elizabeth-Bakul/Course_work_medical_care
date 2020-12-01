@@ -168,7 +168,7 @@ module.exports = function (app) {
                                 res.redirect('/account_doctor')}
                                 else{
                                     console.log(result3.rows)
-                                    res.json({
+                                    res.render('account_doc_karta',{
                                         ReqData: result1.rows,
                                         SymData:result2.rows,
                                         IsData:result3.rows,

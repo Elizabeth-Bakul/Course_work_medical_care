@@ -31,7 +31,7 @@ let request = new XMLHttpRequest();
         console.log(this.response);
     };
     request.send(brig);
-    request.addEventListener("load", function () {});
+    //request.addEventListener("load", function () {});
 
   //tim2[i].value=;
   
