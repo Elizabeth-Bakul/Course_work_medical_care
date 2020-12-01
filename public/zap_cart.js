@@ -11,6 +11,7 @@ var dateRequest2=document.querySelector('.dateRequest');
 var dateAccept2=document.querySelector('.dateAccept');
 var Symptom=document.getElementById('Symptom')
 var Issledovania=document.getElementById('Issledovania')
+var id2=name2=document.querySelector('.id');
 
 console.log(but31);
 for (let i=0; i<but31.length;i++){
@@ -61,6 +62,7 @@ let request = new XMLHttpRequest();
       dateRequest2.setAttribute('readonly','true')
       dateAccept2.value=receivedRequest.ReqData[0].AcceptTime;
       dateAccept2.setAttribute('readonly','true')
+      id2.value=receivedRequest.ReqData[0].id;
       var fc = Symptom.firstChild;
       while( fc ) {
         Symptom.removeChild( fc );
@@ -128,5 +130,39 @@ function work(){
         x.push(symptom_name.options[p].value)
       }
     }
+    let SD=JSON.stringify(
+      {
+      idS:x[0],
+      idReq: id2.value
+    })
+    let request = new XMLHttpRequest();
+    request.open("POST", "/account_doctor_add_SR", true); 
+    request.setRequestHeader("Content-Type", "application/json");
+    request.onload = function () {
+        console.log(this.response);
+    };
+    request.send(SD);
+    var res=[];
+    request.addEventListener("load", function () {
+      let rD = JSON.parse(request.response);
+      for (var xu=0; xu<rD.Diad.length; xu++)
+      {
+        var rtu={};
+        rtu.id=rD.Diad[xu].id;
+        rtu.count=1;
+        res.push(rtu);
+      }
+    })
+    console.log(res);
+    //for( var z=0; z<x.length;z++){}
+    //let request = new XMLHttpRequest();
+    //request.open("POST", "/account_doctor", true); 
+    //request.setRequestHeader("Content-Type", "application/json");
+    //request.onload = function () {
+    //    console.log(this.response);
+    //};
+    //request.send(x[z]);
+    
+    console.log(id2.value)
   console.log(x);
 }

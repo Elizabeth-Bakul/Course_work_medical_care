@@ -131,7 +131,14 @@ module.exports = function (app) {
             throw(e)
         }
     })
-
+    app.post('/account_doctor_add_SR', jsonParser , async function(req, res){
+        try{
+            console.log(req.body);
+        }
+        catch(e){
+            throw(e)
+        }
+    })
     app.post('/account_doctor', jsonParser , async function (req, res){
         try{
             console.log(req.body);
