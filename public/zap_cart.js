@@ -142,7 +142,6 @@ function work(){
         console.log(this.response);
     };
     request.send(SD);
-    var res=[];
     request.addEventListener("load", function () {
       let rD = JSON.parse(request.response);
       for (var xu=0; xu<rD.Diad.length; xu++)
@@ -154,31 +153,33 @@ function work(){
         console.log(rtu)
         res.push(rtu);
       }
-    })
-    console.log(res);
-    for( var z=1; z<x.length;z++){
-    let request1 = new XMLHttpRequest();
-    request1.open("POST", "/account_doctor", true); 
-    request1.setRequestHeader("Content-Type", "application/json");
-    request1.onload = function () {
-        console.log(this.response);
-    };
-    request1.send(x[z]);
-    request.addEventListener("load", function () {
-      let rD = JSON.parse(request.response);
-      for (var xu=0; xu<rD.Diad.length; xu++)
-      {
-        for (let cb=0;cb<res.length;cb++){
-          var rtu={};
-        rtu.id=rD.Diad[xu].Diagnosis_id_fk;
-        rtu.name=rD.Diad[xu].Diagnosis_name;
-        rtu.count=1;
-        res.push(rtu);
+      console.log(res);
+      for( var z=1; z<x.length;z++){
+        let request1 = new XMLHttpRequest();
+        request1.open("POST", "/account_doctor", true); 
+        request1.setRequestHeader("Content-Type", "application/json");
+        request1.onload = function () {
+          console.log(this.response);
+        };
+        request1.send(x[z]);
+        request.addEventListener("load", function () {
+          let rD = JSON.parse(request.response);
+          for (var xu=0; xu<rD.Diad.length; xu++)
+          {
+          for (let cb=0;cb<res.length;cb++){
+              var rtu={};
+              rtu.id=rD.Diad[xu].Diagnosis_id_fk;
+              rtu.name=rD.Diad[xu].Diagnosis_name;
+              rtu.count=1;
+              res.push(rtu);
         }
         
       }
     })
     }
+    })
+    
+    
     
     
     console.log(id2.value)
