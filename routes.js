@@ -513,7 +513,7 @@ module.exports = function (app) {
             //client.release()
             const client2 = await pool.connect()
             await client2.query('BEGIN')
-            await JSON.stringify(client2.query('select "Requests".id, "InformalDescription","RequestTime","AcceptTime", "PatientSurname", "PatientName","PatientMiddleName","PatientAddress" from "Requests" left join "Patients" on "Requests"."Patient_fk"="Patients".id where "Requests".id=$1',[req.body.idReq], function(err1, result1){
+            await JSON.stringify(client2.query('select "Requests".id, "InformalDescription","RequestTime","AcceptTime", "PatientSurname", "PatientName","PatientMiddleName","PatientAddress" from "Requests" left join "Patients" on "Requests"."Patient_fk"="Patients".id',[req.body.idReq], function(err1, result1){
                 if(err1){console.log(err1)
                     req.flash('danger', "Ошибка с поиском Вызовов")
                 res.redirect('/account_doctor')
