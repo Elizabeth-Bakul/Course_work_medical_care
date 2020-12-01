@@ -545,6 +545,7 @@ module.exports = function (app) {
                                         
                                     })
                                     client.query('COMMIT')
+                                    return
                                     }})
                                 }
                             })

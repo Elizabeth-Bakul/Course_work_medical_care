@@ -17,7 +17,7 @@ function getISOStringWithoutSecsAndMillisecs1(date) {
 }
 
 function buttonsControl(button, i){
-  tim2[i].value=getISOStringWithoutSecsAndMillisecs1(new Date());
+  //tim2[i].value=getISOStringWithoutSecsAndMillisecs1(new Date());
   forms[i].submit();
   //fr.submit();
 }
