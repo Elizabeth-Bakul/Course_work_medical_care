@@ -135,6 +135,7 @@ module.exports = function (app) {
     app.post('/account_doctor',ensureAuthenticated, async function (req, res){
         try{
             console.log(req.body);
+            
         }
         catch (e) {
             throw(e)

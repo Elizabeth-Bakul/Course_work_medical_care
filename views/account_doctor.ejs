@@ -68,8 +68,9 @@
                 <th class="33"><%= RequestData[i].RequestTime%></th>
                 <th class="43">
                 <form class="f_inf_req" action="/account_doctor" method="POST" >
-                    <input type="text" name="brigade" class='brrrr' value=<%= userData[0].NumBr %>>
-                    <input type="text" class='rrrrreq' name="idReq" value=<%= RequestData[i].id %>>
+                    <input type="text" name="brigade" class='brrrr' value=<%= userData[0].NumBr %> hidden>
+                    <input type="text" class='rrrrreq' name="idReq" value=<%= RequestData[i].id %> hidden>
+                    <input type="datetime-local" name="dddddd" class="date-time2" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}" hidden>
                     <button type="submit" class="Big_B"   >Принять</button>
                 </form>
                 
@@ -79,7 +80,7 @@
         %>
     </table>
     
-        <!--<input type="datetime-local" name="dddddd" class="date-time2" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">-->
+        <!---->
 
 </div>
 

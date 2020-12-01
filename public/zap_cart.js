@@ -1,6 +1,6 @@
 var but31 = document.querySelectorAll('.Big_B');
 var forms=document.getElementsByTagName("form");
-let tim2=document.querySelector('.date-time2');
+let tim2=document.querySelectorAll('.date-time2');
 let req=document.querySelector('.rrrrreq');
 let brig=document.querySelector('.brrrr');
 for (let i=0; i<but31.length;i++){
@@ -17,7 +17,7 @@ function getISOStringWithoutSecsAndMillisecs1(date) {
 }
 
 function buttonsControl(button, i){
-  //tim2.value=getISOStringWithoutSecsAndMillisecs1(new Date());
+  tim2[i].value=getISOStringWithoutSecsAndMillisecs1(new Date());
   forms[i].submit();
   //fr.submit();
 }
