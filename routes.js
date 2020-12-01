@@ -168,7 +168,8 @@ module.exports = function (app) {
                                             rr3.id=result1.rows[v].Diagnosis_id_fk;
                                             rr3.name=result1.rows[v].Diagnosis_name;
                                             rr3.kol=1;
-                                            rk.push(rr3);
+                                            rk.push(rr3)
+                                            break;
                                         }
                                         console.log("res4")
                                         console.log(rk)
