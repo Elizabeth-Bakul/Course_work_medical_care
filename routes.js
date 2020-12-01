@@ -474,13 +474,16 @@ module.exports = function (app) {
                                             warning: req.flash('warning'),
                                             success: req.flash('success')
                                         }
+                                        
                                     })
+                                    client2.query('COMMIT')
                                     }})
                                 }
                             })
                         }
                     })
-            )}
+            )
+            client2.release()}
 
         catch (e) {
             throw(e)
