@@ -141,6 +141,7 @@ module.exports = function (app) {
                 if(err){
                     console.log(err)
                 } else{
+                    console.log("res1")
                     console.log(result.rows)
                     for (let d=0; d<result.rowCount; d++){
                         var rr2={}
@@ -149,7 +150,36 @@ module.exports = function (app) {
                         rr2.kol=1;
                         rk.push(rr2);
                     }
+                    console.log("res2")
                     console.log(rk);
+                    for (let n=1;n<req.body.idS.length;n++){
+                        client.query('SELECT "Diagnosis_id_fk", "Diagnosis_name" FROM "Diagnosis-Symptoms" left join "Diagnosis" on "Diagnosis-Symptoms"."Diagnosis_id_fk"="Diagnosis".id where "Symptoms_id_fk"=$1',[req.body.idS[n]],function(err1,result1){
+                            if(err1){
+                                console.log(err1)
+                            } else{
+                                console.log("res3")
+                                console.log(result1.rows)
+                                for (let v=0; v<result1.rowCount; v++){
+                                    for (let o=0;o<rk.length;o++){
+                                        if(rk[o].id===result1.rows[v].Diagnosis_id_fk){
+                                            rk[o].kol+=1;
+                                        } else {
+                                            var rr3={}
+                                            rr3.id=result1.rows[d].Diagnosis_id_fk;
+                                            rr3.name=result1.rows[d].Diagnosis_name;
+                                            rr3.kol=1;
+                                            rk.push(rr3);
+                                        }
+                                        console.log("res4")
+                                        console.log(rk)
+                                    }
+                                    console.log("res5")
+                                    console.log(rk)
+                                }
+                                console.log("res6")
+                                        console.log(rk)
+                        }
+                    })
                 }
             }))
             console.log(rk)
