@@ -52,8 +52,35 @@
     <% }
     }
 } %>
+
+<div class="vyzov">
+    <table class="t3">
+        <tr class="tr3">
+            <th class="13">id Вызова
+            </th>
+            <th class="23">Описание случая</th>
+            <th class="33">Время вызова</th>
+            <th class="43">Действие</th>
+        </tr>
+        <% for(let i=0; i < vyzov.length; i++){
+            %><tr class="tr3">
+                <th class="13"><%= vyzov[i].id %></th>
+                <th class="23"><%= vyzov[i].InformalDescription%></th>
+                <th class="33"><%= vyzov[i].RequestTime%></th>
+                <th class="43">
+                <form class="f_inf_req" action="/account_doctor" method="POST" >
+                    <input type="number" name="brigade" class='brrrr' value=<%= us[0].NumBr %> hidden>
+                    <input class="BB"type="button" value=<%= vyzov[i].id %>>
+                </form>
+                
+                </th>
+            </tr><%
+        }
+        %>
+    </table>
+</div>
 <div class="form_req" >
-        <form action="" method="post" hidden>
+        <form action="" method="post">
             <fieldset>
                 <legend class='sear2'>Карта вызова</legend>
                 <label class="search-label" for="BlackList">Страховая компания:</label>
@@ -113,33 +140,6 @@
             </fieldset>
         </form>
 </div>
-<div class="vyzov">
-    <table class="t3">
-        <tr class="tr3">
-            <th class="13">id Вызова
-            </th>
-            <th class="23">Описание случая</th>
-            <th class="33">Время вызова</th>
-            <th class="43">Действие</th>
-        </tr>
-        <% for(let i=0; i < vyzov.length; i++){
-            %><tr class="tr3">
-                <th class="13"><%= vyzov[i].id %></th>
-                <th class="23"><%= vyzov[i].InformalDescription%></th>
-                <th class="33"><%= vyzov[i].RequestTime%></th>
-                <th class="43">
-                <form class="f_inf_req" action="/account_doctor" method="POST" >
-                    <input type="number" name="brigade" class='brrrr' value=<%= us[0].NumBr %> hidden>
-                    <input class="BB"type="button" value=<%= vyzov[i].id %>>
-                </form>
-                
-                </th>
-            </tr><%
-        }
-        %>
-    </table>
-</div>
-
 <script>
     $(document).ready(function(){
         $('.js-selectize').selectize();
