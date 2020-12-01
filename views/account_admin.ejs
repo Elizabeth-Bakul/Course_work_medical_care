@@ -3,13 +3,14 @@
 <head>
     <title>Скорая медицинская помощь</title>
     <meta charset="utf-8"/>
-
+    <link rel='stylesheet' , href='/public/css/style2.css'>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 
 
 <header class="hear">
-    <div class="name1"><img src="../public/img/star.svg" alt="Логотип" class="logo">
+    <div class="name1"><img src="../public/img/star.svg" alt="Логотип" class="logo" multiple="multiple">
         <h1 class="name2">Единая система оказания неотложной медицинской помощи</h1></div>
     <div class="in">
         <button class="btn">
@@ -61,14 +62,14 @@ if(messages.success.length){
         <fieldset>
             <legend class='sear2'>Добавление диагноза</legend>
             <label class="search-label" for="surname">Наименование диагноза:</label>
-            <input class="surname" type="text" id="surname" name="surname" required>
+            <input class="surname" type="text" id="diagnosis_name" required>
             <label class="search-label" for="name"> Симптомы:</label>
-            <select>
+            <select id="select_symptoms" multiple>
                 <% for(var i = 0; i < list_values.length; i++) { %>
                     <option><%= list_values[i].Symptom_name%></option>
                 <% } %>
             </select>
-            <button class="button" type="submit" id="subsear">Добавить</button>
+            <button class="button" type="submit" id="submit_add_diagnosis">Добавить</button>
         </fieldset>
     </form>
 </div>
