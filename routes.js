@@ -190,8 +190,8 @@ module.exports = function (app) {
     app.get('/account_otch', ensureAuthenticated, async function(req, res){
         try {
             const client = await pool.connect()
-        await client.query('BEGIN')
-        await JSON.stringify(client.query('select id,"BrigadeName" from "Brigades"',[], function (err, result){
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('select id,"BrigadeName" from "Brigades"',[], function (err, result){
             if (err) {console.log("Mistake")} else{
                 console.log(result.rows)
                 res.render('account_otch',{
@@ -443,8 +443,45 @@ module.exports = function (app) {
                 }
             }))
             client.release()
-            
-        }
+            const client2 = await pool.connect()
+            await client2.query('BEGIN')
+            await JSON.stringify(client2.query('select "Requests".id, "InformalDescription","RequestTime","AcceptTime", "PatientSurname", "PatientName","PatientMiddleName","PatientAddress" from "Requests" left join "Patients" on "Requests"."Patient_fk"="Patients".id where "Requests".id=$1',[req.body.id_req], function(err1, result1){
+                if(err1){console.log(err1)
+                    req.flash('danger', "Ошибка с поиском Вызовов")
+                res.redirect('/account_doctor')
+                        }
+                else {
+                    console.log(result1.rows);
+                    client2.query('select id, "Symptom_name" from "Symptoms',[],function(err2,result2){
+                        if(err2){console.log(err2)
+                            req.flash('danger', "Ошибка с поиском Симптомов")
+                            res.redirect('/account_doctor')}
+                        else{
+                            console.log(result2.rows)
+                            client2.query('select id, "Analysisname" from "Analysis',[],function(err3,result3){
+                                if(err3){console.log(err3)
+                                    req.flash('danger', "Ошибка с поиском Исследования")
+                                res.redirect('/account_doctor')}
+                                else{
+                                    console.log(result3.rows)
+                                    res.send('',{
+                                        userData: req.user,
+                                        ReqData: result1.rows,
+                                        SymData:result2.rows,
+                                        IsData:result3.rows,
+                                        messages: {
+                                            danger: req.flash('danger'),
+                                            warning: req.flash('warning'),
+                                            success: req.flash('success')
+                                        }
+                                    })
+                                    }})
+                                }
+                            })
+                        }
+                    })
+            )}
+
         catch (e) {
             throw(e)
         }
