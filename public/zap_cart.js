@@ -148,7 +148,8 @@ function work(){
       for (var xu=0; xu<rD.Diad.length; xu++)
       {
         var rtu={};
-        rtu.id=rD.Diad[xu].id;
+        rtu.id=rD.Diad[xu].Diagnosis_id_fk;
+        rtu.name=rD.Diad[xu].Diagnosis_name;
         rtu.count=1;
         res.push(rtu);
       }
