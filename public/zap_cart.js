@@ -59,9 +59,6 @@ let request = new XMLHttpRequest();
       dateRequest2.setAttribute('readonly','true')
       dateAccept2.value=receivedRequest.ReqData[0].AcceptTime;
       dateAccept2.setAttribute('readonly','true')
+      
     });
-
-  //tim2[i].value=;
-  
-  //fr.submit();
 }
