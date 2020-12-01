@@ -132,7 +132,7 @@ module.exports = function (app) {
         }
     })
 
-    app.post('/account_doctor',jsonParser, async function (req, res){
+    app.post('/account_doctor', jsonParser , async function (req, res){
         try{
             console.log(req.body);
             const client = await pool.connect()
