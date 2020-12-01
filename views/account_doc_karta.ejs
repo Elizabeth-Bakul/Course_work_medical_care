@@ -92,10 +92,10 @@
             <select name="Issledovania" id="Issledovania" multiple class="js-selectize" placeholder="Выберите исследования">
                 <option value="" class="Issledovaniaopt"></option>
                 <% 
-                    for( let i=0; i< SymData.length ; i++)
+                    for( let i=0; i< IsData.length ; i++)
                     {
                     %>
-                    <option class="Issledovaniaopt" value=<%=SymData[i].id%>><%= SymData[i].Symptom_name %></option>
+                    <option class="Issledovaniaopt" value=<%=IsData[i].id%>><%= IsData[i].AnalysisName %></option>
                     <%
                     }
                     %>
