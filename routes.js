@@ -511,22 +511,22 @@ module.exports = function (app) {
             //    }
             //}))
             //client.release()
-            const client2 = await pool.connect()
-            await client2.query('BEGIN')
-            await JSON.stringify(client2.query('select "Requests".id, "InformalDescription","RequestTime","AcceptTime", "PatientSurname", "PatientName","PatientMiddleName","PatientAddress" from "Requests" left join "Patients" on "Requests"."Patient_fk"="Patients".id',[req.body.idReq], function(err1, result1){
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('select "Requests".id, "InformalDescription","RequestTime","AcceptTime", "PatientSurname", "PatientName","PatientMiddleName","PatientAddress" from "Requests" left join "Patients" on "Requests"."Patient_fk"="Patients".id',[req.body.idReq], function(err1, result1){
                 if(err1){console.log(err1)
                     req.flash('danger', "Ошибка с поиском Вызовов")
                 res.redirect('/account_doctor')
                         }
                 else {
                     console.log(result1.rows);
-                    client2.query('select id, "Symptom_name" from "Symptoms"',[],function(err2,result2){
+                    client.query('select id, "Symptom_name" from "Symptoms"',[],function(err2,result2){
                         if(err2){console.log(err2)
                             req.flash('danger', "Ошибка с поиском Симптомов")
                             res.redirect('/account_doctor')}
                         else{
                             console.log(result2.rows)
-                            client2.query('select id, "AnalysisName" from "Analysis"',[],function(err3,result3){
+                            client.query('select id, "AnalysisName" from "Analysis"',[],function(err3,result3){
                                 if(err3){console.log(err3)
                                     req.flash('danger', "Ошибка с поиском Исследования")
                                 res.redirect('/account_doctor')}
@@ -544,14 +544,14 @@ module.exports = function (app) {
                                         }
                                         
                                     })
-                                    client2.query('COMMIT')
+                                    client.query('COMMIT')
                                     }})
                                 }
                             })
                         }
                     })
             )
-            client2.release()}
+            client.release()}
 
         catch (e) {
             throw(e)
