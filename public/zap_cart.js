@@ -142,6 +142,7 @@ function work(){
         console.log(this.response);
     };
     request.send(SD);
+    var res=[];
     request.addEventListener("load", function () {
       let rD = JSON.parse(request.response);
       for (var xu=0; xu<rD.Diad.length; xu++)
