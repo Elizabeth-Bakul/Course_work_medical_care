@@ -78,6 +78,13 @@ let request = new XMLHttpRequest();
         Issledovania.removeChild( fc2 );
         fc2 = Issledovania.firstChild;
       }
+      for (let m=0;m<receivedRequest.IsData.length; m++){
+        let op7=document.createElement('option');
+        op7.className='Issledovaniaopt';
+        op7.value=receivedRequest.IsData[m].id;
+        op7.innerHTML=receivedRequest.IsData[m].AnalysisName;
+        Issledovania.appendChild(op7);
+      }
     });
 }
 
