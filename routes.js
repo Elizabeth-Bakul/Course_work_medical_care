@@ -452,7 +452,7 @@ module.exports = function (app) {
                         }
                 else {
                     console.log(result1.rows);
-                    client2.query('select id, "Symptom_name" from "Symptoms',[],function(err2,result2){
+                    client2.query('select id, "Symptom_name" from "Symptoms"',[],function(err2,result2){
                         if(err2){console.log(err2)
                             req.flash('danger', "Ошибка с поиском Симптомов")
                             res.redirect('/account_doctor')}
