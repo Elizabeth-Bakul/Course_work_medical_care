@@ -236,9 +236,9 @@ function work_3(){
     request3.send(SD3);
     mmm.setAttribute('disabled', 'true')
 }
-let but105=document.querySelector('.button_33');
+let but107=document.querySelector('.button_33');
 let count2=0;
-but105.addEventListener("click", work_4);
+but107.addEventListener("click", work_4);
 function work_4(){
   var isl=document.querySelector('.js-selectize4')
   var x4=[]
