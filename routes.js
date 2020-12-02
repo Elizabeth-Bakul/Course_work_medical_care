@@ -286,7 +286,9 @@ module.exports = function (app) {
                         client.query('COMMIT')
                     }))
                     client.query('COMMIT')
-                }client.release()
+                }
+                res.json({})
+                client.release()
             }
             catch(e){
                 throw(e)
@@ -316,6 +318,7 @@ module.exports = function (app) {
                 }))
                 client.query('COMMIT')
             }client.release()
+            res.json({})
         }
         catch(e){
             throw(e)
