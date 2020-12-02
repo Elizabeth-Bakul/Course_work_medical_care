@@ -144,7 +144,7 @@ function work(){
     request.send(SD);
     request.addEventListener("load", function () {
       let rD = JSON.parse(request.response);
-      
+
         
       })
 

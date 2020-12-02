@@ -205,11 +205,15 @@ module.exports = function (app) {
                                 }
                                 console.log("res6")
                                 console.log(rk)
-                        }
+                    }
+                    
                        
             )
             console.log("res7")
             console.log(rk)
+                res.json({
+                        rIn:rk
+                    })
         }
                     
                 }
