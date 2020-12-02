@@ -174,7 +174,7 @@ module.exports = function (app) {
                     }
                     console.log("res2")
                     console.log(rk);
-                    if(req.body.idS.length===1){res.json({
+                    if((req.body.idS.length===1)||(req.body.idS.length===0)){res.json({
                         rIn:rk
                         })}
                     for (let n=1;n<req.body.idS.length;n++){
