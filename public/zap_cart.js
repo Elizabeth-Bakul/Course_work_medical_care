@@ -151,7 +151,7 @@ function work(){
     request.addEventListener("load", function () {
       let rD = JSON.parse(request.response);
       if (rD.rIn.length===0){
-        alert('По данным симптомам нет диагноза в базе. Обратитесь к администратору')ж
+        alert('По данным симптомам нет диагноза в базе. Обратитесь к администратору')
       }
       for (let nb=0;nb<rD.rIn.length; nb++){
         let op11=document.createElement('option');
