@@ -134,6 +134,28 @@ module.exports = function (app) {
     app.post('/account_doctor_add_SR', jsonParser , async function(req, res){
         try{
             console.log(req.body);
+            const client1=await pool.connect()
+            await client1.query('BEGIN')
+            for (let yi=0;yi<req.body.idS.length; yi+){
+                await JSON.stringify(client1.query('select id from "Request-Symptoms" where "Request_id_fk"=$1 and "Symptom_id_fk"=$2',[req.body.idReq,req.body.idS[yi]],function(err2, result2){
+                    if (err2){console.log(err2)} else {
+                        if (result2.rowCount===0){
+                            client1.query('INSERT INTO "Request-Symptoms" ("Request_id_fk", "Symptom_id_fk") VALUES($1,$2)',[],function(err3,result3){
+                                if (err3) {console.log(err3)}
+                                else{
+                                    client1.query('COMMIT')
+
+                                }
+                            })
+                            client1.query('COMMIT')
+                            client1.release()
+                        }
+                        client1.query('COMMIT')
+                    }
+                    client1.query('COMMIT')
+                }))
+                client1.query('COMMIT')
+            }
             const client=await pool.connect()
             await client.query('BEGIN')
             var rk=[]
