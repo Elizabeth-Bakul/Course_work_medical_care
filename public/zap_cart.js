@@ -143,6 +143,7 @@ function work(){
         console.log(this.response);
     };
     request.send(SD);
+    var fc4 = Diagnosis.firstChild;
     while( fc4 ) {
       Diagnosis.removeChild( fc4 );
       fc4 = Diagnosis.firstChild;
