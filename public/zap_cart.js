@@ -173,12 +173,14 @@ function work_2(){
   var da=document.querySelector('.js-selectize')
   console.log(da)
   console.log(da.value)
+  console.log(id2.value)
   //console.log(Diagnosis.value)
   let SD1=JSON.stringify(
       {
-      idD:da.value,
+      idD: da.value,
       idReq: id2.value
     })
+    console.log(SD1)
     let request2 = new XMLHttpRequest();
     request2.open("POST", "/account_doctor_add_DR", true); 
     request2.setRequestHeader("Content-Type", "application/json");
