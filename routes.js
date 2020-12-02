@@ -174,6 +174,9 @@ module.exports = function (app) {
                     }
                     console.log("res2")
                     console.log(rk);
+                    if(req.body.idS.length===1){res.json({
+                        rIn:rk
+                        })}
                     for (let n=1;n<req.body.idS.length;n++){
                         client.query('SELECT "Diagnosis_id_fk", "Diagnosis_name" FROM "Diagnosis-Symptoms" left join "Diagnosis" on "Diagnosis-Symptoms"."Diagnosis_id_fk"="Diagnosis".id where "Symptoms_id_fk"=$1',[req.body.idS[n]],function(err1,result1){
                             if(err1){
