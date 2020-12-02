@@ -140,7 +140,7 @@ module.exports = function (app) {
                 await JSON.stringify(client1.query('select id from "Request-Symptoms" where "Request_id_fk"=$1 and "Symptom_id_fk"=$2',[req.body.idReq,req.body.idS[yi]],function(err2, result2){
                     if (err2){console.log(err2)} else {
                         if (result2.rowCount===0){
-                            client1.query('INSERT INTO "Request-Symptoms" ("Request_id_fk", "Symptom_id_fk") VALUES($1,$2)',[],function(err3,result3){
+                            client1.query('INSERT INTO "Request-Symptoms" ("Request_id_fk", "Symptom_id_fk") VALUES($1,$2)',[req.body.idReq,req.body.idS[yi]],function(err3,result3){
                                 if (err3) {console.log(err3)}
                                 else{
                                     client1.query('COMMIT')
