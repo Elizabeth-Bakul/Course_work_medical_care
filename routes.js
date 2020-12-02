@@ -250,7 +250,7 @@ module.exports = function (app) {
                 if (err1){console.log(err1)}
                 else {
                     console.log(result1.rows)
-                    res.JSON({
+                    res.json({
                         iM:result1.rows
                     })
                     client1.query('COMMIT')
