@@ -11,6 +11,7 @@ var dateRequest2=document.querySelector('.dateRequest');
 var dateAccept2=document.querySelector('.dateAccept');
 var Symptom=document.getElementById('Symptom')
 var Issledovania=document.getElementById('Issledovania')
+var Diagnosis=document.getElementById('Diagnosis')
 var id2=document.querySelector('.id');
 
 console.log(but31);
@@ -142,9 +143,19 @@ function work(){
         console.log(this.response);
     };
     request.send(SD);
+    while( fc4 ) {
+      Diagnosis.removeChild( fc4 );
+      fc4 = Diagnosis.firstChild;
+    }
     request.addEventListener("load", function () {
       let rD = JSON.parse(request.response);
-
+      for (let nb=0;nb<rD.rIn.length; nb++){
+        let op11=document.createElement('option');
+        op11.className='Diagnosisopt';
+        op11.value=rD.rIn[nb].id;
+        op11.innerHTML=rD.rIn[nb].name+' '+rD.rIn[nb].kol;
+        Diagnosis.appendChild(op11);
+      }
         
       })
 
