@@ -268,5 +268,6 @@ let hos=document.querySelector('.Hospitalizationch')
 let ras=document.getElementById('Rasstoynie')
 but106.onclick=()=>{
   hos.setAttribute('checked','true');
+  hos.value='true'
   ras.removeAttribute('hidden')
 }

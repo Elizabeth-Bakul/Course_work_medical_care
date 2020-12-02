@@ -745,7 +745,7 @@ module.exports = function (app) {
             } else {
             req.session.cookie.expires = false; // Cookie expires at end of session
             }
-            res.redirect('/');
+            res.redirect('/account');
             });
 
 }
