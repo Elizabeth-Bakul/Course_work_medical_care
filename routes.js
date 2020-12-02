@@ -148,14 +148,14 @@ module.exports = function (app) {
                                 }
                             })
                             client1.query('COMMIT')
-                            client1.release()
+                            
                         }
                         client1.query('COMMIT')
                     }
                     client1.query('COMMIT')
                 }))
                 client1.query('COMMIT')
-            }
+            }client1.release()
             const client=await pool.connect()
             await client.query('BEGIN')
             var rk=[]
