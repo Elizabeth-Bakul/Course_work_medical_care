@@ -175,19 +175,19 @@ function work_2(){
   console.log(da.value)
   console.log(id2.value)
   //console.log(Diagnosis.value)
-  let SD1=JSON.stringify(
+  let SD6=JSON.stringify(
       {
       idD: da.value,
       idReq: id2.value
     })
-    console.log(SD1)
+    console.log(SD6)
     let request2 = new XMLHttpRequest();
     request2.open("POST", "/account_doctor_add_DR", true); 
     request2.setRequestHeader("Content-Type", "application/json");
     request2.onload = function () {
         console.log(this.response);
     };
-    request2.send(SD1);
+    request2.send(SD6);
     var fc5 = Medicine.firstChild;
     while( fc5 ) {
       Medicine.removeChild( fc5 );

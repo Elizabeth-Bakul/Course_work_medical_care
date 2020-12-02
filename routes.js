@@ -234,6 +234,7 @@ module.exports = function (app) {
     })
     app.post('/account_doctor_add_DR',jsonParser, async function(req,res){
         try{
+            console.log(req.body)
             const client = await pool.connect()
             await client.query('BEGIN')
             await JSON.stringify(client.query('UPDATE "Requests" SET "Diagnosis_id_fk"=$1 WHERE id=$2',[req.body.idD, req.body.idReq], function(err, result){
@@ -249,10 +250,11 @@ module.exports = function (app) {
                 if (err1){console.log(err1)}
                 else {
                     console.log(result1.rows)
-                    client1.query('COMMIT')
                     res.JSON({
                         iM:result1.rows
                     })
+                    client1.query('COMMIT')
+                    
                 }
             }))
             client1.release()
