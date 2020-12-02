@@ -201,7 +201,7 @@ function work_2(){
       for (let nm=0;nm<rM.iM.length; nm++){
         let op12=document.createElement('option');
         op12.className='Diagnosisopt';
-        op12.value=rM.riM[nm].id;
+        op12.value=rM.iM[nm].id;
         op12.innerHTML=rM.iM[nm].Medicines_name;
         Medicine.appendChild(op12);
       }
