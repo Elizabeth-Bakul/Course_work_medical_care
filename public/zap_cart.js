@@ -163,7 +163,7 @@ function work(){
         Diagnosis.appendChild(op11);
       }
       console.log(Diagnosis)
-      symptom_name.setAttribute('readonly', 'true')
+      symptom_name.setAttribute('disabled', 'true')
       })
 }
 
@@ -205,7 +205,7 @@ function work_2(){
         op12.innerHTML=rM.iM[nm].Medicines_name;
         Medicine.appendChild(op12);
       }
-      Diagnosis.setAttribute('readonly', 'true')
+      Diagnosis.setAttribute('disabled', 'true')
     })
 }
 
@@ -234,5 +234,32 @@ function work_3(){
         console.log(this.response);
     };
     request3.send(SD3);
-    mmm.setAttribute('readonly', 'true')
+    mmm.setAttribute('disabled', 'true')
+}
+let but105=document.querySelector('.button_33');
+let count2=0;
+but105.addEventListener("click", work_4);
+function work_4(){
+  var isl=document.querySelector('.js-selectize4')
+  var x4=[]
+    for ( var p4=0; p4<isl.options.length; p4++){
+      if(isl.options[p4].selected===true){
+        x4.push(isl.options[p3].value)
+      }
+    }
+    count2=x4.length
+    console.log(count2)
+  let SD4=JSON.stringify(
+      {
+      idI:x4,
+      idReq: id2.value
+    })
+    let request4 = new XMLHttpRequest();
+    request4.open("POST", "/account_doctor_add_IR", true); 
+    request4.setRequestHeader("Content-Type", "application/json");
+    request4.onload = function () {
+        console.log(this.response);
+    };
+    request4.send(SD4);
+    isl.setAttribute('disabled', 'true')
 }
