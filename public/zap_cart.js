@@ -158,9 +158,11 @@ function work(){
         let op11=document.createElement('option');
         op11.className='Diagnosisopt';
         op11.value=rD.rIn[nb].id;
+        console.log(op11.value)
         op11.innerHTML=rD.rIn[nb].name+' '+rD.rIn[nb].kol;
         Diagnosis.appendChild(op11);
       }
+      console.log(Diagnosis)
       symptom_name.setAttribute('readonly', 'true')
       })
 }
