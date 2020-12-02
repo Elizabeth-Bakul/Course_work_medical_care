@@ -136,7 +136,7 @@ module.exports = function (app) {
             console.log(req.body);
             const client1=await pool.connect()
             await client1.query('BEGIN')
-            for (let yi=0;yi<req.body.idS.length; yi+){
+            for (let yi=0;yi<req.body.idS.length; yi++){
                 await JSON.stringify(client1.query('select id from "Request-Symptoms" where "Request_id_fk"=$1 and "Symptom_id_fk"=$2',[req.body.idReq,req.body.idS[yi]],function(err2, result2){
                     if (err2){console.log(err2)} else {
                         if (result2.rowCount===0){
