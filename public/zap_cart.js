@@ -13,6 +13,7 @@ var Symptom=document.getElementById('Symptom')
 var Issledovania=document.getElementById('Issledovania')
 var Diagnosis=document.getElementById('Diagnosis')
 var id2=document.querySelector('.id');
+var Medicine=document.getElementById('Medicine')
 
 console.log(but31);
 for (let i=0; i<but31.length;i++){
@@ -160,7 +161,69 @@ function work(){
         op11.innerHTML=rD.rIn[nb].name+' '+rD.rIn[nb].kol;
         Diagnosis.appendChild(op11);
       }
-        
+      symptom_name.setAttribute('readonly', 'true')
       })
+}
 
+let but104=document.querySelector('.button_34');
+but104.addEventListener("click", work_2);
+function work_2(){
+  let SD1=JSON.stringify(
+      {
+      idD:Diagnosis.value,
+      idReq: id2.value
+    })
+    let request2 = new XMLHttpRequest();
+    request2.open("POST", "/account_doctor_add_DR", true); 
+    request2.setRequestHeader("Content-Type", "application/json");
+    request2.onload = function () {
+        console.log(this.response);
+    };
+    request2.send(SD1);
+    var fc5 = Medicine.firstChild;
+    while( fc5 ) {
+      Medicine.removeChild( fc5 );
+      fc5 = Medicine.firstChild;
+    }   
+    request2.addEventListener("load", function () {
+      let rM = JSON.parse(request2.response);
+      if (rM.rIn.length===0){
+        alert('По данному диагнозу нет лекарств в базе. Обратитесь к администратору')
+      }
+        for (let nm=0;nm<rM.iM.length; nm++){
+        let op12=document.createElement('option');
+        op12.className='Diagnosisopt';
+        op12.value=rM.riM[nm].id;
+        op12.innerHTML=rM.iM[nm].Medicines_name;
+        Medicine.appendChild(op12);
+      }
+      Diagnosis.setAttribute('readonly', 'true')
+    })
+}
+
+let but105=document.querySelector('.button_35');
+let count1=0;
+but105.addEventListener("click", work_3);
+function work_3(){
+  var x3=[]
+    for ( var p3=0; p3<Medicine.options.length; p3++){
+      if(Medicine.options[p3].selected===true){
+        x3.push(Medicine.options[p3].value)
+      }
+    }
+    count1=x3.length
+    console.log(count1)
+  let SD3=JSON.stringify(
+      {
+      idM:x3,
+      idReq: id2.value
+    })
+    let request3 = new XMLHttpRequest();
+    request3.open("POST", "/account_doctor_add_MR", true); 
+    request3.setRequestHeader("Content-Type", "application/json");
+    request3.onload = function () {
+        console.log(this.response);
+    };
+    request3.send(SD3);
+    Medicine.setAttribute('readonly', 'true')
 }

@@ -137,7 +137,7 @@ module.exports = function (app) {
             const client1=await pool.connect()
             await client1.query('BEGIN')
             for (let yi=0;yi<req.body.idS.length; yi++){
-                await JSON.stringify(client1.query('select id from "Request-Symptoms" where "Request_id_fk"=$1 and "Symptom_id_fk"=$2',[req.body.idReq,req.body.idS[yi]],function(err2, result2){
+                await JSON.stringify(client1.query('select id from "Request-Symptoms" where "Request_id_fk"=$1 and "Symptom_id_fk"=$2',[req.body.idReq,req.body.idS[yi]], function(err2, result2){
                     if (err2){console.log(err2)} else {
                         if (result2.rowCount===0){
                             client1.query('INSERT INTO "Request-Symptoms" ("Request_id_fk", "Symptom_id_fk") VALUES($1,$2)',[req.body.idReq,req.body.idS[yi]],function(err3,result3){
@@ -232,6 +232,68 @@ module.exports = function (app) {
             throw(e)
         }
     })
+    app.post('/account_doctor_add_DR',jsonParser, async function(req,res){
+        try{
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('UPDATE "Requests" SET "Diagnosis_id_fk"=$1 WHERE id=$2',[req.body.idD, req.body.idReq], function(err, result){
+                if (err){console.log(err)}
+                else {
+                    client.query('COMMIT')
+                }
+            }))
+            client.release()
+            const client1 = await pool.connect()
+            await client1.query('BEGIN')
+            await JSON.stringify(client1.query('select id, "Medicines_name" from "Medicines"',[], function(err1, result1){
+                if (err1){console.log(err1)}
+                else {
+                    console.log(result1.rows)
+                    client1.query('COMMIT')
+                    res.JSON({
+                        iM:result1.rows
+                    })
+                }
+            }))
+            client1.release()
+        }
+        catch(e){
+            throw(e)
+        }
+    })
+    app.post('/account_doctor_add_MR', jsonParser,async function (req, res){
+            try{
+                console.log(req.body);
+                const client = await pool.connect()
+                await client.query('BEGIN')
+                for (let ym=0;ym<req.body.idM.length; ym++){
+                    await JSON.stringify(client1.query('select id from "Request-Medicines" where "Request_id_fk"=$1 and "Medicine_id_fk"=$2',[req.body.idReq,req.body.idM[ym]], function(err2, result2){
+                        if (err2){console.log(err2)} else {
+                            if (result2.rowCount===0){
+                                client.query('INSERT INTO "Request-Medicines" ("Request_id_fk", "Medicine_id_fk") VALUES($1,$2)',[req.body.idReq,req.body.idM[ym]],function(err3,result3){
+                                    if (err3) {console.log(err3)}
+                                    else{
+                                        client.query('COMMIT')
+                                    }
+                                })
+                                client.query('COMMIT')
+                                
+                            }
+                            client.query('COMMIT')
+                        }
+                        client.query('COMMIT')
+                    }))
+                    client.query('COMMIT')
+                }client.release()
+            }
+            catch(e){
+                throw(e)
+            }
+    })
+    //app.post('/',jsonParser,async function (req, res){
+
+    //})
+
     app.post('/account_doctor', jsonParser , async function (req, res){
         try{
             console.log(req.body);
