@@ -173,10 +173,10 @@ function work_2(){
   var da=document.querySelector('.js-selectize')
   console.log(da)
   console.log(da.value)
-  console.log(Diagnosis.value)
+  //console.log(Diagnosis.value)
   let SD1=JSON.stringify(
       {
-      idD:Diagnosis.value,
+      idD:da.value,
       idReq: id2.value
     })
     let request2 = new XMLHttpRequest();
