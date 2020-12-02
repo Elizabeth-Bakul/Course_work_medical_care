@@ -211,10 +211,11 @@ let but105=document.querySelector('.button_35');
 let count1=0;
 but105.addEventListener("click", work_3);
 function work_3(){
+  var mmm=document.querySelector('.js-selectize2')
   var x3=[]
-    for ( var p3=0; p3<Medicine.options.length; p3++){
-      if(Medicine.options[p3].selected===true){
-        x3.push(Medicine.options[p3].value)
+    for ( var p3=0; p3<mmm.options.length; p3++){
+      if(mmm.options[p3].selected===true){
+        x3.push(mmm.options[p3].value)
       }
     }
     count1=x3.length
@@ -231,5 +232,5 @@ function work_3(){
         console.log(this.response);
     };
     request3.send(SD3);
-    Medicine.setAttribute('readonly', 'true')
+    mmm.setAttribute('readonly', 'true')
 }
