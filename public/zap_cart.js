@@ -263,3 +263,10 @@ function work_4(){
     request4.send(SD4);
     isl.setAttribute('disabled', 'true')
 }
+let but106=document.querySelector('.button_39');
+let hos=document.querySelector('.Hospitalizationch')
+let ras=document.getElementById('Rasstoynie')
+but106.onclick=()=>{
+  hos.setAttribute('checked','true');
+  ras.removeAttribute('hidden')
+}
