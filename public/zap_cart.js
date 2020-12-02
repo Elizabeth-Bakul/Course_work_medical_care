@@ -195,10 +195,10 @@ function work_2(){
     }   
     request2.addEventListener("load", function () {
       let rM = JSON.parse(request2.response);
-      if (rM.rIn.length===0){
+      if (rM.iM.length===0){
         alert('По данному диагнозу нет лекарств в базе. Обратитесь к администратору')
       }
-        for (let nm=0;nm<rM.iM.length; nm++){
+      for (let nm=0;nm<rM.iM.length; nm++){
         let op12=document.createElement('option');
         op12.className='Diagnosisopt';
         op12.value=rM.riM[nm].id;
