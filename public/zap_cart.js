@@ -244,7 +244,7 @@ function work_4(){
   var x4=[]
     for ( var p4=0; p4<isl.options.length; p4++){
       if(isl.options[p4].selected===true){
-        x4.push(isl.options[p3].value)
+        x4.push(isl.options[p4].value)
       }
     }
     count2=x4.length
