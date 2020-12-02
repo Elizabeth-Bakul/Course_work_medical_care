@@ -246,7 +246,7 @@ module.exports = function (app) {
             client.release()
             const client1 = await pool.connect()
             await client1.query('BEGIN')
-            await JSON.stringify(client1.query('select id, "Medicines_name" from "Medicines"',[], function(err1, result1){
+            await JSON.stringify(client1.query('select id, "Medicines_name" from "Medicines" where "Diagnosis_id_fk"=$1',[req.body.idD], function(err1, result1){
                 if (err1){console.log(err1)}
                 else {
                     console.log(result1.rows)
@@ -297,7 +297,7 @@ module.exports = function (app) {
             console.log(req.body);
             const client = await pool.connect()
             await client.query('BEGIN')
-            for (let yq=0;ym<req.body.idM.length; yq++){
+            for (let yq=0;yq<req.body.idM.length; yq++){
                 await JSON.stringify(client.query('select id from "Requests-Analysis" where "Request_id_fk"=$1 and "Analysis_id_fk"=$2',[req.body.idReq,req.body.idI[yq]], function(err2, result2){
                     if (err2){console.log(err2)} else {
                         if (result2.rowCount===0){
