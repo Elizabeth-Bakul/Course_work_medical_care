@@ -168,6 +168,9 @@ function work(){
 let but104=document.querySelector('.button_34');
 but104.addEventListener("click", work_2);
 function work_2(){
+  var da=document.getElementById(Diagnosis)
+  console.log(da.value)
+  console.log(Diagnosis.value)
   let SD1=JSON.stringify(
       {
       idD:Diagnosis.value,
