@@ -791,6 +791,7 @@ module.exports = function (app) {
     app.post('/add_symptom', jsonParser, async function (req, res) {
 
         try {
+            console.log(req.body)
             const client = await pool.connect()
             await client.query('BEGIN')
             client.query('insert into "Symptoms" (id,"Symptom_name") values (default, $1)', [req.body.symptom_name], function (err, result) {
