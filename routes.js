@@ -421,24 +421,55 @@ module.exports = function (app) {
                     const client = await pool.connect()
                     await client.query('BEGIN')
                     await JSON.stringify(client.query('select "Symptom_name" from "Symptoms"', [], function (err, result) {
-                        if (err) {
-                            console.log("Mistake")
-                        } else {
-                            //console.log(result.rows)
-                            res.render('account_admin', {
-                                userData: req.user,
-                                list_values: result.rows,
-                                messages: {
-                                    danger: req.flash('danger'),
-                                    warning: req.flash('warning'),
-                                    success: req.flash('success')
-                                }
-                            })
-                        }
+                        JSON.stringify(client.query('select "Diagnosis_name" from "Diagnosis"', [], function (err1, result1) {
+
+
+                            if (err) {
+                                console.log("Mistake")
+                            } else {
+                                //console.log(result.rows)
+                                res.render('account_admin', {
+                                    userData: req.user,
+                                    list_values: result.rows,
+                                    list_values_diagnosis: result1.rows,
+                                    messages: {
+                                        danger: req.flash('danger'),
+                                        warning: req.flash('warning'),
+                                        success: req.flash('success')
+                                    }
+                                })
+                            }
+
+                        }))
+
+
                     }))
                 } catch (e) {
                     throw(e)
                 }
+
+                // try {
+                //     const client = await pool.connect()
+                //     await client.query('BEGIN')
+                //     await JSON.stringify(client.query('select "Diagnosis_name" from "Diagnosis"', [], function (err, result) {
+                //         if (err) {
+                //             console.log("Mistake")
+                //         } else {
+                //             //console.log(result.rows)
+                //             res.render('account_admin', {
+                //                 userData: req.user,
+                //                 list_values_diagnosis: result.rows,
+                //                 messages: {
+                //                     danger: req.flash('danger'),
+                //                     warning: req.flash('warning'),
+                //                     success: req.flash('success')
+                //                 }
+                //             })
+                //         }
+                //     }))
+                // } catch (e) {
+                //     throw(e)
+                // }
                 break;
             case 'фельдшер':
                 res.redirect('/account_doctor')
@@ -660,6 +691,7 @@ module.exports = function (app) {
         catch(e){throw(e)}
     })
 
+    //ДОБАВИТЬ проверку существующего диагноза
     app.post('/add_diagnosis_symptoms', jsonParser, async function (req, res) {
         try {
             //console.log(req.body.diagnosis_name);
@@ -717,6 +749,100 @@ module.exports = function (app) {
 
 )
 
+    app.post('/add_symptom', jsonParser, async function (req, res) {
+
+        try {
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            client.query('insert into "Symptoms" (id,"Symptom_name") values (default, $1)', [req.body.symptom_name], function (err, result) {
+                if (err) {
+                    console.log("Mistake")
+                } else {
+                    client.query('COMMIT');
+                    client.release();
+                }
+            })
+        } catch (e) {
+            throw(e)
+        }
+    });
+
+    app.post('/add_analysis', jsonParser, async function (req, res) {
+
+        try {
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            client.query('insert into "Analysis" (id,"AnalysisName") values (default, $1)', [req.body.analysis_name], function (err, result) {
+                if (err) {
+                    console.log("Mistake")
+                } else {
+                    client.query('COMMIT');
+                    client.release();
+                }
+            })
+        } catch (e) {
+            throw(e)
+        }
+    });
+
+    //ДОБАВИТЬ проверку существующего лекарства
+    app.post('/add_medicine', jsonParser, async function (req, res) {
+            try {
+                //console.log(req.body.diagnosis_name);
+                const client = await
+                    pool.connect()
+                await
+                    client.query('BEGIN')
+                await
+                    JSON.stringify(client.query('INSERT INTO "Medicines" (id, "Medicines_name") VALUES (DEFAULT, $1)', [req.body.medicine_name], function (err, result) {
+                        if (err) {
+                            console.log(err)
+                        } else {
+                            // console.log(result.rows)
+                            client.query('select id from "Medicines" where "Medicines_name"=$1', [req.body.medicine_name], function (err1, id_medicine) {
+                                if (err1) {
+                                    console.log(err1)
+                                } else {
+
+
+                                    client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis], function (err2, id_diagnosis) {
+                                        if (err2) {
+                                            console.log(err2)
+                                        } else {
+                                            //console.log(req.body.diagnosis)
+                                            //console.log("id=",id_diagnosis.rows[0].id)
+
+
+                                            client.query('insert into "Diagnosis-Medicines" ("Diagnosis_id_fk", "Medicines_id_fk") VALUES ($1,$2)', [id_diagnosis.rows[0].id, id_medicine.rows[0].id], function (err3, result) {
+                                                if (err3) {
+                                                    console.log(err3)
+                                                } else {
+
+
+                                                    client.query('COMMIT')
+                                                }
+                                            })
+
+
+                                            client.query('COMMIT')
+                                        }
+                                    })
+
+
+                                    client.query('COMMIT')
+                                }
+                            })
+                        }
+                    }))
+                client.release()
+            } catch (e) {
+                throw(e)
+            }
+        }
+    )
+
+
+
     app.get('/logout', function (req, res) {
         console.log(req.isAuthenticated());
         req.logout();
@@ -724,6 +850,7 @@ module.exports = function (app) {
         req.flash('success', "Logged out. See you soon!");
         res.redirect('/');
     });
+
     app.post('/account_zp',jsonParser,async function(req,res){
         try{
             console.log(req.body);

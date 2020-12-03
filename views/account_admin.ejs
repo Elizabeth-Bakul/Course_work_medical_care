@@ -28,11 +28,11 @@
     </div>
 </header>
 <nav class="nav">
-    <a class="nav__link nav_active" href="/account">Добавить диагноз</a>
-    <a class="nav__link" href="/account_otch">Добавить симптом</a>
-    <a class="nav__link" href="/account_ac">Добавить анализ</a>
-    <a class="nav__link" href="/account_ac">Добавить лекарство</a>
-    <a class="nav__link" href="/account_ac">Добавить бригаду</a>
+    <a class="nav__link nav_active" id="add_diagnosis_nav" href="#0">Добавить диагноз</a>
+    <a class="nav__link" id="add_symptom_nav" href="#0">Добавить симптом</a>
+    <a class="nav__link" id="add_analysis_nav" href="#0">Добавить анализ</a>
+    <a class="nav__link" id="add_medicine_nav" href="#0">Добавить лекарство</a>
+    <a class="nav__link" id="add_brigade_nav" href="#0">Добавить бригаду</a>
 
 </nav>
 
@@ -74,13 +74,13 @@ if(messages.success.length){
     </form>
 </div>
 
-<div class="add_symptom">
+<div class="add_symptom" id="add_symptom">
     <form class="search" name="search-form">
         <fieldset>
             <legend class='sear2'>Добавление симптома</legend>
             <label class="search-label" for="surname">Наименование симптома:</label>
-            <input class="surname" type="text" id="surname" name="surname" required>
-            <button class="button" type="submit" id="subsear">Добавить</button>
+            <input class="surname" type="text" id="add_symptom" required>
+            <button class="button" type="submit" id="submit_add_symptom">Добавить</button>
         </fieldset>
     </form>
 </div>
@@ -90,8 +90,8 @@ if(messages.success.length){
         <fieldset>
             <legend class='sear2'>Добавление анализа</legend>
             <label class="search-label" for="surname">Наименование анализа:</label>
-            <input class="surname" type="text" id="surname" name="surname" required>
-            <button class="button" type="submit" id="subsear">Добавить</button>
+            <input class="surname" type="text" id="add_analysis" required>
+            <button class="button" type="submit" id="submit_add_analysis">Добавить</button>
         </fieldset>
     </form>
 </div>
@@ -101,13 +101,14 @@ if(messages.success.length){
         <fieldset>
             <legend class='sear2'>Добавление лекарства</legend>
             <label class="search-label" for="surname">Наименование лекарства</label>
+            <input class="surname" type="text" id="name_medicine" required>
             <label class="search-label" for="name">Диагноз:</label>
-            <select class="ui fluid search dropdown" multiple="">
-                <option value="">State</option>
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
+            <select id="select_diagnosis">
+                <% for(var i = 0; i < list_values_diagnosis.length; i++) { %>
+                    <option><%= list_values_diagnosis[i].Diagnosis_name %></option>
+                <% } %>
             </select>
-            <button class="button" type="submit" id="subsear">Добавить</button>
+            <button class="button" type="submit" id="submit_add_medicine">Добавить</button>
         </fieldset>
     </form>
 </div>
@@ -118,26 +119,11 @@ if(messages.success.length){
             <legend class='sear2'>Добавление бригады</legend>
             <label class="search-label" for="surname">Наименование бригады:</label>
             <input class="surname" type="text" id="surname" name="surname" required>
-            <label class="search-label" for="name">Врач:</label>
-            <input class="name" type="text" id="name" name="name" placeholder="ФИО" required>
-            <label class="search-label" for="Lastname">Водитель:</label>
-            <input class="Lastname" type="text" id="Lastname" name="Lastname" placeholder="ФИО" required>
-            <label class="search-label" for="Lastname">Медсестра:</label>
-            <input class="Lastname" type="text" id="Lastname" name="Lastname" placeholder="ФИО" required>
-            <button class="button" type="submit" id="subsear">Поиск</button>
+            <button class="button" type="submit" id="subsear">Добавить</button>
         </fieldset>
     </form>
 </div>
 
-<div class="black-list" hidden>
-    <p class="black-list-n">Пациент в черном списке</p>
-</div>
-<div class="not-patient" hidden>
-    <p class="not-patient-n">Пациента нет в базе</p>
-</div>
-<div class="in-base" hidden>
-    <p class="in-base-n">Пациент есть в базе</p>
-</div>
 <footer class="foot">
     <p class="container">Copyright © Бакулина Елизавета, Гербовец Даниил, Крыжановская Ксения</p>
 </footer>
