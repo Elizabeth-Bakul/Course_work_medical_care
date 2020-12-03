@@ -105,16 +105,16 @@ document.getElementById("submit_add_diagnosis").addEventListener("click", functi
 document.getElementById("submit_add_symptom").addEventListener("click", function (e) {
     e.preventDefault();
     console.log('hello')
-    let symptomName1 = document.getElementById('addSymptom');
+    let symptomName = document.getElementById('addSymptom');
     console.log(symptomName1.value)
-    let symptom1 = JSON.stringify({
+    let symptom = JSON.stringify({
         symptom_name: symptomName1.value,
     });
-    console.log(symptom1);
+    console.log(symptom);
     let request = new XMLHttpRequest();
     request.open("POST", "/add_symptom", true);
     request.setRequestHeader("Content-Type", "application/json");
-    request.send(symptom1);
+    request.send(symptom);
 })
 
 document.getElementById("submit_add_analysis").addEventListener("click", function (e) {
@@ -189,3 +189,73 @@ document.getElementById("delete_symptom").addEventListener("click", function (e)
     }
     })
 })
+
+document.getElementById("delsear").addEventListener("click", function (e) {
+    e.preventDefault();
+    let brigade_name1 = document.getElementById('surname');
+    let brigade1 = JSON.stringify({
+        brigade_name1: brigade_name1.value,
+    });
+    let request1 = new XMLHttpRequest();
+    request1.open("POST", "/delete_brigada", true);
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.send(brigade1);
+    request1.addEventListener("load", function () {
+    let infDel = JSON.parse(request1.response);
+    if(infDel.flag){
+        alert('Удаление произошло успешно')
+    } else{
+        alert('Произошла ошибка с удалением, данной бригады нет в базе')
+    }
+    })
+})
+
+document.getElementById("delete_medicine").addEventListener("click", function (e) {
+    e.preventDefault();
+    let medicine_name1 = document.getElementById('name_medicine');
+    let medicine1 = JSON.stringify({
+        medicine_name1: medicine_name1.value,
+    });
+    let request1 = new XMLHttpRequest();
+    request1.open("POST", "/delete_medicine", true);
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.send(medicine1);
+    request1.addEventListener("load", function () {
+    let infDel = JSON.parse(request1.response);
+    if(infDel.flag){
+        alert('Удаление произошло успешно')
+    } else{
+        alert('Произошла ошибка с удалением, данного лекарства нет в базе')
+    }
+    })
+})
+document.getElementById("delete_diag_medicine").addEventListener("click", function (e) {
+    e.preventDefault();
+    let medicine_name2 = document.getElementById('name_medicine');
+    let symptom_name2=document.getElementById('select_diagnosis')
+    let medicine2 = JSON.stringify({
+        medicine_name: medicine_name2.value,
+        diagnosis: $('#select_diagnosis').val()
+    });
+    let request1 = new XMLHttpRequest();
+    request1.open("POST", "/delete_medicine_diag", true);
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.send(medicine2);
+    request1.addEventListener("load", function () {
+    let infDel = JSON.parse(request1.response);
+    if(infDel.flag){
+        alert('Удаление произошло успешно')
+    } else{
+        if(infDel.flag==='false1') {alert('Произошла ошибка с удалением, данного лекарства нет в базе')}
+        else {
+            if(infDel.flag==='false1'){
+                alert('Произошла ошибка с удалением, данного диагноза нет в базе')
+            } else {}
+            
+        }
+        
+    }
+    })
+})
+
+

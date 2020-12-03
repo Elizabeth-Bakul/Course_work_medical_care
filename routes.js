@@ -448,28 +448,7 @@ module.exports = function (app) {
                     throw(e)
                 }
 
-                // try {
-                //     const client = await pool.connect()
-                //     await client.query('BEGIN')
-                //     await JSON.stringify(client.query('select "Diagnosis_name" from "Diagnosis"', [], function (err, result) {
-                //         if (err) {
-                //             console.log("Mistake")
-                //         } else {
-                //             //console.log(result.rows)
-                //             res.render('account_admin', {
-                //                 userData: req.user,
-                //                 list_values_diagnosis: result.rows,
-                //                 messages: {
-                //                     danger: req.flash('danger'),
-                //                     warning: req.flash('warning'),
-                //                     success: req.flash('success')
-                //                 }
-                //             })
-                //         }
-                //     }))
-                // } catch (e) {
-                //     throw(e)
-                // }
+        
                 break;
             case 'фельдшер':
                 res.redirect('/account_doctor')
@@ -882,35 +861,89 @@ module.exports = function (app) {
         }
     )
     app.post('/delete_analysis', jsonParser, async function(req,res){
-        console.log(req.body);
+        try{
+            console.log(req.body);
         const client = await pool.connect()
         await client.query('BEGIN')
-        await JSON.stringify(client.query('delete from "Analysis" where "AnalysisName"=$1',[req.body.analysis_name1],function (err,result){
-            if (err){
-                console.log(err)
-                res.json({
+        await JSON.stringify(client.query('select id from "Analysis" where "AnalysisName"=$1',[req.body.analysis_name1],function(err1,result1){
+            if (err1){console.log(err1)}else{
+                if(result1.rowCount===0){
+                    res.json({
                     flag: 'false'
                 })
-            }
-            else {
-                res.json({
-                    flag: 'true'
-                })
-                client.query('COMMIT');
-                client.release();
-            }
-        }))
+                } else {
+                    client.query('delete from "Analysis" where "AnalysisName"=$1',[req.body.analysis_name1],function (err,result){
+                    if (err){
+                        console.log(err)
+                    }
+                    else {
+                        res.json({
+                            flag: 'true'
+                        })
+                    client.query('COMMIT');
+                    client.release();
+                }
+                }
+                    )
+        }}}
+            
+        ))
+        }
+        catch(e){throw(e)}
+        
     })
     app.post('/delete_symptom', jsonParser, async function(req,res){
+        try{
+            console.log(req.body);
+        const client = await pool.connect()
+        await client.query('BEGIN')
+        await JSON.stringify(client.query('select id from "Symptoms" where "Symptom_name"=$1',[req.body.symptom_name1],function(err1,result1){
+            if (err1){console.log(err1)}else{
+                if(result1.rowCount===0){
+                    res.json({
+                    flag: 'false'
+                })} else {
+                client.query('delete from "Symptoms" where "Symptom_name"=$1',[req.body.symptom_name1],function (err,result){
+                    if (err){
+                        console.log(err)
+                    }
+                    else {
+                        res.json({
+                            flag: 'true'
+                        })
+                        client.query('COMMIT');
+                        client.release();
+            }
+        })
+        }
+
+    }}
+        ))
+        }
+        catch(e){
+            throw(e)
+        }})
+    app.post('/delete_brigada', jsonParser, async function(req,res){
+        try{}
+        catch(e){
+            throw(e)
+        }
         console.log(req.body);
         const client = await pool.connect()
         await client.query('BEGIN')
-        await JSON.stringify(client.query('delete from "Symptoms" where "Symptom_name"=$1',[req.body.symptom_name1],function (err,result){
-            if (err){
-                console.log(err)
-                res.json({
+        await JSON.stringify(client.query('select id from "Brigades" where "BrigadeName"=$1',[req.body.brigade_name1], function(err1,result1){
+            if (err1){console.log(err1)}
+            else{
+                if(result1.rowCount===0){
+                    res.json({
                     flag: 'false'
                 })
+                } 
+                else {
+                    client.query('delete from "Brigades" where "BrigadeName"=$1',[req.body.brigade_name1],function (err,result){
+            if (err){
+                console.log(err)
+                
             }
             else {
                 res.json({
@@ -919,9 +952,108 @@ module.exports = function (app) {
                 client.query('COMMIT');
                 client.release();
             }
+        })
+                }
+            }
         }))
+            
     })
-
+    app.post('/delete_medicine', jsonParser, async function(req,res){
+        try{
+            console.log(req.body);
+        const client = await pool.connect()
+        await client.query('BEGIN')
+        await JSON.stringify(client.query('select id from "Medicines" where "Medicines_name"=$1',[req.body.medicine_name1], function(err1,result1){
+            if (err1){console.log(err1)}
+            else{
+                if(result1.rowCount===0){
+                    res.json({
+                    flag: 'false'
+                })
+                } 
+                else {
+                    client.query('delete from "Medicines" where "Medicines_name"=$1',[req.body.medicine_name1],function (err,result){
+            if (err){
+                console.log(err)
+                
+            }
+            else {
+                res.json({
+                    flag: 'true'
+                })
+                client.query('COMMIT');
+                client.release();
+            }
+        })
+                }
+            }
+        }))
+        }
+        catch(e){
+            throw(e)
+        }
+        
+            
+    })
+    app.post('/delete_medicine_diag',jsonParser, async function(req,res){
+        try{
+            console.log(req.body);
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('select id from "Medicines" where "Medicines_name"=$1',[req.body.medicine_name1], function(err1,result1){
+            if (err1){console.log(err1)}
+            else{
+                if(result1.rowCount===0){
+                    res.json({
+                    flag: 'false1'
+                })
+                } 
+                else {
+                    client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis],function(err2,result2){
+                        if(err2){console.log(err2)}else{
+                            if(result2.rowCount===0){
+                                res.json({
+                                    flag: 'false2'
+                                })
+                            } else {
+                                client.query('select id from "Diagnosis-Medicines" where "Diagnosis_id_fk"=$1 and "Medicines_id_fk"=$2', [result1[0].id,result2[0].id], function(err3,result3){
+                                    if(err3){console.log(err3)}
+                                    else {
+                                        if (result3.rowCount===0){
+                                            res.json({
+                                                flag: 'true'
+                                            })
+                                        }
+                                        else {
+                                            client.query('delete from "Diagnosis-Medicines" where "Diagnosis_id_fk"=$1 and "Medicines_id_fk"=$2',[result1[0].id,result2[0].id],function (err,result){
+                                    if (err){
+                                        console.log(err)
+                                        }
+                                    else {
+                                        res.json({
+                                            flag: 'false3'
+                                        })
+                                        client.query('COMMIT');
+                                        client.release();
+                                    }
+        })
+                                        }
+                                    }
+                                })
+                                
+                            }
+                        }
+                    })
+                    
+                }
+            }
+        }))
+        }
+        catch(e){
+            throw(e)
+        }
+    })
+    
     app.get('/logout', function (req, res) {
         console.log(req.isAuthenticated());
         req.logout();
