@@ -250,7 +250,7 @@ module.exports = function (app) {
                 if (err1){console.log(err1)}
                 else {
                     console.log(result1.rows)
-                    if(resulut1.rowCount===0){
+                    if(result1.rowCount===0){
                         client1.query('select id, "Medicines_name" form "Medicines"',[], function(err2,result2){
                             if (err2) {console.log(err2)} else {
                                 res.json({
