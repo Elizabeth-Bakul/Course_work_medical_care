@@ -48,6 +48,10 @@ let request = new XMLHttpRequest();
     request.send(brig);
     request.addEventListener("load", function () {
       let receivedRequest = JSON.parse(request.response);
+      let l1=document.getElementById('link-1')
+      let l2=document.getElementById('link-2')
+      l1.classList.remove("nav_active")
+      l2.classList.add("nav_active")
       f2.removeAttribute('hidden');
       f1.setAttribute('hidden', 'true')
       surname2.value=receivedRequest.ReqData[0].PatientSurname;

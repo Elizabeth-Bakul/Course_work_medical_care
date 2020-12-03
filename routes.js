@@ -707,14 +707,24 @@ module.exports = function (app) {
             if (req.body.Hospitalization==='on'){
                 const client1 = await pool.connect()
                 await client1.query('BEGIN')
-                await JSON.stringify(client1.query('UPDATE "Requests" SET "Hospitalization"=$2 where "id"=$1',[req.body.idRReq, 'true'],function(err, result){
-                    if (err){console.log(err)}
+                await JSON.stringify(client1.query('UPDATE "Requests" SET "Hospitalization"=$2, "Distance"=$3 where "id"=$1',[req.body.idRReq, 'true',req.body.Rasstoynie],function(err1, result){
+                    if (err1){console.log(err1)}
                     else{
                         client1.query('COMMIT')
                     }
                 }))
                 client1.release()
-            }   
+            }
+            const client2 = await pool.connect()
+                await client2.query('BEGIN')
+                await JSON.stringify(client2.query('UPDATE "Requests" SET "ArriveTime"=$2, "EndRequestTime"=$3,"RefundTime"=$4, "Count"=$5 where "id"=$1',[req.body.idRReq,req.body.dateArrive,req.body.dateEndRequestTime,req.body.dateRefund,req.body.countReq ],function(err1, result){
+                    if (err1){console.log(err2)}
+                    else{
+                        client2.query('COMMIT')
+                    }
+                }))
+                client2.release()
+
 
         }
         catch(e){
