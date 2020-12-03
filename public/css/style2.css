@@ -245,3 +245,13 @@ font-size:16px;}
 .th2{
     width:70%;
 }
+
+.success_request {
+    display: flex;
+    color: green;
+}
+
+.error_request {
+    display: flex;
+    color: red;
+}

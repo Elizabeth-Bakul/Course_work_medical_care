@@ -148,7 +148,7 @@ module.exports = function (app) {
                                 }
                             })
                             client1.query('COMMIT')
-                            
+
                         }
                         client1.query('COMMIT')
                     }
@@ -214,14 +214,12 @@ module.exports = function (app) {
                                         })
                                 }
                     }
-                    
-                       
-            )
+                        )
             console.log("res7")
             console.log(rk)
-                
+
         }
-                    
+
                 }
             }))
             console.log(rk)
@@ -264,9 +262,9 @@ module.exports = function (app) {
                         iM:result1.rows
                     })
                     }
-                    
+
                     client1.query('COMMIT')
-                    
+
                 }
             }))
             client1.release()
@@ -291,7 +289,7 @@ module.exports = function (app) {
                                     }
                                 })
                                 client.query('COMMIT')
-                                
+
                             }
                             client.query('COMMIT')
                         }
@@ -322,7 +320,7 @@ module.exports = function (app) {
                                 }
                             })
                             client.query('COMMIT')
-                            
+
                         }
                         client.query('COMMIT')
                     }
@@ -382,7 +380,7 @@ module.exports = function (app) {
                                             warning: req.flash('warning'),
                                             success: req.flash('success')
                                         }
-                                        
+
                                     })
                                     client2.query('COMMIT')
                                     }})
@@ -739,45 +737,67 @@ module.exports = function (app) {
             await
             client.query('BEGIN')
             await
-            JSON.stringify(client.query('INSERT INTO "Diagnosis" (id, "Diagnosis_name") VALUES (DEFAULT, $1)', [req.body.diagnosis_name], function (err, result) {
+                JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis_name], function (err, result) {
                 if (err) {
                     console.log(err)
+                    console.log("return")
+                    return
                 } else {
-                    // console.log(result.rows)
-                    client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis_name], function (err1, id_diagnosis) {
-                        if (err1) {
-                            console.log(err1)
-                        } else {
-                            //console.log("id=",id_diagnosis.rows[0].id)
+                    if (result.rows != "") {
+                        res.json({
+                            answer: 1//такой диагноз уже есть
+                        })
+                    } else {
+                        client.query('INSERT INTO "Diagnosis" (id, "Diagnosis_name") VALUES (DEFAULT, $1)', [req.body.diagnosis_name], function (err, result) {
+                            if (err) {
+                                console.log(err)
+                            } else {
 
-                            for (var i = 0; i < req.body.symptom_name.length; i++) {
 
-                                client.query('select id from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name[i]], function (err2, id_symptom) {
-                                    if (err2) {
-                                        console.log(err2)
+                                // console.log(result.rows)
+                                client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis_name], function (err1, id_diagnosis) {
+                                    if (err1) {
+                                        console.log(err1)
                                     } else {
+                                        //console.log("id=",id_diagnosis.rows[0].id)
+
+                                        for (var i = 0; i < req.body.symptom_name.length; i++) {
+
+                                            client.query('select id from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name[i]], function (err2, id_symptom) {
+                                                if (err2) {
+                                                    console.log(err2)
+                                                } else {
 
 
-                                        client.query('insert into "Diagnosis-Symptoms" ("Diagnosis_id_fk", "Symptoms_id_fk") VALUES ($1,$2)', [id_diagnosis.rows[0].id, id_symptom.rows[0].id], function (err3, result) {
-                                            if (err3) {
-                                                console.log(err3)
-                                            } else {
+                                                    client.query('insert into "Diagnosis-Symptoms" ("Diagnosis_id_fk", "Symptoms_id_fk") VALUES ($1,$2)', [id_diagnosis.rows[0].id, id_symptom.rows[0].id], function (err3, result) {
+                                                        if (err3) {
+                                                            console.log(err3)
+                                                        } else {
 
 
-                                                client.query('COMMIT')
-                                            }
-                                        })
+                                                            client.query('COMMIT')
+                                                        }
+                                                    })
 
+
+                                                    client.query('COMMIT')
+                                                }
+                                            })
+
+                                        }
 
                                         client.query('COMMIT')
                                     }
                                 })
-
                             }
 
-                            client.query('COMMIT')
-                        }
-                    })
+                            client.query('COMMIT');
+
+                        })
+                        res.json({
+                            answer: 2
+                        })
+                    }
                 }
             }))
             client.release()
@@ -793,14 +813,37 @@ module.exports = function (app) {
         try {
             const client = await pool.connect()
             await client.query('BEGIN')
-            client.query('insert into "Symptoms" (id,"Symptom_name") values (default, $1)', [req.body.symptom_name], function (err, result) {
+
+            client.query('select id from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name], function (err, result) {
                 if (err) {
                     console.log("Mistake")
+                    console.log("return")
+                    return
                 } else {
-                    client.query('COMMIT');
-                    client.release();
+                    if (result.rows != "") {
+                        res.json({
+                            answer: 1//такой диагноз уже есть
+                        })
+                    } else {
+
+
+                        client.query('insert into "Symptoms" (id,"Symptom_name") values (default, $1)', [req.body.symptom_name], function (err, result) {
+                            if (err) {
+                                console.log("Mistake")
+
+                            } else {
+                                client.query('COMMIT');
+                                client.release();
+                            }
+                        })
+                        res.json({
+                            answer: 2
+                        })
+                    }
                 }
             })
+
+
         } catch (e) {
             throw(e)
         }

@@ -12,8 +12,27 @@ document.getElementsByClassName('add_analysis')[0].style.display = 'none';
 document.getElementsByClassName('add_medicine')[0].style.display = 'none';
 document.getElementsByClassName('add_brigade')[0].style.display = 'none';
 
+function initial_success_error_messages() {
+    document.getElementsByClassName('success_request')[0].style.display = 'none';
+    document.getElementsByClassName('error_request')[0].style.display = 'none';
+}
+
+function error_message() {
+    document.getElementsByClassName('success_request')[0].style.display = 'none';
+    document.getElementsByClassName('error_request')[0].style.display = 'flex';
+}
+
+function success_message() {
+    document.getElementsByClassName('success_request')[0].style.display = 'flex';
+    document.getElementsByClassName('error_request')[0].style.display = 'none';
+}
+
+initial_success_error_messages();
+
+
 
 document.getElementById("add_diagnosis_nav").addEventListener("click", function (e) {
+    initial_success_error_messages();
     document.getElementById("add_diagnosis_nav").className = "nav__link nav_active";
     document.getElementById("add_symptom_nav").className = "nav__link";
     document.getElementById("add_analysis_nav").className = "nav__link";
@@ -28,6 +47,7 @@ document.getElementById("add_diagnosis_nav").addEventListener("click", function 
 })
 
 document.getElementById("add_symptom_nav").addEventListener("click", function (e) {
+    initial_success_error_messages();
     document.getElementById("add_diagnosis_nav").className = "nav__link";
     document.getElementById("add_symptom_nav").className = "nav__link nav_active";
     document.getElementById("add_analysis_nav").className = "nav__link";
@@ -42,6 +62,7 @@ document.getElementById("add_symptom_nav").addEventListener("click", function (e
 })
 
 document.getElementById("add_analysis_nav").addEventListener("click", function (e) {
+    initial_success_error_messages();
     document.getElementById("add_diagnosis_nav").className = "nav__link";
     document.getElementById("add_symptom_nav").className = "nav__link";
     document.getElementById("add_analysis_nav").className = "nav__link nav_active";
@@ -56,6 +77,7 @@ document.getElementById("add_analysis_nav").addEventListener("click", function (
 })
 
 document.getElementById("add_medicine_nav").addEventListener("click", function (e) {
+    initial_success_error_messages();
     document.getElementById("add_diagnosis_nav").className = "nav__link";
     document.getElementById("add_symptom_nav").className = "nav__link";
     document.getElementById("add_analysis_nav").className = "nav__link";
@@ -70,6 +92,7 @@ document.getElementById("add_medicine_nav").addEventListener("click", function (
 })
 
 document.getElementById("add_brigade_nav").addEventListener("click", function (e) {
+    initial_success_error_messages();
     document.getElementById("add_diagnosis_nav").className = "nav__link";
     document.getElementById("add_symptom_nav").className = "nav__link";
     document.getElementById("add_analysis_nav").className = "nav__link";
@@ -88,7 +111,6 @@ document.getElementById("submit_add_diagnosis").addEventListener("click", functi
     e.preventDefault();
     let diagnosis_name = document.getElementById('diagnosis_name');
     let symptom_name = document.getElementById('symptom_name');
-    console.log(diagnosis_name);
     console.log(symptom_name);
     let diagnosis = JSON.stringify({
         diagnosis_name: diagnosis_name.value,
@@ -99,13 +121,23 @@ document.getElementById("submit_add_diagnosis").addEventListener("click", functi
     request.open("POST", "/add_diagnosis_symptoms", true); // посылаем запрос на адрес "/user"
     request.setRequestHeader("Content-Type", "application/json");
     request.send(diagnosis);
+
+    request.addEventListener("load", function () {
+        // получаем и парсим ответ сервера
+        let repeat = JSON.parse(request.response);
+        //console.log(repeat.answer)
+        if (repeat.answer == 1) {
+            error_message();
+        } else {
+            success_message();
+        }
+    });
 })
 
 
 document.getElementById("submit_add_symptom").addEventListener("click", function (e) {
     e.preventDefault();
-    console.log('hello')
-    let symptom_name = document.getElementById('add_symptom');
+    let symptom_name = document.getElementById('addSymptom');
     let symptom = JSON.stringify({
         symptom_name: symptom_name.value,
     });
@@ -114,6 +146,17 @@ document.getElementById("submit_add_symptom").addEventListener("click", function
     request.open("POST", "/add_symptom", true);
     request.setRequestHeader("Content-Type", "application/json");
     request.send(symptom);
+
+    request.addEventListener("load", function () {
+        // получаем и парсим ответ сервера
+        let repeat = JSON.parse(request.response);
+        console.log(repeat.answer)
+        if (repeat.answer == 1) {
+            error_message();
+        } else {
+            success_message();
+        }
+    });
 })
 
 document.getElementById("submit_add_analysis").addEventListener("click", function (e) {
