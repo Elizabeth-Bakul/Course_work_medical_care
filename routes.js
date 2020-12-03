@@ -1021,7 +1021,7 @@ module.exports = function (app) {
                                     else {
                                         if (result3.rowCount===0){
                                             res.json({
-                                                flag: 'true'
+                                                flag: 'false3'
                                             })
                                         }
                                         else {
@@ -1031,7 +1031,7 @@ module.exports = function (app) {
                                         }
                                     else {
                                         res.json({
-                                            flag: 'false3'
+                                            flag: 'true'
                                         })
                                         client.query('COMMIT');
                                         client.release();

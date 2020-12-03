@@ -243,14 +243,16 @@ document.getElementById("delete_diag_medicine").addEventListener("click", functi
     request1.send(medicine2);
     request1.addEventListener("load", function () {
     let infDel = JSON.parse(request1.response);
-    if(infDel.flag){
+    if(infDel.flag==='true'){
         alert('Удаление произошло успешно')
     } else{
         if(infDel.flag==='false1') {alert('Произошла ошибка с удалением, данного лекарства нет в базе')}
         else {
-            if(infDel.flag==='false1'){
+            if(infDel.flag==='false2'){
                 alert('Произошла ошибка с удалением, данного диагноза нет в базе')
-            } else {}
+            } else {
+                alert('Произошла ошибка с удалением, у данного лекарства нет такого диагноза')
+            }
             
         }
         
