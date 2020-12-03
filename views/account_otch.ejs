@@ -93,7 +93,19 @@
         </th>
     </tr>
     <tr class="tr1">
-        <th></th> 
+        <th>
+            <% 
+                for( let i=3; i< BrigadeData.length ; i++)
+                {
+                %>
+                    <form action="" class=<%=BrigadeData[i].id%>>
+                        <input type="text" class="br" name="id_br" hidden value=<%=BrigadeData[i].id%>>
+                        <button type="submit" class="button2"> <%= BrigadeData[i].BrigadeName%> </button>
+                    </form>
+                <%
+                }
+            %>
+        </th> 
         <th>
             <div class="grah"></div>
         </th> 

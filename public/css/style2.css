@@ -245,3 +245,16 @@ font-size:16px;}
 .th2{
     width:70%;
 }
+.menu_otch{
+    width:40%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+.link_submenu {
+    width:50%;
+    text-decoration: none;
+}
+.link_submenu.act{
+    background-color:#87CEFA;
+}
