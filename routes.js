@@ -879,7 +879,26 @@ module.exports = function (app) {
             }
         }
     )
-
+    app.post('/delete_analysis', jsonParser, async function(req,res){
+        console.log(req.body);
+        const client = await pool.connect()
+        await client.query('BEGIN')
+        await JSON.stringify(client.query('delete "Analysis" from where "AnalysisName"=$1',[req.body.analysis_name1],function (err,result){
+            if (err){
+                console.log(err)
+                res.json({
+                    flag: 'false'
+                })
+            }
+            else {
+                res.json({
+                    flag: 'true'
+                })
+                client.query('COMMIT');
+                client.release();
+            }
+        }))
+    })
 
 
     app.get('/logout', function (req, res) {

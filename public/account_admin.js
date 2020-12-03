@@ -147,3 +147,24 @@ document.getElementById("submit_add_medicine").addEventListener("click", functio
     request.send(medicine);
 })
 
+
+document.getElementById("delete_analysis").addEventListener("click", function (e) {
+    e.preventDefault();
+    let analysis_name1 = document.getElementById('add_analysis');
+    let analysis1 = JSON.stringify({
+        analysis_name1: analysis_name1.value,
+    });
+    console.log(analysis_name1);
+    let request1 = new XMLHttpRequest();
+    request1.open("POST", "/delete_analysis", true);
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.send(analysis1);
+    request1.addEventListener("load", function () {
+    let infDel = JSON.parse(request.response);
+    if(infDel.flag){
+        alert('Удаление произошло успешно')
+    } else{
+        alert('Произошла ошибка с удалением, данного диагноза нет в базе')
+    }
+    })
+})
