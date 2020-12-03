@@ -280,3 +280,16 @@ but106.onclick=()=>{
   hos.value='true'
   ras.removeAttribute('hidden')
 }
+let but110=document.querySelector('.button_36');
+let obst=0;
+but110.onclick=()=>{
+  let ras1=document.querySelector('.Rasstoynie')
+  console.log(ras1.value)
+  let stoi=document.querySelector('.countReq')
+  obst=850+45*ras1.value+750*count2+560*count1;
+  console.log(count1)
+  console.log(count2)
+  console.log(obst)
+  stoi.value=obst
+  stoi.setAttribute('readonly','true')
+}
