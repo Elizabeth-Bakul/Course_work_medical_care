@@ -105,15 +105,16 @@ document.getElementById("submit_add_diagnosis").addEventListener("click", functi
 document.getElementById("submit_add_symptom").addEventListener("click", function (e) {
     e.preventDefault();
     console.log('hello')
-    let symptom_name = document.getElementById('add_symptom');
-    let symptom = JSON.stringify({
-        symptom_name: symptom_name.value,
+    let symptom_name1 = document.getElementById('add_symptom');
+    console.log(symptom_name1.value)
+    let symptom1 = JSON.stringify({
+        symptom_name: symptom_name1.value,
     });
-    console.log(symptom);
+    console.log(symptom1);
     let request = new XMLHttpRequest();
     request.open("POST", "/add_symptom", true);
     request.setRequestHeader("Content-Type", "application/json");
-    request.send(symptom);
+    request.send(symptom1);
 })
 
 document.getElementById("submit_add_analysis").addEventListener("click", function (e) {
