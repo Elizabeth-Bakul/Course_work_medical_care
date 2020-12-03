@@ -197,14 +197,23 @@ function work_2(){
       let rM = JSON.parse(request2.response);
       if (rM.iM.length===0){
         alert('По данному диагнозу нет лекарств в базе. Обратитесь к администратору')
-      }
-      for (let nm=0;nm<rM.iM.length; nm++){
+        for (let nz=0;nz<rM.iAM.length; nz++){
+          let op18=document.createElement('option');
+          op18.className='Diagnosisopt';
+          op18.value=rM.iAM[nz].id;
+          op18.innerHTML=rM.iAM[nz].Medicines_name;
+          Medicine.appendChild(op18);
+        }
+      } else {
+        for (let nm=0;nm<rM.iM.length; nm++){
         let op12=document.createElement('option');
         op12.className='Diagnosisopt';
         op12.value=rM.iM[nm].Medicines_id_fk;
         op12.innerHTML=rM.iM[nm].Medicines_name;
         Medicine.appendChild(op12);
       }
+      }
+      
       Diagnosis.setAttribute('disabled', 'true')
     })
 }
