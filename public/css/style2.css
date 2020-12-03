@@ -252,6 +252,9 @@ font-size:16px;}
 }
 .menu_otch{
     width:40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .link_submenu {
     width:50%;
