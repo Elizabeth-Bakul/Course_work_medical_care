@@ -275,9 +275,7 @@ function work_4(){
 let but106=document.querySelector('.button_39');
 let hos=document.querySelector('.Hospitalizationch')
 let ras=document.getElementById('Rasstoynie')
-but106.onclick=()=>{
-  hos.setAttribute('checked','true');
-  hos.value='true'
+hos.onchange=()=>{
   ras.removeAttribute('hidden')
 }
 let but110=document.querySelector('.button_36');
