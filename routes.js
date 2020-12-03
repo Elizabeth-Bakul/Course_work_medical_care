@@ -693,6 +693,29 @@ module.exports = function (app) {
     app.post('/close_req',async function (req, res){
         try{
             console.log(req.body)
+            if (req.body.BlackList==='on'){
+                const client = await pool.connect()
+                await client.query('BEGIN')
+                await JSON.stringify(client.query('UPDATE "Patients" SET "InBlackList"=$4 where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3',[req.body.name, req.body.surname, req.body.Lastname, 'true'],function(err, result){
+                    if (err){console.log(err)}
+                    else{
+                        client.query('COMMIT')
+                    }
+                }))
+                client.release()
+            }
+            if (req.body.Hospitalization==='on'){
+                const client1 = await pool.connect()
+                await client1.query('BEGIN')
+                await JSON.stringify(client1.query('UPDATE "Requests" SET "Hospitalization"=$2 where "id"=$1',[req.body.idRReq, 'true'],function(err, result){
+                    if (err){console.log(err)}
+                    else{
+                        client1.query('COMMIT')
+                    }
+                }))
+                client1.release()
+            }   
+
         }
         catch(e){
             throw(e)
