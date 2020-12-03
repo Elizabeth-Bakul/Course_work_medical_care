@@ -795,6 +795,7 @@ module.exports = function (app) {
             await client.query('BEGIN')
             client.query('insert into "Symptoms" (id,"Symptom_name") values (default, $1)', [req.body.symptom_name], function (err, result) {
                 if (err) {
+                    console.log(err)
                     console.log("Mistake")
                 } else {
                     client.query('COMMIT');
