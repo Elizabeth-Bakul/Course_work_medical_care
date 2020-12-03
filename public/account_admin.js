@@ -105,10 +105,10 @@ document.getElementById("submit_add_diagnosis").addEventListener("click", functi
 document.getElementById("submit_add_symptom").addEventListener("click", function (e) {
     e.preventDefault();
     console.log('hello')
-    let symptomName1 = document.querySelector('.addSymptom');
+    let symptomName1 = document.getElementById('addSymptom');
     console.log(symptomName1.value)
     let symptom1 = JSON.stringify({
-        symptom_name: symptom_name1.value,
+        symptom_name: symptomName1.value,
     });
     console.log(symptom1);
     let request = new XMLHttpRequest();
