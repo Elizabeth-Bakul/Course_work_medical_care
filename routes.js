@@ -690,7 +690,14 @@ module.exports = function (app) {
         }
         catch(e){throw(e)}
     })
-
+    app.post('/close_req',async function (req, res){
+        try{
+            console.log(req.body)
+        }
+        catch(e){
+            throw(e)
+        }
+    })
     //ДОБАВИТЬ проверку существующего диагноза
     app.post('/add_diagnosis_symptoms', jsonParser, async function (req, res) {
         try {

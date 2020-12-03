@@ -292,4 +292,10 @@ but110.onclick=()=>{
   console.log(obst)
   stoi.value=obst
   stoi.setAttribute('readonly','true')
+  ras1.setAttribute('readonly','true')
+}
+let but112=document.querySelector('.button2');
+let freq=document.querySelector('.req')
+but112.onclick=()=>{
+  freq.submit()
 }
