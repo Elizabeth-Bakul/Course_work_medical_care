@@ -259,6 +259,9 @@ font-size:16px;}
 .link_submenu {
     width:50%;
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .link_submenu.act{
     background-color:#87CEFA;
