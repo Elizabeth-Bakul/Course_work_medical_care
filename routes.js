@@ -721,11 +721,10 @@ module.exports = function (app) {
                     if (err1){console.log(err2)}
                     else{
                         client2.query('COMMIT')
+                        res.redirect('/account_doctor')
                     }
                 }))
                 client2.release()
-
-
         }
         catch(e){
             throw(e)
