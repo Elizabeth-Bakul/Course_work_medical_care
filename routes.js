@@ -883,7 +883,7 @@ module.exports = function (app) {
         console.log(req.body);
         const client = await pool.connect()
         await client.query('BEGIN')
-        await JSON.stringify(client.query('delete from"Analysis" where "AnalysisName"=$1',[req.body.analysis_name1],function (err,result){
+        await JSON.stringify(client.query('delete from "Analysis" where "AnalysisName"=$1',[req.body.analysis_name1],function (err,result){
             if (err){
                 console.log(err)
                 res.json({
@@ -899,7 +899,26 @@ module.exports = function (app) {
             }
         }))
     })
-
+    app.post('/delete_symptom', jsonParser, async function(req,res){
+        console.log(req.body);
+        const client = await pool.connect()
+        await client.query('BEGIN')
+        await JSON.stringify(client.query('delete from "Symptoms" where "Symptom_name"=$1',[req.body.symptom_name1],function (err,result){
+            if (err){
+                console.log(err)
+                res.json({
+                    flag: 'false'
+                })
+            }
+            else {
+                res.json({
+                    flag: 'true'
+                })
+                client.query('COMMIT');
+                client.release();
+            }
+        }))
+    })
 
     app.get('/logout', function (req, res) {
         console.log(req.isAuthenticated());

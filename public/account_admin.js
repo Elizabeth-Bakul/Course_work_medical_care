@@ -164,7 +164,27 @@ document.getElementById("delete_analysis").addEventListener("click", function (e
     if(infDel.flag){
         alert('Удаление произошло успешно')
     } else{
-        alert('Произошла ошибка с удалением, данного диагноза нет в базе')
+        alert('Произошла ошибка с удалением, данного анализа нет в базе')
+    }
+    })
+})
+
+document.getElementById("delete_symptom").addEventListener("click", function (e) {
+    e.preventDefault();
+    let symptom_name1 = document.getElementById('add_symptom');
+    let symptom1 = JSON.stringify({
+        symptom_name1: symptom_name1.value,
+    });
+    let request1 = new XMLHttpRequest();
+    request1.open("POST", "/delete_symptom", true);
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.send(symptom1);
+    request1.addEventListener("load", function () {
+    let infDel = JSON.parse(request1.response);
+    if(infDel.flag){
+        alert('Удаление произошло успешно')
+    } else{
+        alert('Произошла ошибка с удалением, данного симптома нет в базе')
     }
     })
 })
