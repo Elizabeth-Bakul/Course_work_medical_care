@@ -255,3 +255,32 @@ font-size:16px;}
     display: flex;
     color: red;
 }
+.m_o{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+}
+.menu_otch{
+    width:40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:20px;
+    font-family: "Verdana", sans-serif;
+}
+main{
+    height:60%;
+}
+.link_submenu {
+    width:50%;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black
+
+}
+.link_submenu.act{
+    background-color:#87CEFA;
+}

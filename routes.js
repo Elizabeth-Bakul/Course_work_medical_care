@@ -811,11 +811,13 @@ module.exports = function (app) {
     app.post('/add_symptom', jsonParser, async function (req, res) {
 
         try {
+            console.log(req.body)
             const client = await pool.connect()
             await client.query('BEGIN')
 
             client.query('select id from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name], function (err, result) {
                 if (err) {
+                    console.log(err)
                     console.log("Mistake")
                     console.log("return")
                     return
@@ -922,8 +924,46 @@ module.exports = function (app) {
             }
         }
     )
-
-
+    app.post('/delete_analysis', jsonParser, async function(req,res){
+        console.log(req.body);
+        const client = await pool.connect()
+        await client.query('BEGIN')
+        await JSON.stringify(client.query('delete from "Analysis" where "AnalysisName"=$1',[req.body.analysis_name1],function (err,result){
+            if (err){
+                console.log(err)
+                res.json({
+                    flag: 'false'
+                })
+            }
+            else {
+                res.json({
+                    flag: 'true'
+                })
+                client.query('COMMIT');
+                client.release();
+            }
+        }))
+    })
+    app.post('/delete_symptom', jsonParser, async function(req,res){
+        console.log(req.body);
+        const client = await pool.connect()
+        await client.query('BEGIN')
+        await JSON.stringify(client.query('delete from "Symptoms" where "Symptom_name"=$1',[req.body.symptom_name1],function (err,result){
+            if (err){
+                console.log(err)
+                res.json({
+                    flag: 'false'
+                })
+            }
+            else {
+                res.json({
+                    flag: 'true'
+                })
+                client.query('COMMIT');
+                client.release();
+            }
+        }))
+    })
 
     app.get('/logout', function (req, res) {
         console.log(req.isAuthenticated());
