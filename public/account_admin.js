@@ -109,7 +109,7 @@ document.getElementById("submit_add_symptom").addEventListener("click", function
     let symptom = JSON.stringify({
         symptom_name: symptom_name.value,
     });
-    console.log(symptom_name);
+    console.log(symptom);
     let request = new XMLHttpRequest();
     request.open("POST", "/add_symptom", true);
     request.setRequestHeader("Content-Type", "application/json");
