@@ -245,11 +245,13 @@ font-size:16px;}
 .th2{
     width:70%;
 }
-.menu_otch{
-    width:40%;
+.m_o{
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
+}
+.menu_otch{
+    width:40%;
 }
 .link_submenu {
     width:50%;
