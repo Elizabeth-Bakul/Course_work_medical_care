@@ -160,7 +160,7 @@ document.getElementById("delete_analysis").addEventListener("click", function (e
     request1.setRequestHeader("Content-Type", "application/json");
     request1.send(analysis1);
     request1.addEventListener("load", function () {
-    let infDel = JSON.parse(request.response);
+    let infDel = JSON.parse(request1.response);
     if(infDel.flag){
         alert('Удаление произошло успешно')
     } else{

@@ -883,7 +883,7 @@ module.exports = function (app) {
         console.log(req.body);
         const client = await pool.connect()
         await client.query('BEGIN')
-        await JSON.stringify(client.query('delete "Analysis" from where "AnalysisName"=$1',[req.body.analysis_name1],function (err,result){
+        await JSON.stringify(client.query('delete from"Analysis" where "AnalysisName"=$1',[req.body.analysis_name1],function (err,result){
             if (err){
                 console.log(err)
                 res.json({
