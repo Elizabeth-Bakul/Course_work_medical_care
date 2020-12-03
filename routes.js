@@ -251,7 +251,7 @@ module.exports = function (app) {
                 else {
                     console.log(result1.rows)
                     if(result1.rowCount===0){
-                        client1.query('select id, "Medicines_name" form "Medicines"',[], function(err2,result2){
+                        client1.query('select id, "Medicines_name" from "Medicines"',[], function(err2,result2){
                             if (err2) {console.log(err2)} else {
                                 res.json({
                                     iM:result1.rows,
