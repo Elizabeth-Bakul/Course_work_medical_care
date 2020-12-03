@@ -249,8 +249,10 @@ font-size:16px;}
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 2%;
 }
 .menu_otch{
+    height:25px;
     width:40%;
     display: flex;
     justify-content: center;
@@ -262,6 +264,7 @@ font-size:16px;}
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size:16px;
 }
 .link_submenu.act{
     background-color:#87CEFA;
