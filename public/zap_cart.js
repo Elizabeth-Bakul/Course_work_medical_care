@@ -13,6 +13,7 @@ var Symptom=document.getElementById('Symptom')
 var Issledovania=document.getElementById('Issledovania')
 var Diagnosis=document.getElementById('Diagnosis')
 var id2=document.querySelector('.id');
+var Medicine=document.getElementById('Medicine')
 
 console.log(but31);
 for (let i=0; i<but31.length;i++){
@@ -157,10 +158,116 @@ function work(){
         let op11=document.createElement('option');
         op11.className='Diagnosisopt';
         op11.value=rD.rIn[nb].id;
+        console.log(op11.value)
         op11.innerHTML=rD.rIn[nb].name+' '+rD.rIn[nb].kol;
         Diagnosis.appendChild(op11);
       }
-        
+      console.log(Diagnosis)
+      symptom_name.setAttribute('disabled', 'true')
       })
+}
 
+let but104=document.querySelector('.button_34');
+but104.addEventListener("click", work_2);
+function work_2(){
+  var da=document.querySelector('.js-selectize')
+  console.log(da)
+  console.log(da.value)
+  console.log(id2.value)
+  //console.log(Diagnosis.value)
+  let SD6=JSON.stringify(
+      {
+      idD: da.value,
+      idReq: id2.value
+    })
+    console.log(SD6)
+    let request2 = new XMLHttpRequest();
+    request2.open("POST", "/account_doctor_add_DR", true); 
+    request2.setRequestHeader("Content-Type", "application/json");
+    request2.onload = function () {
+        console.log(this.response);
+    };
+    request2.send(SD6);
+    var fc5 = Medicine.firstChild;
+    while( fc5 ) {
+      Medicine.removeChild( fc5 );
+      fc5 = Medicine.firstChild;
+    }   
+    request2.addEventListener("load", function () {
+      let rM = JSON.parse(request2.response);
+      if (rM.iM.length===0){
+        alert('По данному диагнозу нет лекарств в базе. Обратитесь к администратору')
+      }
+      for (let nm=0;nm<rM.iM.length; nm++){
+        let op12=document.createElement('option');
+        op12.className='Diagnosisopt';
+        op12.value=rM.iM[nm].Medicines_id_fk;
+        op12.innerHTML=rM.iM[nm].Medicines_name;
+        Medicine.appendChild(op12);
+      }
+      Diagnosis.setAttribute('disabled', 'true')
+    })
+}
+
+let but105=document.querySelector('.button_35');
+let count1=0;
+but105.addEventListener("click", work_3);
+function work_3(){
+  var mmm=document.querySelector('.js-selectize2')
+  var x3=[]
+    for ( var p3=0; p3<mmm.options.length; p3++){
+      if(mmm.options[p3].selected===true){
+        x3.push(mmm.options[p3].value)
+      }
+    }
+    count1=x3.length
+    console.log(count1)
+  let SD3=JSON.stringify(
+      {
+      idM:x3,
+      idReq: id2.value
+    })
+    let request3 = new XMLHttpRequest();
+    request3.open("POST", "/account_doctor_add_MR", true); 
+    request3.setRequestHeader("Content-Type", "application/json");
+    request3.onload = function () {
+        console.log(this.response);
+    };
+    request3.send(SD3);
+    mmm.setAttribute('disabled', 'true')
+}
+let but107=document.querySelector('.button_33');
+let count2=0;
+but107.addEventListener("click", work_4);
+function work_4(){
+  var isl=document.querySelector('.js-selectize4')
+  var x4=[]
+    for ( var p4=0; p4<isl.options.length; p4++){
+      if(isl.options[p4].selected===true){
+        x4.push(isl.options[p4].value)
+      }
+    }
+    count2=x4.length
+    console.log(count2)
+  let SD4=JSON.stringify(
+      {
+      idI:x4,
+      idReq: id2.value
+    })
+    let request4 = new XMLHttpRequest();
+    request4.open("POST", "/account_doctor_add_IR", true); 
+    request4.setRequestHeader("Content-Type", "application/json");
+    request4.onload = function () {
+        console.log(this.response);
+    };
+    request4.send(SD4);
+    isl.setAttribute('disabled', 'true')
+}
+let but106=document.querySelector('.button_39');
+let hos=document.querySelector('.Hospitalizationch')
+let ras=document.getElementById('Rasstoynie')
+but106.onclick=()=>{
+  hos.setAttribute('checked','true');
+  hos.value='true'
+  ras.removeAttribute('hidden')
 }

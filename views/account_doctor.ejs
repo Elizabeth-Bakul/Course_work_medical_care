@@ -87,7 +87,7 @@
                 <input class="BlackLIst" type="checkbox" name="BlackList" id="BlackList"><br>
                 <input class="id" type="text" id="id" name="" placeholder="Фамилия" required hidden>
                 <label class="search-label" for="surname">Фамилия:</label>
-                <input class="surname" type="text" id="surname2" name="surname" placeholder="Фамилия" required >
+                <input class="surname" type="text" id="surname2" name="surname" placeholder="Фамилия" required ><br>
                 <label for="name" class="search-label">Имя:</label>
                 <input class="name" type="text" id="name2" name="name" placeholder="Имя" required>
                 <label class="search-label" for="Lastname">Отчество:</label>
@@ -104,12 +104,12 @@
                 <input type="datetime-local" name="dateArrive" class="date-time1" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}">
                 <input class="button_31" type="button" value="Заполнить"> <br>
                 <label class="search-label" for="Symptom">Симптомы</label>
-                <select name="Symptom" id="Symptom" multiple class="js-selectize" placeholder="Выберите Симптомы">
+                <select name="Symptom" id="Symptom" multiple class="js-selectize1" placeholder="Выберите Симптомы">
                         <option value="" class='Symptomopt'></option>
                 </select>
                 <input class="button_32" type="button" value="Выбрать"> <br>
                 <label class="search-label" for="Issledovania">Исследования</label>
-                <select name="Issledovania" id="Issledovania" multiple class="js-selectize" placeholder="Выберите исследования">
+                <select name="Issledovania" id="Issledovania" multiple class="js-selectize4" placeholder="Выберите исследования">
                     <option value="" class="Issledovaniaopt"></option>
                 </select>
                 <input class="button_33" type="button" value="Выбрать"><br>
@@ -119,15 +119,15 @@
                 </select>
                 <input class="button_34" type="button" value="Выбрать"><br>
                 <label class="search-label" for="Medicine">Лекарства</label>
-                <select name="Medicine" id="Medicine" class="js-selectize" placeholder="Выберите диагноз">
+                <select name="Medicine" id="Medicine" class="js-selectize2" multiple placeholder="Выберите диагноз">
                     <option value="" class="Medicineopt"></option>
                 </select>
                 <input class="button_35" type="button" value="Выбрать"><br>
                 <label class="search-label" for="Hospitalization">Госпитализация</label>
-                <input class="button_35" type="button" value="Подтвердить"><br>
+                <input class="button_39" type="button" value="Подтвердить"><br>
                 <input class="Hospitalizationch" type="checkbox" name="Hospitalization" id="Hospitalizationch" hidden>
                 <label class="search-label" for="Rasstoynie" hidden>Расстояние:</label>
-                <input class="Rasstoynie" type="number" id="Rasstoynie" name="Rasstoynie" placeholder="Расстояние" hidden>
+                <input class="Rasstoynie" type="number" id="Rasstoynie" name="Rasstoynie" placeholder="Расстояние" hidden><br>
                 <label class="search-label" for="countReq" hidden>Стоимость</label>
                 <input class="countReq" type="number" id="countReq" name="countReq" placeholder="Стоимость" >
                 <input class="button_36" type="button" value="Рассчитать"><br>
