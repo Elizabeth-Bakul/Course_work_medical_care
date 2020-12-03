@@ -172,7 +172,7 @@ document.getElementById("delete_analysis").addEventListener("click", function (e
 
 document.getElementById("delete_symptom").addEventListener("click", function (e) {
     e.preventDefault();
-    let symptom_name1 = document.getElementById('add_symptom');
+    let symptom_name1 = document.getElementById('addSymptom');
     let symptom1 = JSON.stringify({
         symptom_name1: symptom_name1.value,
     });
