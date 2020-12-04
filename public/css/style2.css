@@ -66,6 +66,7 @@ font-size:16px;}
     text-decoration: none;
     width: 50%;
     color: #1747ff;
+    vertical-align: middle;
 }
 
 .nav__link.nav_active {
@@ -82,11 +83,11 @@ font-size:16px;}
 }
 
 .btn {
-    width: 100%;
-    border:1px solid #1747ff;
+    margin-left: 10%;
+    width: 90%;
+    /*border:1px solid #1747ff;*/
     background-color:#87CEFA;
     font-size: 1rem;
-    font-weight: 400;
     line-height: 1;
     padding: 1.2em 2.8em;
     text-decoration: none;
@@ -314,6 +315,9 @@ div {
 fieldset {
 }
 
+.reload {
+    display: flex;
+}
 
 /*Buttons*/
 

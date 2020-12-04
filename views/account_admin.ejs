@@ -5,6 +5,7 @@
     <meta charset="utf-8"/>
     <link rel='stylesheet' , href='/public/css/style2.css'>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -63,7 +64,11 @@ if(messages.success.length){
         <fieldset>
             <legend class='sear2'>Редактирование диагноза</legend>
             <label class="search-label" for="surname">Наименование диагноза:</label>
-            <input class="surname" type="text" id="diagnosis_name" required>
+            <div class="reload">
+                <input class="surname" type="text" id="diagnosis_name" required>
+                <button id="reload_diagnosis" style="font-size:15px; height:33px;width: 33px; margin-left: 5px"><i
+                            class="fa fa-refresh"></i></button>
+            </div>
             <label class="search-label" for="name"> Симптомы:</label>
             <select id="select_symptoms" multiple>
                 <% for(var i = 0; i < list_values.length; i++) { %>
@@ -83,7 +88,11 @@ if(messages.success.length){
         <fieldset>
             <legend class='sear2'>Редактирование симптома</legend>
             <label class="search-label" for="surname">Наименование симптома:</label>
-            <input class="surname" type="text" id="addSymptom" required>
+            <div class="reload">
+                <input class="surname" type="text" id="addSymptom" required>
+                <button id="reload_symptoms" style="font-size:15px; height:33px;width: 33px; margin-left: 5px"><i
+                            class="fa fa-refresh"></i></button>
+            </div>
             <button class="button" type="submit" id="submit_add_symptom">Добавить</button>
             <button class="button" type="submit" id="delete_symptom">Удалить</button>
         </fieldset>
@@ -95,7 +104,11 @@ if(messages.success.length){
         <fieldset>
             <legend class='sear2'>Редактирование анализа:</legend>
             <label class="search-label" for="surname">Наименование анализа:</label>
-            <input class="surname" type="text" id="add_analysis" required>
+            <div class="reload">
+                <input class="surname" type="text" id="add_analysis" required>
+                <button id="reload_analysis" style="font-size:15px; height:33px;width: 33px; margin-left: 5px"><i
+                            class="fa fa-refresh"></i></button>
+            </div>
             <button class="button" type="submit" id="submit_add_analysis">Добавить</button>
             <button class="button" type="submit" id="delete_analysis">Удалить</button>
         </fieldset>
@@ -107,7 +120,11 @@ if(messages.success.length){
         <fieldset>
             <legend class='sear2'>Редактирование лекарства</legend>
             <label class="search-label" for="surname">Наименование лекарства</label>
-            <input class="surname" type="text" id="name_medicine" required>
+            <div class="reload">
+                <input class="surname" type="text" id="name_medicine" required>
+                <button id="reload_medicine" style="font-size:15px; height:33px;width: 33px; margin-left: 5px"><i
+                            class="fa fa-refresh"></i></button>
+            </div>
             <label class="search-label" for="name">Диагноз:</label>
             <select id="select_diagnosis">
                 <% for(var i = 0; i < list_values_diagnosis.length; i++) { %>
@@ -127,7 +144,11 @@ if(messages.success.length){
         <fieldset>
             <legend class='sear2'>Редактирование бригады</legend>
             <label class="search-label" for="surname">Наименование бригады:</label>
-            <input class="surname" type="text" id="surname" name="surname" required>
+            <div class="reload">
+                <input class="surname" type="text" id="surname" name="surname" required>
+                <button id="reload_brigade" style="font-size:15px; height:33px;width: 33px; margin-left: 5px"><i
+                            class="fa fa-refresh"></i></button>
+            </div>
             <button class="button" type="submit" id="subsear">Добавить</button>
             <button class="button" type="submit" id="delsear">Удалить</button>
         </fieldset>

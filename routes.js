@@ -538,7 +538,7 @@ module.exports = function (app) {
 
 
                             if (err) {
-                                console.log("Mistake")
+                                console.log("Error")
                             } else {
                                 //console.log(result.rows)
                                 res.render('account_admin', {
@@ -581,7 +581,7 @@ module.exports = function (app) {
             await client.query('BEGIN')
             await JSON.stringify(client.query('select id,"BrigadeName" from "Brigades"', [], function (err, result) {
                 if (err) {
-                    console.log("Mistake")
+                    console.log("Error")
                 } else {
                     console.log(result.rows)
                     res.render('account_otch', {
@@ -975,7 +975,7 @@ module.exports = function (app) {
             client.query('select id from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name], function (err, result) {
                 if (err) {
                     console.log(err)
-                    console.log("Mistake")
+                    console.log("Error")
                     console.log("return")
                     return
                 } else {
@@ -988,7 +988,7 @@ module.exports = function (app) {
 
                         client.query('insert into "Symptoms" (id,"Symptom_name") values (default, $1)', [req.body.symptom_name], function (err, result) {
                             if (err) {
-                                console.log("Mistake")
+                                console.log("Error")
 
                             } else {
                                 client.query('COMMIT');
@@ -1016,7 +1016,7 @@ module.exports = function (app) {
 
             client.query('select id from "Analysis" where "AnalysisName"=$1', [req.body.analysis_name], function (err, result) {
                 if (err) {
-                    console.log("Mistake")
+                    console.log("Error")
                 } else {
 
                     if (result.rows != "") {
@@ -1027,7 +1027,7 @@ module.exports = function (app) {
 
                         client.query('insert into "Analysis" (id,"AnalysisName") values (default, $1)', [req.body.analysis_name], function (err, result) {
                             if (err) {
-                                console.log("Mistake")
+                                console.log("Error")
                             } else {
                                 client.query('COMMIT');
                                 client.release();
@@ -1055,7 +1055,7 @@ module.exports = function (app) {
 
                 client.query('select id from "Medicines" where "Medicines_name"=$1', [req.body.medicine_name], function (err, result) {
                     if (err) {
-                        console.log("Mistake")
+                        console.log("Error")
                     } else {
                         if (result.rows != "") {
                             res.json({
@@ -1395,7 +1395,7 @@ module.exports = function (app) {
                                                             d.flag = 'false3'
                                                             mas_flag.push(d)
                                                             if (okl === req.body.symptom_name.length - 1) {
-                                                                console.log('MISTAKE DELETE')
+                                                                console.log('Error DELETE')
                                                                 console.log(mas_flag)
                                                                 res.json({
                                                                     flag: mas_flag
@@ -1519,7 +1519,7 @@ module.exports = function (app) {
 
                                                                         //mas_flag.push(d)
                                                                         //mas_flag='false3'
-                                                                        console.log('MISTAKE DELETE')
+                                                                        console.log('Error DELETE')
                                                                         //console.log(mas_flag)
 
                                                                     } else {
