@@ -106,7 +106,7 @@ document.getElementById("submit_add_symptom").addEventListener("click", function
     e.preventDefault();
     console.log('hello')
     let symptomName = document.getElementById('addSymptom');
-    console.log(symptomName1.value)
+    console.log(symptomName.value)
     let symptom = JSON.stringify({
         symptom_name: symptomName.value,
     });
