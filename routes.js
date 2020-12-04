@@ -50,6 +50,7 @@ module.exports = function (app) {
     app.post('/join', async function (req, res) {
 
         try {
+            console.log(req.body)
             const client = await pool.connect()
             await client.query('BEGIN')
             var pwd = await bcrypt.hash(req.body.password, 5);
@@ -58,19 +59,65 @@ module.exports = function (app) {
                     req.flash('warning', 'This email address is already registered.');
                     res.redirect('/join');
                 } else {
-                    if (((req.body.WorkerType == 'бухгалтер-регистратор') || (req.body.WorkerType == 'администратор')) && (req.body.Brigade_fk !=3 )){
-                        req.flash('warning', 'Неправильная бригада. Для этой профессии бригада 3');
-                        res.redirect('/join');
+                    flas=0
+                    switch(req.body.typeWorker){
+                        case 'бухгалтер-регистратор': 
+                            if(req.body.brigadenum != 3) {
+                                flas=2
+                            } else {flas=1}
+                            break;
+                        case 'администратор':
+                            if(req.body.brigadenum != 3) {
+                                flas=2
+                                } else {flas=1}
+                            break;
+                        case 'врач':
+                            if(req.body.brigadenum == 3) {
+                                flas=3
+                            } else {flas=1}
+                            break;
+                        case 'Врач':
+                                if(req.body.brigadenum == 3) {
+                                    flas=3
+                                } else {flas=1}
+                                break;
+                        case 'фельдшер':
+                                    if(req.body.brigadenum == 3) {
+                                        flas=3
+                                    } else {flas=1}
+                                    break;
+                        case 'Фельдшер':
+                                        if(req.body.brigadenum == 3) {
+                                            flas=3
+                                        } else {flas=1}
+                                        break;
+                        case 'водитель':
+                                            if(req.body.brigadenum == 3) {
+                                                flas=3
+                                            } else {flas=1}
+                                            break;
+                        case 'Водитель':
+                            if(req.body.brigadenum == 3) {
+                                flas=3
+                            } else {flas=1}
+                            break;
+                        case 'медработник':
+                            if(req.body.brigadenum == 3) {
+                                flas=3
+                            } else {flas=1}
+                            break;
+                        case 'Медработник':
+                            if(req.body.brigadenum == 3) {
+                                flas=3
+                            } else {flas=1}
+                            break;
+                        default:
+                            flas=4;
+                            break;
                     }
-                    if (((req.body.WorkerType==='врач')||(req.body.WorkerType==='Врач') ||(req.body.WorkerType==='фельдшер')||(req.body.WorkerType==='Фельдшер')||(req.body.WorkerType==='водитель')||(req.body.WorkerType==='Водитель')||(req.body.WorkerType==='медработник')||(req.body.WorkerType==='Медработник'))&&(req.body.Brigade_fk===3)){
-                        req.flash('warning', 'Неправильная бригада. Для этой профессии бригада не может быть 3');
-                        res.redirect('/join');
-                    }
-                    if((req.body.WorkerType==='врач')&&(req.body.WorkerType!='Врач') &&(req.body.WorkerType!='фельдшер')&&(req.body.WorkerType!='Фельдшер')&&(req.body.WorkerType!='водитель')&&(req.body.WorkerType!='Водитель')&&(req.body.WorkerType==='медработник')&&(req.body.WorkerType!='Медработник')){
-                        req.flash('warning', 'Неправильная профессия');
-                        res.redirect('/join');
-                    }
-                    client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddleName", "WorkerType", "Brigade_fk", "Login", "Password") ' +
+                    console.log(flas)
+                    if (flas===1){
+client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddleName", "WorkerType", "Brigade_fk", "Login", "Password") ' +
                         'VALUES ($1, $2, $3, $4, $5, $6, $7)',
                         [req.body.lastName, req.body.firstName, req.body.middleName, req.body.typeWorker, req.body.brigadenum, req.body.username, pwd], function (err, result) {
                             if (err) {
@@ -85,10 +132,27 @@ module.exports = function (app) {
                                 return;
                             }
                         });
+                        client.release();
                 }
 
-            }));
-            client.release();
+                     else {
+                        if (flas===2){
+                            req.flash('danger', 'Неправильная бригада, для этой профессии бригада 3')
+                            res.redirect('/join');
+                        } else {
+                            if (flas===3){
+                                req.flash('danger', 'Неправильная бригада')
+                                res.redirect('/join');
+                            } else {
+                                req.flash('danger', 'Неправильная профессия')
+                                res.redirect('/join');
+                            }
+                                
+                            } 
+                     }  
+                     
+                    
+                    }}))
         } catch (e) {
             throw(e)
         }
