@@ -774,7 +774,7 @@ module.exports = function (app) {
             client.query('select id from "Brigades" where "BrigadeName"=$1',[req.body.brigade_name1],function(err,result){
                 if(err){console.log(err)
                         res.json({
-                            flag: 'true'
+                            flag: 'false'
                         }
                         )}else {
                     if(result.rowCount===0){
@@ -784,9 +784,10 @@ module.exports = function (app) {
                                     flag: 'true'
                                 })
                                 client.query('COMMIT')
+                                client.release()
                             }
                         })
-                        client.release()
+                        
                     } else {
                         res.json({flag:'false'})
                     }
