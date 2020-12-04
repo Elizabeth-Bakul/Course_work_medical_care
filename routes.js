@@ -1179,7 +1179,7 @@ module.exports = function (app) {
                                                         }
                                                         else {
                                                             let c={}
-                                                            c.id=id_symptom.Symptom_name
+                                                            c.id=id_symptom.rows[0].Symptom_name
                                                             c.flag='true'
                                                             mas_flag.push(c)
                                                             client.query('COMMIT')
