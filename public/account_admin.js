@@ -12,27 +12,9 @@ document.getElementsByClassName('add_analysis')[0].style.display = 'none';
 document.getElementsByClassName('add_medicine')[0].style.display = 'none';
 document.getElementsByClassName('add_brigade')[0].style.display = 'none';
 
-function initial_success_error_messages() {
-    document.getElementsByClassName('success_request')[0].style.display = 'none';
-    document.getElementsByClassName('error_request')[0].style.display = 'none';
-}
-
-function error_message() {
-    document.getElementsByClassName('success_request')[0].style.display = 'none';
-    document.getElementsByClassName('error_request')[0].style.display = 'flex';
-}
-
-function success_message() {
-    document.getElementsByClassName('success_request')[0].style.display = 'flex';
-    document.getElementsByClassName('error_request')[0].style.display = 'none';
-}
-
-initial_success_error_messages();
-
 
 
 document.getElementById("add_diagnosis_nav").addEventListener("click", function (e) {
-    initial_success_error_messages();
     document.getElementById("add_diagnosis_nav").className = "nav__link nav_active";
     document.getElementById("add_symptom_nav").className = "nav__link";
     document.getElementById("add_analysis_nav").className = "nav__link";
@@ -47,7 +29,6 @@ document.getElementById("add_diagnosis_nav").addEventListener("click", function 
 })
 
 document.getElementById("add_symptom_nav").addEventListener("click", function (e) {
-    initial_success_error_messages();
     document.getElementById("add_diagnosis_nav").className = "nav__link";
     document.getElementById("add_symptom_nav").className = "nav__link nav_active";
     document.getElementById("add_analysis_nav").className = "nav__link";
@@ -62,7 +43,6 @@ document.getElementById("add_symptom_nav").addEventListener("click", function (e
 })
 
 document.getElementById("add_analysis_nav").addEventListener("click", function (e) {
-    initial_success_error_messages();
     document.getElementById("add_diagnosis_nav").className = "nav__link";
     document.getElementById("add_symptom_nav").className = "nav__link";
     document.getElementById("add_analysis_nav").className = "nav__link nav_active";
@@ -77,7 +57,6 @@ document.getElementById("add_analysis_nav").addEventListener("click", function (
 })
 
 document.getElementById("add_medicine_nav").addEventListener("click", function (e) {
-    initial_success_error_messages();
     document.getElementById("add_diagnosis_nav").className = "nav__link";
     document.getElementById("add_symptom_nav").className = "nav__link";
     document.getElementById("add_analysis_nav").className = "nav__link";
@@ -92,7 +71,6 @@ document.getElementById("add_medicine_nav").addEventListener("click", function (
 })
 
 document.getElementById("add_brigade_nav").addEventListener("click", function (e) {
-    initial_success_error_messages();
     document.getElementById("add_diagnosis_nav").className = "nav__link";
     document.getElementById("add_symptom_nav").className = "nav__link";
     document.getElementById("add_analysis_nav").className = "nav__link";
@@ -127,9 +105,9 @@ document.getElementById("submit_add_diagnosis").addEventListener("click", functi
         let repeat = JSON.parse(request.response);
         //console.log(repeat.answer)
         if (repeat.answer == 1) {
-            error_message();
+            alert("Диагноз успешно добавлен в базу")
         } else {
-            success_message();
+            alert("Ошибка: диагноз уже есть в базе!")
         }
     });
 })
@@ -266,9 +244,9 @@ document.getElementById("delsear").addEventListener("click", function (e) {
     request1.addEventListener("load", function () {
     let infDel = JSON.parse(request1.response);
     if(infDel.flag){
-        alert('Удаление произошло успешно.Работники,относящиеся к бригаде уволены')
+        alert('Удаление произошло успешно. Работники, относящиеся к бригаде уволены')
     } else{
-        alert('Произошла ошибка с удалением, данной бригады нет в базе. ')
+        alert('Произошла ошибка с удалением, данной бригады нет в базе.')
     }
     })
 })

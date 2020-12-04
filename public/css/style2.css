@@ -284,3 +284,18 @@ main{
 .link_submenu.act{
     background-color:#87CEFA;
 }
+
+font {
+    font-family: 'Roboto', sans-serif;
+}
+
+@font-face {
+    src: url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);
+}
+
+div {
+    font-family: 'Roboto', sans-serif;
+}
+
+/*Buttons*/
+
