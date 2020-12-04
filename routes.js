@@ -1217,6 +1217,7 @@ module.exports = function (app) {
             console.log(req.body);
             const client = await pool.connect()
             await client.query('BEGIN')
+            let mas_flag=[]
             await JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1',[req.body.diagnosis_name], function(err1,result1){
                 if (err1){console.log(err1)}
                 else{
@@ -1226,8 +1227,9 @@ module.exports = function (app) {
                     })
                     } 
                     else {
-                        let mas_flag=[]
+                        
                         for (let okl=0;okl<req.body.symptom_name.length;okl++){
+
                             client.query('select id, "Symptom_name" from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name[okl]], function (err2, id_symptom) {
                                 if (err2) {
                                     console.log(err2)
@@ -1237,13 +1239,13 @@ module.exports = function (app) {
                                         a.id=id_symptom.rows[0].Symptom_name
                                         a.flag='false1'
                                         mas_flag.push(a)
-                                        if(okl===req.body.symptom_name.length-1){
-                                            console.log("Sympt")
-                                            console.log(mas_flag)
-                                            res.json({
-                                                flag:mas_flag
-                                                })
-                                        }
+                                        //if(okl===req.body.symptom_name.length-1){
+                                        //    console.log("Sympt")
+                                        //    console.log(mas_flag)
+                                        //    res.json({
+                                        //        flag:mas_flag
+                                        //       })
+                                        //}
                                     } else {
                                         client.query('select id from "Diagnosis-Symptoms" where "Diagnosis_id_fk"=$1 and "Symptoms_id_fk"=$2 ',[result1.rows[0].id,id_symptom.rows[0].id], function(err3, result2){
                                             if(err3) {console.log(err3)}
@@ -1257,13 +1259,7 @@ module.exports = function (app) {
                                                             mas_flag.push(d)
                                                             console.log('MISTAKE DELETE')
                                                             console.log(mas_flag)
-                                                            if(okl===req.body.symptom_name.length-1){
-                                                                
-                                                                console.log(mas_flag)
-                                                                res.json({
-                                                                    flag:mas_flag
-                                                                    })
-                                                            }
+                            
                                                         }
                                                         else {
                                                             let c={}
@@ -1273,14 +1269,15 @@ module.exports = function (app) {
                                                             console.log('INSERT')
                                                             console.log(mas_flag)
                                                             client.query('COMMIT')
-                                                            if(okl===req.body.symptom_name.length-1){
-                                                                
-                                                                console.log(mas_flag)
-                                                                res.json({
-                                                                    flag:mas_flag
-                                                                    })
+                                                            //if(okl===req.body.symptom_name.length-1){
+                                                            //    
+                                                            //    console.log(mas_flag)
+                                                            //    res.json({
+                                                            //        flag:mas_flag
+                                                            //        })
 
-                                                            }}                                                 
+                                                        //    }
+                                                        }                                                 
                                                     
                                                     }
                                                     )} else {
@@ -1299,12 +1296,21 @@ module.exports = function (app) {
                                 } 
                                 
                             )
+                            if(okl===req.body.symptom_name.length-1){
+                                                                
+                                console.log(mas_flag)
+                                res.json({
+                                    flag:mas_flag
+                                    })
+
+                            }
                             client.query('COMMIT')
                         }
                         client.release()
                         
                     }
                 }}))
+
         }
         catch(e){
             throw(e)
