@@ -57,6 +57,7 @@ if(messages.success.length){
 <% }
 }
 } %>
+
 <div class="add_diagnosis">
     <form class="search" name="search-form">
         <fieldset>
@@ -70,6 +71,8 @@ if(messages.success.length){
                 <% } %>
             </select>
             <button class="button" type="submit" id="submit_add_diagnosis">Добавить</button>
+            <label class="success_request" for="surname">Диагноз успешно добавлен в базу</label>
+            <label class="error_request" for="surname">Ошибка: диагноз уже есть в базе!</label>
             <button class="button" type="submit" id="update_diagnosis">Добавить симптомы к диагозу</button><br>
             <button class="button" type="submit" id="delete_diagnosis">Удалить</button>
             <button class="button" type="submit" id="delete_diag_symptom">Удалить симптомы у диагноза</button>
@@ -85,6 +88,9 @@ if(messages.success.length){
             <input class="surname" type="text" id="addSymptom" required>
             <button class="button" type="submit" id="submit_add_symptom">Добавить</button>
             <button class="button" type="submit" id="delete_symptom">Удалить</button>
+            <label class="success_request" for="surname">Симптом успешно добавлен в базу</label>
+            <label class="error_request" for="surname">Ошибка: симптом уже есть в базе!</label>
+
         </fieldset>
     </form>
 </div>

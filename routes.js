@@ -183,7 +183,7 @@ client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddle
                                 }
                             })
                             client1.query('COMMIT')
-                            
+
                         }
                         client1.query('COMMIT')
                     }
@@ -249,14 +249,12 @@ client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddle
                                         })
                                 }
                     }
-                    
-                       
-            )
+                        )
             console.log("res7")
             console.log(rk)
-                
+
         }
-                    
+
                 }
             }))
             console.log(rk)
@@ -299,9 +297,9 @@ client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddle
                         iM:result1.rows
                     })
                     }
-                    
+
                     client1.query('COMMIT')
-                    
+
                 }
             }))
             client1.release()
@@ -326,7 +324,7 @@ client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddle
                                     }
                                 })
                                 client.query('COMMIT')
-                                
+
                             }
                             client.query('COMMIT')
                         }
@@ -357,7 +355,7 @@ client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddle
                                 }
                             })
                             client.query('COMMIT')
-                            
+
                         }
                         client.query('COMMIT')
                     }
@@ -417,7 +415,7 @@ client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddle
                                             warning: req.flash('warning'),
                                             success: req.flash('success')
                                         }
-                                        
+
                                     })
                                     client2.query('COMMIT')
                                     }})
@@ -759,45 +757,67 @@ client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddle
             await
             client.query('BEGIN')
             await
-            JSON.stringify(client.query('INSERT INTO "Diagnosis" (id, "Diagnosis_name") VALUES (DEFAULT, $1)', [req.body.diagnosis_name], function (err, result) {
+                JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis_name], function (err, result) {
                 if (err) {
                     console.log(err)
+                    console.log("return")
+                    return
                 } else {
-                    // console.log(result.rows)
-                    client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis_name], function (err1, id_diagnosis) {
-                        if (err1) {
-                            console.log(err1)
-                        } else {
-                            //console.log("id=",id_diagnosis.rows[0].id)
+                    if (result.rows != "") {
+                        res.json({
+                            answer: 1//такой диагноз уже есть
+                        })
+                    } else {
+                        client.query('INSERT INTO "Diagnosis" (id, "Diagnosis_name") VALUES (DEFAULT, $1)', [req.body.diagnosis_name], function (err, result) {
+                            if (err) {
+                                console.log(err)
+                            } else {
 
-                            for (var i = 0; i < req.body.symptom_name.length; i++) {
 
-                                client.query('select id from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name[i]], function (err2, id_symptom) {
-                                    if (err2) {
-                                        console.log(err2)
+                                // console.log(result.rows)
+                                client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis_name], function (err1, id_diagnosis) {
+                                    if (err1) {
+                                        console.log(err1)
                                     } else {
+                                        //console.log("id=",id_diagnosis.rows[0].id)
+
+                                        for (var i = 0; i < req.body.symptom_name.length; i++) {
+
+                                            client.query('select id from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name[i]], function (err2, id_symptom) {
+                                                if (err2) {
+                                                    console.log(err2)
+                                                } else {
 
 
-                                        client.query('insert into "Diagnosis-Symptoms" ("Diagnosis_id_fk", "Symptoms_id_fk") VALUES ($1,$2)', [id_diagnosis.rows[0].id, id_symptom.rows[0].id], function (err3, result) {
-                                            if (err3) {
-                                                console.log(err3)
-                                            } else {
+                                                    client.query('insert into "Diagnosis-Symptoms" ("Diagnosis_id_fk", "Symptoms_id_fk") VALUES ($1,$2)', [id_diagnosis.rows[0].id, id_symptom.rows[0].id], function (err3, result) {
+                                                        if (err3) {
+                                                            console.log(err3)
+                                                        } else {
 
 
-                                                client.query('COMMIT')
-                                            }
-                                        })
+                                                            client.query('COMMIT')
+                                                        }
+                                                    })
 
+
+                                                    client.query('COMMIT')
+                                                }
+                                            })
+
+                                        }
 
                                         client.query('COMMIT')
                                     }
                                 })
-
                             }
 
-                            client.query('COMMIT')
-                        }
-                    })
+                            client.query('COMMIT');
+
+                        })
+                        res.json({
+                            answer: 2
+                        })
+                    }
                 }
             }))
             client.release()
@@ -847,15 +867,38 @@ client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddle
             console.log(req.body)
             const client = await pool.connect()
             await client.query('BEGIN')
-            client.query('insert into "Symptoms" (id,"Symptom_name") values (default, $1)', [req.body.symptom_name], function (err, result) {
+
+            client.query('select id from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name], function (err, result) {
                 if (err) {
                     console.log(err)
                     console.log("Mistake")
+                    console.log("return")
+                    return
                 } else {
-                    client.query('COMMIT');
-                    client.release();
+                    if (result.rows != "") {
+                        res.json({
+                            answer: 1//такой диагноз уже есть
+                        })
+                    } else {
+
+
+                        client.query('insert into "Symptoms" (id,"Symptom_name") values (default, $1)', [req.body.symptom_name], function (err, result) {
+                            if (err) {
+                                console.log("Mistake")
+
+                            } else {
+                                client.query('COMMIT');
+                                client.release();
+                            }
+                        })
+                        res.json({
+                            answer: 2
+                        })
+                    }
                 }
             })
+
+
         } catch (e) {
             throw(e)
         }
@@ -1253,12 +1296,41 @@ client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddle
             throw(e)
         }
     })
+
+
     app.post('/update_diagnosis', jsonParser, async function(req,res){
         try{
+            let mas_flag = 'default'
+
+            async function setflag(a) {
+                switch (a) {
+                    case 1:
+                        res.json({
+                            flag: 'false1'
+                        })
+                        break;
+                    case 2:
+                        res.json({
+                            flag: 'false2'
+                        })
+                        break
+                    case 3:
+                        res.json({
+                            flag: 'false3'
+                        })
+                        break
+                    case 4:
+                        res.json({
+                            flag: 'true'
+                        })
+                        break
+                }
+            }
             console.log(req.body);
             const client = await pool.connect()
             await client.query('BEGIN')
-            let mas_flag=[]
+            // let mas_flag=[]
+            mas_flag = 'default'
             await JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1',[req.body.diagnosis_name], function(err1,result1){
                 if (err1){console.log(err1)}
                 else{
@@ -1266,9 +1338,9 @@ client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddle
                         res.json({
                         flag: 'false'
                     })
-                    } 
+                    }
                     else {
-                        
+
                         for (let okl=0;okl<req.body.symptom_name.length;okl++){
 
                         client.query('select id, "Symptom_name" from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name[okl]], function (err2, id_symptom) {
@@ -1279,7 +1351,10 @@ client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddle
                                         let a={}
                                         a.id=id_symptom.rows[0].Symptom_name
                                         a.flag='false1'
-                                        mas_flag.push(a)
+                                        //mas_flag.push(a)
+                                        setflat();
+                                        //mas_flag='false1'
+                                        setflag(1);
                                         //if(okl===req.body.symptom_name.length-1){
                                         //    console.log("Sympt")
                                         //    console.log(mas_flag)
@@ -1297,57 +1372,66 @@ client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddle
                                                             let d={}
                                                             d.id=id_symptom.rows[0].Symptom_name
                                                             d.flag='false3'
-                                                            mas_flag.push(d)
+                                                            setflag(3);
+
+                                                            //mas_flag.push(d)
+                                                            //mas_flag='false3'
                                                             console.log('MISTAKE DELETE')
-                                                            console.log(mas_flag)
-                            
+                                                            //console.log(mas_flag)
+
                                                         }
                                                         else {
                                                             let c={}
                                                             c.id=id_symptom.rows[0].Symptom_name
                                                             c.flag='true'
-                                                            mas_flag.push(c)
+                                                            // mas_flag.push(c)
+                                                            //mas_flag='true'
+                                                            setflag(4);
+
                                                             console.log('INSERT')
-                                                            console.log(mas_flag)
+                                                            //console.log(mas_flag)
                                                             client.query('COMMIT')
                                                             //if(okl===req.body.symptom_name.length-1){
-                                                            //    
+                                                            //
                                                             //    console.log(mas_flag)
                                                             //    res.json({
                                                             //        flag:mas_flag
                                                             //        })
 
                                                             //}
-                                                        }                                                 
-                                                    
+                                                        }
+
                                                     }
                                                     )} else {
                                                     let b={}
                                                     b.id=id_symptom.rows[0].Symptom_name
                                                     b.flag='false2'
-                                                    mas_flag.push(b)
+                                                    //mas_flag.push(b)
+                                                    //mas_flag='false2'
+                                                    setflag(2);
+
                                                     console.log("DIAGNOSO-SYMPT")
-                                                    console.log(mas_flag)
+                                                    //console.log(mas_flag)
                                                     }
                                                 }
                                             }
                                         )}
                                         client.query('COMMIT')
                                     }
-                                } 
-                                
+                            }
+
                             )
-                            
+
                             client.query('COMMIT')
                         }
                         client.release()
-                        
+
                     }
                 }}))
-                console.log(mas_flag)
-                        res.json({
-                            flag:mas_flag
-                            })
+            console.log("перед отправкой")
+            //console.log(mas_flag[mas_flag.l)
+            console.log(mas_flag)
+
         }
         catch(e){
             throw(e)

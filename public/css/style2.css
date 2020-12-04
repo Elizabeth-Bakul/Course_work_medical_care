@@ -245,6 +245,16 @@ font-size:16px;}
 .th2{
     width:70%;
 }
+
+.success_request {
+    display: flex;
+    color: green;
+}
+
+.error_request {
+    display: flex;
+    color: red;
+}
 .m_o{
     display: flex;
     justify-content: center;
@@ -269,7 +279,7 @@ main{
     justify-content: center;
     align-items: center;
     color: black
-    
+
 }
 .link_submenu.act{
     background-color:#87CEFA;
