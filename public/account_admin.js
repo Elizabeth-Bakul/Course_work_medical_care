@@ -151,14 +151,14 @@ document.getElementById("submit_add_medicine").addEventListener("click", functio
 document.getElementById("subsear").addEventListener("click", function (e) {
     e.preventDefault();
     let brigade_name1 = document.getElementById('surname');
-    let brigade1 = JSON.stringify({
+    let brigade = JSON.stringify({
         brigade_name1: brigade_name1.value,
     });
-    let request1 = new XMLHttpRequest();
-    request1.open("POST", "/add_brigada", true);
-    request1.setRequestHeader("Content-Type", "application/json");
-    request1.send(brigade1);
-    request1.addEventListener("load", function () {
+    let request = new XMLHttpRequest();
+    request.open("POST", "/add_brigada", true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(brigade);
+    request.addEventListener("load", function () {
     let infDel = JSON.parse(request1.response);
         if(infDel.flag){
             alert('Добавление произошло успешно')

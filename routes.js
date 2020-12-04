@@ -772,11 +772,17 @@ module.exports = function (app) {
             const client = await pool.connect()
             await client.query('BEGIN')
             client.query('select id from "Brigades" where "BrigadeName"=$1',[req.body.brigade_name1],function(err,result){
-                if(err){console.log(err)}else {
+                if(err){console.log(err)
+                        res.json({
+                            flag: 'true'
+                        }
+                        )}else {
                     if(result.rowCount===0){
                         client.query('INSERT INTO "Brigades" ("BrigadeName") VALUES ($1)',[req.body.brigade_name1], function(err1,result1){
                             if(err1){console.log(err1)} else{
-                                res.json({flag:'true'})
+                                res.json({
+                                    flag: 'true'
+                                })
                                 client.query('COMMIT')
                             }
                         })
