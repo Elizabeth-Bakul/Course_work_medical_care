@@ -159,7 +159,7 @@ document.getElementById("subsear").addEventListener("click", function (e) {
     request.setRequestHeader("Content-Type", "application/json");
     request.send(brigade);
     request.addEventListener("load", function () {
-    let infDel = JSON.parse(request1.response);
+    let infDel = JSON.parse(request.response);
         if(infDel.flag){
             alert('Добавление произошло успешно')
         } else{
