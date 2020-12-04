@@ -1212,7 +1212,105 @@ module.exports = function (app) {
             throw(e)
         }
     })
-    
+    app.post('/update_diagnosis', jsonParser, async function(req,res){
+        try{
+            console.log(req.body);
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1',[req.body.diagnosis_name], function(err1,result1){
+                if (err1){console.log(err1)}
+                else{
+                    if(result1.rowCount===0){
+                        res.json({
+                        flag: 'false'
+                    })
+                    } 
+                    else {
+                        let mas_flag=[]
+                        for (let okl=0;okl<req.body.symptom_name.length;okl++){
+                            client.query('select id, "Symptom_name" from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name[okl]], function (err2, id_symptom) {
+                                if (err2) {
+                                    console.log(err2)
+                                } else {
+                                    if(id_symptom.rowCount===0){
+                                        let a={}
+                                        a.id=id_symptom.rows[0].Symptom_name
+                                        a.flag='false1'
+                                        mas_flag.push(a)
+                                        if(okl===req.body.symptom_name.length-1){
+                                            console.log("Sympt")
+                                            console.log(mas_flag)
+                                            res.json({
+                                                flag:mas_flag
+                                                })
+                                        }
+                                    } else {
+                                        client.query('select id from "Diagnosis-Symptoms" where "Diagnosis_id_fk"=$1 and "Symptoms_id_fk"=$2 ',[result1.rows[0].id,id_symptom.rows[0].id], function(err3, result2){
+                                            if(err3) {console.log(err3)}
+                                            else {
+                                                if(result2.rowCount===0){
+                                                    client.query('INSERT INTO "Diagnosis-Symptoms" ("Diagnosis_id_fk","Symptoms_id_fk") VALUES($1,$2) ',[result1.rows[0].id,id_symptom.rows[0].id], function (err4,result3){
+                                                        if(err4) {console.log(err4)
+                                                            let d={}
+                                                            d.id=id_symptom.rows[0].Symptom_name
+                                                            d.flag='false3'
+                                                            mas_flag.push(d)
+                                                            if(okl===req.body.symptom_name.length-1){
+                                                                console.log('MISTAKE DELETE')
+                                                                console.log(mas_flag)
+                                                                res.json({
+                                                                    flag:mas_flag
+                                                                    })
+                                                            }
+                                                        }
+                                                        else {
+                                                            let c={}
+                                                            c.id=id_symptom.rows[0].Symptom_name
+                                                            c.flag='true'
+                                                            mas_flag.push(c)
+                                                            client.query('COMMIT')
+                                                            if(okl===req.body.symptom_name.length-1){
+                                                                console.log('INSERT')
+                                                                console.log(mas_flag)
+                                                                res.json({
+                                                                    flag:mas_flag
+                                                                    })
+
+                                                            }}                                                 
+                                                    
+                                                    }
+                                                    )} else {
+                                                    let b={}
+                                                    b.id=id_symptom.rows[0].Symptom_name
+                                                    b.flag='false2'
+                                                    mas_flag.push(b)
+                                                    if(okl===req.body.symptom_name.length-1){
+                                                        console.log(mas_flag)
+                                                        console.log("DIAGNOSO-SYMPT")
+                                                        res.json({
+                                                            flag:mas_flag
+                                                            })
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        )}
+                                        client.query('COMMIT')
+                                    }
+                                } 
+                                
+                            )
+                            client.query('COMMIT')
+                        }
+                        client.release()
+                        
+                    }
+                }}))
+        }
+        catch(e){
+            throw(e)
+        }
+    })
     app.post('/update_medicine_diag',jsonParser, async function(req,res){
         try{
             console.log(req.body);

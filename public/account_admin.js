@@ -352,3 +352,26 @@ document.getElementById("delete_diag_symptom").addEventListener("click", functio
         //ДАНЯ добавь обработку результата false-нет диагноза; false1-нет симптома из списка  false2-нет у диагноза данного симптома false3-не удалось удалить true -удалилось
     })
 })
+
+document.getElementById("update_diagnosis").addEventListener("click", function (e) {
+    e.preventDefault();
+    let diagnosis_name = document.getElementById('diagnosis_name');
+    let symptom_name = document.getElementById('symptom_name');
+    console.log(diagnosis_name);
+    console.log(symptom_name);
+    let diagnosis = JSON.stringify({
+        diagnosis_name: diagnosis_name.value,
+        symptom_name: $('#select_symptoms').val(),
+    });
+    console.log(diagnosis);
+    let request = new XMLHttpRequest();
+    request.open("POST", "/update_diagnosis", true); // посылаем запрос на адрес "/user"
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(diagnosis);
+    request.addEventListener("load", function () {
+        let infDel = JSON.parse(request.response);
+        console.log(infDel)
+        //ДАНЯ добавь обработку результата false-нет диагноза; false1-нет симптома из списка  false2-нет у диагноза данного симптома false3-не удалось удалить true -удалилось
+    })
+})
+
