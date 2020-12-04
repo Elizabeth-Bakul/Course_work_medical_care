@@ -766,6 +766,32 @@ module.exports = function (app) {
     }
 
 )
+    app.post('/add_brigade', jsonParser, async function(req,res){
+        try{
+            console.log(req.body)
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            client.query('select id from "Brigades" where "BrigadeName"=$1',[req.body.brigade_name1],function(err,result){
+                if(err){console.log(err)}else {
+                    if(result.rowCount===0){
+                        client.query('INSERT INTO "Brigades" ("BrigadeName") VALUES ($1)',[req.body.brigade_name1], function(err1,result1){
+                            if(err1){console.log(err1)} else{
+                                res.json({flag:'true'})
+                                client.query('COMMIT')
+                            }
+                        })
+                        client.release()
+                    } else {
+                        res.json({flag:'false'})
+                    }
+                }
+            })
+            client.release()
+        }
+        catch(e){
+            throw(e)
+        }
+    })
 
     app.post('/add_symptom', jsonParser, async function (req, res) {
 
@@ -823,32 +849,20 @@ module.exports = function (app) {
                                 if (err1) {
                                     console.log(err1)
                                 } else {
-
-
                                     client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis], function (err2, id_diagnosis) {
                                         if (err2) {
                                             console.log(err2)
                                         } else {
-                                            //console.log(req.body.diagnosis)
-                                            //console.log("id=",id_diagnosis.rows[0].id)
-
-
                                             client.query('insert into "Diagnosis-Medicines" ("Diagnosis_id_fk", "Medicines_id_fk") VALUES ($1,$2)', [id_diagnosis.rows[0].id, id_medicine.rows[0].id], function (err3, result) {
                                                 if (err3) {
                                                     console.log(err3)
                                                 } else {
-
-
                                                     client.query('COMMIT')
                                                 }
                                             })
-
-
                                             client.query('COMMIT')
                                         }
                                     })
-
-
                                     client.query('COMMIT')
                                 }
                             })
@@ -924,11 +938,8 @@ module.exports = function (app) {
             throw(e)
         }})
     app.post('/delete_brigada', jsonParser, async function(req,res){
-        try{}
-        catch(e){
-            throw(e)
-        }
-        console.log(req.body);
+        try{
+            console.log(req.body);
         const client = await pool.connect()
         await client.query('BEGIN')
         await JSON.stringify(client.query('select id from "Brigades" where "BrigadeName"=$1',[req.body.brigade_name1], function(err1,result1){
@@ -956,6 +967,11 @@ module.exports = function (app) {
                 }
             }
         }))
+        }
+        catch(e){
+            throw(e)
+        }
+        
             
     })
     app.post('/delete_medicine', jsonParser, async function(req,res){
@@ -1000,7 +1016,7 @@ module.exports = function (app) {
             console.log(req.body);
             const client = await pool.connect()
             await client.query('BEGIN')
-            await JSON.stringify(client.query('select id from "Medicines" where "Medicines_name"=$1',[req.body.medicine_name1], function(err1,result1){
+            await JSON.stringify(client.query('select id from "Medicines" where "Medicines_name"=$1',[req.body.medicine_name], function(err1,result1){
             if (err1){console.log(err1)}
             else{
                 if(result1.rowCount===0){
@@ -1053,7 +1069,113 @@ module.exports = function (app) {
             throw(e)
         }
     })
-    
+    app.post('/delete_diagnosis', jsonParser, async function(req,res){
+        try{
+            console.log(req.body);
+        const client = await pool.connect()
+        await client.query('BEGIN')
+        await JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1',[req.body.diagnosis_name1], function(err1,result1){
+            if (err1){console.log(err1)}
+            else{
+                if(result1.rowCount===0){
+                    res.json({
+                    flag: 'false'
+                })
+                } 
+                else {
+                    client.query('delete from "Diagnosis" where "Diagnosis_name"=$1',[req.body.diagnosis_name1],function (err,result){
+            if (err){
+                console.log(err)
+                
+            }
+            else {
+                res.json({
+                    flag: 'true'
+                })
+                client.query('COMMIT');
+                client.release();
+            }
+        })
+                }
+            }
+        }))
+        }
+        catch(e){
+            throw(e)
+        }
+        
+            
+    })   
+    app.post('/delete_diagnosis_symptoms',jsonParser, async function(req,res){
+        try{
+            console.log(req.body);
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1',[req.body.diagnosis_name1], function(err1,result1){
+                if (err1){console.log(err1)}
+                else{
+                    if(result1.rowCount===0){
+                        res.json({
+                        flag: 'false'
+                    })
+                    } 
+                    else {
+                        let mas_flag=[]
+                        for (let okl=0;okl<req.body.symptom_name.length;okl++){
+                            client.query('select id, "Symptom_name" from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name[okl]], function (err2, id_symptom) {
+                                if (err2) {
+                                    console.log(err2)
+                                } else {
+                                    if(id_symptom.rowCount===0){
+                                        let a={}
+                                        a.id=id_symptom.Symptom_name
+                                        a.flag='false1'
+                                        mas_flag.push(a)
+                                    } else {
+                                        client.query('select id from "Diagnosis-Symptoms" where "Diagnosis_id_fk"=$1 and "Symptoms_id_fk"=$2 ',[result1[0].id,id_symptom.id], function(err3, result2){
+                                            if(err3) {console.log(err3)}
+                                            else {
+                                                if(result2.rowCount===0){
+                                                    let b={}
+                                                    b.id=id_symptom.Symptom_name
+                                                    b.flag='false2'
+                                                    mas_flag.push(b)
+                                                } else {
+                                                    client.query('delete from "Diagnosis-Symptoms" where "Diagnosis_id_fk"=$1 and "Symptoms_id_fk"=$2 ',[result1[0].id,id_symptom.id], function (err4,result3){
+                                                        if(err4) {console.log(err4)
+                                                            let d={}
+                                                            d.id=id_symptom.Symptom_name
+                                                            d.flag='false3'
+                                                            mas_flag.push(c)
+                                                        }
+                                                        else {
+                                                            let c={}
+                                                            c.id=id_symptom.Symptom_name
+                                                            c.flag='true'
+                                                            mas_flag.push(c)
+                                                            client.query('COMMIT')
+                                                        }
+                                                    })
+                                                }
+                                            }
+                                        })
+                                        client.query('COMMIT')
+                                    }
+                                }})
+                            client.query('COMMIT')
+                        }
+                        client.release()
+                        console.log(mas_flag)
+                        res.json({
+                            flag:mas_flag
+                        })
+                    }
+                }}))
+        }
+        catch(e){
+            throw(e)
+        }
+    })
     app.get('/logout', function (req, res) {
         console.log(req.isAuthenticated());
         req.logout();

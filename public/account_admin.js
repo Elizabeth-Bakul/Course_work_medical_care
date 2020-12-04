@@ -148,7 +148,25 @@ document.getElementById("submit_add_medicine").addEventListener("click", functio
     request.send(medicine);
 })
 
-
+document.getElementById("subsear").addEventListener("click", function (e) {
+    e.preventDefault();
+    let brigade_name1 = document.getElementById('surname');
+    let brigade1 = JSON.stringify({
+        brigade_name1: brigade_name1.value,
+    });
+    let request1 = new XMLHttpRequest();
+    request1.open("POST", "/add_brigada", true);
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.send(brigade1);
+    request1.addEventListener("load", function () {
+    let infDel = JSON.parse(request1.response);
+    if(infDel.flag){
+        alert('Добавление произошло успешно')
+    } else{
+        alert('Произошла ошибка с добавлением, данная бригада есть в базе.')
+    }
+    })
+})
 document.getElementById("delete_analysis").addEventListener("click", function (e) {
     e.preventDefault();
     let analysis_name1 = document.getElementById('add_analysis');
@@ -203,9 +221,9 @@ document.getElementById("delsear").addEventListener("click", function (e) {
     request1.addEventListener("load", function () {
     let infDel = JSON.parse(request1.response);
     if(infDel.flag){
-        alert('Удаление произошло успешно')
+        alert('Удаление произошло успешно.Работники,относящиеся к бригаде уволены')
     } else{
-        alert('Произошла ошибка с удалением, данной бригады нет в базе')
+        alert('Произошла ошибка с удалением, данной бригады нет в базе. ')
     }
     })
 })
@@ -229,6 +247,7 @@ document.getElementById("delete_medicine").addEventListener("click", function (e
     }
     })
 })
+
 document.getElementById("delete_diag_medicine").addEventListener("click", function (e) {
     e.preventDefault();
     let medicine_name2 = document.getElementById('name_medicine');
@@ -260,4 +279,44 @@ document.getElementById("delete_diag_medicine").addEventListener("click", functi
     })
 })
 
+document.getElementById("delete_diagnosis").addEventListener("click", function (e) {
+    e.preventDefault();
+    let diagnosis_name1 = document.getElementById('diagnosis_name');
+    let diagnosis1 = JSON.stringify({
+        diagnosis_name1: diagnosis_name1.value,
+    });
+    let request1 = new XMLHttpRequest();
+    request1.open("POST", "/delete_diagnosis", true);
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.send(diagnosis1);
+    request1.addEventListener("load", function () {
+    let infDel = JSON.parse(request1.response);
+    if(infDel.flag){
+        alert('Удаление произошло успешно')
+    } else{
+        alert('Произошла ошибка с удалением, данного диагноза нет в базе')
+    }
+    })
+})
 
+document.getElementById("delete_diag_symptom").addEventListener("click", function (e) {
+    e.preventDefault();
+    let diagnosis_name = document.getElementById('diagnosis_name');
+    let symptom_name = document.getElementById('symptom_name');
+    console.log(diagnosis_name);
+    console.log(symptom_name);
+    let diagnosis = JSON.stringify({
+        diagnosis_name: diagnosis_name.value,
+        symptom_name: $('#select_symptoms').val(),
+    });
+    console.log(diagnosis);
+    let request = new XMLHttpRequest();
+    request.open("POST", "/delete_diagnosis_symptoms", true); // посылаем запрос на адрес "/user"
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(diagnosis);
+    request1.addEventListener("load", function () {
+        let infDel = JSON.parse(request1.response);
+        console.log(infDel)
+        //ДАНЯ добавь обработку результата false-нет диагноза; false1-нет симптома из списка  false2-нет у диагноза данного симптома false3-не удалось удалить true -удалилось
+    })
+})

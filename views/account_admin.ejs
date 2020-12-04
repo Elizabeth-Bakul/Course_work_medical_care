@@ -70,6 +70,9 @@ if(messages.success.length){
                 <% } %>
             </select>
             <button class="button" type="submit" id="submit_add_diagnosis">Добавить</button>
+            <button class="button" type="submit" id="update_diagnosis">Добавить симптомы к диагозу</button><br>
+            <button class="button" type="submit" id="delete_diagnosis">Удалить</button>
+            <button class="button" type="submit" id="delete_diag_symptom">Удалить симптомы у диагноза</button>
         </fieldset>
     </form>
 </div>
@@ -109,11 +112,11 @@ if(messages.success.length){
                 <% for(var i = 0; i < list_values_diagnosis.length; i++) { %>
                     <option><%= list_values_diagnosis[i].Diagnosis_name %></option>
                 <% } %>
-            </select>
+            </select><br>
             <button class="button" type="submit" id="submit_add_medicine">Добавить</button>
-            <button class="button" type="submit" id="update_medicine">Добавить диагноз к лекарству</button>
+            <button class="button" type="submit" id="update_medicine">Добавить диагноз к лекарству</button><br>
             <button class="button" type="submit" id="delete_medicine">Удалить</button>
-            <button class="button" type="submit" id="delete_diag_medicine">Удалить диагноз к лекарству</button>
+            <button class="button" type="submit" id="delete_diag_medicine">Удалить диагноз у лекарства</button>
         </fieldset>
     </form>
 </div>
