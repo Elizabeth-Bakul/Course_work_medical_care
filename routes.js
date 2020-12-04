@@ -1206,7 +1206,7 @@ module.exports = function (app) {
                                     flag: 'false2'
                                 })
                             } else {
-                                client.query('select id from "Diagnosis-Medicines" where "Diagnosis_id_fk"=$1 and "Medicines_id_fk"=$2', [result1.rows[0].id,result2.rows[0].id], function(err3,result3){
+                                client.query('select id from "Diagnosis-Medicines" where "Diagnosis_id_fk"=$2 and "Medicines_id_fk"=$1', [result1.rows[0].id,result2.rows[0].id], function(err3,result3){
                                     if(err3){console.log(err3)}
                                     else {
                                         if (result3.rowCount!=0){
@@ -1215,7 +1215,7 @@ module.exports = function (app) {
                                             })
                                         }
                                         else {
-                                            client.query('INSERT INTO "Diagnosis-Medicines" ("Diagnosis_id_fk", "Medicines_id_fk") VALUES($1,$2)',[result1.rows[0].id,result2.rows[0].id],function (err,result){
+                                            client.query('INSERT INTO "Diagnosis-Medicines" ("Diagnosis_id_fk", "Medicines_id_fk") VALUES($2,$1)',[result1.rows[0].id,result2.rows[0].id],function (err,result){
                                     if (err){
                                         console.log(err)
                                         }
