@@ -1169,14 +1169,17 @@ module.exports = function (app) {
                                         })
                                         client.query('COMMIT')
                                     }
-                                }})
+                                } if(okl===req.body.symptom_name.length-1){
+                                    console.log(mas_flag)
+                                    res.json({
+                                        flag:mas_flag
+                                        })
+                                }
+                            })
                             client.query('COMMIT')
                         }
                         client.release()
-                        console.log(mas_flag)
-                        res.json({
-                            flag:mas_flag
-                        })
+                        
                     }
                 }}))
         }
