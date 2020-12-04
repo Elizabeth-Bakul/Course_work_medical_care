@@ -46,12 +46,16 @@ function buttonsControl(button, i){
             history.innerHTML='Нет вызовов';
             g.removeAttribute('hidden');
         } else {
+            let flag5=0
             for(let k=0; k<receivedBrigades.req.length; k++){
             history.innerHTML+=receivedBrigades.req[k].AcceptTime+'  '+receivedBrigades.req[k].id+'<br>'
             if (receivedBrigades.req[k].EndRequestTime===null){
-                bad.removeAttribute('hidden');
-            } else {g.removeAttribute('hidden');}
+                flag5=1
+            } 
         }
+        if(flag5===0){
+            g.removeAttribute('hidden');
+        } else{bad.removeAttribute('hidden');}
         //console.log(receivedBrigades.work[0].WorkerSurname,' ', receivedBrigades.req[0].id);
         }
         
