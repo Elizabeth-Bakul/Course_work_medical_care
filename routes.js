@@ -416,7 +416,7 @@ module.exports = function (app) {
             case 'врач':
                 res.redirect('/account_doctor')
                 break;
-            case 'водитель':
+            case 'Водитель':
                 res.redirect('/account_doctor')
                 break;
             case "администратор":
