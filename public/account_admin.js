@@ -279,6 +279,38 @@ document.getElementById("delete_diag_medicine").addEventListener("click", functi
     })
 })
 
+document.getElementById("update_diag_medicine").addEventListener("click", function (e) {
+    e.preventDefault();
+    let medicine_name2 = document.getElementById('name_medicine');
+    let symptom_name2=document.getElementById('select_diagnosis')
+    let medicine2 = JSON.stringify({
+        medicine_name: medicine_name2.value,
+        diagnosis: $('#select_diagnosis').val()
+    });
+    let request1 = new XMLHttpRequest();
+    request1.open("POST", "/update_medicine_diag", true);
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.send(medicine2);
+    request1.addEventListener("load", function () {
+    let infDel = JSON.parse(request1.response);
+    if(infDel.flag==='true'){
+        alert('Добавление произошло успешно')
+    } else{
+        if(infDel.flag==='false1') {alert('Произошла ошибка с добавление, данного лекарства нет в базе. Нажмите на кнопку добавить')}
+        else {
+            if(infDel.flag==='false2'){
+                alert('Произошла ошибка с добавлением, данного диагноза нет в базе')
+            } else {
+                alert('Произошла ошибка с добавление, у данного лекарства есть такой диагноза')
+            }
+            
+        }
+        
+    }
+    })
+})
+
+
 document.getElementById("delete_diagnosis").addEventListener("click", function (e) {
     e.preventDefault();
     let diagnosis_name1 = document.getElementById('diagnosis_name');

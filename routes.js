@@ -1176,6 +1176,66 @@ module.exports = function (app) {
             throw(e)
         }
     })
+    
+    app.post('/update_medicine_diag',jsonParser, async function(req,res){
+        try{
+            console.log(req.body);
+            const client = await pool.connect()
+            await client.query('BEGIN')
+            await JSON.stringify(client.query('select id from "Medicines" where "Medicines_name"=$1',[req.body.medicine_name], function(err1,result1){
+            if (err1){console.log(err1)}
+            else{
+                if(result1.rowCount===0){
+                    res.json({
+                    flag: 'false1'
+                })
+                } 
+                else {
+                    client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis],function(err2,result2){
+                        if(err2){console.log(err2)}else{
+                            if(result2.rowCount===0){
+                                res.json({
+                                    flag: 'false2'
+                                })
+                            } else {
+                                client.query('select id from "Diagnosis-Medicines" where "Diagnosis_id_fk"=$1 and "Medicines_id_fk"=$2', [result1[0].id,result2[0].id], function(err3,result3){
+                                    if(err3){console.log(err3)}
+                                    else {
+                                        if (result3.rowCount!=0){
+                                            res.json({
+                                                flag: 'false3'
+                                            })
+                                        }
+                                        else {
+                                            client.query('INSERT INTO "Diagnosis-Medicines" ("Diagnosis_id_fk", "Medicines_id_fk") VALUES($1,$2)',[result1[0].id,result2[0].id],function (err,result){
+                                    if (err){
+                                        console.log(err)
+                                        }
+                                    else {
+                                        res.json({
+                                            flag: 'true'
+                                        })
+                                        client.query('COMMIT');
+                                        client.release();
+                                    }
+        })
+                                        }
+                                    }
+                                })
+                                
+                            }
+                        }
+                    })
+                    
+                }
+            }
+        }))
+        }
+        catch(e){
+            throw(e)
+        }
+    })
+    
     app.get('/logout', function (req, res) {
         console.log(req.isAuthenticated());
         req.logout();
