@@ -1255,12 +1255,41 @@ module.exports = function (app) {
             throw(e)
         }
     })
+
+
     app.post('/update_diagnosis', jsonParser, async function(req,res){
         try{
+            let mas_flag = 'default'
+
+            async function setflag(a) {
+                switch (a) {
+                    case 1:
+                        res.json({
+                            flag: 'false1'
+                        })
+                        break;
+                    case 2:
+                        res.json({
+                            flag: 'false2'
+                        })
+                        break
+                    case 3:
+                        res.json({
+                            flag: 'false3'
+                        })
+                        break
+                    case 4:
+                        res.json({
+                            flag: 'true'
+                        })
+                        break
+                }
+            }
             console.log(req.body);
             const client = await pool.connect()
             await client.query('BEGIN')
-            let mas_flag=[]
+            // let mas_flag=[]
+            mas_flag = 'default'
             await JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1',[req.body.diagnosis_name], function(err1,result1){
                 if (err1){console.log(err1)}
                 else{
@@ -1268,9 +1297,9 @@ module.exports = function (app) {
                         res.json({
                         flag: 'false'
                     })
-                    } 
+                    }
                     else {
-                        
+
                         for (let okl=0;okl<req.body.symptom_name.length;okl++){
 
                         client.query('select id, "Symptom_name" from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name[okl]], function (err2, id_symptom) {
@@ -1281,7 +1310,10 @@ module.exports = function (app) {
                                         let a={}
                                         a.id=id_symptom.rows[0].Symptom_name
                                         a.flag='false1'
-                                        mas_flag.push(a)
+                                        //mas_flag.push(a)
+                                        setflat();
+                                        //mas_flag='false1'
+                                        setflag(1);
                                         //if(okl===req.body.symptom_name.length-1){
                                         //    console.log("Sympt")
                                         //    console.log(mas_flag)
@@ -1299,57 +1331,66 @@ module.exports = function (app) {
                                                             let d={}
                                                             d.id=id_symptom.rows[0].Symptom_name
                                                             d.flag='false3'
-                                                            mas_flag.push(d)
+                                                            setflag(3);
+
+                                                            //mas_flag.push(d)
+                                                            //mas_flag='false3'
                                                             console.log('MISTAKE DELETE')
-                                                            console.log(mas_flag)
-                            
+                                                            //console.log(mas_flag)
+
                                                         }
                                                         else {
                                                             let c={}
                                                             c.id=id_symptom.rows[0].Symptom_name
                                                             c.flag='true'
-                                                            mas_flag.push(c)
+                                                            // mas_flag.push(c)
+                                                            //mas_flag='true'
+                                                            setflag(4);
+
                                                             console.log('INSERT')
-                                                            console.log(mas_flag)
+                                                            //console.log(mas_flag)
                                                             client.query('COMMIT')
                                                             //if(okl===req.body.symptom_name.length-1){
-                                                            //    
+                                                            //
                                                             //    console.log(mas_flag)
                                                             //    res.json({
                                                             //        flag:mas_flag
                                                             //        })
 
                                                             //}
-                                                        }                                                 
-                                                    
+                                                        }
+
                                                     }
                                                     )} else {
                                                     let b={}
                                                     b.id=id_symptom.rows[0].Symptom_name
                                                     b.flag='false2'
-                                                    mas_flag.push(b)
+                                                    //mas_flag.push(b)
+                                                    //mas_flag='false2'
+                                                    setflag(2);
+
                                                     console.log("DIAGNOSO-SYMPT")
-                                                    console.log(mas_flag)
+                                                    //console.log(mas_flag)
                                                     }
                                                 }
                                             }
                                         )}
                                         client.query('COMMIT')
                                     }
-                                } 
-                                
+                            }
+
                             )
-                            
+
                             client.query('COMMIT')
                         }
                         client.release()
-                        
+
                     }
                 }}))
-                console.log(mas_flag)
-                        res.json({
-                            flag:mas_flag
-                            })
+            console.log("перед отправкой")
+            //console.log(mas_flag[mas_flag.l)
+            console.log(mas_flag)
+
         }
         catch(e){
             throw(e)

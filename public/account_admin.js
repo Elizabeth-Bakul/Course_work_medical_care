@@ -415,7 +415,24 @@ document.getElementById("update_diagnosis").addEventListener("click", function (
     request.send(diagnosis);
     request.addEventListener("load", function () {
         let infDel = JSON.parse(request.response);
-        console.log(infDel)
+        console.log(infDel.flag)
+        switch (infDel.flag) {
+            case 'false':
+                alert('Нет такого диагноза')
+                break
+            case 'false1':
+                alert('Нет такого симптома');
+                break
+            case 'false2':
+                alert('Такой(-ие) симптом(-ы) уже привязан(-ы) к данному диагнозу')
+                break
+            case 'false3':
+                alert('Ошибка добавления связи Диагноз-Симптом')
+                break
+            case 'true':
+                alert('Симптом(-ы) успешно добавлен(-ы) к диагнозу')
+                break;
+        }
         //ДАНЯ добавь обработку результата false-нет диагноза; false1-нет симптома из списка  false2-нет у диагноза данного симптома false3-не удалось удалить true -удалилось
     })
 })
