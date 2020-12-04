@@ -85,6 +85,19 @@ font-size:16px;}
     width: 100%;
     border:1px solid #1747ff;
     background-color:#87CEFA;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    background-color: transparent;
+    border: 2px solid #1747ff;
+    border-radius: 0.6em;
+    cursor: pointer;
 }
 
 .dropdown {
@@ -223,6 +236,7 @@ font-size:16px;}
     margin-bottom: 10%;
     padding: 8px 12px;
     width: 60%;
+    margin: auto;
 }
 .add_form {
     display: flex;
@@ -297,5 +311,50 @@ div {
     font-family: 'Roboto', sans-serif;
 }
 
+fieldset {
+
+}
+
 /*Buttons*/
 
+
+/*.btn {*/
+/*    box-sizing: border-box;*/
+/*    -webkit-appearance: none;*/
+/*    -moz-appearance: none;*/
+/*    appearance: none;*/
+/*    background-color: transparent;*/
+/*    border: 2px solid #1747ff;*/
+/*    border-radius: 0.6em;*/
+/*    color: #1747ff;*/
+/*    cursor: pointer;*/
+/*    display: -webkit-box;*/
+/*    display: -webkit-flex;*/
+/*    display: -ms-flexbox;*/
+/*    display: flex;*/
+/*    -webkit-align-self: center;*/
+/*    -ms-flex-item-align: center;*/
+/*    align-self: center;*/
+/*    font-size: 1rem;*/
+/*    font-weight: 400;*/
+/*    line-height: 1;*/
+/*    margin: 20px;*/
+/*    padding: 1.2em 2.8em;*/
+/*    text-decoration: none;*/
+/*    text-align: center;*/
+/*    text-transform: uppercase;*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-weight: 700;*/
+/*}*/
+/*.btn:hover, .btn:focus {*/
+/*    color: #fff;*/
+/*    outline: 0;*/
+/*}*/
+
+/*.first {*/
+/*    -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;*/
+/*    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;*/
+/*}*/
+/*.first:hover {*/
+/*    box-shadow: 0 0 40px 40px #1747ff inset;*/
+/*}*/
