@@ -1230,7 +1230,7 @@ module.exports = function (app) {
                         
                         for (let okl=0;okl<req.body.symptom_name.length;okl++){
 
-                        await    client.query('select id, "Symptom_name" from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name[okl]], function (err2, id_symptom) {
+                        client.query('select id, "Symptom_name" from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name[okl]], function (err2, id_symptom) {
                                 if (err2) {
                                     console.log(err2)
                                 } else {
@@ -1293,10 +1293,7 @@ module.exports = function (app) {
                                         )}
                                         client.query('COMMIT')
                                     }
-                                } 
-                                
-                            )
-                            if(okl===req.body.symptom_name.length-1){
+                                    if(okl===req.body.symptom_name.length-1){
                                                                 
                                 console.log(mas_flag)
                                 res.json({
@@ -1304,6 +1301,10 @@ module.exports = function (app) {
                                     })
 
                             }
+                                } 
+                                
+                            )
+                            
                             client.query('COMMIT')
                         }
                         client.release()
