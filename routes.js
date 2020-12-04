@@ -1056,8 +1056,8 @@ module.exports = function (app) {
                                         res.json({
                                             flag: 'true'
                                         })
-                                        client.query('COMMIT');
-                                        client.release();
+                                                client.query('COMMIT');
+                                                client.release();
                                     }
         })
                                         }
@@ -1071,6 +1071,7 @@ module.exports = function (app) {
                 }
             }
         }))
+        client.release();
         }
         catch(e){
             throw(e)
