@@ -416,6 +416,9 @@ module.exports = function (app) {
             case 'врач':
                 res.redirect('/account_doctor')
                 break;
+            case 'водитель':
+                res.redirect('/account_doctor')
+                break;
             case "администратор":
                 try {
                     const client = await pool.connect()
