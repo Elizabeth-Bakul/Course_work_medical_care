@@ -152,6 +152,16 @@ document.getElementById("submit_add_analysis").addEventListener("click", functio
     request.open("POST", "/add_analysis", true);
     request.setRequestHeader("Content-Type", "application/json");
     request.send(analysis);
+    request.addEventListener("load", function () {
+        // получаем и парсим ответ сервера
+        let repeat = JSON.parse(request.response);
+        console.log(repeat.answer)
+        if (repeat.answer == 1) {
+            alert("Такой анализ уже есть в базе")
+        } else {
+            alert("Анализ успешно добавлен в базу")
+        }
+    });
 })
 
 document.getElementById("submit_add_medicine").addEventListener("click", function (e) {
@@ -169,6 +179,16 @@ document.getElementById("submit_add_medicine").addEventListener("click", functio
     request.open("POST", "/add_medicine", true); // посылаем запрос на адрес "/user"
     request.setRequestHeader("Content-Type", "application/json");
     request.send(medicine);
+    request.addEventListener("load", function () {
+        // получаем и парсим ответ сервера
+        let repeat = JSON.parse(request.response);
+        console.log(repeat.answer)
+        if (repeat.answer == 1) {
+            alert("Такое лекарство уже есть в базе")
+        } else {
+            alert("Лекарство успешно добавлено в базу")
+        }
+    });
 })
 
 document.getElementById("subsear").addEventListener("click", function (e) {

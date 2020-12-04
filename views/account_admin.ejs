@@ -69,10 +69,10 @@ if(messages.success.length){
                 <% for(var i = 0; i < list_values.length; i++) { %>
                     <option><%= list_values[i].Symptom_name%></option>
                 <% } %>
-            </select>
-            <button class="button" type="submit" id="submit_add_diagnosis">Добавить</button>
-            <button class="button" type="submit" id="update_diagnosis">Добавить симптомы к диагозу</button><br>
-            <button class="button" type="submit" id="delete_diagnosis">Удалить</button>
+            </select><br>
+            <button class="button" type="submit" id="submit_add_diagnosis">Добавить диагноз</button>
+            <button class="button" type="submit" id="update_diagnosis">Добавить симптомы к диагозу</button>
+            <button class="button" type="submit" id="delete_diagnosis">Удалить диагноз</button>
             <button class="button" type="submit" id="delete_diag_symptom">Удалить симптомы у диагноза</button>
         </fieldset>
     </form>
@@ -93,7 +93,7 @@ if(messages.success.length){
 <div class="add_analysis">
     <form class="search" name="search-form">
         <fieldset>
-            <legend class='sear2'>Редактирование анализа</legend>
+            <legend class='sear2'>Редактирование анализа:</legend>
             <label class="search-label" for="surname">Наименование анализа:</label>
             <input class="surname" type="text" id="add_analysis" required>
             <button class="button" type="submit" id="submit_add_analysis">Добавить</button>

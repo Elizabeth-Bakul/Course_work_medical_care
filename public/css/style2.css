@@ -312,8 +312,8 @@ div {
 }
 
 fieldset {
-
 }
+
 
 /*Buttons*/
 
@@ -358,3 +358,10 @@ fieldset {
 /*.first:hover {*/
 /*    box-shadow: 0 0 40px 40px #1747ff inset;*/
 /*}*/
+
+
+footer {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    /*Минус Высота футера*/
+}
