@@ -58,19 +58,25 @@ module.exports = function (app) {
                     req.flash('warning', 'This email address is already registered.');
                     res.redirect('/join');
                 } else {
-                    if (((req.body.WorkerType == 'бухгалтер-регистратор') || (req.body.WorkerType == 'администратор')) && (req.body.Brigade_fk !=3 )){
-                        req.flash('warning', 'Неправильная бригада. Для этой профессии бригада 3');
-                        res.redirect('/join');
+                    flas=0
+                    switch(req.body.WorkerType){
+                        case 'бухгалтер-регистратор', 'администратор': 
+                            if(req.body.Brigade_fk !=3) {
+                                flas=2
+                            } else {flas=1}
+                            break;
+                        case 'врач','Врач', 'фельдшер','Фельдшер', 'водитель','Водитель', 'медработник', 'Медработник':
+                            if(req.body.Brigade_fk ===3) {
+                                flas=3
+                            } else {flas=1}
+                            break;
+                        default:
+                            flas=4;
+                            break;
                     }
-                    if (((req.body.WorkerType==='врач')||(req.body.WorkerType==='Врач') ||(req.body.WorkerType==='фельдшер')||(req.body.WorkerType==='Фельдшер')||(req.body.WorkerType==='водитель')||(req.body.WorkerType==='Водитель')||(req.body.WorkerType==='медработник')||(req.body.WorkerType==='Медработник'))&&(req.body.Brigade_fk===3)){
-                        req.flash('warning', 'Неправильная бригада. Для этой профессии бригада не может быть 3');
-                        res.redirect('/join');
-                    }
-                    if((req.body.WorkerType==='врач')&&(req.body.WorkerType!='Врач') &&(req.body.WorkerType!='фельдшер')&&(req.body.WorkerType!='Фельдшер')&&(req.body.WorkerType!='водитель')&&(req.body.WorkerType!='Водитель')&&(req.body.WorkerType==='медработник')&&(req.body.WorkerType!='Медработник')){
-                        req.flash('warning', 'Неправильная профессия');
-                        res.redirect('/join');
-                    }
-                    client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddleName", "WorkerType", "Brigade_fk", "Login", "Password") ' +
+                    
+                    if (flas==1){
+client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddleName", "WorkerType", "Brigade_fk", "Login", "Password") ' +
                         'VALUES ($1, $2, $3, $4, $5, $6, $7)',
                         [req.body.lastName, req.body.firstName, req.body.middleName, req.body.typeWorker, req.body.brigadenum, req.body.username, pwd], function (err, result) {
                             if (err) {
@@ -85,10 +91,27 @@ module.exports = function (app) {
                                 return;
                             }
                         });
+                        client.release();
                 }
 
-            }));
-            client.release();
+                     else {
+                        if (flas==2){
+                            req.flash('danger', 'Неправильная бригада, для этой профессии бригада 2')
+                            res.redirect('/join');
+                        } else {
+                            if (flas==3){
+                                req.flash('danger', 'Неправильная бригада')
+                                res.redirect('/join');
+                            } else {
+                                req.flash('danger', 'Неправильная профессия')
+                                res.redirect('/join');
+                            }
+                                
+                            } 
+                     }  
+                     
+                    
+                    }}))
         } catch (e) {
             throw(e)
         }
