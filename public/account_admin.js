@@ -279,7 +279,7 @@ document.getElementById("delete_diag_medicine").addEventListener("click", functi
     })
 })
 
-document.getElementById("update_diag_medicine").addEventListener("click", function (e) {
+document.getElementById("update_medicine").addEventListener("click", function (e) {
     e.preventDefault();
     let medicine_name2 = document.getElementById('name_medicine');
     let symptom_name2=document.getElementById('select_diagnosis')
