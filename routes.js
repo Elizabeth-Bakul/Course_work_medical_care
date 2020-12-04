@@ -1255,8 +1255,10 @@ module.exports = function (app) {
                                                             d.id=id_symptom.rows[0].Symptom_name
                                                             d.flag='false3'
                                                             mas_flag.push(d)
+                                                            console.log('MISTAKE DELETE')
+                                                            console.log(mas_flag)
                                                             if(okl===req.body.symptom_name.length-1){
-                                                                console.log('MISTAKE DELETE')
+                                                                
                                                                 console.log(mas_flag)
                                                                 res.json({
                                                                     flag:mas_flag
@@ -1268,9 +1270,11 @@ module.exports = function (app) {
                                                             c.id=id_symptom.rows[0].Symptom_name
                                                             c.flag='true'
                                                             mas_flag.push(c)
+                                                            console.log('INSERT')
+                                                            console.log(mas_flag)
                                                             client.query('COMMIT')
                                                             if(okl===req.body.symptom_name.length-1){
-                                                                console.log('INSERT')
+                                                                
                                                                 console.log(mas_flag)
                                                                 res.json({
                                                                     flag:mas_flag
@@ -1284,9 +1288,11 @@ module.exports = function (app) {
                                                     b.id=id_symptom.rows[0].Symptom_name
                                                     b.flag='false2'
                                                     mas_flag.push(b)
+                                                    console.log("DIAGNOSO-SYMPT")
+                                                    console.log(mas_flag)
                                                     if(okl===req.body.symptom_name.length-1){
                                                         console.log(mas_flag)
-                                                        console.log("DIAGNOSO-SYMPT")
+                                                        
                                                         res.json({
                                                             flag:mas_flag
                                                             })
