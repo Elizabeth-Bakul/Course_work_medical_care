@@ -792,7 +792,7 @@ module.exports = function (app) {
                     }
                 }
             })
-            client.release()
+            
         }
         catch(e){
             throw(e)
