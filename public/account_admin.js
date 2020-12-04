@@ -155,7 +155,7 @@ document.getElementById("subsear").addEventListener("click", function (e) {
         brigade_name1: brigade_name1.value,
     });
     let request = new XMLHttpRequest();
-    request.open("POST", "/add_brigada", true);
+    request.open("POST", "/add_brigade", true);
     request.setRequestHeader("Content-Type", "application/json");
     request.send(brigade);
     request.addEventListener("load", function () {
