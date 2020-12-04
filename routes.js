@@ -1139,6 +1139,12 @@ module.exports = function (app) {
                                         a.id=id_symptom.Symptom_name
                                         a.flag='false1'
                                         mas_flag.push(a)
+                                        if(okl===req.body.symptom_name.length-1){
+                                            console.log(mas_flag)
+                                            res.json({
+                                                flag:mas_flag
+                                                })
+                                        }
                                     } else {
                                         client.query('select id from "Diagnosis-Symptoms" where "Diagnosis_id_fk"=$1 and "Symptoms_id_fk"=$2 ',[result1.rows[0].id,id_symptom.rows[0].id], function(err3, result2){
                                             if(err3) {console.log(err3)}
@@ -1148,6 +1154,12 @@ module.exports = function (app) {
                                                     b.id=id_symptom.Symptom_name
                                                     b.flag='false2'
                                                     mas_flag.push(b)
+                                                    if(okl===req.body.symptom_name.length-1){
+                                                        console.log(mas_flag)
+                                                        res.json({
+                                                            flag:mas_flag
+                                                            })
+                                                    }
                                                 } else {
                                                     client.query('delete from "Diagnosis-Symptoms" where "Diagnosis_id_fk"=$1 and "Symptoms_id_fk"=$2 ',[result1.rows[0].id,id_symptom.rows[0].id], function (err4,result3){
                                                         if(err4) {console.log(err4)
@@ -1155,6 +1167,12 @@ module.exports = function (app) {
                                                             d.id=id_symptom.Symptom_name
                                                             d.flag='false3'
                                                             mas_flag.push(c)
+                                                            if(okl===req.body.symptom_name.length-1){
+                                                                console.log(mas_flag)
+                                                                res.json({
+                                                                    flag:mas_flag
+                                                                    })
+                                                            }
                                                         }
                                                         else {
                                                             let c={}
@@ -1162,6 +1180,12 @@ module.exports = function (app) {
                                                             c.flag='true'
                                                             mas_flag.push(c)
                                                             client.query('COMMIT')
+                                                            if(okl===req.body.symptom_name.length-1){
+                                                                console.log(mas_flag)
+                                                                res.json({
+                                                                    flag:mas_flag
+                                                                    })
+                                                            }
                                                         }
                                                     })
                                                 }
