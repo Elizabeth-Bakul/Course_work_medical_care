@@ -346,8 +346,8 @@ document.getElementById("delete_diag_symptom").addEventListener("click", functio
     request.open("POST", "/delete_diagnosis_symptoms", true); // посылаем запрос на адрес "/user"
     request.setRequestHeader("Content-Type", "application/json");
     request.send(diagnosis);
-    request1.addEventListener("load", function () {
-        let infDel = JSON.parse(request1.response);
+    request.addEventListener("load", function () {
+        let infDel = JSON.parse(request.response);
         console.log(infDel)
         //ДАНЯ добавь обработку результата false-нет диагноза; false1-нет симптома из списка  false2-нет у диагноза данного симптома false3-не удалось удалить true -удалилось
     })
