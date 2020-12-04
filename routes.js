@@ -1119,7 +1119,7 @@ module.exports = function (app) {
             console.log(req.body);
             const client = await pool.connect()
             await client.query('BEGIN')
-            await JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1',[req.body.diagnosis_name1], function(err1,result1){
+            await JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1',[req.body.diagnosis_name], function(err1,result1){
                 if (err1){console.log(err1)}
                 else{
                     if(result1.rowCount===0){
@@ -1140,7 +1140,7 @@ module.exports = function (app) {
                                         a.flag='false1'
                                         mas_flag.push(a)
                                     } else {
-                                        client.query('select id from "Diagnosis-Symptoms" where "Diagnosis_id_fk"=$1 and "Symptoms_id_fk"=$2 ',[result1[0].id,id_symptom.id], function(err3, result2){
+                                        client.query('select id from "Diagnosis-Symptoms" where "Diagnosis_id_fk"=$1 and "Symptoms_id_fk"=$2 ',[result1.rows[0].id,id_symptom.rows[0].id], function(err3, result2){
                                             if(err3) {console.log(err3)}
                                             else {
                                                 if(result2.rowCount===0){
@@ -1149,7 +1149,7 @@ module.exports = function (app) {
                                                     b.flag='false2'
                                                     mas_flag.push(b)
                                                 } else {
-                                                    client.query('delete from "Diagnosis-Symptoms" where "Diagnosis_id_fk"=$1 and "Symptoms_id_fk"=$2 ',[result1[0].id,id_symptom.id], function (err4,result3){
+                                                    client.query('delete from "Diagnosis-Symptoms" where "Diagnosis_id_fk"=$1 and "Symptoms_id_fk"=$2 ',[result1.rows[0].id,id_symptom.rows[0].id], function (err4,result3){
                                                         if(err4) {console.log(err4)
                                                             let d={}
                                                             d.id=id_symptom.Symptom_name
