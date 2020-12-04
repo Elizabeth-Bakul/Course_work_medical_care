@@ -61,12 +61,52 @@ module.exports = function (app) {
                 } else {
                     flas=0
                     switch(req.body.WorkerType){
-                        case 'бухгалтер-регистратор', 'администратор': 
+                        case 'бухгалтер-регистратор': 
                             if(req.body.Brigade_fk !=3) {
                                 flas=2
                             } else {flas=1}
                             break;
-                        case 'врач','Врач', 'фельдшер','Фельдшер', 'водитель','Водитель', 'медработник', 'Медработник':
+                        case 'администратор':
+                            if(req.body.Brigade_fk !=3) {
+                                flas=2
+                                } else {flas=1}
+                            break;
+                        case 'врач':
+                            if(req.body.Brigade_fk ===3) {
+                                flas=3
+                            } else {flas=1}
+                            break;
+                        case 'Врач':
+                                if(req.body.Brigade_fk ===3) {
+                                    flas=3
+                                } else {flas=1}
+                                break;
+                        case 'фельдшер':
+                                    if(req.body.Brigade_fk ===3) {
+                                        flas=3
+                                    } else {flas=1}
+                                    break;
+                        case 'Фельдшер':
+                                        if(req.body.Brigade_fk ===3) {
+                                            flas=3
+                                        } else {flas=1}
+                                        break;
+                        case 'водитель':
+                                            if(req.body.Brigade_fk ===3) {
+                                                flas=3
+                                            } else {flas=1}
+                                            break;
+                        case 'Водитель':
+                            if(req.body.Brigade_fk ===3) {
+                                flas=3
+                            } else {flas=1}
+                            break;
+                        case 'медработник':
+                            if(req.body.Brigade_fk ===3) {
+                                flas=3
+                            } else {flas=1}
+                            break;
+                        case 'Медработник':
                             if(req.body.Brigade_fk ===3) {
                                 flas=3
                             } else {flas=1}
