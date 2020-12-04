@@ -184,7 +184,6 @@ module.exports = function (app) {
         try {
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select "PatientAddress","InBlackList", "InsuranceName", "InsurancePayType" from "Patients" ' +
                 'left join "Insurance" I on "Patients"."InsuranceId_fk" = I.id where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3', [req.body.userName, req.body.userSurname, req.body.userMiddlename], function (err, result) {
                 console.log(result.rows[0]);
@@ -195,7 +194,7 @@ module.exports = function (app) {
                     {
                         result: result.rows[0]
                     });
-
+                client.release();
             }));
         } catch (e) {
             throw(e)
