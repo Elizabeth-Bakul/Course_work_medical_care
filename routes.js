@@ -62,52 +62,52 @@ module.exports = function (app) {
                     flas=0
                     switch(req.body.typeWorker){
                         case 'бухгалтер-регистратор': 
-                            if(req.body.Brigade_fk !=3) {
+                            if(req.body.brigadenum !=3) {
                                 flas=2
                             } else {flas=1}
                             break;
                         case 'администратор':
-                            if(req.body.Brigade_fk !=3) {
+                            if(req.body.brigadenum !=3) {
                                 flas=2
                                 } else {flas=1}
                             break;
                         case 'врач':
-                            if(req.body.Brigade_fk ===3) {
+                            if(req.body.brigadenum ===3) {
                                 flas=3
                             } else {flas=1}
                             break;
                         case 'Врач':
-                                if(req.body.Brigade_fk ===3) {
+                                if(req.body.brigadenum ===3) {
                                     flas=3
                                 } else {flas=1}
                                 break;
                         case 'фельдшер':
-                                    if(req.body.Brigade_fk ===3) {
+                                    if(req.body.brigadenum ===3) {
                                         flas=3
                                     } else {flas=1}
                                     break;
                         case 'Фельдшер':
-                                        if(req.body.Brigade_fk ===3) {
+                                        if(req.body.brigadenum ===3) {
                                             flas=3
                                         } else {flas=1}
                                         break;
                         case 'водитель':
-                                            if(req.body.Brigade_fk ===3) {
+                                            if(req.body.brigadenum ===3) {
                                                 flas=3
                                             } else {flas=1}
                                             break;
                         case 'Водитель':
-                            if(req.body.Brigade_fk ===3) {
+                            if(req.body.brigadenum ===3) {
                                 flas=3
                             } else {flas=1}
                             break;
                         case 'медработник':
-                            if(req.body.Brigade_fk ===3) {
+                            if(req.body.brigadenum ===3) {
                                 flas=3
                             } else {flas=1}
                             break;
                         case 'Медработник':
-                            if(req.body.Brigade_fk ===3) {
+                            if(req.body.brigadenum ===3) {
                                 flas=3
                             } else {flas=1}
                             break;
