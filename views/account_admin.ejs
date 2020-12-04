@@ -28,11 +28,11 @@
     </div>
 </header>
 <nav class="nav">
-    <a class="nav__link nav_active" id="add_diagnosis_nav" href="#0">Добавить диагноз</a>
+    <a class="nav__link nav_active" id="add_diagnosis_nav" href="#0">Редактировать диагноз</a>
     <a class="nav__link" id="add_symptom_nav" href="#0">Редактировать симптом</a>
     <a class="nav__link" id="add_analysis_nav" href="#0">Редактировать анализ</a>
-    <a class="nav__link" id="add_medicine_nav" href="#0">Добавить лекарство</a>
-    <a class="nav__link" id="add_brigade_nav" href="#0">Добавить бригаду</a>
+    <a class="nav__link" id="add_medicine_nav" href="#0">Редактировать лекарство</a>
+    <a class="nav__link" id="add_brigade_nav" href="#0">Редактировать бригаду</a>
 
 </nav>
 
@@ -61,7 +61,7 @@ if(messages.success.length){
 <div class="add_diagnosis">
     <form class="search" name="search-form">
         <fieldset>
-            <legend class='sear2'>Добавление диагноза</legend>
+            <legend class='sear2'>Редактирование диагноза</legend>
             <label class="search-label" for="surname">Наименование диагноза:</label>
             <input class="surname" type="text" id="diagnosis_name" required>
             <label class="search-label" for="name"> Симптомы:</label>
@@ -73,6 +73,9 @@ if(messages.success.length){
             <button class="button" type="submit" id="submit_add_diagnosis">Добавить</button>
             <label class="success_request" for="surname">Диагноз успешно добавлен в базу</label>
             <label class="error_request" for="surname">Ошибка: диагноз уже есть в базе!</label>
+            <button class="button" type="submit" id="update_diagnosis">Добавить симптомы к диагозу</button><br>
+            <button class="button" type="submit" id="delete_diagnosis">Удалить</button>
+            <button class="button" type="submit" id="delete_diag_symptom">Удалить симптомы у диагноза</button>
         </fieldset>
     </form>
 </div>
@@ -107,7 +110,7 @@ if(messages.success.length){
 <div class="add_medicine">
     <form class="search" name="search-form">
         <fieldset>
-            <legend class='sear2'>Добавление лекарства</legend>
+            <legend class='sear2'>Редактирование лекарства</legend>
             <label class="search-label" for="surname">Наименование лекарства</label>
             <input class="surname" type="text" id="name_medicine" required>
             <label class="search-label" for="name">Диагноз:</label>
@@ -115,8 +118,11 @@ if(messages.success.length){
                 <% for(var i = 0; i < list_values_diagnosis.length; i++) { %>
                     <option><%= list_values_diagnosis[i].Diagnosis_name %></option>
                 <% } %>
-            </select>
+            </select><br>
             <button class="button" type="submit" id="submit_add_medicine">Добавить</button>
+            <button class="button" type="submit" id="update_medicine">Добавить диагноз к лекарству</button><br>
+            <button class="button" type="submit" id="delete_medicine">Удалить</button>
+            <button class="button" type="submit" id="delete_diag_medicine">Удалить диагноз у лекарства</button>
         </fieldset>
     </form>
 </div>
@@ -124,10 +130,11 @@ if(messages.success.length){
 <div class="add_brigade">
     <form class="search" name="search-form">
         <fieldset>
-            <legend class='sear2'>Добавление бригады</legend>
+            <legend class='sear2'>Редактирование бригады</legend>
             <label class="search-label" for="surname">Наименование бригады:</label>
             <input class="surname" type="text" id="surname" name="surname" required>
             <button class="button" type="submit" id="subsear">Добавить</button>
+            <button class="button" type="submit" id="delsear">Удалить</button>
         </fieldset>
     </form>
 </div>

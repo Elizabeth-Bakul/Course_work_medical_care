@@ -137,14 +137,17 @@ document.getElementById("submit_add_diagnosis").addEventListener("click", functi
 
 document.getElementById("submit_add_symptom").addEventListener("click", function (e) {
     e.preventDefault();
-    let symptom_name = document.getElementById('addSymptom');
+    console.log('hello')
+    let symptomName = document.getElementById('addSymptom');
+    console.log(symptomName.value)
     let symptom = JSON.stringify({
-        symptom_name: symptom_name.value,
+        symptom_name: symptomName.value,
     });
-    console.log(symptom_name);
+    console.log(symptom);
     let request = new XMLHttpRequest();
     request.open("POST", "/add_symptom", true);
     request.setRequestHeader("Content-Type", "application/json");
+    request.send(symptom);
     request.send(symptom);
 
     request.addEventListener("load", function () {
@@ -190,7 +193,25 @@ document.getElementById("submit_add_medicine").addEventListener("click", functio
     request.send(medicine);
 })
 
-
+document.getElementById("subsear").addEventListener("click", function (e) {
+    e.preventDefault();
+    let brigade_name1 = document.getElementById('surname');
+    let brigade = JSON.stringify({
+        brigade_name1: brigade_name1.value,
+    });
+    let request = new XMLHttpRequest();
+    request.open("POST", "/add_brigade", true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(brigade);
+    request.addEventListener("load", function () {
+    let infDel = JSON.parse(request.response);
+        if(infDel.flag){
+            alert('Добавление произошло успешно')
+        } else{
+        alert('Произошла ошибка с добавлением, данная бригада есть в базе.')
+        }
+})
+})
 document.getElementById("delete_analysis").addEventListener("click", function (e) {
     e.preventDefault();
     let analysis_name1 = document.getElementById('add_analysis');
@@ -231,3 +252,171 @@ document.getElementById("delete_symptom").addEventListener("click", function (e)
     }
     })
 })
+
+document.getElementById("delsear").addEventListener("click", function (e) {
+    e.preventDefault();
+    let brigade_name1 = document.getElementById('surname');
+    let brigade1 = JSON.stringify({
+        brigade_name1: brigade_name1.value,
+    });
+    let request1 = new XMLHttpRequest();
+    request1.open("POST", "/delete_brigada", true);
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.send(brigade1);
+    request1.addEventListener("load", function () {
+    let infDel = JSON.parse(request1.response);
+    if(infDel.flag){
+        alert('Удаление произошло успешно.Работники,относящиеся к бригаде уволены')
+    } else{
+        alert('Произошла ошибка с удалением, данной бригады нет в базе. ')
+    }
+    })
+})
+
+document.getElementById("delete_medicine").addEventListener("click", function (e) {
+    e.preventDefault();
+    let medicine_name1 = document.getElementById('name_medicine');
+    let medicine1 = JSON.stringify({
+        medicine_name1: medicine_name1.value,
+    });
+    let request1 = new XMLHttpRequest();
+    request1.open("POST", "/delete_medicine", true);
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.send(medicine1);
+    request1.addEventListener("load", function () {
+    let infDel = JSON.parse(request1.response);
+    if(infDel.flag){
+        alert('Удаление произошло успешно')
+    } else{
+        alert('Произошла ошибка с удалением, данного лекарства нет в базе')
+    }
+    })
+})
+
+document.getElementById("delete_diag_medicine").addEventListener("click", function (e) {
+    e.preventDefault();
+    let medicine_name2 = document.getElementById('name_medicine');
+    let symptom_name2=document.getElementById('select_diagnosis')
+    let medicine2 = JSON.stringify({
+        medicine_name: medicine_name2.value,
+        diagnosis: $('#select_diagnosis').val()
+    });
+    let request1 = new XMLHttpRequest();
+    request1.open("POST", "/delete_medicine_diag", true);
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.send(medicine2);
+    request1.addEventListener("load", function () {
+    let infDel = JSON.parse(request1.response);
+    if(infDel.flag){
+        alert('Удаление произошло успешно')
+    } else{
+        if(infDel.flag==='false1') {alert('Произошла ошибка с удалением, данного лекарства нет в базе')}
+        else {
+            if(infDel.flag==='false2'){
+                alert('Произошла ошибка с удалением, данного диагноза нет в базе')
+            } else {
+                alert('Произошла ошибка с удалением, у данного лекарства нет такого диагноза')
+            }
+
+        }
+
+    }
+    })
+})
+
+document.getElementById("update_medicine").addEventListener("click", function (e) {
+    e.preventDefault();
+    let medicine_name2 = document.getElementById('name_medicine');
+    let symptom_name2=document.getElementById('select_diagnosis')
+    let medicine2 = JSON.stringify({
+        medicine_name: medicine_name2.value,
+        diagnosis: $('#select_diagnosis').val()
+    });
+    let request1 = new XMLHttpRequest();
+    request1.open("POST", "/update_medicine_diag", true);
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.send(medicine2);
+    request1.addEventListener("load", function () {
+    let infDel = JSON.parse(request1.response);
+    if(infDel.flag==='true'){
+        alert('Добавление произошло успешно')
+    } else{
+        if(infDel.flag==='false1') {alert('Произошла ошибка с добавление, данного лекарства нет в базе. Нажмите на кнопку добавить')}
+        else {
+            if(infDel.flag==='false2'){
+                alert('Произошла ошибка с добавлением, данного диагноза нет в базе')
+            } else {
+                alert('Произошла ошибка с добавление, у данного лекарства есть такой диагноза')
+            }
+
+        }
+
+    }
+    })
+})
+
+
+document.getElementById("delete_diagnosis").addEventListener("click", function (e) {
+    e.preventDefault();
+    let diagnosis_name1 = document.getElementById('diagnosis_name');
+    let diagnosis1 = JSON.stringify({
+        diagnosis_name1: diagnosis_name1.value,
+    });
+    let request1 = new XMLHttpRequest();
+    request1.open("POST", "/delete_diagnosis", true);
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.send(diagnosis1);
+    request1.addEventListener("load", function () {
+    let infDel = JSON.parse(request1.response);
+    if(infDel.flag){
+        alert('Удаление произошло успешно')
+    } else{
+        alert('Произошла ошибка с удалением, данного диагноза нет в базе')
+    }
+    })
+})
+
+document.getElementById("delete_diag_symptom").addEventListener("click", function (e) {
+    e.preventDefault();
+    let diagnosis_name = document.getElementById('diagnosis_name');
+    let symptom_name = document.getElementById('symptom_name');
+    console.log(diagnosis_name);
+    console.log(symptom_name);
+    let diagnosis = JSON.stringify({
+        diagnosis_name: diagnosis_name.value,
+        symptom_name: $('#select_symptoms').val(),
+    });
+    console.log(diagnosis);
+    let request = new XMLHttpRequest();
+    request.open("POST", "/delete_diagnosis_symptoms", true); // посылаем запрос на адрес "/user"
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(diagnosis);
+    request.addEventListener("load", function () {
+        let infDel = JSON.parse(request.response);
+        console.log(infDel)
+        //ДАНЯ добавь обработку результата false-нет диагноза; false1-нет симптома из списка  false2-нет у диагноза данного симптома false3-не удалось удалить true -удалилось
+    })
+})
+
+document.getElementById("update_diagnosis").addEventListener("click", function (e) {
+    e.preventDefault();
+    let diagnosis_name = document.getElementById('diagnosis_name');
+    let symptom_name = document.getElementById('symptom_name');
+    console.log(diagnosis_name);
+    console.log(symptom_name);
+    let diagnosis = JSON.stringify({
+        diagnosis_name: diagnosis_name.value,
+        symptom_name: $('#select_symptoms').val(),
+    });
+    console.log(diagnosis);
+    let request = new XMLHttpRequest();
+    request.open("POST", "/update_diagnosis", true); // посылаем запрос на адрес "/user"
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(diagnosis);
+    request.addEventListener("load", function () {
+        let infDel = JSON.parse(request.response);
+        console.log(infDel)
+        //ДАНЯ добавь обработку результата false-нет диагноза; false1-нет симптома из списка  false2-нет у диагноза данного симптома false3-не удалось удалить true -удалилось
+    })
+})
+
