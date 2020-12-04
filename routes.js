@@ -1166,9 +1166,9 @@ module.exports = function (app) {
                                                     client.query('delete from "Diagnosis-Symptoms" where "Diagnosis_id_fk"=$1 and "Symptoms_id_fk"=$2 ',[result1.rows[0].id,id_symptom.rows[0].id], function (err4,result3){
                                                         if(err4) {console.log(err4)
                                                             let d={}
-                                                            d.id=id_symptom.Symptom_name
+                                                            d.id=id_symptom.rows[0].Symptom_name
                                                             d.flag='false3'
-                                                            mas_flag.push(c)
+                                                            mas_flag.push(d)
                                                             if(okl===req.body.symptom_name.length-1){
                                                                 console.log('MISTAKE DELETE')
                                                                 console.log(mas_flag)
