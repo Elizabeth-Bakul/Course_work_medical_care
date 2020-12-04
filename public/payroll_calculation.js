@@ -100,24 +100,44 @@ button.addEventListener("click", function (e){
                         ras=bzdoc+0.15*receivedZP.res[m].s;
                     } else{ras=bzdoc};
                     break;
+                case 'Врач':
+                        if (receivedZP.res[m].s!='null'){
+                            ras=bzdoc+0.15*receivedZP.res[m].s;
+                        } else{ras=bzdoc};
+                        break;
                 case 'фельдшер':
                     if (receivedZP.res[m].s!='null'){
                         ras=bzdoc+0.15*receivedZP.res[m].s;
                     } else{ras=bzdoc};
                     break; 
+                case 'Фельдшер':
+                        if (receivedZP.res[m].s!='null'){
+                            ras=bzdoc+0.15*receivedZP.res[m].s;
+                        } else{ras=bzdoc};
+                        break;
                 case "администратор":
                     ras=bzad; 
                     break;
-                case "медсестра":
+                case "Медработник":
                     if (receivedZP.res[m].s!='null'){
                         ras=bzm+0.1*receivedZP.res[m].s;
                     } else{ras=bzm};
-                    break; 
+                break; 
+                case "медработник":
+                    if (receivedZP.res[m].s!='null'){
+                        ras=bzm+0.1*receivedZP.res[m].s;
+                    } else{ras=bzm};
+                break;
                 case "водитель":
                     if (receivedZP.res[m].s!='null'){
                         ras=bzdr+0.05*receivedZP.res[m].s;
                     } else{ras=bzdr};
-                    break; 
+                    break;
+                case "Водитель":
+                        if (receivedZP.res[m].s!='null'){
+                            ras=bzdr+0.05*receivedZP.res[m].s;
+                        } else{ras=bzdr};
+                        break;    
                 default:
                     console.log("Ошибка! Неизвестный тип работника.");
                     break;
