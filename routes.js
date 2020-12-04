@@ -1048,7 +1048,7 @@ module.exports = function (app) {
                                             })
                                         }
                                         else {
-                                            client.query('delete from "Diagnosis-Medicines" where "Diagnosis_id_fk"=$1 and "Medicines_id_fk"=$2',[result1.rows[0].id,result2.rows[0].id],function (err,result){
+                                            client.query('delete from "Diagnosis-Medicines" where "Diagnosis_id_fk"=$2 and "Medicines_id_fk"=$1',[result1.rows[0].id,result2.rows[0].id],function (err,result){
                                     if (err){
                                         console.log(err)
                                         }
