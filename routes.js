@@ -58,7 +58,7 @@ module.exports = function (app) {
                     req.flash('warning', 'This email address is already registered.');
                     res.redirect('/join');
                 } else {
-                    if (((req.body.WorkerType==='бухгалтер-регистратор')||(req.body.WorkerType==='администратор'))&&(req.body.Brigade_fk!=3)){
+                    if (((req.body.WorkerType == 'бухгалтер-регистратор') || (req.body.WorkerType == 'администратор')) && (req.body.Brigade_fk !=3 )){
                         req.flash('warning', 'Неправильная бригада. Для этой профессии бригада 3');
                         res.redirect('/join');
                     }
@@ -66,7 +66,7 @@ module.exports = function (app) {
                         req.flash('warning', 'Неправильная бригада. Для этой профессии бригада не может быть 3');
                         res.redirect('/join');
                     }
-                    if((req.body.WorkerType!='врач')&&(req.body.WorkerType!='Врач') &&(req.body.WorkerType!='фельдшер')&&(req.body.WorkerType!='Фельдшер')&&(req.body.WorkerType!='водитель')&&(req.body.WorkerType!='Водитель')&&(req.body.WorkerType==='медработник')&&(req.body.WorkerType!='Медработник')){
+                    if((req.body.WorkerType==='врач')&&(req.body.WorkerType!='Врач') &&(req.body.WorkerType!='фельдшер')&&(req.body.WorkerType!='Фельдшер')&&(req.body.WorkerType!='водитель')&&(req.body.WorkerType!='Водитель')&&(req.body.WorkerType==='медработник')&&(req.body.WorkerType!='Медработник')){
                         req.flash('warning', 'Неправильная профессия');
                         res.redirect('/join');
                     }
@@ -468,6 +468,9 @@ module.exports = function (app) {
             case 'фельдшер':
                 res.redirect('/account_doctor')
                 break;
+            case 'Фельдшер':
+                    res.redirect('/account_doctor')
+                    break;
             default:
                 console.log("Ошибка! Неизвестный тип работника.");
                 res.redirect('/');
