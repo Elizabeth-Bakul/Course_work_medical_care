@@ -1290,13 +1290,6 @@ module.exports = function (app) {
                                                     mas_flag.push(b)
                                                     console.log("DIAGNOSO-SYMPT")
                                                     console.log(mas_flag)
-                                                    if(okl===req.body.symptom_name.length-1){
-                                                        console.log(mas_flag)
-                                                        
-                                                        res.json({
-                                                            flag:mas_flag
-                                                            })
-                                                        }
                                                     }
                                                 }
                                             }
