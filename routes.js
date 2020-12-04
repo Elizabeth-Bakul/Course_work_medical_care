@@ -50,6 +50,7 @@ module.exports = function (app) {
     app.post('/join', async function (req, res) {
 
         try {
+            console.log(req.body)
             const client = await pool.connect()
             await client.query('BEGIN')
             var pwd = await bcrypt.hash(req.body.password, 5);
@@ -74,8 +75,8 @@ module.exports = function (app) {
                             flas=4;
                             break;
                     }
-                    
-                    if (flas==1){
+                    console.log(flas)
+                    if (flas===1){
 client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddleName", "WorkerType", "Brigade_fk", "Login", "Password") ' +
                         'VALUES ($1, $2, $3, $4, $5, $6, $7)',
                         [req.body.lastName, req.body.firstName, req.body.middleName, req.body.typeWorker, req.body.brigadenum, req.body.username, pwd], function (err, result) {
@@ -95,11 +96,11 @@ client.query('INSERT INTO "Workers" ("WorkerSurname", "WorkerName","WorkerMiddle
                 }
 
                      else {
-                        if (flas==2){
-                            req.flash('danger', 'Неправильная бригада, для этой профессии бригада 2')
+                        if (flas===2){
+                            req.flash('danger', 'Неправильная бригада, для этой профессии бригада 3')
                             res.redirect('/join');
                         } else {
-                            if (flas==3){
+                            if (flas===3){
                                 req.flash('danger', 'Неправильная бригада')
                                 res.redirect('/join');
                             } else {
