@@ -38,16 +38,19 @@ document.getElementById("subsear").addEventListener("click", function (e){
     request.addEventListener("load", function () {
         // получаем и парсим ответ сервера
         let receivedUser = JSON.parse(request.response);
-        console.log(receivedUser.PatientAddress, " ", receivedUser.InBlackList, " ", receivedUser.InsuranceName, " ", receivedUser.InsurancePayType, " ");// смотрим ответ сервера
-        if (typeof receivedUser=="undefined") {n2.removeAttribute('hidden');} else{
+        console.log(receivedUser.result)
+        //console.log(receivedUser.result.PatientAddress, " ", receivedUser.result.InBlackList, " ", receivedUser.InsuranceName, " ", receivedUser.InsurancePayType, " ");// смотрим ответ сервера
+        if (typeof receivedUser.result == "undefined") {
+            n2.removeAttribute('hidden');
+        } else {
 
-            if (receivedUser.InBlackList) {
+            if (receivedUser.result.InBlackList) {
                 registerForm.setAttribute('hidden', 'true');
                 n1.removeAttribute('hidden');
             } else {
                 registerForm.removeAttribute('hidden');
-                uA.value = receivedUser.PatientAddress;
-                uSt.value = receivedUser.InsuranceName;
+                uA.value = receivedUser.result.PatientAddress;
+                uSt.value = receivedUser.result.InsuranceName;
                 uSt.setAttribute('readonly', 'true');
                 rl.setAttribute('hidden', 'true');
                 r1.setAttribute('hidden', 'true');
