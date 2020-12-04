@@ -60,7 +60,7 @@ module.exports = function (app) {
                     res.redirect('/join');
                 } else {
                     flas=0
-                    switch(req.body.WorkerType){
+                    switch(req.body.typeWorker){
                         case 'бухгалтер-регистратор': 
                             if(req.body.Brigade_fk !=3) {
                                 flas=2
