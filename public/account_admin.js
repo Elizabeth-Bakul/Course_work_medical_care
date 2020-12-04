@@ -160,12 +160,12 @@ document.getElementById("subsear").addEventListener("click", function (e) {
     request1.send(brigade1);
     request1.addEventListener("load", function () {
     let infDel = JSON.parse(request1.response);
-    if(infDel.flag){
-        alert('Добавление произошло успешно')
-    } else{
+        if(infDel.flag){
+            alert('Добавление произошло успешно')
+        } else{
         alert('Произошла ошибка с добавлением, данная бригада есть в базе.')
-    }
-    })
+        }
+})
 })
 document.getElementById("delete_analysis").addEventListener("click", function (e) {
     e.preventDefault();
