@@ -1136,10 +1136,11 @@ module.exports = function (app) {
                                 } else {
                                     if(id_symptom.rowCount===0){
                                         let a={}
-                                        a.id=id_symptom.Symptom_name
+                                        a.id=id_symptom.rows[0].Symptom_name
                                         a.flag='false1'
                                         mas_flag.push(a)
                                         if(okl===req.body.symptom_name.length-1){
+                                            console.log("Sympt")
                                             console.log(mas_flag)
                                             res.json({
                                                 flag:mas_flag
@@ -1151,11 +1152,12 @@ module.exports = function (app) {
                                             else {
                                                 if(result2.rowCount===0){
                                                     let b={}
-                                                    b.id=id_symptom.Symptom_name
+                                                    b.id=id_symptom.rows[0].Symptom_name
                                                     b.flag='false2'
                                                     mas_flag.push(b)
                                                     if(okl===req.body.symptom_name.length-1){
                                                         console.log(mas_flag)
+                                                        console.log("DIAGNOSO-SYMPT")
                                                         res.json({
                                                             flag:mas_flag
                                                             })
@@ -1168,6 +1170,7 @@ module.exports = function (app) {
                                                             d.flag='false3'
                                                             mas_flag.push(c)
                                                             if(okl===req.body.symptom_name.length-1){
+                                                                console.log('MISTAKE DELETE')
                                                                 console.log(mas_flag)
                                                                 res.json({
                                                                     flag:mas_flag
@@ -1181,10 +1184,12 @@ module.exports = function (app) {
                                                             mas_flag.push(c)
                                                             client.query('COMMIT')
                                                             if(okl===req.body.symptom_name.length-1){
+                                                                console.log('DELETE')
                                                                 console.log(mas_flag)
                                                                 res.json({
                                                                     flag:mas_flag
                                                                     })
+
                                                             }
                                                         }
                                                     })
@@ -1193,12 +1198,8 @@ module.exports = function (app) {
                                         })
                                         client.query('COMMIT')
                                     }
-                                } if(okl===req.body.symptom_name.length-1){
-                                    console.log(mas_flag)
-                                    res.json({
-                                        flag:mas_flag
-                                        })
-                                }
+                                } 
+                                
                             })
                             client.query('COMMIT')
                         }
