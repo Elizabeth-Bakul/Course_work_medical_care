@@ -229,7 +229,7 @@ document.getElementById("subsear").addEventListener("click", function (e) {
     request.send(brigade);
     request.addEventListener("load", function () {
         let infDel = JSON.parse(request.response);
-        if (infDel.flag) {
+        if (infDel.flag == 'true') {
             alert('Добавление произошло успешно')
         } else {
             alert('Произошла ошибка с добавлением, данная бригада есть в базе.')
@@ -315,7 +315,7 @@ document.getElementById("delete_medicine").addEventListener("click", function (e
     request1.send(medicine1);
     request1.addEventListener("load", function () {
         let infDel = JSON.parse(request1.response);
-        if (infDel.flag) {
+        if (infDel.flag == 'true') {
             alert('Удаление произошло успешно')
         } else {
             alert('Произошла ошибка с удалением, данного лекарства нет в базе')
@@ -378,7 +378,7 @@ document.getElementById("update_medicine").addEventListener("click", function (e
                 if (infDel.flag === 'false2') {
                     alert('Произошла ошибка с добавлением, данного диагноза нет в базе')
                 } else {
-                    alert('Произошла ошибка с добавлением, у данного лекарства есть такой диагноза')
+                    alert('Произошла ошибка с добавлением, данное лекарство уже связано с этим диагнозом')
                 }
 
             }
@@ -425,7 +425,21 @@ document.getElementById("delete_diag_symptom").addEventListener("click", functio
     request.send(diagnosis);
     request.addEventListener("load", function () {
         let infDel = JSON.parse(request.response);
-        console.log(infDel)
+        console.log("флаг")
+
+        if (infDel.flag === 'true') {
+            alert('Удаление произошло успешно')
+        } else {
+            if (infDel.flag === 'false1') {
+                alert('Произошла ошибка с удалением, данного симптома у диагноза нет в базе')
+            } else {
+                if (infDel.flag === 'false2') {
+                    alert('Произошла ошибка с удалением, данного симптома у диагноза нет в базе')
+                }
+
+            }
+
+        }
         //ДАНЯ добавь обработку результата false-нет диагноза; false1-нет симптома из списка  false2-нет у диагноза данного симптома false3-не удалось удалить true -удалилось
     })
 })

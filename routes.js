@@ -52,7 +52,6 @@ module.exports = function (app) {
         try {
             console.log(req.body)
             const client = await pool.connect()
-            await client.query('BEGIN')
             var pwd = await bcrypt.hash(req.body.password, 5);
             await JSON.stringify(client.query('SELECT id FROM "Workers" WHERE "Login"=$1', [req.body.username], function (err, result) {
                 if (result.rows[0]) {
@@ -145,14 +144,12 @@ module.exports = function (app) {
                                     res.redirect('/join');
                                 } else {
 
-                                    client.query('COMMIT')
                                     console.log(result)
                                     req.flash('success', 'User created.')
                                     res.redirect('/login');
                                     return;
                                 }
                             });
-                        client.release();
                     } else {
                         if (flas === 2) {
                             req.flash('danger', 'Неправильная бригада, для этой профессии бригада 3')
@@ -172,6 +169,8 @@ module.exports = function (app) {
 
                 }
             }))
+            client.release();
+
         } catch (e) {
             throw(e)
         }
@@ -194,8 +193,9 @@ module.exports = function (app) {
                     {
                         result: result.rows[0]
                     });
-                client.release();
             }));
+            client.release();
+
         } catch (e) {
             throw(e)
         }
@@ -203,7 +203,6 @@ module.exports = function (app) {
     app.get('/account_doctor', ensureAuthenticated, async function (req, res) {
         try {
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select id,"InformalDescription","RequestTime" from "Requests" where "AcceptTime" is NULL', [], function (err, result) {
                 if (err) {
                     console.log(err)
@@ -219,7 +218,6 @@ module.exports = function (app) {
                             success: req.flash('success')
                         }
                     });
-                    client.query('COMMIT')
                 }
             }))
             client.release()
@@ -231,7 +229,6 @@ module.exports = function (app) {
         try {
             console.log(req.body);
             const client1 = await pool.connect()
-            await client1.query('BEGIN')
             for (let yi = 0; yi < req.body.idS.length; yi++) {
                 await JSON.stringify(client1.query('select id from "Request-Symptoms" where "Request_id_fk"=$1 and "Symptom_id_fk"=$2', [req.body.idReq, req.body.idS[yi]], function (err2, result2) {
                     if (err2) {
@@ -242,22 +239,16 @@ module.exports = function (app) {
                                 if (err3) {
                                     console.log(err3)
                                 } else {
-                                    client1.query('COMMIT')
 
                                 }
                             })
-                            client1.query('COMMIT')
+
 
                         }
-                        client1.query('COMMIT')
                     }
-                    client1.query('COMMIT')
                 }))
-                client1.query('COMMIT')
             }
-            client1.release()
             const client = await pool.connect()
-            await client.query('BEGIN')
             var rk = []
             await JSON.stringify(client.query('SELECT "Diagnosis_id_fk", "Diagnosis_name" FROM "Diagnosis-Symptoms" left join "Diagnosis" on "Diagnosis-Symptoms"."Diagnosis_id_fk"="Diagnosis".id where "Symptoms_id_fk"=$1', [req.body.idS[0]], function (err, result) {
                 if (err) {
@@ -324,10 +315,12 @@ module.exports = function (app) {
                     }
 
                 }
+
             }))
             console.log(rk)
-            client.query('COMMIT')
+
             client.release()
+            client1.release()
         } catch (e) {
             throw(e)
         }
@@ -336,17 +329,13 @@ module.exports = function (app) {
         try {
             console.log(req.body)
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('UPDATE "Requests" SET "Diagnosis_id_fk"=$1 WHERE id=$2', [req.body.idD, req.body.idReq], function (err, result) {
                 if (err) {
                     console.log(err)
                 } else {
-                    client.query('COMMIT')
                 }
             }))
-            client.release()
             const client1 = await pool.connect()
-            await client1.query('BEGIN')
             await JSON.stringify(client1.query('select "Medicines_id_fk", "Medicines_name" from "Diagnosis-Medicines" left join "Medicines" on "Diagnosis-Medicines"."Medicines_id_fk"="Medicines".id where "Diagnosis_id_fk"=$1', [req.body.idD], function (err1, result1) {
                 if (err1) {
                     console.log(err1)
@@ -370,10 +359,10 @@ module.exports = function (app) {
                         })
                     }
 
-                    client1.query('COMMIT')
 
                 }
             }))
+            client.release()
             client1.release()
         } catch (e) {
             throw(e)
@@ -383,7 +372,6 @@ module.exports = function (app) {
         try {
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             for (let ym = 0; ym < req.body.idM.length; ym++) {
                 await JSON.stringify(client.query('select id from "Request-Medicines" where "Request_id_fk"=$1 and "Medicine_id_fk"=$2', [req.body.idReq, req.body.idM[ym]], function (err2, result2) {
                     if (err2) {
@@ -394,17 +382,12 @@ module.exports = function (app) {
                                 if (err3) {
                                     console.log(err3)
                                 } else {
-                                    client.query('COMMIT')
                                 }
                             })
-                            client.query('COMMIT')
 
                         }
-                        client.query('COMMIT')
                     }
-                    client.query('COMMIT')
                 }))
-                client.query('COMMIT')
             }
             res.json({})
             client.release()
@@ -416,7 +399,6 @@ module.exports = function (app) {
         try {
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             for (let yq = 0; yq < req.body.idI.length; yq++) {
                 await JSON.stringify(client.query('select id from "Requests-Analysis" where "Request_id_fk"=$1 and "Analysis_id_fk"=$2', [req.body.idReq, req.body.idI[yq]], function (err2, result2) {
                     if (err2) {
@@ -427,17 +409,12 @@ module.exports = function (app) {
                                 if (err3) {
                                     console.log(err3)
                                 } else {
-                                    client.query('COMMIT')
                                 }
                             })
-                            client.query('COMMIT')
 
                         }
-                        client.query('COMMIT')
                     }
-                    client.query('COMMIT')
                 }))
-                client.query('COMMIT')
             }
             client.release()
             res.json({})
@@ -450,20 +427,16 @@ module.exports = function (app) {
         try {
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('UPDATE public."Requests" SET  "AcceptTime"=$1, "Brigade_id_fk"=$2 WHERE id=$3', [req.body.dA, req.body.idBrig, req.body.idReq], function (err, result) {
                 if (err) {
                     res.flash('danger', 'Ошибка с обновлением данных');
                     res.redirect('/account_doctor')
                 } else {
-                    client.query('COMMIT');
                     console.log('Update success');
                     return;
                 }
             }))
-            client.release()
             const client2 = await pool.connect()
-            await client2.query('BEGIN')
             await JSON.stringify(client2.query('select "Requests".id, "InformalDescription","RequestTime","AcceptTime", "PatientSurname", "PatientName","PatientMiddleName","PatientAddress" from "Requests" left join "Patients" on "Requests"."Patient_fk"="Patients".id where "Requests".id=$1', [req.body.idReq], function (err1, result1) {
                     if (err1) {
                         console.log(err1)
@@ -496,7 +469,6 @@ module.exports = function (app) {
                                             }
 
                                         })
-                                        client2.query('COMMIT')
                                     }
                                 })
                             }
@@ -504,6 +476,7 @@ module.exports = function (app) {
                     }
                 })
             )
+            client.release()
             client2.release()
         } catch (e) {
             throw(e)
@@ -534,11 +507,8 @@ module.exports = function (app) {
             case "администратор":
                 try {
                     const client = await pool.connect()
-                    await client.query('BEGIN')
                     await JSON.stringify(client.query('select "Symptom_name" from "Symptoms"', [], function (err, result) {
                         JSON.stringify(client.query('select "Diagnosis_name" from "Diagnosis"', [], function (err1, result1) {
-
-
                             if (err) {
                                 console.log("Error")
                             } else {
@@ -559,6 +529,7 @@ module.exports = function (app) {
 
 
                     }))
+                    client.release();
                 } catch (e) {
                     throw(e)
                 }
@@ -580,7 +551,6 @@ module.exports = function (app) {
     app.get('/account_otch', ensureAuthenticated, async function (req, res) {
         try {
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select id,"BrigadeName" from "Brigades"', [], function (err, result) {
                 if (err) {
                     console.log("Error")
@@ -597,6 +567,7 @@ module.exports = function (app) {
                     })
                 }
             }))
+            client.release();
         } catch (e) {
             throw(e)
         }
@@ -605,7 +576,6 @@ module.exports = function (app) {
     app.get('/account_otch_pat', ensureAuthenticated, async function (req, res) {
         try {
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select id, "PatientName","PatientSurname","PatientMiddleName" from "Patients"', [], function (err, result) {
                 if (err) {
                     console.log(err)
@@ -622,6 +592,7 @@ module.exports = function (app) {
                     })
                 }
             }))
+            client.release();
         } catch (e) {
             throw(e)
         }
@@ -633,7 +604,6 @@ module.exports = function (app) {
             //2. Поиск пациента в бд(id, adress). Если есть, то сравниваем адрес. Адрес не совподает-> меняем адрес. Пациента нет в БД: Добавляем, получаем id.
             //3 Добавляем в БД вызов с введенными данными и полученными id из пункта 1 и пункта 2.
             const client = await pool.connect()
-            await client.query('BEGIN')
             let user = {};
             await JSON.stringify(client.query('select id from "Insurance" where "InsuranceName"=$1', [req.body.str], function (err, result) {
                     if (err) {
@@ -647,7 +617,6 @@ module.exports = function (app) {
                                 if (err1) {
                                     console.log('Ошибка с добавлением в таблицу Страховки.')
                                 } else {
-                                    client.query('COMMIT')
                                     console.log('Страховая компания добавлена.')
                                     return;
                                 }
@@ -656,22 +625,19 @@ module.exports = function (app) {
                     }
                 }
             ))
-            client.release()
+            //client.release()
             const client2 = await pool.connect()
-            await client2.query('BEGIN')
             await JSON.stringify(client2.query('select id from "Insurance" where "InsuranceName"=$1', [req.body.str], function (err2, result2) {
                 if (err2) {
                     console.log("Ошибка с поиском Страховой компании2")
                 } else {
                     console.log(result2.rows[0].id)
                     user.id = result2.rows[0].id;
-                    client2.query('COMMIT')
                     return;
                 }
             }))
-            client2.release()
+            //client2.release()
             const client3 = await pool.connect()
-            await client3.query('BEGIN')
             await JSON.stringify(client3.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3', [req.body.name, req.body.surname, req.body.Lastname], function (err3, result3) {
 
 
@@ -683,7 +649,6 @@ module.exports = function (app) {
                                 if (err5) {
                                     console.log('Ошибка с добавлением в таблицу Пациента.')
                                 } else {
-                                    client3.query('COMMIT')
                                     console.log('Пациент добавлен.')
                                     return
                                 }
@@ -693,9 +658,8 @@ module.exports = function (app) {
                 }
                 )
             )
-            client3.release()
+            //client3.release()
             const client4 = await pool.connect()
-            await client4.query('BEGIN')
             await JSON.stringify(client4.query('select id, "PatientAddress" from "Patients" where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3', [req.body.name, req.body.surname, req.body.Lastname], function (err6, result6) {
                 if (err6) {
                     console.log("Ошибка с поиском пациента")
@@ -708,7 +672,6 @@ module.exports = function (app) {
                                 console.log("Ошибка с обновлением данных")
                             } else {
                                 console.log("Адресс обновлен")
-                                client4.query('COMMIT')
                                 return
                             }
                         })
@@ -716,22 +679,26 @@ module.exports = function (app) {
                     }
                 }
             }))
-            client4.release()
+            //client4.release()
             const client5 = await pool.connect()
-            await client5.query('BEGIN')
             console.log(user.pol_id)
             await JSON.stringify(client5.query('INSERT INTO "Requests" ("Patient_fk","InformalDescription", "RequestTime") VALUES($1,$2,$3)', [user.pol_id, req.body.ops, req.body.date], function (err8, result8) {
                 if (err8) {
                     req.flash('danger', 'Ошибка')
                     res.redirect('/account')
                 } else {
-                    client.query('COMMIT')
                     req.flash('sucess', 'Вызов принят')
                     res.redirect('/account')
                     return;
                 }
             }))
+            //client5.release();
+            client.release();
+            client2.release();
+            client3.release();
+            client4.release();
             client5.release();
+
         } catch (e) {
             throw(e)
         }
@@ -741,7 +708,6 @@ module.exports = function (app) {
                 console.log(req.body);
 
                 const client = await pool.connect()
-                await client.query('BEGIN')
                 await JSON.stringify(client.query('select "WorkerSurname", "WorkerName","WorkerMiddleName", "WorkerType" from "Workers" where "Brigade_fk"=$1', [req.body.idBrigades], function (err1, result1) {
                     if (err1) {
                         console.log(err1)
@@ -757,7 +723,6 @@ module.exports = function (app) {
                                     work: result1.rows,
                                     req: result.rows
                                 })
-                                client.query('COMMIT')
                             }
                         })
                     }
@@ -784,7 +749,6 @@ module.exports = function (app) {
             console.log(req.body);
 
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select "PatientName","PatientSurname","PatientMiddleName","PatientAddress","InBlackList", "InsuranceName", "InsurancePayType" from "Patients" ' +
                 'left join "Insurance" I on "Patients"."InsuranceId_fk" = I.id where "Patients".id=$1', [req.body.idPat], function (err, result) {
                 if (err) {
@@ -800,7 +764,6 @@ module.exports = function (app) {
                                 Pat: result.rows,
                                 res: result1.rows
                             })
-                            client.query('COMMIT')
                         }
                     })
                 }
@@ -815,38 +778,32 @@ module.exports = function (app) {
             console.log(req.body)
             if (req.body.BlackList === 'on') {
                 const client = await pool.connect()
-                await client.query('BEGIN')
                 await JSON.stringify(client.query('UPDATE "Patients" SET "InBlackList"=$4 where "PatientName"=$1 and "PatientSurname"=$2 and "PatientMiddleName"=$3', [req.body.name, req.body.surname, req.body.Lastname, 'true'], function (err, result) {
                     if (err) {
                         console.log(err)
                     } else {
-                        client.query('COMMIT')
                     }
                 }))
-                client.release()
             }
             if (req.body.Hospitalization === 'on') {
                 const client1 = await pool.connect()
-                await client1.query('BEGIN')
                 await JSON.stringify(client1.query('UPDATE "Requests" SET "Hospitalization"=$2, "Distance"=$3 where "id"=$1', [req.body.idRReq, 'true', req.body.Rasstoynie], function (err1, result) {
                     if (err1) {
                         console.log(err1)
                     } else {
-                        client1.query('COMMIT')
                     }
                 }))
-                client1.release()
             }
             const client2 = await pool.connect()
-            await client2.query('BEGIN')
             await JSON.stringify(client2.query('UPDATE "Requests" SET "ArriveTime"=$2, "EndRequestTime"=$3,"RefundTime"=$4, "Count"=$5 where "id"=$1', [req.body.idRReq, req.body.dateArrive, req.body.dateEndRequestTime, req.body.dateRefund, req.body.countReq], function (err1, result) {
                 if (err1) {
                     console.log(err2)
                 } else {
-                    client2.query('COMMIT')
                     res.redirect('/account_doctor')
                 }
             }))
+            client.release()
+            client1.release()
             client2.release()
         } catch (e) {
             throw(e)
@@ -858,8 +815,6 @@ module.exports = function (app) {
                 //console.log(req.body.diagnosis_name);
                 const client = await
                     pool.connect()
-                await
-                    client.query('BEGIN')
                 await
                     JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis_name], function (err, result) {
                         if (err) {
@@ -899,23 +854,19 @@ module.exports = function (app) {
                                                                 } else {
 
 
-                                                                    client.query('COMMIT')
                                                                 }
                                                             })
 
 
-                                                            client.query('COMMIT')
                                                         }
                                                     })
 
                                                 }
 
-                                                client.query('COMMIT')
                                             }
                                         })
                                     }
 
-                                    client.query('COMMIT');
 
                                 })
                                 res.json({
@@ -934,7 +885,6 @@ module.exports = function (app) {
         try {
             console.log(req.body)
             const client = await pool.connect()
-            await client.query('BEGIN')
             client.query('select id from "Brigades" where "BrigadeName"=$1', [req.body.brigade_name1], function (err, result) {
                 if (err) {
                     console.log(err)
@@ -951,8 +901,6 @@ module.exports = function (app) {
                                 res.json({
                                     flag: 'true'
                                 })
-                                client.query('COMMIT')
-                                client.release()
                             }
                         })
 
@@ -961,6 +909,7 @@ module.exports = function (app) {
                     }
                 }
             })
+            client.release()
 
         } catch (e) {
             throw(e)
@@ -972,7 +921,6 @@ module.exports = function (app) {
         try {
             console.log(req.body)
             const client = await pool.connect()
-            await client.query('BEGIN')
 
             client.query('select id from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name], function (err, result) {
                 if (err) {
@@ -993,8 +941,6 @@ module.exports = function (app) {
                                 console.log("Error")
 
                             } else {
-                                client.query('COMMIT');
-                                client.release();
                             }
                         })
                         res.json({
@@ -1004,6 +950,7 @@ module.exports = function (app) {
                 }
             })
 
+            client.release();
 
         } catch (e) {
             throw(e)
@@ -1014,7 +961,6 @@ module.exports = function (app) {
 
         try {
             const client = await pool.connect()
-            await client.query('BEGIN')
 
             client.query('select id from "Analysis" where "AnalysisName"=$1', [req.body.analysis_name], function (err, result) {
                 if (err) {
@@ -1031,8 +977,6 @@ module.exports = function (app) {
                             if (err) {
                                 console.log("Error")
                             } else {
-                                client.query('COMMIT');
-                                client.release();
                             }
                         })
                         res.json({
@@ -1041,6 +985,7 @@ module.exports = function (app) {
                     }
                 }
             })
+            client.release();
 
         } catch (e) {
             throw(e)
@@ -1053,7 +998,6 @@ module.exports = function (app) {
                 const client = await
                     pool.connect()
                 await
-                    client.query('BEGIN')
 
                 client.query('select id from "Medicines" where "Medicines_name"=$1', [req.body.medicine_name], function (err, result) {
                     if (err) {
@@ -1082,13 +1026,10 @@ module.exports = function (app) {
                                                         if (err3) {
                                                             console.log(err3)
                                                         } else {
-                                                            client.query('COMMIT')
                                                         }
                                                     })
-                                                    client.query('COMMIT')
                                                 }
                                             })
-                                            client.query('COMMIT')
                                         }
                                     })
                                 }
@@ -1110,7 +1051,6 @@ module.exports = function (app) {
         try {
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select id from "Analysis" where "AnalysisName"=$1', [req.body.analysis_name1], function (err1, result1) {
                     if (err1) {
                         console.log(err1)
@@ -1127,8 +1067,6 @@ module.exports = function (app) {
                                         res.json({
                                             flag: 'true'
                                         })
-                                        client.query('COMMIT');
-                                        client.release();
                                     }
                                 }
                             )
@@ -1136,6 +1074,8 @@ module.exports = function (app) {
                     }
                 }
             ))
+            client.release();
+
         } catch (e) {
             throw(e)
         }
@@ -1145,7 +1085,6 @@ module.exports = function (app) {
         try {
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select id from "Symptoms" where "Symptom_name"=$1', [req.body.symptom_name1], function (err1, result1) {
                     if (err1) {
                         console.log(err1)
@@ -1162,8 +1101,6 @@ module.exports = function (app) {
                                     res.json({
                                         flag: 'true'
                                     })
-                                    client.query('COMMIT');
-                                    client.release();
                                 }
                             })
                         }
@@ -1171,6 +1108,8 @@ module.exports = function (app) {
                     }
                 }
             ))
+            client.release();
+
         } catch (e) {
             throw(e)
         }
@@ -1179,7 +1118,6 @@ module.exports = function (app) {
         try {
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select id from "Brigades" where "BrigadeName"=$1', [req.body.brigade_name1], function (err1, result1) {
                 if (err1) {
                     console.log(err1)
@@ -1197,13 +1135,13 @@ module.exports = function (app) {
                                 res.json({
                                     flag: 'true'
                                 })
-                                client.query('COMMIT');
-                                client.release();
                             }
                         })
                     }
                 }
             }))
+            client.release();
+
         } catch (e) {
             throw(e)
         }
@@ -1214,7 +1152,6 @@ module.exports = function (app) {
         try {
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select id from "Medicines" where "Medicines_name"=$1', [req.body.medicine_name1], function (err1, result1) {
                 if (err1) {
                     console.log(err1)
@@ -1232,13 +1169,13 @@ module.exports = function (app) {
                                 res.json({
                                     flag: 'true'
                                 })
-                                client.query('COMMIT');
-                                client.release();
                             }
                         })
                     }
                 }
             }))
+            client.release();
+
         } catch (e) {
             throw(e)
         }
@@ -1249,7 +1186,6 @@ module.exports = function (app) {
         try {
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select id from "Medicines" where "Medicines_name"=$1', [req.body.medicine_name], function (err1, result1) {
                 if (err1) {
                     console.log(err1)
@@ -1284,8 +1220,6 @@ module.exports = function (app) {
                                                         res.json({
                                                             flag: 'true'
                                                         })
-                                                        client.query('COMMIT');
-                                                        client.release();
                                                     }
                                                 })
                                             }
@@ -1299,6 +1233,7 @@ module.exports = function (app) {
                     }
                 }
             }))
+            client.release();
 
         } catch (e) {
             throw(e)
@@ -1308,7 +1243,6 @@ module.exports = function (app) {
         try {
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis_name1], function (err1, result1) {
                 if (err1) {
                     console.log(err1)
@@ -1326,13 +1260,13 @@ module.exports = function (app) {
                                 res.json({
                                     flag: 'true'
                                 })
-                                client.query('COMMIT');
-                                client.release();
                             }
                         })
                     }
                 }
             }))
+            client.release();
+
         } catch (e) {
             throw(e)
         }
@@ -1341,9 +1275,34 @@ module.exports = function (app) {
     })
     app.post('/delete_diagnosis_symptoms', jsonParser, async function (req, res) {
         try {
+
+            async function setflag(a) {
+                switch (a) {
+                    case 1:
+                        res.json({
+                            flag: 'false1'
+                        })
+                        break;
+                    case 2:
+                        res.json({
+                            flag: 'false2'
+                        })
+                        break
+                    case 3:
+                        res.json({
+                            flag: 'false3'
+                        })
+                        break
+                    case 4:
+                        res.json({
+                            flag: 'true'
+                        })
+                        break
+                }
+            }
+
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis_name], function (err1, result1) {
                 if (err1) {
                     console.log(err1)
@@ -1367,9 +1326,10 @@ module.exports = function (app) {
                                         if (okl === req.body.symptom_name.length - 1) {
                                             console.log("Sympt")
                                             console.log(mas_flag)
-                                            res.json({
-                                                flag: mas_flag
-                                            })
+                                            // res.json({
+                                            //     flag: mas_flag
+                                            // })
+                                            setflag(1);
                                         }
                                     } else {
                                         client.query('select id from "Diagnosis-Symptoms" where "Diagnosis_id_fk"=$1 and "Symptoms_id_fk"=$2 ', [result1.rows[0].id, id_symptom.rows[0].id], function (err3, result2) {
@@ -1384,9 +1344,10 @@ module.exports = function (app) {
                                                     if (okl === req.body.symptom_name.length - 1) {
                                                         console.log(mas_flag)
                                                         console.log("DIAGNOSO-SYMPT")
-                                                        res.json({
-                                                            flag: mas_flag
-                                                        })
+                                                        // res.json({
+                                                        //     flag: mas_flag
+                                                        // })
+                                                        setflag(2)
                                                     }
                                                 } else {
                                                     client.query('delete from "Diagnosis-Symptoms" where "Diagnosis_id_fk"=$1 and "Symptoms_id_fk"=$2 ', [result1.rows[0].id, id_symptom.rows[0].id], function (err4, result3) {
@@ -1399,22 +1360,23 @@ module.exports = function (app) {
                                                             if (okl === req.body.symptom_name.length - 1) {
                                                                 console.log('Error DELETE')
                                                                 console.log(mas_flag)
-                                                                res.json({
-                                                                    flag: mas_flag
-                                                                })
+                                                                // res.json({
+                                                                //     flag: mas_flag
+                                                                // })
+                                                                setflag(3)
                                                             }
                                                         } else {
                                                             let c = {}
                                                             c.id = id_symptom.rows[0].Symptom_name
                                                             c.flag = 'true'
                                                             mas_flag.push(c)
-                                                            client.query('COMMIT')
                                                             if (okl === req.body.symptom_name.length - 1) {
                                                                 console.log('DELETE')
                                                                 console.log(mas_flag)
-                                                                res.json({
-                                                                    flag: mas_flag
-                                                                })
+                                                                // res.json({
+                                                                //     flag: mas_flag
+                                                                // })
+                                                                setflag(4)
 
                                                             }
                                                         }
@@ -1422,18 +1384,17 @@ module.exports = function (app) {
                                                 }
                                             }
                                         })
-                                        client.query('COMMIT')
                                     }
                                 }
 
                             })
-                            client.query('COMMIT')
                         }
-                        client.release()
 
                     }
                 }
             }))
+            client.release()
+
         } catch (e) {
             throw(e)
         }
@@ -1471,7 +1432,6 @@ module.exports = function (app) {
 
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             // let mas_flag=[]
             mas_flag = 'default'
             await JSON.stringify(client.query('select id from "Diagnosis" where "Diagnosis_name"=$1', [req.body.diagnosis_name], function (err1, result1) {
@@ -1534,7 +1494,6 @@ module.exports = function (app) {
 
                                                                         console.log('INSERT')
                                                                         //console.log(mas_flag)
-                                                                        client.query('COMMIT')
                                                                         //if(okl===req.body.symptom_name.length-1){
                                                                         //
                                                                         //    console.log(mas_flag)
@@ -1562,14 +1521,11 @@ module.exports = function (app) {
                                                 }
                                             )
                                         }
-                                        client.query('COMMIT')
                                     }
                                 }
                             )
 
-                            client.query('COMMIT')
                         }
-                        client.release()
 
                     }
                 }
@@ -1577,6 +1533,7 @@ module.exports = function (app) {
             console.log("перед отправкой")
             //console.log(mas_flag[mas_flag.l)
             console.log(mas_flag)
+            client.release()
 
         } catch (e) {
             throw(e)
@@ -1586,7 +1543,6 @@ module.exports = function (app) {
         try {
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select id from "Medicines" where "Medicines_name"=$1', [req.body.medicine_name], function (err1, result1) {
                 if (err1) {
                     console.log(err1)
@@ -1621,8 +1577,6 @@ module.exports = function (app) {
                                                         res.json({
                                                             flag: 'true'
                                                         })
-                                                        client.query('COMMIT');
-                                                        client.release();
                                                     }
                                                 })
                                             }
@@ -1636,6 +1590,8 @@ module.exports = function (app) {
                     }
                 }
             }))
+            client.release();
+
         } catch (e) {
             throw(e)
         }
@@ -1653,7 +1609,6 @@ module.exports = function (app) {
         try {
             console.log(req.body);
             const client = await pool.connect()
-            await client.query('BEGIN')
             await JSON.stringify(client.query('select I."l", I."WorkerSurname",I."WorkerName",I."WorkerMiddleName",I."WorkerType", V."s" from (select "Brigades".id "l","BrigadeName", "WorkerSurname","WorkerName","WorkerMiddleName","WorkerType" from "Brigades" Right join "Workers" on "Brigades".id="Workers"."Brigade_fk") as I left join (select sum("Count") as "s","Brigade_id_fk" as "m" from "Requests" where (EXTRACT(month from"RequestTime")=$1) and (EXTRACT(year from"RequestTime")=$2) group by "m") as V on I."l"=V."m"', [req.body.idMonth, req.body.idYear], function (err, result) {
                 if (err) {
                     console.log(err)
@@ -1662,7 +1617,6 @@ module.exports = function (app) {
                     res.json({
                         res: result.rows
                     })
-                    client.query('COMMIT')
                 }
             }))
             client.release()
@@ -1698,7 +1652,6 @@ passport.use('local', new LocalStrategy({passReqToCallback: true}, (req, usernam
         async function loginAttempt() {
             const client = await pool.connect()
             try {
-                await client.query('BEGIN')
                 var currentAccountsData = await JSON.stringify(client.query('select "WorkerSurname", "WorkerName", "WorkerMiddleName", "WorkerType", "Brigade_fk", "Login", "Password" from "Workers" where "Login"=$1'
                     , [username], function (err, result) {
                         if (err) {
@@ -1732,6 +1685,7 @@ passport.use('local', new LocalStrategy({passReqToCallback: true}, (req, usernam
                             });
                         }
                     }))
+                client.release();
             } catch (e) {
                 throw (e);
             }
