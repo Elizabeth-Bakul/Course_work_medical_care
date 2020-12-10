@@ -26,16 +26,18 @@
         </div>
     </div>
 </header>
-<main>
 <nav class="nav">
     <a class="nav__link" href="/account">Регистрация вызова</a>
     <a class="nav__link nav_active" href="/account_otch">Отчетность</a>
     <a class="nav__link" href="/account_by">Бухгалтерия</a>
 </nav>
-<nav class="menu_otch">
-    <a href="/account_otch" class="link_submenu">Бригады</a>
-    <a href="/account_otch_pat" class="link_submenu act">Пациент</a>
-</nav>
+<div class="m_o">
+    <nav class="menu_otch">
+        <a href="/account_otch" class="link_submenu">Бригады</a>
+        <a href="/account_otch_pat" class="link_submenu act">Пациент</a>
+    </nav>
+</div>
+
 <% if (messages){
     if(messages.warning){
         if(messages.warning.length){
@@ -57,18 +59,21 @@
     <% }
     }
 } %>
+
+<form class="search" name="search-form">
+    <fieldset>
 <div class="pat">
     <form action="" class="otc_pat">
         <select name="pat" id="" class="js-selectize" placeholder="Выберите пациента">
             <option value=""></option>
-            <% 
-                for( let i=0; i< PatientData.length ; i++)
-                {
-                %>
-                <option value=<%=PatientData[i].id%>><%= PatientData[i].PatientSurname %>  <%= PatientData[i].PatientName[0] %>. <%= PatientData[i].PatientMiddleName[0] %></option>
-                <%
-                }
-                %>
+            <%
+            for( let i=0; i< PatientData.length ; i++)
+            {
+            %>
+            <option value=<%=PatientData[i].id%>><%= PatientData[i].PatientSurname %>  <%= PatientData[i].PatientName[0] %>. <%= PatientData[i].PatientMiddleName[0] %></option>
+            <%
+            }
+            %>
         </select>
         <button type="submit" class="button2">Поиск</button>
     </form>
@@ -82,25 +87,26 @@
     <div class="ins_type"></div>
     <div class="bl_pat"></div>
     <div class="no_res" hidden>Нет вызовов</div>
-    <table class="tab_res" hidden>
-        <tr>
+    <table class="tab_res search_patient" hidden>
+        <tr class="search_patient_tr">
             <th class="d">
                 <div class="m">Дата и время</div>
             </th>
             <th class="iD">
-                <div class="m">id вызова</div> 
+                <div class="m">id вызова</div>
             </th>
             <th class="ds">
-                <div class="m">Диагноз</div> 
+                <div class="m">Диагноз</div>
             </th>
             <th class="hos">
-                <div class="m">Госпитализация</div> 
+                <div class="m">Госпитализация</div>
             </th>
         </tr>
 
     </table>
 </div>
-</main>
+    </fieldset>
+</form>
 <script>
     $(document).ready(function(){
         $('.js-selectize').selectize();

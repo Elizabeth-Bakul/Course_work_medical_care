@@ -1601,7 +1601,7 @@ module.exports = function (app) {
         console.log(req.isAuthenticated());
         req.logout();
         console.log(req.isAuthenticated());
-        req.flash('success', "Logged out. See you soon!");
+        req.flash('success', "Выход произведен успешно.");
         res.redirect('/');
     });
 

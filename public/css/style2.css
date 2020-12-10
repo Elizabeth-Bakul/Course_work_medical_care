@@ -60,6 +60,9 @@ font-size:16px;}
     text-align: center;
     font-family: "Verdana", sans-serif;
     color: #1747ff;
+    vertical-align: center;
+
+
 }
 
 .nav__link {
@@ -67,11 +70,14 @@ font-size:16px;}
     width: 50%;
     color: #1747ff;
     vertical-align: middle;
+
 }
 
 .nav__link.nav_active {
-    text-decoration: underline;
+    /*text-decoration: underline;*/
     color: #1747ff;
+    background-color: #87CEFA
+
 }
 .hear {
     display: flex;
@@ -239,6 +245,23 @@ font-size:16px;}
     width: 60%;
     margin: auto;
 }
+
+.search_patient {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    padding: 8px 12px;
+    width: 100%;
+    margin: auto;
+}
+
+.search_patient_tr {
+    display: inline-block;
+    margin: auto;
+}
+
 .add_form {
     display: flex;
     flex-direction: column;
@@ -248,17 +271,55 @@ font-size:16px;}
     padding: 8px 12px;
     width: 80%;
 }
+
 .sub-menu.active{
     background-color: #87CEFA;
 }
+
+.tr_common {
+    display: inline-block;
+    width: 100%;
+}
+
 .t1{
-    width:75%;
+    width: 10%;
+    text-align: left;
+}
+
+.t2 {
+    width: 90%;
+    text-align: center;
+    margin: auto;
 }
 .th1{
     width:30%;
+    border-collapse: collapse;
+    border: 3px solid;
+    border-color: #87CEFA;
 }
 .th2{
     width:70%;
+    border-collapse: collapse;
+    border: 3px solid;
+    border-color: #87CEFA;
+
+}
+
+.td_t1 {
+    width: 20%;
+}
+
+.td_t2 {
+    width: 80%;
+}
+
+.submit_hide {
+    background: transparent;
+    border: none !important;
+    margin-right: auto;
+    margin-bottom: 10px;
+    font-size: 20px;
+    background-color: white;
 }
 
 .success_request {
@@ -313,6 +374,7 @@ div {
 }
 
 fieldset {
+
 }
 
 .reload {

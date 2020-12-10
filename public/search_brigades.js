@@ -1,4 +1,4 @@
-var buttons=document.querySelectorAll('.button2');
+var buttons = document.querySelectorAll('.submit_hide');
 var forms=document.getElementsByTagName("form");
 var inp=document.getElementsByTagName("input");
 let status=document.querySelector('.status');
