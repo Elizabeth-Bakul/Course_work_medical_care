@@ -58,8 +58,80 @@ function buttonsControl(button, i){
         } else{bad.removeAttribute('hidden');}
         //console.log(receivedBrigades.work[0].WorkerSurname,' ', receivedBrigades.req[0].id);
         }
+        // let data = [2,4, 200]
+        var ctx = document.getElementById('myChart');
+        var date = new Date();
+        console.log(date.getMonth() + 1)
+        console.log(date.getFullYear())
+        console.log(receivedBrigades.req)
+        var count_array = []
+        var date_array = []
+        for (let i = 0; i < receivedBrigades.req.length; i++) {
+
+            let str = receivedBrigades.req[i].AcceptTime
+            var month = str.slice(5, 7);
+            if (date.getMonth() + 1 == month) {
+                let temp = date_array.indexOf(receivedBrigades.req[i].AcceptTime.slice(8, 10))
+                if (temp != -1) {
+                    count_array[temp] += 1;
+                } else {
+                    date_array.push(receivedBrigades.req[i].AcceptTime.slice(8, 10))
+                    count_array.push(1)
+                    console.log(receivedBrigades.req[i].AcceptTime.slice(8, 10))
+                }
+            }
+        }
+        console.log(date_array)
+        console.log(count_array)
+        date_array.reverse();
+        count_array.reverse();
+
+        var myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: date_array,
+                datasets: [{
+                    label: 'Количество вызовов',
+                    data: count_array,
+                    borderColor: [
+                        'rgba(1, 0, 253, 1)'
+                    ],
+                    borderWidth: 1,
+                    lineTension: 0.1,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            callback: function (value) {
+                                if (value % 1 === 0) {
+                                    return value;
+                                }
+                            }
+                        }
+                    }]
+                }
+            }
+
+        });
+
+        document.getElementById('randomizeData').addEventListener('click', function () {
+            config.data.datasets.forEach(function (dataset) {
+                dataset.data = dataset.data.map(function () {
+                    return randomScalingFactor();
+                });
+
+            });
+
+            window.myLine.update();
+        });
         
     })
     console.log(forms[i].className);
+
+
 }
-//Остался график и запрос данных для графика
+
