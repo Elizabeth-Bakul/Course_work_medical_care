@@ -58,13 +58,18 @@ but.addEventListener("click", function (e){
 
     request.addEventListener("load", function () {
         let receivedPatient = JSON.parse(request.response);
-        n.innerHTML=receivedPatient.Pat[0].PatientName;
-        s.innerHTML=receivedPatient.Pat[0].PatientSurname;
-        mn.innerHTML=receivedPatient.Pat[0].PatientMiddleName;
-        ad.innerHTML=receivedPatient.Pat[0].PatientAddress;
-        bl.innerHTML=receivedPatient.Pat[0].InBlackList;
-        str.innerHTML=receivedPatient.Pat[0].InsuranceName;
-        tp.innerHTML=receivedPatient.Pat[0].InsurancePayType;
+
+        n.innerHTML = 'Имя: ' + receivedPatient.Pat[0].PatientName;
+        s.innerHTML = 'Фамилия: ' + receivedPatient.Pat[0].PatientSurname;
+        mn.innerHTML = 'Отчество: ' + receivedPatient.Pat[0].PatientMiddleName;
+        ad.innerHTML = 'Адрес: ' + receivedPatient.Pat[0].PatientAddress;
+        if (receivedPatient.Pat[0].InBlackList) {
+            bl.innerHTML = 'Наличие в черном списке: Да';
+        } else {
+            bl.innerHTML = 'Наличие в черном списке: Нет';
+        }
+        str.innerHTML = 'Страховая компания: ' + receivedPatient.Pat[0].InsuranceName;
+        tp.innerHTML = 'Тип оплаты: ' + receivedPatient.Pat[0].InsurancePayType;
         bad.setAttribute('hidden', true)
         g.setAttribute('hidden',true);
         let di=document.createElement('div');
@@ -91,7 +96,10 @@ but.addEventListener("click", function (e){
             for(let k=0; k<receivedPatient.res.length; k++){
                 let di5=document.createElement('div');
                 di5.className='el';
-                di5.innerHTML=receivedPatient.res[k].RequestTime;
+                let temp = receivedPatient.res[k].RequestTime.split('T')
+                let mint = temp[1].split(':')
+
+                di5.innerHTML = 'Время: ' + mint[0] + ':' + mint[1] + '  Дата: ' + temp[0];
                 dat.appendChild(di5);
                 let di6=document.createElement('div');
                 di6.className='el';
@@ -100,14 +108,22 @@ but.addEventListener("click", function (e){
 
                 let di7=document.createElement('div');
                 di7.className='el';
-                di7.innerHTML=receivedPatient.res[k].Diagnosis_name;
+                if (receivedPatient.res[k].Diagnosis_name == null) {
+                    di7.innerHTML = "Отсутствует";
+                } else {
+                    di7.innerHTML = receivedPatient.res[k].Diagnosis_name;
+                }
+
                 ds.appendChild(di7);
             let di8=document.createElement('div');
             di8.className='el';
-                
-                
-                
-                di8.innerHTML=receivedPatient.res[k].Hospitalization;
+
+
+                if (receivedPatient.res[k].Hospitalization) {
+                    di8.innerHTML = 'Да'
+                } else {
+                    di8.innerHTML = 'Нет'
+                }
                 hos.appendChild(di8);
             }
         }

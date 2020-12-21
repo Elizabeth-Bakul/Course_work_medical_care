@@ -35,7 +35,7 @@ button.addEventListener("click", function (e){
         console.log(this.response);
     };
     request.send(dz);
-    dd.innerHTML='Месяц :'+month+' год: '+year;
+    //dd.innerHTML='Месяц:  '+month+' Год: '+year;
     var fc = n.firstChild;
     while( fc ) {
         n.removeChild( fc );

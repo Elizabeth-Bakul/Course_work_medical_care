@@ -255,11 +255,17 @@ font-size:16px;}
     padding: 8px 12px;
     width: 100%;
     margin: auto;
+    justify-content: center;
+
+
 }
 
+
 .search_patient_tr {
-    display: inline-block;
+    display: flex;
     margin: auto;
+    justify-content: center;
+
 }
 
 .add_form {

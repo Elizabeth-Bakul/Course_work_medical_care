@@ -48,7 +48,9 @@ function buttonsControl(button, i){
         } else {
             let flag5=0
             for(let k=0; k<receivedBrigades.req.length; k++){
-            history.innerHTML+=receivedBrigades.req[k].AcceptTime+'  '+receivedBrigades.req[k].id+'<br>'
+                let temp = receivedBrigades.req[k].AcceptTime.split('T')
+                let mint = temp[1].split(':')
+                history.innerHTML += 'Время: ' + mint[0] + ':' + mint[1] + '  Дата: ' + temp[0] + '         id вызова:  ' + receivedBrigades.req[k].id + '<br>'
             if (receivedBrigades.req[k].EndRequestTime===null){
                 flag5=1
             } 
