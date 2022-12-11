@@ -34,12 +34,3 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
       - name: Deploy SSH
         run: DOCKER_HOST=“ssh://root@${{ secrets.SSH_HOST }}” docker-compose up -d
-#      - name: Deploy to server
-#        run: >
-#          ssh -T root@${{ secrets.SSH_HOST }} "
-#          docker ps -aq | xargs docker stop | xargs docker rm;
-#          docker stop $(docker ps -a -q);
-#          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/tenders-server;
-#          docker run -d -p 443:8443 ${{ secrets.DOCKERHUB_USERNAME }}/tenders-server;
-#          exit
-#          "
